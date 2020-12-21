@@ -3,40 +3,25 @@
 
 #include <QtWidgets>
 #include "DCodeEditor.h"
+#include "include/Menu/MenuFile.h"
+#include "include/Menu/MenuEdit.h"
+#include "include/Menu/MenuPref.h"
+#include "include/Menu/MenuHelp.h"
 
 class Fenetre : public QMainWindow {
 	Q_OBJECT
 	
 	public:
 		Fenetre();
-	
-	public slots:
-		void addTab();
-	
+		QTabWidget* getCentral(){return central;}
+		
 	private:
-		void loadFileMenu();
-		QMenu *fileMenu;		
-		QAction *f_newProject;
-		QAction *f_newFile;
-		QAction *f_openFile;
-		QAction *f_recentFiles;
-		QAction *f_closeEditor;
-		QAction *f_closeAllEditor;
-		QAction *f_save;
-		QAction *f_saveAs;
-		QAction *f_saveAll;
-		QAction *f_properties;
-		QAction *f_quitter;	
-		QMenu *newf;		
-		QMenu *editMenu;
-		QMenu *prefMenu;
-		QMenu *aideMenu;
+		MenuFile *menuFile;
+		MenuEdit *menuEdit;
+		MenuPref *menuPref;
+		MenuHelp *menuHelp;
 		
-		void loadEditionMenu();
-		void loadPrefMenu();
-		void loadAideMenu();
-		
-		QTabWidget *tw1;
+		QTabWidget *central;
 		
 };
 

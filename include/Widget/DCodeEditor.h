@@ -2,6 +2,7 @@
 #define DCODEEDITOR
 
 #include <QtWidgets>
+#include "JavaHighLighter.h"
 
 class DCodeEditor : public QPlainTextEdit {
 	Q_OBJECT
@@ -19,6 +20,7 @@ class DCodeEditor : public QPlainTextEdit {
 	public slots:
 		void leftAreaWidthUpdate();
 		void scrollLeftAreaUpdate(const QRect &rect,int dy);
+		void highlightCurrentLine();
 };
 
 class LeftLineArea : public QWidget {
@@ -31,7 +33,6 @@ class LeftLineArea : public QWidget {
 	
 	protected:
 		void paintEvent(QPaintEvent *event){
-			printf("je repaint 1\n");
 			dce->leftAreaPaintEvent(event);
 		}	
 };

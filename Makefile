@@ -280,7 +280,7 @@ all: debug-all release-all  FORCE
 clean: debug-clean release-clean  FORCE
 distclean: debug-distclean release-distclean  FORCE
 	-$(DEL_FILE) Makefile
-	-$(DEL_FILE) C:\Users\Yohan\Documents\DUT2\C++\DystEditor\uic_wrapper.bat C:\Users\Yohan\Documents\DUT2\C++\DystEditor\uic_wrapper.bat .qmake.stash
+	-$(DEL_FILE) C:\Users\Yohan\Documents\DUT2\C++\ProjetTuteure\uic_wrapper.bat C:\Users\Yohan\Documents\DUT2\C++\ProjetTuteure\uic_wrapper.bat .qmake.stash
 
 debug-mocclean:
 	$(MAKE) -f $(MAKEFILE).Debug mocclean
