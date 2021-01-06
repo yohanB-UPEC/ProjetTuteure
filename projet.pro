@@ -2,22 +2,40 @@
 QT += core gui widgets
 CONFIG += console
 
-HEADERS += include/Widget/Fenetre.h
-HEADERS += include/Widget/DCodeEditor.h
-HEADERS += include/Widget/JavaHighLighter.h
-HEADERS += include/Menu/MenuFile.h
-HEADERS += include/Menu/MenuNew.h
-HEADERS += include/Menu/MenuEdit.h
-HEADERS += include/Menu/MenuPref.h
-HEADERS += include/Menu/MenuHelp.h
+HEADERS += include/Widget/Fenetre.h \
+		include/Widget/DCodeEditor.h \
+		include/Widget/JavaHighLighter.h \
+		include/Menu/MenuFile.h \
+		include/Menu/MenuNew.h \
+		include/Menu/MenuEdit.h \
+		include/Menu/MenuPref.h \
+		include/Menu/MenuHelp.h \
+		include/Hierarchy/ClassElement.h \
+		include/Hierarchy/ClassSubElement.h \
+		include/Hierarchy/DAttribut.h \
+		include/Hierarchy/DMethod.h \
+		include/Hierarchy/DClass.h \
+		include/Hierarchy/NaiveAnalyzer.h 
+				
+SOURCES += src/Widget/Fenetre.cpp \
+		src/Widget/DCodeEditor.cpp \
+		src/Widget/JavaHighLighter.cpp \
+		src/Menu/MenuFile.cpp \
+		src/Menu/MenuNew.cpp \
+		src/Menu/MenuEdit.cpp \
+		src/Menu/MenuPref.cpp \
+		src/Menu/MenuHelp.cpp \
+		src/Hierarchy/DClass.cpp \
+		src/Hierarchy/NaiveAnalyzer.cpp
+		
+test_conf {
+	TARGET = my_app_test
+	QT += testlib
+	HEADERS += include/UnitTest/DClassTest.h			
+	SOURCES += src/UnitTest/DClassTest.cpp
+} else {
+	SOURCES += src/main.cpp
+}
 
 
-SOURCES += src/main.cpp
-SOURCES += src/Widget/Fenetre.cpp
-SOURCES += src/Widget/DCodeEditor.cpp
-SOURCES += src/Widget/JavaHighLighter.cpp
-SOURCES += src/Menu/MenuFile.cpp
-SOURCES += src/Menu/MenuNew.cpp
-SOURCES += src/Menu/MenuEdit.cpp
-SOURCES += src/Menu/MenuPref.cpp
-SOURCES += src/Menu/MenuHelp.cpp
+
