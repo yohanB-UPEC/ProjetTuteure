@@ -1,4 +1,3 @@
-release/main.o
 release/Fenetre.o
 release/DCodeEditor.o
 release/JavaHighLighter.o
@@ -7,6 +6,8 @@ release/MenuNew.o
 release/MenuEdit.o
 release/MenuPref.o
 release/MenuHelp.o
+release/DClass.o
+release/main.o
 release/moc_Fenetre.o
 release/moc_DCodeEditor.o
 release/moc_JavaHighLighter.o

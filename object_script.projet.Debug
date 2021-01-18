@@ -1,4 +1,3 @@
-debug/main.o
 debug/Fenetre.o
 debug/DCodeEditor.o
 debug/JavaHighLighter.o
@@ -7,6 +6,8 @@ debug/MenuNew.o
 debug/MenuEdit.o
 debug/MenuPref.o
 debug/MenuHelp.o
+debug/DClass.o
+debug/main.o
 debug/moc_Fenetre.o
 debug/moc_DCodeEditor.o
 debug/moc_JavaHighLighter.o
