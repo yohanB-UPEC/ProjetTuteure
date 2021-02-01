@@ -18,7 +18,8 @@ class Model : public QAbstractItemModel{
 		bool hasChildren(const QModelIndex &parent = QModelIndex()) const;
 		Qt::ItemFlags flags(const QModelIndex &index) const;
 		bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole);
-		
+		QVariant headerData(int section, Qt::Orientation orientation,int role) const;
+
 	public slots:
 	
 	private:

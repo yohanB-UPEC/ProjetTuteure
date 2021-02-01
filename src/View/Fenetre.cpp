@@ -28,6 +28,7 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 	//QFileSystemModel *filemodel = new QFileSystemModel;
     //filemodel->setRootPath(QDir::currentPath());
     QTreeView *tree = new QTreeView;
+    tree->setHeaderHidden(true);
 	explorer->setWidget(tree);
     tree->setModel(model);
 	

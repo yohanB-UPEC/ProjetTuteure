@@ -9,7 +9,7 @@ TreeItem::~TreeItem(){
 }
 
 TreeItem* TreeItem::child(int row){
-	if(row < 0 && row < m_children.size()){
+	if(row >= 0 && row < m_children.size()){
 		return m_children.at(row);
 	}
 	return nullptr;

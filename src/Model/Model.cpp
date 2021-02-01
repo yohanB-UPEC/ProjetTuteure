@@ -1,6 +1,6 @@
 #include "include/Model/Model.h"
 
-Model::Model(): QAbstractItemModel(){
+Model::Model(): QAbstractItemModel(), root(){
 	TreeItem *projet = new TreeItem(&root);
 	projet->setLabel("Javora");
 	
@@ -23,7 +23,8 @@ Model::Model(): QAbstractItemModel(){
 	src->appendChild(package);
 	projet->appendChild(src);
 	root.appendChild(projet);
-	
+	root.setLabel("root");
+	printf("Constructeur\n");
 }
 
 QModelIndex Model::index(int row, int column, const QModelIndex &parent) const {
@@ -33,11 +34,9 @@ QModelIndex Model::index(int row, int column, const QModelIndex &parent) const {
 	}else{
 		p = (TreeItem*)parent.internalPointer();
 	}
-	printf("index\n");
 	TreeItem *child = p->child(row);
-	if(child){
-		printf("index = %s\n", child->label().toUtf8().constData());
-		return createIndex(row,column,child);
+	if(child != nullptr){
+		return createIndex(row,0,child);
 	}
 	return QModelIndex();
 }
@@ -46,8 +45,7 @@ QModelIndex Model::parent(const QModelIndex &index) const{
 	if(!index.isValid()){
 		return QModelIndex();
 	}
-	TreeItem* i = (TreeItem*)index.internalPointer();
-	TreeItem* parent = i->parent();
+	TreeItem* parent = ((TreeItem*)index.internalPointer())->parent();
 	if(parent == &root){
 		return QModelIndex();
 	}
@@ -56,32 +54,39 @@ QModelIndex Model::parent(const QModelIndex &index) const{
 
 int Model::rowCount(const QModelIndex &parent) const{
 	if(!parent.isValid()){
-		return 0;
+		return root.childCount();
 	}
 	TreeItem* i = (TreeItem*)parent.internalPointer();
 	return i->childCount();
 }
 
 int Model::columnCount(const QModelIndex &parent) const{
-	return 0;
+	return 1;
 }
 
 QVariant Model::data(const QModelIndex &index, int role) const{
 	if(!index.isValid()){
 		return QVariant();
 	}
+	if (role != Qt::DisplayRole)
+        return QVariant();
 	TreeItem* i = (TreeItem*)index.internalPointer();
 	return QVariant(i->label());
 }
 
 bool Model::hasChildren(const QModelIndex &parent) const{
+	bool res;
 	if(!parent.isValid()){
-		return false;
+		res = root.hasChildren();
+	}else{
+		res = ((TreeItem*)parent.internalPointer())->hasChildren();
 	}
-	return ((TreeItem*)parent.internalPointer())->hasChildren();
+	return res;
 }
 
 Qt::ItemFlags Model::flags(const QModelIndex &index) const{
+	if (!index.isValid())
+        return Qt::NoItemFlags;
 	return (Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
 }
 
@@ -95,4 +100,11 @@ bool Model::setData(const QModelIndex &index, const QVariant &value, int role){
 	}
 	
 	return false;
+}
+
+QVariant Model::headerData(int section, Qt::Orientation orientation,int role) const{
+	if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
+        return QVariant(root.label());
+
+    return QVariant();
 }
