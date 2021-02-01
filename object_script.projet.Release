@@ -7,6 +7,8 @@ release/MenuEdit.o
 release/MenuPref.o
 release/MenuHelp.o
 release/DClass.o
+release/NaiveAnalyzer.o
+release/JavaFileReader.o
 release/main.o
 release/moc_Fenetre.o
 release/moc_DCodeEditor.o

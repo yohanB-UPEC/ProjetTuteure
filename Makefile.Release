@@ -57,6 +57,7 @@ SOURCES       = src\Widget\Fenetre.cpp \
 		src\Menu\MenuHelp.cpp \
 		src\Hierarchy\DClass.cpp \
 		src\Hierarchy\NaiveAnalyzer.cpp \
+		src\Hierarchy\JavaFileReader.cpp \
 		src\UnitTest\DClassTest.cpp release\moc_Fenetre.cpp \
 		release\moc_DCodeEditor.cpp \
 		release\moc_JavaHighLighter.cpp \
@@ -76,6 +77,7 @@ OBJECTS       = release/Fenetre.o \
 		release/MenuHelp.o \
 		release/DClass.o \
 		release/NaiveAnalyzer.o \
+		release/JavaFileReader.o \
 		release/DClassTest.o \
 		release/moc_Fenetre.o \
 		release/moc_DCodeEditor.o \
@@ -101,6 +103,7 @@ DIST          =  include\Widget\Fenetre.h \
 		include\Hierarchy\DMethod.h \
 		include\Hierarchy\DClass.h \
 		include\Hierarchy\NaiveAnalyzer.h \
+		include\Hierarchy\JavaFileReader.h \
 		include\UnitTest\DClassTest.h src\Widget\Fenetre.cpp \
 		src\Widget\DCodeEditor.cpp \
 		src\Widget\JavaHighLighter.cpp \
@@ -111,6 +114,7 @@ DIST          =  include\Widget\Fenetre.h \
 		src\Menu\MenuHelp.cpp \
 		src\Hierarchy\DClass.cpp \
 		src\Hierarchy\NaiveAnalyzer.cpp \
+		src\Hierarchy\JavaFileReader.cpp \
 		src\UnitTest\DClassTest.cpp
 QMAKE_TARGET  = my_app_test
 DESTDIR        = release\ #avoid trailing-slash linebreak
@@ -131,10 +135,10 @@ qmake: FORCE
 qmake_all: FORCE
 
 dist:
-	$(ZIP) my_app_test.zip $(SOURCES) $(DIST) projet.pro C:\qt5\qtbase\mkspecs\features\spec_pre.prf C:\qt5-build\qtbase\mkspecs\qdevice.pri C:\qt5\qtbase\mkspecs\features\device_config.prf C:\qt5\qtbase\mkspecs\common\sanitize.conf C:\qt5\qtbase\mkspecs\common\gcc-base.conf C:\qt5\qtbase\mkspecs\common\g++-base.conf C:\qt5\qtbase\mkspecs\common\angle.conf C:\qt5\qtbase\mkspecs\features\win32\windows_vulkan_sdk.prf C:\qt5\qtbase\mkspecs\common\windows-vulkan.conf C:\qt5\qtbase\mkspecs\common\g++-win32.conf C:\qt5-build\qtbase\mkspecs\qconfig.pri C:\qt5-build\qtbase\mkspecs\modules\qt_ext_freetype.pri C:\qt5-build\qtbase\mkspecs\modules\qt_ext_harfbuzz.pri C:\qt5-build\qtbase\mkspecs\modules\qt_ext_libpng.pri C:\qt5-build\qtbase\mkspecs\modules\qt_ext_pcre2.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_axbase.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_axbase_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_axcontainer.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_axcontainer_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_axserver.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_axserver_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_bootstrap_dbus_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_bootstrap_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_concurrent.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_concurrent_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_core.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_core_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_dbus.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_dbus_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_edid_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_fb_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_gui.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_gui_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_network.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_network_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_networkauth.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_networkauth_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_opengl.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_opengl_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_openglextensions.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_openglextensions_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_printsupport.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_printsupport_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_serialbus.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_serialbus_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_serialport.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_serialport_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_sql.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_sql_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_svg.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_svg_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_testlib.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_testlib_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_theme_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_widgets.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_widgets_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_xml.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_xml_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_canbusutil.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_dumpcpp.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_dumpdoc.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_qdbuscpp2xml.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_qdbusxml2cpp.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_qlalr.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_qvkgen.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_syncqt.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_uic.pri C:\qt5\qtbase\mkspecs\features\qt_functions.prf C:\qt5\qtbase\mkspecs\features\qt_config.prf C:\qt5\qtbase\mkspecs\win32-g++\qmake.conf C:\qt5\qtbase\mkspecs\features\spec_post.prf .qmake.stash C:\qt5\qtbase\mkspecs\features\exclusive_builds.prf C:\qt5\qtbase\mkspecs\features\toolchain.prf C:\qt5\qtbase\mkspecs\features\default_pre.prf C:\qt5\qtbase\mkspecs\features\win32\default_pre.prf C:\qt5\qtbase\mkspecs\features\resolve_config.prf C:\qt5\qtbase\mkspecs\features\exclusive_builds_post.prf C:\qt5\qtbase\mkspecs\features\default_post.prf C:\qt5\qtbase\mkspecs\features\build_pass.prf C:\qt5\qtbase\mkspecs\features\win32\console.prf C:\qt5\qtbase\mkspecs\features\precompile_header.prf C:\qt5\qtbase\mkspecs\features\warn_on.prf C:\qt5\qtbase\mkspecs\features\qt.prf C:\qt5\qtbase\mkspecs\features\resources.prf C:\qt5\qtbase\mkspecs\features\moc.prf C:\qt5\qtbase\mkspecs\features\testlib_defines.prf C:\qt5\qtbase\mkspecs\features\win32\opengl.prf C:\qt5\qtbase\mkspecs\features\uic.prf C:\qt5\qtbase\mkspecs\features\qmake_use.prf C:\qt5\qtbase\mkspecs\features\file_copies.prf C:\qt5\qtbase\mkspecs\features\testcase_targets.prf C:\qt5\qtbase\mkspecs\features\exceptions.prf C:\qt5\qtbase\mkspecs\features\yacc.prf C:\qt5\qtbase\mkspecs\features\lex.prf projet.pro C:\qt5-build\qtbase\lib\Qt5Widgets.prl C:\qt5-build\qtbase\lib\Qt5Gui.prl C:\qt5-build\qtbase\lib\Qt5Test.prl C:\qt5-build\qtbase\lib\Qt5Core.prl    C:\qt5\qtbase\mkspecs\features\data\dummy.cpp include\Widget\Fenetre.h include\Widget\DCodeEditor.h include\Widget\JavaHighLighter.h include\Menu\MenuFile.h include\Menu\MenuNew.h include\Menu\MenuEdit.h include\Menu\MenuPref.h include\Menu\MenuHelp.h include\Hierarchy\ClassElement.h include\Hierarchy\ClassSubElement.h include\Hierarchy\DAttribut.h include\Hierarchy\DMethod.h include\Hierarchy\DClass.h include\Hierarchy\NaiveAnalyzer.h include\UnitTest\DClassTest.h  src\Widget\Fenetre.cpp src\Widget\DCodeEditor.cpp src\Widget\JavaHighLighter.cpp src\Menu\MenuFile.cpp src\Menu\MenuNew.cpp src\Menu\MenuEdit.cpp src\Menu\MenuPref.cpp src\Menu\MenuHelp.cpp src\Hierarchy\DClass.cpp src\Hierarchy\NaiveAnalyzer.cpp src\UnitTest\DClassTest.cpp     
+	$(ZIP) my_app_test.zip $(SOURCES) $(DIST) projet.pro C:\qt5\qtbase\mkspecs\features\spec_pre.prf C:\qt5-build\qtbase\mkspecs\qdevice.pri C:\qt5\qtbase\mkspecs\features\device_config.prf C:\qt5\qtbase\mkspecs\common\sanitize.conf C:\qt5\qtbase\mkspecs\common\gcc-base.conf C:\qt5\qtbase\mkspecs\common\g++-base.conf C:\qt5\qtbase\mkspecs\common\angle.conf C:\qt5\qtbase\mkspecs\features\win32\windows_vulkan_sdk.prf C:\qt5\qtbase\mkspecs\common\windows-vulkan.conf C:\qt5\qtbase\mkspecs\common\g++-win32.conf C:\qt5-build\qtbase\mkspecs\qconfig.pri C:\qt5-build\qtbase\mkspecs\modules\qt_ext_freetype.pri C:\qt5-build\qtbase\mkspecs\modules\qt_ext_harfbuzz.pri C:\qt5-build\qtbase\mkspecs\modules\qt_ext_libpng.pri C:\qt5-build\qtbase\mkspecs\modules\qt_ext_pcre2.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_accessibility_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_axbase.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_axbase_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_axcontainer.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_axcontainer_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_axserver.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_axserver_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_bootstrap_dbus_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_bootstrap_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_concurrent.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_concurrent_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_core.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_core_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_dbus.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_dbus_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_devicediscovery_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_edid_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_eventdispatcher_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_fb_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_fontdatabase_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_gui.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_gui_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_network.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_network_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_networkauth.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_networkauth_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_opengl.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_opengl_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_openglextensions.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_openglextensions_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_platformcompositor_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_printsupport.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_printsupport_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_serialbus.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_serialbus_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_serialport.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_serialport_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_sql.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_sql_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_svg.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_svg_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_testlib.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_testlib_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_theme_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_widgets.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_widgets_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_windowsuiautomation_support_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_xml.pri C:\qt5-build\qtbase\mkspecs\modules\qt_lib_xml_private.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_canbusutil.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_dumpcpp.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_dumpdoc.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_qdbuscpp2xml.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_qdbusxml2cpp.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_qlalr.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_qvkgen.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_syncqt.pri C:\qt5-build\qtbase\mkspecs\modules\qt_tool_uic.pri C:\qt5\qtbase\mkspecs\features\qt_functions.prf C:\qt5\qtbase\mkspecs\features\qt_config.prf C:\qt5\qtbase\mkspecs\win32-g++\qmake.conf C:\qt5\qtbase\mkspecs\features\spec_post.prf .qmake.stash C:\qt5\qtbase\mkspecs\features\exclusive_builds.prf C:\qt5\qtbase\mkspecs\features\toolchain.prf C:\qt5\qtbase\mkspecs\features\default_pre.prf C:\qt5\qtbase\mkspecs\features\win32\default_pre.prf C:\qt5\qtbase\mkspecs\features\resolve_config.prf C:\qt5\qtbase\mkspecs\features\exclusive_builds_post.prf C:\qt5\qtbase\mkspecs\features\default_post.prf C:\qt5\qtbase\mkspecs\features\build_pass.prf C:\qt5\qtbase\mkspecs\features\win32\console.prf C:\qt5\qtbase\mkspecs\features\precompile_header.prf C:\qt5\qtbase\mkspecs\features\warn_on.prf C:\qt5\qtbase\mkspecs\features\qt.prf C:\qt5\qtbase\mkspecs\features\resources.prf C:\qt5\qtbase\mkspecs\features\moc.prf C:\qt5\qtbase\mkspecs\features\testlib_defines.prf C:\qt5\qtbase\mkspecs\features\win32\opengl.prf C:\qt5\qtbase\mkspecs\features\uic.prf C:\qt5\qtbase\mkspecs\features\qmake_use.prf C:\qt5\qtbase\mkspecs\features\file_copies.prf C:\qt5\qtbase\mkspecs\features\testcase_targets.prf C:\qt5\qtbase\mkspecs\features\exceptions.prf C:\qt5\qtbase\mkspecs\features\yacc.prf C:\qt5\qtbase\mkspecs\features\lex.prf projet.pro C:\qt5-build\qtbase\lib\Qt5Widgets.prl C:\qt5-build\qtbase\lib\Qt5Gui.prl C:\qt5-build\qtbase\lib\Qt5Test.prl C:\qt5-build\qtbase\lib\Qt5Core.prl    C:\qt5\qtbase\mkspecs\features\data\dummy.cpp include\Widget\Fenetre.h include\Widget\DCodeEditor.h include\Widget\JavaHighLighter.h include\Menu\MenuFile.h include\Menu\MenuNew.h include\Menu\MenuEdit.h include\Menu\MenuPref.h include\Menu\MenuHelp.h include\Hierarchy\ClassElement.h include\Hierarchy\ClassSubElement.h include\Hierarchy\DAttribut.h include\Hierarchy\DMethod.h include\Hierarchy\DClass.h include\Hierarchy\NaiveAnalyzer.h include\Hierarchy\JavaFileReader.h include\UnitTest\DClassTest.h  src\Widget\Fenetre.cpp src\Widget\DCodeEditor.cpp src\Widget\JavaHighLighter.cpp src\Menu\MenuFile.cpp src\Menu\MenuNew.cpp src\Menu\MenuEdit.cpp src\Menu\MenuPref.cpp src\Menu\MenuHelp.cpp src\Hierarchy\DClass.cpp src\Hierarchy\NaiveAnalyzer.cpp src\Hierarchy\JavaFileReader.cpp src\UnitTest\DClassTest.cpp     
 
 clean: compiler_clean 
-	-$(DEL_FILE) release\Fenetre.o release\DCodeEditor.o release\JavaHighLighter.o release\MenuFile.o release\MenuNew.o release\MenuEdit.o release\MenuPref.o release\MenuHelp.o release\DClass.o release\NaiveAnalyzer.o release\DClassTest.o release\moc_Fenetre.o release\moc_DCodeEditor.o release\moc_JavaHighLighter.o release\moc_MenuFile.o release\moc_MenuNew.o release\moc_MenuEdit.o release\moc_MenuPref.o release\moc_MenuHelp.o release\moc_DClassTest.o
+	-$(DEL_FILE) release\Fenetre.o release\DCodeEditor.o release\JavaHighLighter.o release\MenuFile.o release\MenuNew.o release\MenuEdit.o release\MenuPref.o release\MenuHelp.o release\DClass.o release\NaiveAnalyzer.o release\JavaFileReader.o release\DClassTest.o release\moc_Fenetre.o release\moc_DCodeEditor.o release\moc_JavaHighLighter.o release\moc_MenuFile.o release\moc_MenuNew.o release\moc_MenuEdit.o release\moc_MenuPref.o release\moc_MenuHelp.o release\moc_DClassTest.o
 
 distclean: clean 
 	-$(DEL_FILE) C:\Users\Yohan\Documents\DUT2\C++\ProjetTuteure\uic_wrapper.bat C:\Users\Yohan\Documents\DUT2\C++\ProjetTuteure\uic_wrapper.bat .qmake.stash
@@ -4502,6 +4506,8 @@ release/moc_DClassTest.cpp: include/UnitTest/DClassTest.h \
 		C:/qt5-build/qtbase/include/QtCore/QRegularExpression \
 		include/Hierarchy/NaiveAnalyzer.h \
 		C:/qt5-build/qtbase/include/QtCore/QFile \
+		C:/qt5-build/qtbase/include/QtCore/QTextStream \
+		include/Hierarchy/JavaFileReader.h \
 		release/moc_predefs.h \
 		C:/qt5-build/qtbase/bin/moc.exe
 	C:\qt5-build\qtbase\bin\moc.exe $(DEFINES) --include C:/Users/Yohan/Documents/DUT2/C++/ProjetTuteure/release/moc_predefs.h -IC:/qt5/qtbase/mkspecs/win32-g++ -IC:/Users/Yohan/Documents/DUT2/C++/ProjetTuteure -IC:/qt5-build/qtbase/include -IC:/qt5-build/qtbase/include/QtWidgets -IC:/qt5-build/qtbase/include/QtGui -IC:/qt5-build/qtbase/include/QtTest -IC:/qt5-build/qtbase/include/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include\UnitTest\DClassTest.h -o release\moc_DClassTest.cpp
@@ -11897,8 +11903,170 @@ release/NaiveAnalyzer.o: src/Hierarchy/NaiveAnalyzer.cpp include/Hierarchy/Naive
 		C:/qt5-build/qtbase/include/QtCore/qcontainerfwd.h \
 		C:/qt5/qtbase/src/corelib/tools/qcontainerfwd.h \
 		C:/qt5-build/qtbase/include/QtCore/qobject_impl.h \
-		C:/qt5/qtbase/src/corelib/kernel/qobject_impl.h
+		C:/qt5/qtbase/src/corelib/kernel/qobject_impl.h \
+		C:/qt5-build/qtbase/include/QtCore/QTextStream \
+		C:/qt5-build/qtbase/include/QtCore/qtextstream.h \
+		C:/qt5/qtbase/src/corelib/serialization/qtextstream.h \
+		C:/qt5-build/qtbase/include/QtCore/qlocale.h \
+		C:/qt5/qtbase/src/corelib/tools/qlocale.h \
+		C:/qt5-build/qtbase/include/QtCore/qvariant.h \
+		C:/qt5/qtbase/src/corelib/kernel/qvariant.h \
+		C:/qt5-build/qtbase/include/QtCore/qmap.h \
+		C:/qt5/qtbase/src/corelib/tools/qmap.h \
+		C:/qt5-build/qtbase/include/QtCore/qdebug.h \
+		C:/qt5/qtbase/src/corelib/io/qdebug.h \
+		C:/qt5-build/qtbase/include/QtCore/qhash.h \
+		C:/qt5/qtbase/src/corelib/tools/qhash.h \
+		C:/qt5-build/qtbase/include/QtCore/qvector.h \
+		C:/qt5/qtbase/src/corelib/tools/qvector.h \
+		C:/qt5-build/qtbase/include/QtCore/qpoint.h \
+		C:/qt5/qtbase/src/corelib/tools/qpoint.h \
+		C:/qt5-build/qtbase/include/QtCore/qset.h \
+		C:/qt5/qtbase/src/corelib/tools/qset.h \
+		C:/qt5-build/qtbase/include/QtCore/qcontiguouscache.h \
+		C:/qt5/qtbase/src/corelib/tools/qcontiguouscache.h \
+		C:/qt5-build/qtbase/include/QtCore/qsharedpointer.h \
+		C:/qt5/qtbase/src/corelib/tools/qsharedpointer.h \
+		C:/qt5-build/qtbase/include/QtCore/qshareddata.h \
+		C:/qt5/qtbase/src/corelib/tools/qshareddata.h \
+		C:/qt5-build/qtbase/include/QtCore/qsharedpointer_impl.h \
+		C:/qt5/qtbase/src/corelib/tools/qsharedpointer_impl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\NaiveAnalyzer.o src\Hierarchy\NaiveAnalyzer.cpp
+
+release/JavaFileReader.o: src/Hierarchy/JavaFileReader.cpp include/Hierarchy/JavaFileReader.h \
+		C:/qt5-build/qtbase/include/QtCore/QFile \
+		C:/qt5-build/qtbase/include/QtCore/qfile.h \
+		C:/qt5/qtbase/src/corelib/io/qfile.h \
+		C:/qt5-build/qtbase/include/QtCore/qfiledevice.h \
+		C:/qt5/qtbase/src/corelib/io/qfiledevice.h \
+		C:/qt5-build/qtbase/include/QtCore/qiodevice.h \
+		C:/qt5/qtbase/src/corelib/io/qiodevice.h \
+		C:/qt5-build/qtbase/include/QtCore/qglobal.h \
+		C:/qt5/qtbase/src/corelib/global/qglobal.h \
+		C:/qt5-build/qtbase/include/QtCore/qconfig-bootstrapped.h \
+		C:/qt5/qtbase/src/corelib/global/qconfig-bootstrapped.h \
+		C:/qt5-build/qtbase/include/QtCore/qconfig.h \
+		C:/qt5-build/qtbase/src/corelib/global/qconfig.h \
+		C:/qt5-build/qtbase/include/QtCore/qtcore-config.h \
+		C:/qt5-build/qtbase/src/corelib/qtcore-config.h \
+		C:/qt5-build/qtbase/include/QtCore/qsystemdetection.h \
+		C:/qt5/qtbase/src/corelib/global/qsystemdetection.h \
+		C:/qt5-build/qtbase/include/QtCore/qprocessordetection.h \
+		C:/qt5/qtbase/src/corelib/global/qprocessordetection.h \
+		C:/qt5-build/qtbase/include/QtCore/qcompilerdetection.h \
+		C:/qt5/qtbase/src/corelib/global/qcompilerdetection.h \
+		C:/qt5-build/qtbase/include/QtCore/qtypeinfo.h \
+		C:/qt5/qtbase/src/corelib/global/qtypeinfo.h \
+		C:/qt5-build/qtbase/include/QtCore/qsysinfo.h \
+		C:/qt5/qtbase/src/corelib/global/qsysinfo.h \
+		C:/qt5-build/qtbase/include/QtCore/qlogging.h \
+		C:/qt5/qtbase/src/corelib/global/qlogging.h \
+		C:/qt5-build/qtbase/include/QtCore/qflags.h \
+		C:/qt5/qtbase/src/corelib/global/qflags.h \
+		C:/qt5-build/qtbase/include/QtCore/qatomic.h \
+		C:/qt5/qtbase/src/corelib/thread/qatomic.h \
+		C:/qt5-build/qtbase/include/QtCore/qbasicatomic.h \
+		C:/qt5/qtbase/src/corelib/thread/qbasicatomic.h \
+		C:/qt5-build/qtbase/include/QtCore/qatomic_bootstrap.h \
+		C:/qt5/qtbase/src/corelib/thread/qatomic_bootstrap.h \
+		C:/qt5-build/qtbase/include/QtCore/qgenericatomic.h \
+		C:/qt5/qtbase/src/corelib/thread/qgenericatomic.h \
+		C:/qt5-build/qtbase/include/QtCore/qatomic_cxx11.h \
+		C:/qt5/qtbase/src/corelib/thread/qatomic_cxx11.h \
+		C:/qt5-build/qtbase/include/QtCore/qatomic_msvc.h \
+		C:/qt5/qtbase/src/corelib/thread/qatomic_msvc.h \
+		C:/qt5-build/qtbase/include/QtCore/qglobalstatic.h \
+		C:/qt5/qtbase/src/corelib/global/qglobalstatic.h \
+		C:/qt5-build/qtbase/include/QtCore/qmutex.h \
+		C:/qt5/qtbase/src/corelib/thread/qmutex.h \
+		C:/qt5-build/qtbase/include/QtCore/qnumeric.h \
+		C:/qt5/qtbase/src/corelib/global/qnumeric.h \
+		C:/qt5-build/qtbase/include/QtCore/qversiontagging.h \
+		C:/qt5/qtbase/src/corelib/global/qversiontagging.h \
+		C:/qt5-build/qtbase/include/QtCore/qobject.h \
+		C:/qt5/qtbase/src/corelib/kernel/qobject.h \
+		C:/qt5-build/qtbase/include/QtCore/qobjectdefs.h \
+		C:/qt5/qtbase/src/corelib/kernel/qobjectdefs.h \
+		C:/qt5-build/qtbase/include/QtCore/qnamespace.h \
+		C:/qt5/qtbase/src/corelib/global/qnamespace.h \
+		C:/qt5-build/qtbase/include/QtCore/qobjectdefs_impl.h \
+		C:/qt5/qtbase/src/corelib/kernel/qobjectdefs_impl.h \
+		C:/qt5-build/qtbase/include/QtCore/qstring.h \
+		C:/qt5/qtbase/src/corelib/tools/qstring.h \
+		C:/qt5-build/qtbase/include/QtCore/qchar.h \
+		C:/qt5/qtbase/src/corelib/tools/qchar.h \
+		C:/qt5-build/qtbase/include/QtCore/qbytearray.h \
+		C:/qt5/qtbase/src/corelib/tools/qbytearray.h \
+		C:/qt5-build/qtbase/include/QtCore/qrefcount.h \
+		C:/qt5/qtbase/src/corelib/tools/qrefcount.h \
+		C:/qt5-build/qtbase/include/QtCore/qarraydata.h \
+		C:/qt5/qtbase/src/corelib/tools/qarraydata.h \
+		C:/qt5-build/qtbase/include/QtCore/qstringliteral.h \
+		C:/qt5/qtbase/src/corelib/tools/qstringliteral.h \
+		C:/qt5-build/qtbase/include/QtCore/qstringalgorithms.h \
+		C:/qt5/qtbase/src/corelib/tools/qstringalgorithms.h \
+		C:/qt5-build/qtbase/include/QtCore/qstringview.h \
+		C:/qt5/qtbase/src/corelib/tools/qstringview.h \
+		C:/qt5-build/qtbase/include/QtCore/qstringbuilder.h \
+		C:/qt5/qtbase/src/corelib/tools/qstringbuilder.h \
+		C:/qt5-build/qtbase/include/QtCore/qlist.h \
+		C:/qt5/qtbase/src/corelib/tools/qlist.h \
+		C:/qt5-build/qtbase/include/QtCore/qalgorithms.h \
+		C:/qt5/qtbase/src/corelib/tools/qalgorithms.h \
+		C:/qt5-build/qtbase/include/QtCore/qiterator.h \
+		C:/qt5/qtbase/src/corelib/tools/qiterator.h \
+		C:/qt5-build/qtbase/include/QtCore/qhashfunctions.h \
+		C:/qt5/qtbase/src/corelib/tools/qhashfunctions.h \
+		C:/qt5-build/qtbase/include/QtCore/qpair.h \
+		C:/qt5/qtbase/src/corelib/tools/qpair.h \
+		C:/qt5-build/qtbase/include/QtCore/qbytearraylist.h \
+		C:/qt5/qtbase/src/corelib/tools/qbytearraylist.h \
+		C:/qt5-build/qtbase/include/QtCore/qstringlist.h \
+		C:/qt5/qtbase/src/corelib/tools/qstringlist.h \
+		C:/qt5-build/qtbase/include/QtCore/qregexp.h \
+		C:/qt5/qtbase/src/corelib/tools/qregexp.h \
+		C:/qt5-build/qtbase/include/QtCore/qstringmatcher.h \
+		C:/qt5/qtbase/src/corelib/tools/qstringmatcher.h \
+		C:/qt5-build/qtbase/include/QtCore/qcoreevent.h \
+		C:/qt5/qtbase/src/corelib/kernel/qcoreevent.h \
+		C:/qt5-build/qtbase/include/QtCore/qscopedpointer.h \
+		C:/qt5/qtbase/src/corelib/tools/qscopedpointer.h \
+		C:/qt5-build/qtbase/include/QtCore/qmetatype.h \
+		C:/qt5/qtbase/src/corelib/kernel/qmetatype.h \
+		C:/qt5-build/qtbase/include/QtCore/qvarlengtharray.h \
+		C:/qt5/qtbase/src/corelib/tools/qvarlengtharray.h \
+		C:/qt5-build/qtbase/include/QtCore/qcontainerfwd.h \
+		C:/qt5/qtbase/src/corelib/tools/qcontainerfwd.h \
+		C:/qt5-build/qtbase/include/QtCore/qobject_impl.h \
+		C:/qt5/qtbase/src/corelib/kernel/qobject_impl.h \
+		C:/qt5-build/qtbase/include/QtCore/QTextStream \
+		C:/qt5-build/qtbase/include/QtCore/qtextstream.h \
+		C:/qt5/qtbase/src/corelib/serialization/qtextstream.h \
+		C:/qt5-build/qtbase/include/QtCore/qlocale.h \
+		C:/qt5/qtbase/src/corelib/tools/qlocale.h \
+		C:/qt5-build/qtbase/include/QtCore/qvariant.h \
+		C:/qt5/qtbase/src/corelib/kernel/qvariant.h \
+		C:/qt5-build/qtbase/include/QtCore/qmap.h \
+		C:/qt5/qtbase/src/corelib/tools/qmap.h \
+		C:/qt5-build/qtbase/include/QtCore/qdebug.h \
+		C:/qt5/qtbase/src/corelib/io/qdebug.h \
+		C:/qt5-build/qtbase/include/QtCore/qhash.h \
+		C:/qt5/qtbase/src/corelib/tools/qhash.h \
+		C:/qt5-build/qtbase/include/QtCore/qvector.h \
+		C:/qt5/qtbase/src/corelib/tools/qvector.h \
+		C:/qt5-build/qtbase/include/QtCore/qpoint.h \
+		C:/qt5/qtbase/src/corelib/tools/qpoint.h \
+		C:/qt5-build/qtbase/include/QtCore/qset.h \
+		C:/qt5/qtbase/src/corelib/tools/qset.h \
+		C:/qt5-build/qtbase/include/QtCore/qcontiguouscache.h \
+		C:/qt5/qtbase/src/corelib/tools/qcontiguouscache.h \
+		C:/qt5-build/qtbase/include/QtCore/qsharedpointer.h \
+		C:/qt5/qtbase/src/corelib/tools/qsharedpointer.h \
+		C:/qt5-build/qtbase/include/QtCore/qshareddata.h \
+		C:/qt5/qtbase/src/corelib/tools/qshareddata.h \
+		C:/qt5-build/qtbase/include/QtCore/qsharedpointer_impl.h \
+		C:/qt5/qtbase/src/corelib/tools/qsharedpointer_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\JavaFileReader.o src\Hierarchy\JavaFileReader.cpp
 
 release/DClassTest.o: src/UnitTest/DClassTest.cpp include/UnitTest/DClassTest.h \
 		C:/qt5-build/qtbase/include/QtTest/QtTest \
@@ -12478,7 +12646,9 @@ release/DClassTest.o: src/UnitTest/DClassTest.cpp include/UnitTest/DClassTest.h 
 		C:/qt5-build/qtbase/include/QtCore/QRegularExpressionMatch \
 		C:/qt5-build/qtbase/include/QtCore/QRegularExpression \
 		include/Hierarchy/NaiveAnalyzer.h \
-		C:/qt5-build/qtbase/include/QtCore/QFile
+		C:/qt5-build/qtbase/include/QtCore/QFile \
+		C:/qt5-build/qtbase/include/QtCore/QTextStream \
+		include/Hierarchy/JavaFileReader.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\DClassTest.o src\UnitTest\DClassTest.cpp
 
 release/moc_Fenetre.o: release/moc_Fenetre.cpp 

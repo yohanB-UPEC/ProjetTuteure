@@ -2,31 +2,41 @@
 QT += core gui widgets
 CONFIG += console
 
-HEADERS += include/Widget/Fenetre.h \
-		include/Widget/DCodeEditor.h \
-		include/Widget/JavaHighLighter.h \
-		include/Menu/MenuFile.h \
-		include/Menu/MenuNew.h \
-		include/Menu/MenuEdit.h \
-		include/Menu/MenuPref.h \
-		include/Menu/MenuHelp.h \
-		include/Hierarchy/ClassElement.h \
-		include/Hierarchy/ClassSubElement.h \
-		include/Hierarchy/DAttribut.h \
-		include/Hierarchy/DMethod.h \
-		include/Hierarchy/DClass.h \
-		include/Hierarchy/NaiveAnalyzer.h 
+HEADERS += include/View/Fenetre.h \
+		include/View/Widget/DCodeEditor.h \
+		include/View/Widget/JavaHighLighter.h \
+		include/View/Menu/MenuFile.h \
+		include/View/Menu/MenuNew.h \
+		include/View/Menu/MenuEdit.h \
+		include/View/Menu/MenuPref.h \
+		include/View/Menu/MenuHelp.h \
+		include/View/Dialog/ProjectDialog.h \
+		include/Model/ClassElement.h \
+		include/Model/ClassSubElement.h \
+		include/Model/DAttribut.h \
+		include/Model/DMethod.h \
+		include/Model/DClass.h \
+		include/Model/Model.h \
+		include/Model/TreeItem.h \
+		include/Compiler/NaiveAnalyzer.h \
+		include/Compiler/JavaFileReader.h \
+		include/Controller/Controller.h 
 				
-SOURCES += src/Widget/Fenetre.cpp \
-		src/Widget/DCodeEditor.cpp \
-		src/Widget/JavaHighLighter.cpp \
-		src/Menu/MenuFile.cpp \
-		src/Menu/MenuNew.cpp \
-		src/Menu/MenuEdit.cpp \
-		src/Menu/MenuPref.cpp \
-		src/Menu/MenuHelp.cpp \
-		src/Hierarchy/DClass.cpp \
-		src/Hierarchy/NaiveAnalyzer.cpp
+SOURCES += src/View/Fenetre.cpp \
+		src/View/Widget/DCodeEditor.cpp \
+		src/View/Widget/JavaHighLighter.cpp \
+		src/View/Menu/MenuFile.cpp \
+		src/View/Menu/MenuNew.cpp \
+		src/View/Menu/MenuEdit.cpp \
+		src/View/Menu/MenuPref.cpp \
+		src/View/Menu/MenuHelp.cpp \
+		src/View/Dialog/ProjectDialog.cpp \
+		src/Model/DClass.cpp \
+		src/Model/Model.cpp \
+		src/Model/TreeItem.cpp \
+		src/Compiler/NaiveAnalyzer.cpp \
+		src/Compiler/JavaFileReader.cpp \
+		src/Controller/Controller.cpp
 		
 test_conf {
 	TARGET = my_app_test

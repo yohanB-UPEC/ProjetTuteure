@@ -8,6 +8,7 @@ debug/MenuPref.o
 debug/MenuHelp.o
 debug/DClass.o
 debug/NaiveAnalyzer.o
+debug/JavaFileReader.o
 debug/DClassTest.o
 debug/moc_Fenetre.o
 debug/moc_DCodeEditor.o
