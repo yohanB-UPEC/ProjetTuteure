@@ -1,27 +1,26 @@
 #include "include/Model/Model.h"
 
-Model::Model(): QAbstractItemModel(), root(){
-	TreeItem *projet = new TreeItem(&root);
-	projet->setLabel("Javora");
-	
-	TreeItem *src = new TreeItem(projet);
-	src->setLabel("src");
-	
-	TreeItem *package = new TreeItem(src);
-	package->setLabel("fr.SylarAdes.javora");
-	
-	TreeItem *file1 = new TreeItem(package);
-	file1->setLabel("Fichier #1");
-	TreeItem *file2 = new TreeItem(package);
-	file2->setLabel("Fichier #2");
-	TreeItem *file3 = new TreeItem(package);
-	file3->setLabel("Fichier #3");
+Model::Model(): QAbstractItemModel(), root("root"){
+	DProject *projet = new DProject("Javora");
+	DSourceFolder *src = new DSourceFolder("src");
+	DFolder *res = new DFolder("res");
+	DPackage *package = new DPackage("fr.SylarAdes.javora");
+	TreeItem *file1 = new TreeItem("Fichier #1");
+	TreeItem *file2 = new TreeItem("Fichier #2");
+	TreeItem *file3 = new TreeItem("Fichier #3");
+	TreeItem *img1 = new TreeItem("Image #1");
+	TreeItem *img2 = new TreeItem("Image #2");
+	TreeItem *make = new TreeItem("Makefile");
 	
 	package->appendChild(file1);
 	package->appendChild(file2);
 	package->appendChild(file3);	
 	src->appendChild(package);
+	res->appendChild(img1);
+	res->appendChild(img2);
 	projet->appendChild(src);
+	projet->appendChild(res);
+	projet->appendChild(make);
 	root.appendChild(projet);
 	root.setLabel("root");
 	printf("Constructeur\n");
@@ -68,10 +67,14 @@ QVariant Model::data(const QModelIndex &index, int role) const{
 	if(!index.isValid()){
 		return QVariant();
 	}
-	if (role != Qt::DisplayRole)
-        return QVariant();
 	TreeItem* i = (TreeItem*)index.internalPointer();
-	return QVariant(i->label());
+	if (role == Qt::DisplayRole){	
+		return QVariant(i->label());	
+	}else if(role == Qt::DecorationRole){
+		return i->getIcon();
+	}
+	
+	return QVariant();
 }
 
 bool Model::hasChildren(const QModelIndex &parent) const{
@@ -107,4 +110,23 @@ QVariant Model::headerData(int section, Qt::Orientation orientation,int role) co
         return QVariant(root.label());
 
     return QVariant();
+}
+
+bool Model::insertRow(int row, TreeItem *item, const QModelIndex &parent){
+	TreeItem *p;
+	if(parent.isValid()){
+		p = (TreeItem*)parent.internalPointer();
+	}else{
+		p = &root;
+	}
+
+	
+	if(row > p->childCount()){
+		row = p->childCount();
+	}else if(row < 0){
+		row = 0;
+	}
+	emit beginInsertRows(parent,row,row);
+	p->appendChild(item, row);
+	emit endInsertRows();
 }

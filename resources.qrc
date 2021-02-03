@@ -1,0 +1,13 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>res/icons/logo.png</file>
+	<file>res/icons/file.png</file>
+	<file>res/icons/text_file.png</file>
+	<file>res/icons/java_file.png</file>
+	<file>res/icons/java_folder.png</file>
+	<file>res/icons/folder.png</file>
+	<file>res/icons/package_f.png</file>
+	<file>res/icons/package_o.png</file>
+	<file>res/icons/projet.png</file>
+</qresource>
+</RCC>

@@ -1,13 +1,15 @@
 #ifndef PROJECTDIALOG
 #define PROJECTDIALOG
 
-#include <QtWidgets>
+#include "include/Controller/Dialog/ProjectController.h"
 
 class ProjectDialog : public QDialog {
 	Q_OBJECT
 	
+	friend class ProjectController;
+	
 	public:
-		ProjectDialog(QWidget *parent);
+		ProjectDialog(QWidget *parent, Model *model);
 		// getter
 		const QString getName();
 		const QString getLocation();
@@ -18,10 +20,9 @@ class ProjectDialog : public QDialog {
 		QLineEdit *loc;
 		QComboBox *jdk;
 		QPushButton *valider;
+		ProjectController pc;
 		
 	public slots:
-		void parcourir();
-		void validate();
 		
 };
 

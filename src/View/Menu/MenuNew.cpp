@@ -21,7 +21,6 @@ void MenuNew::s_File(){
 	this->fen->getCentral()->addTab(new DCodeEditor(),"nouveau");
 }
 void MenuNew::s_Project(){
-	ProjectDialog proDia(this->fen);
-	int res = proDia.exec();
-	printf("ProDia= %d\n",res);
+	ProjectDialog proDia(this->fen,this->fen->getModel());
+	proDia.exec();
 }
