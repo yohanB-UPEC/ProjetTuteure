@@ -3,6 +3,12 @@
 
 #include <QMenu>
 #include "../Dialog/ProjectDialog.h"
+#include "../Dialog/PackageDialog.h"
+#include "../Dialog/ClassDialog.h"
+#include "../Dialog/InterfaceDialog.h"
+#include "../Dialog/EnumDialog.h"
+#include "../Dialog/FolderDialog.h"
+#include "../Dialog/SrcFolderDialog.h"
 
 class Fenetre; 
 
@@ -15,6 +21,12 @@ class MenuNew : public QMenu {
 	public slots:
 		void s_File();
 		void s_Project();
+		void s_Package();
+		void s_Class();
+        void s_Interface();
+        void s_Enum();
+        void s_Folder();
+        void s_SrcFolder();
 		
 	private:
 		QAction *javaProject;
@@ -23,6 +35,7 @@ class MenuNew : public QMenu {
 		QAction *aInterface;
 		QAction *aEnum;
 		QAction *folder;
+        QAction *srcfolder;
 		QAction *file;
 		Fenetre *fen;
 };

@@ -1,6 +1,6 @@
 #include "include/View/Dialog/ProjectDialog.h"
 
-ProjectDialog::ProjectDialog(QWidget *parent=0): QDialog(parent){
+ProjectDialog::ProjectDialog(QWidget *parent): QDialog(parent){
 	this->resize(600,250);
 	this->setMinimumWidth(500);
 	this->setWindowTitle("Création de Projet");

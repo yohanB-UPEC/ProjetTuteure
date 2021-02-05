@@ -3,6 +3,10 @@ QT += core gui widgets
 CONFIG += console
 
 HEADERS += include/View/Fenetre.h \
+		include/View/Dialog/EnumDialog.h \
+		include/View/Dialog/FolderDialog.h \
+		include/View/Dialog/InterfaceDialog.h \
+		include/View/Dialog/SrcFolderDialog.h \
 		include/View/Widget/DCodeEditor.h \
 		include/View/Widget/JavaHighLighter.h \
 		include/View/Menu/MenuFile.h \
@@ -20,9 +24,15 @@ HEADERS += include/View/Fenetre.h \
 		include/Model/TreeItem.h \
 		include/Compiler/NaiveAnalyzer.h \
 		include/Compiler/JavaFileReader.h \
-		include/Controller/Controller.h 
+		include/Controller/Controller.h \
+		include/View/Dialog/PackageDialog.h \
+		include/View/Dialog/ClassDialog.h
 				
 SOURCES += src/View/Fenetre.cpp \
+		src/View/Dialog/EnumDialog.cpp \
+		src/View/Dialog/FolderDialog.cpp \
+		src/View/Dialog/InterfaceDialog.cpp \
+		src/View/Dialog/SrcFolderDialog.cpp \
 		src/View/Widget/DCodeEditor.cpp \
 		src/View/Widget/JavaHighLighter.cpp \
 		src/View/Menu/MenuFile.cpp \
@@ -36,7 +46,9 @@ SOURCES += src/View/Fenetre.cpp \
 		src/Model/TreeItem.cpp \
 		src/Compiler/NaiveAnalyzer.cpp \
 		src/Compiler/JavaFileReader.cpp \
-		src/Controller/Controller.cpp
+		src/Controller/Controller.cpp \
+		src/View/Dialog/PackageDialog.cpp \
+		src/View/Dialog/ClassDialog.cpp
 		
 test_conf {
 	TARGET = my_app_test

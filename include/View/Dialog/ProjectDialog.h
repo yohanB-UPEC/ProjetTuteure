@@ -7,7 +7,7 @@ class ProjectDialog : public QDialog {
 	Q_OBJECT
 	
 	public:
-		ProjectDialog(QWidget *parent);
+        ProjectDialog(QWidget *parent=0);
 		// getter
 		const QString getName();
 		const QString getLocation();
