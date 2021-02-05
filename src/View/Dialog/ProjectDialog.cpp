@@ -1,6 +1,7 @@
 #include "include/View/Dialog/ProjectDialog.h"
 
-ProjectDialog::ProjectDialog(QWidget *parent): QDialog(parent){
+ProjectDialog::ProjectDialog(QWidget *parent, Model *model): QDialog(parent), pc(model,this){
+
 	this->resize(600,250);
 	this->setMinimumWidth(500);
 	this->setWindowTitle("Création de Projet");
@@ -47,26 +48,15 @@ ProjectDialog::ProjectDialog(QWidget *parent): QDialog(parent){
 	this->setLayout(layout);
 	
 	
-	connect(browse,SIGNAL(clicked()),this,SLOT(parcourir()));
+	connect(browse,SIGNAL(clicked()),&pc,SLOT(parcourir()));
 	connect(annuler,SIGNAL(clicked()),this,SLOT(reject()));
-	connect(valider,SIGNAL(clicked()),this,SLOT(accept()));
-	connect(name,SIGNAL(textChanged(QString)),this,SLOT(validate()));
-	connect(loc,SIGNAL(textChanged(QString)),this,SLOT(validate()));
+	connect(valider,SIGNAL(clicked()),&pc,SLOT(createProject()));
+	connect(name,SIGNAL(textChanged(QString)),&pc,SLOT(validate()));
+	connect(loc,SIGNAL(textChanged(QString)),&pc,SLOT(validate()));
 }
 
-void ProjectDialog::parcourir(){
-	QString dir = QFileDialog::getExistingDirectory(this, tr("Selectionne un dossier"),"./",QFileDialog::ShowDirsOnly);
-	if(dir.size() > 0){
-		this->loc->setText(dir);
-	}
-}
-void ProjectDialog::validate(){
-	if(name->text().size() > 0 && loc->text().size() > 0){
-		this->valider->setEnabled(true);
-	}else{
-		this->valider->setEnabled(false);
-	}
-}
+
+
 
 const QString ProjectDialog::getName(){
 	return this->name->text();

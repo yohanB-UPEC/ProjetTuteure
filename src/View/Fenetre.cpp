@@ -5,6 +5,7 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 	this->controller = new Controller(this,this->model);
 	this->resize(1000,600);
 	this->setWindowTitle("Projet Dyst Editor");
+	this->setWindowIcon(DIcons::logo);
 	
 	menuFile = new MenuFile(this);
 	menuEdit = new MenuEdit(this);
@@ -28,6 +29,7 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 	//QFileSystemModel *filemodel = new QFileSystemModel;
     //filemodel->setRootPath(QDir::currentPath());
     QTreeView *tree = new QTreeView;
+    tree->setHeaderHidden(true);
 	explorer->setWidget(tree);
     tree->setModel(model);
 	

@@ -1,6 +1,7 @@
 
 QT += core gui widgets
 CONFIG += console
+RESOURCES = resources.qrc
 
 HEADERS += include/View/Fenetre.h \
 		include/View/Dialog/EnumDialog.h \
@@ -22,11 +23,17 @@ HEADERS += include/View/Fenetre.h \
 		include/Model/DClass.h \
 		include/Model/Model.h \
 		include/Model/TreeItem.h \
+		include/Model/DIcons.h \
+		include/Model/DProject.h \
+		include/Model/DSourceFolder.h \
+		include/Model/DFolder.h \
+		include/Model/DPackage.h \
 		include/Compiler/NaiveAnalyzer.h \
 		include/Compiler/JavaFileReader.h \
 		include/Controller/Controller.h \
 		include/View/Dialog/PackageDialog.h \
-		include/View/Dialog/ClassDialog.h
+                include/View/Dialog/ClassDialog.h \
+		include/Controller/Dialog/ProjectController.h 
 				
 SOURCES += src/View/Fenetre.cpp \
 		src/View/Dialog/EnumDialog.cpp \
@@ -44,11 +51,17 @@ SOURCES += src/View/Fenetre.cpp \
 		src/Model/DClass.cpp \
 		src/Model/Model.cpp \
 		src/Model/TreeItem.cpp \
+		src/Model/DIcons.cpp \
+		src/Model/DProject.cpp \
+		src/Model/DSourceFolder.cpp \
+		src/Model/DFolder.cpp \
+		src/Model/DPackage.cpp \
 		src/Compiler/NaiveAnalyzer.cpp \
 		src/Compiler/JavaFileReader.cpp \
 		src/Controller/Controller.cpp \
 		src/View/Dialog/PackageDialog.cpp \
-		src/View/Dialog/ClassDialog.cpp
+                src/View/Dialog/ClassDialog.cpp \
+		src/Controller/Dialog/ProjectController.cpp 
 		
 test_conf {
 	TARGET = my_app_test
