@@ -1,5 +1,5 @@
 
-QT += core gui widgets
+QT += core gui widgets xml
 CONFIG += console
 RESOURCES = resources.qrc
 
@@ -21,6 +21,7 @@ HEADERS += include/View/Fenetre.h \
 		include/Model/DAttribut.h \
 		include/Model/DMethod.h \
 		include/Model/DClass.h \
+		include/Model/DJavaFile.h \
 		include/Model/Model.h \
 		include/Model/TreeItem.h \
 		include/Model/DIcons.h \
@@ -32,7 +33,7 @@ HEADERS += include/View/Fenetre.h \
 		include/Compiler/JavaFileReader.h \
 		include/Controller/Controller.h \
 		include/View/Dialog/PackageDialog.h \
-                include/View/Dialog/ClassDialog.h \
+        include/View/Dialog/ClassDialog.h \
 		include/Controller/Dialog/ProjectController.h 
 				
 SOURCES += src/View/Fenetre.cpp \
@@ -49,6 +50,7 @@ SOURCES += src/View/Fenetre.cpp \
 		src/View/Menu/MenuHelp.cpp \
 		src/View/Dialog/ProjectDialog.cpp \
 		src/Model/DClass.cpp \
+		src/Model/DJavaFile.cpp \
 		src/Model/Model.cpp \
 		src/Model/TreeItem.cpp \
 		src/Model/DIcons.cpp \
@@ -60,7 +62,7 @@ SOURCES += src/View/Fenetre.cpp \
 		src/Compiler/JavaFileReader.cpp \
 		src/Controller/Controller.cpp \
 		src/View/Dialog/PackageDialog.cpp \
-                src/View/Dialog/ClassDialog.cpp \
+        src/View/Dialog/ClassDialog.cpp \
 		src/Controller/Dialog/ProjectController.cpp 
 		
 test_conf {

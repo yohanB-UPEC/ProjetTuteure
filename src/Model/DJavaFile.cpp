@@ -1,16 +1,25 @@
 #include "include/Model/DJavaFile.h"
 
+DJavaFile::DJavaFile(QDomElement *e): TreeItem(e){
+	
+}
+
+QVariant DJavaFile::getIcon(){
+	return QVariant(DIcons::java_file);
+}
+
+
 std::list<DClass*> DJavaFile::findClasses(QString regex){
 	std::list<DClass*> res;
 	QRegularExpression rec(regex);
 	
 	std::list<DClass*>::iterator dc;
 	for(dc=this->mClasses.begin();dc!=this->mClasses.end();++dc){
-		if(rec.match(dc->label()).hasMatch()){
+		if(rec.match((*dc)->label()).hasMatch()){
 			res.push_back(*dc);
 		}
 	}
-	if(rec.match(this->mPublicClass.label()).hasMatch()){
+	if(rec.match(this->mPublicClass->label()).hasMatch()){
 		res.push_back(this->mPublicClass);
 	}
 	return res;

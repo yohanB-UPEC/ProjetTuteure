@@ -1,4 +1,8 @@
 debug/Fenetre.o
+debug/EnumDialog.o
+debug/FolderDialog.o
+debug/InterfaceDialog.o
+debug/SrcFolderDialog.o
 debug/DCodeEditor.o
 debug/JavaHighLighter.o
 debug/MenuFile.o
@@ -8,6 +12,7 @@ debug/MenuPref.o
 debug/MenuHelp.o
 debug/ProjectDialog.o
 debug/DClass.o
+debug/DJavaFile.o
 debug/Model.o
 debug/TreeItem.o
 debug/DIcons.o
@@ -18,10 +23,16 @@ debug/DPackage.o
 debug/NaiveAnalyzer.o
 debug/JavaFileReader.o
 debug/Controller.o
+debug/PackageDialog.o
+debug/ClassDialog.o
 debug/ProjectController.o
 debug/main.o
 debug/qrc_resources.o
 debug/moc_Fenetre.o
+debug/moc_EnumDialog.o
+debug/moc_FolderDialog.o
+debug/moc_InterfaceDialog.o
+debug/moc_SrcFolderDialog.o
 debug/moc_DCodeEditor.o
 debug/moc_JavaHighLighter.o
 debug/moc_MenuFile.o
@@ -32,4 +43,6 @@ debug/moc_MenuHelp.o
 debug/moc_ProjectDialog.o
 debug/moc_Model.o
 debug/moc_Controller.o
+debug/moc_PackageDialog.o
+debug/moc_ClassDialog.o
 debug/moc_ProjectController.o

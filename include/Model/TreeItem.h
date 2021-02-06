@@ -2,12 +2,14 @@
 #define TREEITEM
 
 #include <QtWidgets>
+#include <QDomElement>
 #include "DIcons.h"
 
 class TreeItem{
 	
 	public:
-		TreeItem(QString label);
+		TreeItem(QString label=nullptr);
+		TreeItem( QDomElement *e);
 		virtual ~TreeItem();
 		TreeItem* child(int row);
 		TreeItem* parent(){return this->m_parent;}
@@ -19,6 +21,8 @@ class TreeItem{
 		int row(){return (m_parent==nullptr)?m_parent->m_children.indexOf(this):0;}
 		virtual QVariant getIcon();
 		void setParent(TreeItem* parent = nullptr){this->m_parent = parent;}
+		virtual QString getPath();
+		virtual void save(QXmlStreamWriter *out=nullptr);
 		
 	protected:
 		QList<TreeItem*> m_children;

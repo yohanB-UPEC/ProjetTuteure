@@ -1,28 +1,15 @@
 #include "include/Model/Model.h"
 
-Model::Model(): QAbstractItemModel(), root("root"){
-	DProject *projet = new DProject("Javora");
-	DSourceFolder *src = new DSourceFolder("src");
-	DFolder *res = new DFolder("res");
-	DPackage *package = new DPackage("fr.SylarAdes.javora");
-	TreeItem *file1 = new TreeItem("Fichier #1");
-	TreeItem *file2 = new TreeItem("Fichier #2");
-	TreeItem *file3 = new TreeItem("Fichier #3");
-	TreeItem *img1 = new TreeItem("Image #1");
-	TreeItem *img2 = new TreeItem("Image #2");
-	TreeItem *make = new TreeItem("Makefile");
-	
-	package->appendChild(file1);
-	package->appendChild(file2);
-	package->appendChild(file3);	
-	src->appendChild(package);
-	res->appendChild(img1);
-	res->appendChild(img2);
-	projet->appendChild(src);
-	projet->appendChild(res);
-	projet->appendChild(make);
-	root.appendChild(projet);
-	root.setLabel("root");
+Model::Model(): QAbstractItemModel(), root("root"), settings("config.ini",QSettings::IniFormat){
+	settings.beginGroup("Projects");
+	QStringList keys = settings.allKeys();
+	for(int i = 0; i < keys.size(); i++){
+		QVariant path = settings.value(keys.at(i),QVariant());
+		if(!path.isNull() && path.isValid()){
+			root.appendChild(new DProject(path.toString()));
+		}
+	}
+	settings.endGroup();
 	printf("Constructeur\n");
 }
 
@@ -118,6 +105,9 @@ bool Model::insertRow(int row, TreeItem *item, const QModelIndex &parent){
 		p = (TreeItem*)parent.internalPointer();
 	}else{
 		p = &root;
+		settings.beginGroup("Projects");
+		int key = settings.allKeys().size();
+		settings.setValue(QString("pro"+key),item->getPath());
 	}
 
 	
@@ -128,5 +118,6 @@ bool Model::insertRow(int row, TreeItem *item, const QModelIndex &parent){
 	}
 	emit beginInsertRows(parent,row,row);
 	p->appendChild(item, row);
+	item->save();
 	emit endInsertRows();
 }

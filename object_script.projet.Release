@@ -1,4 +1,8 @@
 release/Fenetre.o
+release/EnumDialog.o
+release/FolderDialog.o
+release/InterfaceDialog.o
+release/SrcFolderDialog.o
 release/DCodeEditor.o
 release/JavaHighLighter.o
 release/MenuFile.o
@@ -8,6 +12,7 @@ release/MenuPref.o
 release/MenuHelp.o
 release/ProjectDialog.o
 release/DClass.o
+release/DJavaFile.o
 release/Model.o
 release/TreeItem.o
 release/DIcons.o
@@ -18,10 +23,16 @@ release/DPackage.o
 release/NaiveAnalyzer.o
 release/JavaFileReader.o
 release/Controller.o
+release/PackageDialog.o
+release/ClassDialog.o
 release/ProjectController.o
 release/main.o
 release/qrc_resources.o
 release/moc_Fenetre.o
+release/moc_EnumDialog.o
+release/moc_FolderDialog.o
+release/moc_InterfaceDialog.o
+release/moc_SrcFolderDialog.o
 release/moc_DCodeEditor.o
 release/moc_JavaHighLighter.o
 release/moc_MenuFile.o
@@ -32,4 +43,6 @@ release/moc_MenuHelp.o
 release/moc_ProjectDialog.o
 release/moc_Model.o
 release/moc_Controller.o
+release/moc_PackageDialog.o
+release/moc_ClassDialog.o
 release/moc_ProjectController.o

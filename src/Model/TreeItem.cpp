@@ -1,8 +1,12 @@
 #include "include/Model/TreeItem.h"
 
-TreeItem::TreeItem(QString label): m_label(label){
+TreeItem::TreeItem(QString label): m_parent(nullptr), m_label(label){
 	
 }
+
+TreeItem::TreeItem(QDomElement *e): m_label(e->attribute("label","inconnue")){
+}
+
 TreeItem::~TreeItem(){
 	while (!m_children.isEmpty())
 		delete m_children.takeFirst();
@@ -28,4 +32,23 @@ TreeItem* TreeItem::child(int row){
 
 QVariant TreeItem::getIcon(){
 	return QVariant(DIcons::text_file);
+}
+
+QString TreeItem::getPath(){
+	if(m_parent != nullptr){
+		return m_parent->getPath() + "/" + this->m_label;
+	}
+	return QString();
+}
+
+void TreeItem::save(QXmlStreamWriter *out){
+	if(out == nullptr){
+		if(m_parent != nullptr){
+			m_parent->save();
+		}
+		return;
+	}
+	out->writeStartElement("TreeItem");
+	out->writeAttribute("label",m_label);
+	out->writeEndElement();
 }

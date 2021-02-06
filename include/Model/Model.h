@@ -28,6 +28,7 @@ class Model : public QAbstractItemModel{
 	
 	private:
 		TreeItem root;
+		QSettings settings;
 	
 };
 #endif

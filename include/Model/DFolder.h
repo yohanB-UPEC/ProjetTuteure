@@ -7,7 +7,9 @@ class DFolder : public TreeItem {
 	
 	public:
 		DFolder(QString label);
+		DFolder(QDomElement *e);
 		QVariant getIcon();
+		void save(QXmlStreamWriter *out=nullptr);
 	private:
 	
 };
