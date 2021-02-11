@@ -2,9 +2,12 @@
 #define ENUMDIALOG_H
 
 #include <QtWidgets>
+#include "include/Controller/Dialog/EnumController.h"
 
 class EnumDialog : public QDialog {
     Q_OBJECT
+
+    friend class EnumController;
 
     public:
         EnumDialog(QWidget *parent);
@@ -15,13 +18,7 @@ class EnumDialog : public QDialog {
         QLineEdit *loc, *loc2;
         QItemSelectionModel* selectionModel;
         QFileSystemModel *filemodel, *filemodel2;
-
-    public slots:
-        void validate();
-        void parcourir();
-        void parcourir2();
-        //void selectedItem(const QItemSelection &selected, const QItemSelection &deselected);
-
+        EnumController ed;
 };
 
 #endif

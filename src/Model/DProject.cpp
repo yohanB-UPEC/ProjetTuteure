@@ -1,4 +1,4 @@
-#include "include/model/DProject.h"
+#include "include/Model/DProject.h"
 
 DProject::DProject(QString label, QString path): TreeItem(label), m_path(path){
 	

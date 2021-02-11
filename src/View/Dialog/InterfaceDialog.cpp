@@ -1,6 +1,6 @@
 #include "include/View/Dialog/InterfaceDialog.h"
 
-InterfaceDialog::InterfaceDialog(QWidget *parent): QDialog(parent){
+InterfaceDialog::InterfaceDialog(QWidget *parent): QDialog(parent), ifd(this){
 
     /* Paramètrage de la boîte de dialogue */
 
@@ -72,33 +72,11 @@ InterfaceDialog::InterfaceDialog(QWidget *parent): QDialog(parent){
     layout->addLayout(h4);
     this->setLayout(layout);
 
-    connect(browse,SIGNAL(clicked()),this,SLOT(parcourir()));
-    connect(browse2,SIGNAL(clicked()),this,SLOT(parcourir2()));
+    connect(browse,SIGNAL(clicked()),&ifd,SLOT(parcourir()));
+    connect(browse2,SIGNAL(clicked()),&ifd,SLOT(parcourir2()));
     connect(annuler,SIGNAL(clicked()),this,SLOT(reject()));
     connect(valider,SIGNAL(clicked()),this,SLOT(accept()));
-    connect(name,SIGNAL(textChanged(QString)),this,SLOT(validate()));
-    connect(loc,SIGNAL(textChanged(QString)),this,SLOT(validate()));
-    connect(loc2,SIGNAL(textChanged(QString)),this,SLOT(validate()));
-}
-
-void InterfaceDialog::validate(){
-    if(name->text().size() > 0 && loc->text().size() > 0 && loc2->text().size() > 0){
-        this->valider->setEnabled(true);
-    }else{
-        this->valider->setEnabled(false);
-    }
-}
-
-void InterfaceDialog::parcourir(){
-    QString dir = QFileDialog::getExistingDirectory(this, tr("Selectionne un dossier"),"./",QFileDialog::ShowDirsOnly);
-    if(dir.size() > 0){
-        this->loc->setText(dir);
-    }
-}
-
-void InterfaceDialog::parcourir2(){
-    QString dir = QFileDialog::getExistingDirectory(this, tr("Selectionne un dossier"),"./",QFileDialog::ShowDirsOnly);
-    if(dir.size() > 0){
-        this->loc2->setText(dir);
-    }
+    connect(name,SIGNAL(textChanged(QString)),&ifd,SLOT(validate()));
+    connect(loc,SIGNAL(textChanged(QString)),&ifd,SLOT(validate()));
+    connect(loc2,SIGNAL(textChanged(QString)),&ifd,SLOT(validate()));
 }

@@ -16,6 +16,8 @@ class ProjectController : public QObject {
 		void parcourir();
 		void validate();
 		void createProject();
+        bool caracteresSpeciaux();
+        bool isExisted();
 		
 	private:
 		ProjectDialog *m_dial;

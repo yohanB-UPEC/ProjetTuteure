@@ -1,4 +1,4 @@
-#include "include/model/DFolder.h"
+#include "include/Model/DFolder.h"
 
 DFolder::DFolder(QString label): TreeItem(label){
 	

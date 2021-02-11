@@ -1,11 +1,14 @@
-#ifndef CLASSDIALOG
-#define CLASSDIALOG
+#ifndef CLASSDIALOG_H
+#define CLASSDIALOG_H
 
 #include <QtWidgets>
+#include "include/Controller/Dialog/ClassController.h"
 
 class ClassDialog : public QDialog {
 	Q_OBJECT
 	
+	friend class ClassController;
+
 	public:
         ClassDialog(QWidget *parent=0);
 		
@@ -14,11 +17,9 @@ class ClassDialog : public QDialog {
 		QLineEdit *name;
 		QLineEdit *superClass;
         QLineEdit *interFace;
-		QString loc;
-		
-	public slots:
-		void validate();
-	
+		QLineEdit *loc;
+		QLineEdit *loc2;
+		ClassController clc;
 };
 
 #endif

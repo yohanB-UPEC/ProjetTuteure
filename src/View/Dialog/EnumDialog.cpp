@@ -1,6 +1,6 @@
 #include "include/View/Dialog/EnumDialog.h"
 
-EnumDialog::EnumDialog(QWidget *parent): QDialog(parent){
+EnumDialog::EnumDialog(QWidget *parent): QDialog(parent), ed(this){
 
     /* Paramètrage de la boîte de dialogue */
 
@@ -72,33 +72,11 @@ EnumDialog::EnumDialog(QWidget *parent): QDialog(parent){
     layout->addLayout(h4);
     this->setLayout(layout);
 
-    connect(browse,SIGNAL(clicked()),this,SLOT(parcourir()));
-    connect(browse2,SIGNAL(clicked()),this,SLOT(parcourir2()));
+    connect(browse,SIGNAL(clicked()),&ed,SLOT(parcourir()));
+    connect(browse2,SIGNAL(clicked()),&ed,SLOT(parcourir2()));
     connect(annuler,SIGNAL(clicked()),this,SLOT(reject()));
     connect(valider,SIGNAL(clicked()),this,SLOT(accept()));
-    connect(name,SIGNAL(textChanged(QString)),this,SLOT(validate()));
-    connect(loc,SIGNAL(textChanged(QString)),this,SLOT(validate()));
-    connect(loc2,SIGNAL(textChanged(QString)),this,SLOT(validate()));
-}
-
-void EnumDialog::validate(){
-    if(name->text().size() > 0 && loc->text().size() > 0 && loc2->text().size() > 0){
-        this->valider->setEnabled(true);
-    }else{
-        this->valider->setEnabled(false);
-    }
-}
-
-void EnumDialog::parcourir(){
-    QString dir = QFileDialog::getExistingDirectory(this, tr("Selectionne un dossier"),"./",QFileDialog::ShowDirsOnly);
-    if(dir.size() > 0){
-        this->loc->setText(dir);
-    }
-}
-
-void EnumDialog::parcourir2(){
-    QString dir = QFileDialog::getExistingDirectory(this, tr("Selectionne un dossier"),"./",QFileDialog::ShowDirsOnly);
-    if(dir.size() > 0){
-        this->loc2->setText(dir);
-    }
+    connect(name,SIGNAL(textChanged(QString)),&ed,SLOT(validate()));
+    connect(loc,SIGNAL(textChanged(QString)),&ed,SLOT(validate()));
+    connect(loc2,SIGNAL(textChanged(QString)),&ed,SLOT(validate()));
 }

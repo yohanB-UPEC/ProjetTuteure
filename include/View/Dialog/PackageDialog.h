@@ -2,23 +2,24 @@
 #define PACKAGEDIALOG
 
 #include <QtWidgets>
+#include "include/Controller/Dialog/PackageController.h"
 
 class PackageDialog : public QDialog {
 	Q_OBJECT
+
+    friend class PackageController;
 	
 	public:
-		PackageDialog(QWidget *parent);
+        PackageDialog(QWidget *parent=0);
 		
 	private:
 		QPushButton *valider;
 		QLineEdit *name;
-		QString loc;
+        QLineEdit *path;
+        QString loc;
 		QItemSelectionModel* selectionModel;
 		QFileSystemModel *filemodel;
-		
-	public slots:
-		void validate();
-		void selectedItem(const QItemSelection &selected, const QItemSelection &deselected);
+        PackageController pkd;
 	
 };
 

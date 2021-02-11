@@ -1,6 +1,6 @@
 #include "include/View/Dialog/SrcFolderDialog.h"
 
-SrcFolderDialog::SrcFolderDialog(QWidget *parent): QDialog(parent){
+SrcFolderDialog::SrcFolderDialog(QWidget *parent): QDialog(parent), sfd(this){
     this->resize(600,100);
     this->setMinimumWidth(500);
     this->setWindowTitle("Création de dossier");
@@ -39,23 +39,9 @@ SrcFolderDialog::SrcFolderDialog(QWidget *parent): QDialog(parent){
     this->setLayout(layout);
 
 
-    connect(browse,SIGNAL(clicked()),this,SLOT(parcourir()));
+    connect(browse,SIGNAL(clicked()),&sfd,SLOT(parcourir()));
     connect(annuler,SIGNAL(clicked()),this,SLOT(reject()));
     connect(valider,SIGNAL(clicked()),this,SLOT(accept()));
-    connect(name,SIGNAL(textChanged(QString)),this,SLOT(validate()));
-    connect(loc,SIGNAL(textChanged(QString)),this,SLOT(validate()));
-}
-
-void SrcFolderDialog::parcourir(){
-    QString dir = QFileDialog::getExistingDirectory(this, tr("Selectionne un dossier"),"./",QFileDialog::ShowDirsOnly);
-    if(dir.size() > 0){
-        this->loc->setText(dir);
-    }
-}
-void SrcFolderDialog::validate(){
-    if(name->text().size() > 0 && loc->text().size() > 0){
-        this->valider->setEnabled(true);
-    }else{
-        this->valider->setEnabled(false);
-    }
+    connect(name,SIGNAL(textChanged(QString)),&sfd,SLOT(validate()));
+    connect(loc,SIGNAL(textChanged(QString)),&sfd,SLOT(validate()));
 }

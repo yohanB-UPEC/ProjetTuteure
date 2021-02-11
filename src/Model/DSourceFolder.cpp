@@ -1,4 +1,4 @@
-#include "include/model/DSourceFolder.h"
+#include "include/Model/DSourceFolder.h"
 
 DSourceFolder::DSourceFolder(QString label): TreeItem(label){
 	

@@ -2,9 +2,12 @@
 #define FOLDERDIALOG_H
 
 #include <QtWidgets>
+#include "include/Controller/Dialog/FolderController.h"
 
 class FolderDialog : public QDialog {
     Q_OBJECT
+
+    friend class FolderController;
 
     public:
         FolderDialog(QWidget *parent);
@@ -15,10 +18,7 @@ class FolderDialog : public QDialog {
         QLineEdit *loc;
         QItemSelectionModel* selectionModel;
         QFileSystemModel *filemodel;
-
-    public slots:
-        void validate();
-        void parcourir();
+        FolderController fd;
         //void selectedItem(const QItemSelection &selected, const QItemSelection &deselected);
 
 };
