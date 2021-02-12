@@ -9,6 +9,7 @@
 #include "Menu/MenuEdit.h"
 #include "Menu/MenuPref.h"
 #include "Menu/MenuHelp.h"
+#include "Widget/Console.h"
 
 
 
@@ -24,6 +25,7 @@ class Fenetre : public QMainWindow {
 		MenuEdit *menuEdit;
 		MenuPref *menuPref;
 		MenuHelp *menuHelp;
+        Console *console;
 		
 		QTabWidget *central;
 		
