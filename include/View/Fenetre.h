@@ -3,6 +3,7 @@
 
 #include <QtWidgets>
 #include "../Model/Model.h"
+#include "../Model/DSnippet.h"
 #include "../Controller/Controller.h"
 #include "Widget/DCodeEditor.h"
 #include "Menu/MenuFile.h"
@@ -25,12 +26,17 @@ class Fenetre : public QMainWindow {
 		MenuEdit *menuEdit;
 		MenuPref *menuPref;
 		MenuHelp *menuHelp;
-        Console *console;
+        QPushButton *newCmd;
+        QDockWidget *consoles;
 		
 		QTabWidget *central;
+        QTabWidget *central2;
 		
 		Model *model;
 		Controller *controller;
+
+    public slots:
+        void s_newCmd();
 		
 };
 

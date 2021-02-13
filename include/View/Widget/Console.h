@@ -3,11 +3,13 @@
 
 #include <QtWidgets>
 
+class Fenetre;
+
 class Console : public QWidget {
     Q_OBJECT
 
     public:
-        Console(QWidget *parent = nullptr);
+        Console(QWidget *parent);
         ~Console();
         QPlainTextEdit *getEdit();
         QLineEdit *getLineEdit();
@@ -16,6 +18,8 @@ class Console : public QWidget {
         QPlainTextEdit *edit;
         QLineEdit *lineEdit;
         QProcess *cmd;
+        QMenu *menu;
+        QAction *newCmd;
 
     public slots:
         void readStdOut();

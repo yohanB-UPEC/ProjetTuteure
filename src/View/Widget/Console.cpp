@@ -3,11 +3,11 @@
 #include "include/View/Widget/Console.h"
 
 Console::Console(QWidget *parent) : QWidget(parent){
-
+        //this->fen = fen;
         QVBoxLayout *vb = new QVBoxLayout();
 
         edit = new QPlainTextEdit(this);
-        edit->setStyleSheet("QPlainTextEdit {background-color: #252424; color: white; font-family: sans-serif; font-size: 15px;}");
+        edit->setStyleSheet("QPlainTextEdit {background-color: #242424; color: white; font-family: cursive; font-size: 15px;}");
         edit->setBackgroundVisible(true);
         edit->setReadOnly(true);
 
@@ -19,7 +19,8 @@ Console::Console(QWidget *parent) : QWidget(parent){
         this->setLayout(vb);
         cmd = new QProcess(parent);
         cmd->setProcessChannelMode(QProcess::MergedChannels);
-        cmd->start("C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", QStringList());
+        cmd->start("powershell.exe", QStringList());
+
         connect(cmd, SIGNAL(readyRead()), this, SLOT(readStdOut()));
         connect(lineEdit, SIGNAL(editingFinished()), this, SLOT(execCmd()));
 }
@@ -35,6 +36,7 @@ QLineEdit* Console::getLineEdit(){
 void Console::readStdOut(){
     QTextCodec *codec = QTextCodec::codecForName("IBM850");
     edit->insertPlainText(codec->toUnicode(" " + cmd->readAllStandardOutput()));
+    edit->verticalScrollBar()->setValue(edit->verticalScrollBar()->maximum());
 }
 
 Console::~Console(){
@@ -46,3 +48,7 @@ void Console::execCmd(){
     lineEdit->setText("");
     cmd->write(arr);
 }
+/*
+void Console::s_Console(){
+    this->fen->getCentral()->addTab(new Console(),"nouveau");
+}*/

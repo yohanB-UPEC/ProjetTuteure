@@ -9,6 +9,8 @@ HEADERS += include/View/Fenetre.h \
     include/Controller/Dialog/InterfaceController.h \
     include/Controller/Dialog/PackageController.h \
     include/Controller/Dialog/SrcFolderController.h \
+    include/Controller/Widget/SnippetController.h \
+    include/Model/DSnippet.h \
 		include/View/Dialog/EnumDialog.h \
 		include/View/Dialog/FolderDialog.h \
 		include/View/Dialog/InterfaceDialog.h \
@@ -41,7 +43,8 @@ HEADERS += include/View/Fenetre.h \
 		include/View/Dialog/PackageDialog.h \
                 include/View/Dialog/ClassDialog.h \
 		include/Controller/Dialog/ProjectController.h \
-		include/Controller/Dialog/ClassController.h
+		include/Controller/Dialog/ClassController.h \
+    include/View/Widget/Snippet.h
 				
 SOURCES += src/View/Fenetre.cpp \
     src/Controller/Dialog/EnumController.cpp \
@@ -49,6 +52,8 @@ SOURCES += src/View/Fenetre.cpp \
     src/Controller/Dialog/InterfaceController.cpp \
     src/Controller/Dialog/PackageController.cpp \
     src/Controller/Dialog/SrcFolderController.cpp \
+    src/Controller/Widget/SnippetController.cpp \
+    src/Model/DSnippet.cpp \
 		src/View/Dialog/EnumDialog.cpp \
 		src/View/Dialog/FolderDialog.cpp \
 		src/View/Dialog/InterfaceDialog.cpp \
@@ -77,7 +82,8 @@ SOURCES += src/View/Fenetre.cpp \
 		src/View/Dialog/PackageDialog.cpp \
                 src/View/Dialog/ClassDialog.cpp \
 		src/Controller/Dialog/ProjectController.cpp \
-		src/Controller/Dialog/ClassController.cpp
+		src/Controller/Dialog/ClassController.cpp \
+    src/View/Widget/Snippet.cpp
 		
 test_conf {
 	TARGET = my_app_test
