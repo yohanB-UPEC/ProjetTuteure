@@ -2,9 +2,12 @@
 #define SRCFOLDERDIALOG_H
 
 #include <QtWidgets>
+#include "include/Controller/Dialog/SrcFolderController.h"
 
 class SrcFolderDialog : public QDialog {
     Q_OBJECT
+
+    friend class SrcFolderController;
 
     public:
         SrcFolderDialog(QWidget *parent);
@@ -15,12 +18,7 @@ class SrcFolderDialog : public QDialog {
         QLineEdit *loc;
         QItemSelectionModel* selectionModel;
         QFileSystemModel *filemodel;
-
-    public slots:
-        void validate();
-        void parcourir();
-        //void selectedItem(const QItemSelection &selected, const QItemSelection &deselected);
-
+        SrcFolderController sfd;
 };
 
 

@@ -1,6 +1,6 @@
 #include "include/View/Dialog/ClassDialog.h"
 
-ClassDialog::ClassDialog(QWidget *parent): QDialog(parent){
+ClassDialog::ClassDialog(QWidget *parent): QDialog(parent), clc(this){
 
 	/* Paramètrage de la boîte de dialogue */
 
@@ -15,8 +15,30 @@ ClassDialog::ClassDialog(QWidget *parent): QDialog(parent){
 	QHBoxLayout *h1 = new QHBoxLayout();
 	QLabel *lab1 = new QLabel("Classe* ");
 	name = new QLineEdit();
+	QLabel *lab7 = new QLabel(".java");
 	h1->addWidget(lab1);
 	h1->addWidget(name);
+	h1->addWidget(lab7);
+
+	/* dossier source */
+
+    QHBoxLayout *h7 = new QHBoxLayout();
+    QLabel *lab6 = new QLabel("Emplacement du package: ");
+    loc = new QLineEdit();
+    QPushButton *browse = new QPushButton("Parcourir");
+    h7->addWidget(lab6);
+    h7->addWidget(loc);
+    h7->addWidget(browse);
+
+    /* package */
+
+    QHBoxLayout *h8 = new QHBoxLayout();
+    QLabel *lab5 = new QLabel("Emplacement du dossier: ");
+    loc2 = new QLineEdit();
+    QPushButton *browse2 = new QPushButton("Parcourir");
+    h8->addWidget(lab5);
+    h8->addWidget(loc2);
+    h8->addWidget(browse2);
 
     /* Choix du (des) noms des super-classes */
 
@@ -72,6 +94,8 @@ ClassDialog::ClassDialog(QWidget *parent): QDialog(parent){
 	h5->addWidget(valider);
 
     layout->addLayout(h1);
+    layout->addLayout(h7);
+    layout->addLayout(h8);
     layout->addLayout(h2);
     layout->addLayout(h3);
     layout->addLayout(h4);
@@ -81,13 +105,9 @@ ClassDialog::ClassDialog(QWidget *parent): QDialog(parent){
 
     connect(annuler,SIGNAL(clicked()),this,SLOT(reject()));
 	connect(valider,SIGNAL(clicked()),this,SLOT(accept()));
-	connect(name,SIGNAL(textChanged(QString)),this,SLOT(validate()));
-}
-
-void ClassDialog::validate(){
-	if(name->text().size() > 0){
-		this->valider->setEnabled(true);
-	}else{
-		this->valider->setEnabled(false);
-	}
+	connect(name,SIGNAL(textChanged(QString)),&clc,SLOT(validate()));
+    connect(loc,SIGNAL(textChanged(QString)),&clc,SLOT(validate()));
+    connect(loc2,SIGNAL(textChanged(QString)),&clc,SLOT(validate()));
+    connect(browse,SIGNAL(clicked()),&clc,SLOT(parcourir()));
+    connect(browse2,SIGNAL(clicked()),&clc,SLOT(parcourir2()));
 }

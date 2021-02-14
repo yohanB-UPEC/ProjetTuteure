@@ -15,7 +15,7 @@ void ProjectController::parcourir(){
 void ProjectController::validate(){
 	if(m_dial->getName().size() > 0 && m_dial->getLocation().size() > 0){
 		QFileInfo fi(m_dial->getLocation());
-		if(fi.isDir() && fi.isReadable() && fi.isWritable() && !fi.dir().exists(m_dial->getName())){
+        if(fi.isDir() && fi.isReadable() && fi.isWritable() && !fi.dir().exists(m_dial->getName()) && caracteresSpeciaux() && !isExisted()){
 			m_dial->valider->setEnabled(true);
 			return;
 		}
@@ -38,4 +38,18 @@ void ProjectController::createProject(){
 	
 	m_model->insertRow(9999,projet);
 	m_dial->accept();
+}
+
+bool ProjectController::caracteresSpeciaux(){
+    for(int i = 0; i < m_dial->getName().size(); i++){
+        if(!(m_dial->getName().at(i).isLetterOrNumber())){
+            return false;
+        }
+    }
+    return true;
+}
+
+bool ProjectController::isExisted(){
+    QDir dossier(m_dial->getLocation());
+    return dossier.exists(((QString)m_dial->getName()).append(".java"));
 }

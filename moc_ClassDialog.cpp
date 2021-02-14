@@ -21,8 +21,13 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ClassDialog_t {
+<<<<<<< HEAD
+    QByteArrayData data[4];
+    char stringdata0[34];
+=======
     QByteArrayData data[3];
     char stringdata0[22];
+>>>>>>> a1c6044658eed948540dded1cb1bdd771b55b007
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,11 +37,20 @@ struct qt_meta_stringdata_ClassDialog_t {
 static const qt_meta_stringdata_ClassDialog_t qt_meta_stringdata_ClassDialog = {
     {
 QT_MOC_LITERAL(0, 0, 11), // "ClassDialog"
+<<<<<<< HEAD
+QT_MOC_LITERAL(1, 12, 9), // "parcourir"
+QT_MOC_LITERAL(2, 22, 0), // ""
+QT_MOC_LITERAL(3, 23, 10) // "parcourir2"
+
+    },
+    "ClassDialog\0parcourir\0\0parcourir2"
+=======
 QT_MOC_LITERAL(1, 12, 8), // "validate"
 QT_MOC_LITERAL(2, 21, 0) // ""
 
     },
     "ClassDialog\0validate\0"
+>>>>>>> a1c6044658eed948540dded1cb1bdd771b55b007
 };
 #undef QT_MOC_LITERAL
 
@@ -46,7 +60,11 @@ static const uint qt_meta_data_ClassDialog[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
+<<<<<<< HEAD
+       2,   14, // methods
+=======
        1,   14, // methods
+>>>>>>> a1c6044658eed948540dded1cb1bdd771b55b007
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -54,10 +72,19 @@ static const uint qt_meta_data_ClassDialog[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
+<<<<<<< HEAD
+       1,    0,   24,    2, 0x0a /* Public */,
+       3,    0,   25,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+=======
        1,    0,   19,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
+>>>>>>> a1c6044658eed948540dded1cb1bdd771b55b007
 
        0        // eod
 };
@@ -68,7 +95,12 @@ void ClassDialog::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         auto *_t = static_cast<ClassDialog *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
+<<<<<<< HEAD
+        case 0: _t->parcourir(); break;
+        case 1: _t->parcourir2(); break;
+=======
         case 0: _t->validate(); break;
+>>>>>>> a1c6044658eed948540dded1cb1bdd771b55b007
         default: ;
         }
     }
@@ -104,6 +136,15 @@ int ClassDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
+<<<<<<< HEAD
+        if (_id < 2)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 2;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 2)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 2;
+=======
         if (_id < 1)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 1;
@@ -111,6 +152,7 @@ int ClassDialog::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         if (_id < 1)
             *reinterpret_cast<int*>(_a[0]) = -1;
         _id -= 1;
+>>>>>>> a1c6044658eed948540dded1cb1bdd771b55b007
     }
     return _id;
 }

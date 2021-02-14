@@ -33,7 +33,8 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 	explorer->setWidget(tree);
     tree->setModel(model);
 	
-	
+    console = new Console(consoles);
+    consoles->setWidget(console);
 	this->addDockWidget(Qt::RightDockWidgetArea,snippet);
 	this->addDockWidget(Qt::BottomDockWidgetArea,consoles);
 	this->addDockWidget(Qt::LeftDockWidgetArea,explorer);

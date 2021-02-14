@@ -1,6 +1,6 @@
 #include "include/View/Dialog/PackageDialog.h"
 
-PackageDialog::PackageDialog(QWidget *parent): QDialog(parent){
+PackageDialog::PackageDialog(QWidget *parent): QDialog(parent), pkd(this){
 
 	/* paramètrage de la boîte de dialogue */
 
@@ -16,6 +16,14 @@ PackageDialog::PackageDialog(QWidget *parent): QDialog(parent){
 	filemodel->setRootPath(QDir::currentPath());
 	QTreeView *pkgTree = new QTreeView;
     pkgTree->setModel(filemodel);
+
+    /* chemin du package */
+
+    QHBoxLayout *h3 = new QHBoxLayout();
+    QLabel *lab2 = new QLabel("Chemin du projet: ");
+    path = new QLineEdit();
+    h3->addWidget(lab2);
+    h3->addWidget(path);
 
     /* choix du nom du projet */
 	
@@ -38,6 +46,7 @@ PackageDialog::PackageDialog(QWidget *parent): QDialog(parent){
 	/* ajout des différents widgets dans la boîte de dialogue */
 
 	layout->addWidget(pkgTree);
+    layout->addLayout(h3);
     layout->addLayout(h1);
     layout->addLayout(h2);
     
@@ -47,25 +56,7 @@ PackageDialog::PackageDialog(QWidget *parent): QDialog(parent){
 
     connect(annuler,SIGNAL(clicked()),this,SLOT(reject()));
 	connect(valider,SIGNAL(clicked()),this,SLOT(accept()));
-	connect(name,SIGNAL(textChanged(QString)),this,SLOT(validate()));
-	connect(pkgTree->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)), this, SLOT(validate()));
-	connect(pkgTree->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)), this, SLOT(selectedItem(const QItemSelection&,const QItemSelection&)));
-}
-
-/* Bouton valider uniquement clickable quand le nom du package et le choix du package ont été choisis */
-
-void PackageDialog::validate(){
-	if(loc.size() > 0 && name->text().size() > 0){
-		this->valider->setEnabled(true);
-	}else{
-		this->valider->setEnabled(false);
-	}
-}
-
-/* permet d'obtenir la chemin d'accès du package */
-
-void PackageDialog::selectedItem(const QItemSelection &selected, const QItemSelection &deselected){
-	QModelIndexList items = selected.indexes();
-    loc = filemodel->filePath(items[0]);
-    printf("%s\n", loc.toStdString().c_str());
+    connect(name,SIGNAL(textChanged(QString)),&pkd,SLOT(validate()));
+    connect(pkgTree->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)), &pkd, SLOT(validate()));
+    connect(pkgTree->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)), &pkd, SLOT(selectedItem(const QItemSelection&,const QItemSelection&)));
 }
