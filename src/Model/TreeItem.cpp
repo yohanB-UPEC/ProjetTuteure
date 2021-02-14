@@ -52,3 +52,22 @@ void TreeItem::save(QXmlStreamWriter *out){
 	out->writeAttribute("label",m_label);
 	out->writeEndElement();
 }
+
+void TreeItem::create(QString *path){
+	QFileInfo file;
+	if(path == nullptr){
+		file.setFile(this->getPath());
+	}else{
+		file.setFile(*path+"/"+m_label);
+	}
+	
+	QDir dir = file.absoluteDir();
+	dir.mkpath(dir.path());	
+	qDebug() << "creation du fichier " << file.absoluteFilePath();
+	QFile f(file.absoluteFilePath());
+	if(!f.open(QIODevice::WriteOnly)){
+		QMessageBox::critical(nullptr,"TreeItem::create(QString *path): l.67","impossible de créer le fichier: " +file.absoluteFilePath());
+		m_label="Error: Fichiers illisible";
+	}
+	f.close();
+}

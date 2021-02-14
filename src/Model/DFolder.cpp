@@ -13,6 +13,8 @@ DFolder::DFolder(QDomElement *e): TreeItem(e){
 				this->appendChild(new DFolder(&c));
 			}else if(c.tagName() == "TreeItem"){
 				this->appendChild(new TreeItem(&c));
+			}else if(c.tagName() == "DPackage" && className()=="DSourceFolder"){
+				this->appendChild(new DPackage(&c));
 			}else{
 				qDebug() << "fichier de config du projet incorrect balise:" << c.tagName() ;
 				QMessageBox::critical(nullptr,"DFolder::DFolder(QDomElement *e): l.17","fichier de configuration du projet incorrect balise: " +c.tagName());
@@ -34,10 +36,25 @@ void DFolder::save(QXmlStreamWriter *out){
 		}
 		return;
 	}
-	out->writeStartElement("DFolder");
+	out->writeStartElement(this->className());
 	out->writeAttribute("label",m_label);
 	for(int i = 0; i < m_children.size();i++){
 		m_children.at(i)->save(out);
 	}
 	out->writeEndElement();
+}
+
+const QString DFolder::className() const{
+	return "DFolder";
+}
+
+void DFolder::create(QString *path){
+	QDir dir;
+	if(path == nullptr){
+		dir.setPath(this->getPath());
+	}else{
+		dir.setPath(*path+"/"+m_label);
+	}
+	qDebug() << "creation du dossier " << dir.path();
+	dir.mkpath(dir.path());	
 }

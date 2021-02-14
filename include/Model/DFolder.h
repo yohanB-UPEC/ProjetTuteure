@@ -2,6 +2,7 @@
 #define DFOLDER
 
 #include "TreeItem.h"
+#include "DPackage.h"
 
 class DFolder : public TreeItem {
 	
@@ -10,6 +11,8 @@ class DFolder : public TreeItem {
 		DFolder(QDomElement *e);
 		QVariant getIcon();
 		void save(QXmlStreamWriter *out=nullptr);
+		virtual const QString className() const;
+		void create(QString *path =nullptr);
 	private:
 	
 };

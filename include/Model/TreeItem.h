@@ -23,6 +23,7 @@ class TreeItem{
 		void setParent(TreeItem* parent = nullptr){this->m_parent = parent;}
 		virtual QString getPath();
 		virtual void save(QXmlStreamWriter *out=nullptr);
+		virtual void create(QString *path=nullptr);
 		
 	protected:
 		QList<TreeItem*> m_children;

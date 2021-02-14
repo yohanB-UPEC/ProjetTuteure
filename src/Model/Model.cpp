@@ -108,6 +108,7 @@ bool Model::insertRow(int row, TreeItem *item, const QModelIndex &parent){
 		settings.beginGroup("Projects");
 		int key = settings.allKeys().size();
 		settings.setValue(QString("pro"+key),item->getPath());
+		settings.endGroup();
 	}
 
 	

@@ -1,16 +1,16 @@
 #ifndef DSOURCEFOLDER
 #define DSOURCEFOLDER
 
-#include "TreeItem.h"
-#include "DPackage.h"
+#include "DFolder.h"
 
-class DSourceFolder : public TreeItem {
+
+class DSourceFolder : public DFolder {
 	
 	public:
 		DSourceFolder(QString label);
 		DSourceFolder(QDomElement *e);
 		QVariant getIcon();
-		void save(QXmlStreamWriter *out=nullptr);
+		const QString className() const;
 		
 	private:
 	

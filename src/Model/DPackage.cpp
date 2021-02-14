@@ -46,3 +46,16 @@ void DPackage::save(QXmlStreamWriter *out){
 	}
 	out->writeEndElement();
 }
+
+void DPackage::create(QString *path){
+	QDir dir;
+	if(path == nullptr){
+		dir.setPath(this->getPath());
+	}else{
+		QString p(m_label);
+		p.replace(".","/");
+		dir.setPath(*path+"/"+p);
+	}
+	qDebug() << "creation du dossier " << dir.path();
+	dir.mkpath(dir.path());
+}
