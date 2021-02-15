@@ -10,6 +10,7 @@ class DCodeEditor : public QPlainTextEdit {
 	public:
 		DCodeEditor(QWidget *parent = nullptr);
 		void leftAreaPaintEvent(QPaintEvent *event);
+        DCodeEditor *getEditor();
 	
 	private:
 		QWidget *leftArea;

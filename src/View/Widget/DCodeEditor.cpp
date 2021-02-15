@@ -41,8 +41,7 @@ void DCodeEditor::leftAreaPaintEvent(QPaintEvent *event){
 	
 }
 
-void DCodeEditor::highlightCurrentLine()
-{
+void DCodeEditor::highlightCurrentLine(){
     QList<QTextEdit::ExtraSelection> extraSelections;
 
 

@@ -17,6 +17,7 @@ HEADERS += include/View/Fenetre.h \
 		include/View/Dialog/SrcFolderDialog.h \
     include/View/Widget/Console.h \
 		include/View/Widget/DCodeEditor.h \
+    include/View/Widget/DSnippetItem.h \
 		include/View/Widget/JavaHighLighter.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
@@ -60,6 +61,7 @@ SOURCES += src/View/Fenetre.cpp \
 		src/View/Dialog/SrcFolderDialog.cpp \
     src/View/Widget/Console.cpp \
 		src/View/Widget/DCodeEditor.cpp \
+    src/View/Widget/DSnippetItem.cpp \
 		src/View/Widget/JavaHighLighter.cpp \
 		src/View/Menu/MenuFile.cpp \
 		src/View/Menu/MenuNew.cpp \

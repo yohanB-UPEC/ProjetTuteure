@@ -1,7 +1,8 @@
 #include "include/View/Widget/Snippet.h"
+#include "include/View/Fenetre.h"
 
-Snippet::Snippet(QWidget *parent): QWidget(parent){
-
+Snippet::Snippet(Fenetre* fen, QWidget *parent): QWidget(parent){
+    this->fen = fen;
     layout = new QVBoxLayout();
 
     QHBoxLayout *h1 = new QHBoxLayout();
@@ -16,6 +17,7 @@ Snippet::Snippet(QWidget *parent): QWidget(parent){
     QVBoxLayout *h2 = new QVBoxLayout();
 
     listWidget = new QListWidget();
+    listWidget->setMouseTracking(true);
     listItems = new QListWidgetItem;
 
 
@@ -35,8 +37,7 @@ Snippet::Snippet(QWidget *parent): QWidget(parent){
     }
 
     getList();
-
-    //connect(input,SIGNAL(textChanged(QString)),this,SLOT(searchSnippet()));
+    connect(input,SIGNAL(textChanged(QString)),this,SLOT(isDeleted()));
     connect(add,SIGNAL(clicked()),this,SLOT(addSnippet()));
 }
 
@@ -79,8 +80,9 @@ void Snippet::getList(){
         QFile file(it.next());
         QFileInfo info(file);
         QString filename = info.baseName();
-        if(filename != "")
+        if(filename != ""){
             addToList(filename);
+        }
     }
 }
 
@@ -94,23 +96,49 @@ void Snippet::addSnippet(){
 }
 
 void Snippet::addToList(QString snippetname){
-    QWidget* widget = new QWidget();
-    QHBoxLayout* h3 = new QHBoxLayout(widget);
-    QLabel* lab = new QLabel(snippetname);
-    QPushButton* copy = new QPushButton("Copier");
-    QPushButton* modif = new QPushButton("Modifier");
+    QListWidgetItem *listWItems = new QListWidgetItem;
+    DSnippetItem *dlistItem = new DSnippetItem(snippetname, listWItems);
+    listWItems->setSizeHint(dlistItem->sizeHint());
+    listWidget->addItem(listWItems);
+    listWidget->setItemWidget(listWItems, dlistItem);
 
-    h3->addWidget(lab);
-    h3->addWidget(copy);
-    h3->addWidget(modif);
-
-    widget->setLayout(h3);
-
-    listItems = new QListWidgetItem;
-    listItems->setSizeHint(widget->sizeHint());
-    listWidget->addItem(listItems);
-    listWidget->setItemWidget(listItems, widget);
+    connect(dlistItem,SIGNAL(sig(QString)),this,SLOT(copyFile(QString)));
+    connect(dlistItem,SIGNAL(sig_modify(QString)),this,SLOT(modifyFile(QString)));
 }
+
+void Snippet::copyFile(QString name){
+    QFile file("Snippets/" + name + ".java");
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
+        qDebug() << "file read failed" << file.errorString();
+    }
+    QTextStream flux(&file);
+    QString content = flux.readAll();
+    DCodeEditor *editor = new DCodeEditor();
+    editor->appendPlainText(content);
+    editor->selectAll();
+    editor->copy();
+}
+
+void Snippet::modifyFile(QString name){
+    DCodeEditor *editor = new DCodeEditor();
+    this->fen->getCentral()->addTab(editor, name + ".java");
+    QFile file("Snippets/" + name + ".java");
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
+        for(int i = 0; i < listWidget->count(); i++){
+            QListWidgetItem *item = listWidget->item(i);
+            QString nom = ((DSnippetItem*) listWidget->itemWidget(item))->getNomSnippet()->text();
+            if(name == nom){
+                item->setHidden(true);
+            }
+        }
+        QMessageBox msgBox(QMessageBox::Critical, "Fichier inexistant", "Le fichier est introuvable");
+        msgBox.setText("Le fichier n'existe pas");
+        msgBox.exec();
+    }
+    QTextStream flux(&file);
+    editor->appendPlainText(flux.readAll());
+}
+
 
 void Snippet::validate(QString nomSnippet){
     if(nomSnippet.size() > 0 && caracteresSpeciaux(nomSnippet))
@@ -128,11 +156,13 @@ bool Snippet::caracteresSpeciaux(QString nomSnippet){
     return true;
 }
 
-void Snippet::searchSnippet(){
-    qDebug() << "input = " << input->text();
-    qDebug() << "nbSnippets = " << listWidget->count();
-    QListWidgetItem *item = listWidget->currentItem();
-    if(item)
-        qDebug() << "snippet = " << item->text();
-    else qDebug() << "FDP";
+void Snippet::isDeleted(){
+    for(int i = 0; i < listWidget->count(); i++){
+        QListWidgetItem *item = listWidget->item(i);
+        QString nom = ((DSnippetItem*) listWidget->itemWidget(item))->getNomSnippet()->text();
+        if(!(nom.contains(input->text(), Qt::CaseInsensitive)))
+            item->setHidden(true);
+        else
+            item->setHidden(false);
+    }
 }
