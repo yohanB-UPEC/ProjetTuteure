@@ -13,6 +13,12 @@ class MenuHelp : public QMenu {
 		
 	private:
 		Fenetre *fen;
+        QAction *doc;
+        QAction *about;
+
+    public slots:
+        void s_Doc();
+        void s_About();
 		
 };
 

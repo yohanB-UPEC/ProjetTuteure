@@ -1,9 +1,10 @@
 #include <QProcess>
 #include <QWidget>
 #include "include/View/Widget/Console.h"
+#include "include/View/Fenetre.h"
 
-Console::Console(QWidget *parent) : QWidget(parent){
-        //this->fen = fen;
+Console::Console(Fenetre *fen, QWidget *parent) : QWidget(parent){
+        this->fen = fen;
         QVBoxLayout *vb = new QVBoxLayout();
 
         edit = new QPlainTextEdit(this);
@@ -19,8 +20,8 @@ Console::Console(QWidget *parent) : QWidget(parent){
         this->setLayout(vb);
         cmd = new QProcess(parent);
         cmd->setProcessChannelMode(QProcess::MergedChannels);
-        cmd->start("powershell.exe", QStringList());
 
+        cmd->start(this->fen->getMenuPref()->getNom(), QStringList());
         connect(cmd, SIGNAL(readyRead()), this, SLOT(readStdOut()));
         connect(lineEdit, SIGNAL(editingFinished()), this, SLOT(execCmd()));
 }
@@ -45,6 +46,14 @@ Console::~Console(){
 
 void Console::execCmd(){
     QByteArray arr = QByteArray::fromStdString(lineEdit->text().toStdString() + "\r\n");
+    /*QProcess *proc = new QProcess(nullptr);
+    proc->setProcessChannelMode(QProcess::MergedChannels);
+    proc->start(lineEdit->text(), QStringList());
+    if(lineEdit->text().compare("ctrl-c") == 0){
+        qDebug() << "ctrl-c";
+        proc->terminate();
+        proc->kill();
+    }*/
     lineEdit->setText("");
     cmd->write(arr);
 }

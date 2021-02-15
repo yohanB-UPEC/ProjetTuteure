@@ -4,7 +4,6 @@
 int main(int argc,char **argv){
 	
 	QApplication app(argc,argv);
-	printf("commencement\n");
 	QResource::registerResource("resources.rcc");
 	DIcons::init();
 	Model model;

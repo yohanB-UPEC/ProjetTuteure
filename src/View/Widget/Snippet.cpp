@@ -20,7 +20,6 @@ Snippet::Snippet(Fenetre* fen, QWidget *parent): QWidget(parent){
     listWidget->setMouseTracking(true);
     listItems = new QListWidgetItem;
 
-
     h1->addWidget(input);
     h1->addWidget(add);
     h2->addWidget(listWidget);
@@ -109,7 +108,17 @@ void Snippet::addToList(QString snippetname){
 void Snippet::copyFile(QString name){
     QFile file("Snippets/" + name + ".java");
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
-        qDebug() << "file read failed" << file.errorString();
+        for(int i = 0; i < listWidget->count(); i++){
+            QListWidgetItem *item = listWidget->item(i);
+            QString nom = ((DSnippetItem*) listWidget->itemWidget(item))->getNomSnippet()->text();
+            if(name == nom){
+                item->setHidden(true);
+            }
+        }
+        QMessageBox msgBox(QMessageBox::Critical, "Fichier inexistant", "Le fichier est introuvable");
+        msgBox.setText("Le fichier n'existe pas");
+        msgBox.exec();
+        return;
     }
     QTextStream flux(&file);
     QString content = flux.readAll();
@@ -134,6 +143,7 @@ void Snippet::modifyFile(QString name){
         QMessageBox msgBox(QMessageBox::Critical, "Fichier inexistant", "Le fichier est introuvable");
         msgBox.setText("Le fichier n'existe pas");
         msgBox.exec();
+        return;
     }
     QTextStream flux(&file);
     editor->appendPlainText(flux.readAll());

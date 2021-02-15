@@ -10,14 +10,14 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 	this->setWindowTitle("Projet Dyst Editor");
 	this->setWindowIcon(DIcons::logo);
 	
-	menuFile = new MenuFile(this);
-	menuEdit = new MenuEdit(this);
-	menuPref = new MenuPref(this);
-	menuHelp = new MenuHelp(this);
+    menuFile = new MenuFile(this);
+    menuEdit = new MenuEdit(this);
+    menuPref = new MenuPref(this);
+    menuHelp = new MenuHelp(this);
 	
 	central = new QTabWidget(this);
 	central->setTabsClosable(true);
-	central->setMovable(true);
+    central->setMovable(true);
 	this->setCentralWidget(central);
 
     central2 = new QTabWidget(this);
@@ -26,7 +26,7 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 
 	
 	
-	QDockWidget *snippet = new QDockWidget("Snippets",this);
+    QDockWidget *snippet = new QDockWidget("Snippets",this);
     snippet->setWidget(new Snippet(this));
     consoles = new QDockWidget("Consoles",this);
 
@@ -39,7 +39,6 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
     lab->setStyleSheet("font-size: 12px;");
 
     QWidget *title_bar = new QWidget();
-    title_bar->setStyleSheet("background: rgb(218,218,218); padding: 0; margin: 0; border-style: outset; border-width: 1px; border-color: grey;");
     title_bar->setMaximumHeight(25);
     QHBoxLayout *layout = new QHBoxLayout();
     layout->setContentsMargins(5,0,50,0);
@@ -49,7 +48,7 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
     layout->addWidget(lab);
     layout->addWidget(newCmd, Qt::AlignVCenter);
     consoles->setTitleBarWidget(title_bar);
-	QDockWidget *explorer = new QDockWidget("Explorateur",this);
+    QDockWidget *explorer = new QDockWidget("Explorateur",this);
 	
 	snippet->setFeatures(QDockWidget::DockWidgetMovable);
 	consoles->setFeatures(QDockWidget::DockWidgetMovable);
@@ -70,5 +69,6 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 }
 
 void Fenetre::s_newCmd(){
-    central2->addTab(new Console(consoles),"nouveau");
+    console = new Console(this, consoles);
+    central2->addTab(console,"nouveau");
 }

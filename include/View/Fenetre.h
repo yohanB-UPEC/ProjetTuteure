@@ -21,6 +21,8 @@ class Fenetre : public QMainWindow {
 		Fenetre(Model *model);
 		QTabWidget* getCentral(){return central;}
 		Model* getModel(){return this->model;}
+        Console* getConsole(){return this->console;}
+        MenuPref* getMenuPref(){return this->menuPref;}
 	private:
 		MenuFile *menuFile;
 		MenuEdit *menuEdit;
@@ -34,6 +36,7 @@ class Fenetre : public QMainWindow {
 		
 		Model *model;
 		Controller *controller;
+        Console *console;
 
     public slots:
         void s_newCmd();
