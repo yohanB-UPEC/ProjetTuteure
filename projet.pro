@@ -4,16 +4,11 @@ CONFIG += console
 RESOURCES = resources.qrc
 
 HEADERS += include/View/Fenetre.h \
-    include/Controller/Dialog/EnumController.h \
     include/Controller/Dialog/FolderController.h \
-    include/Controller/Dialog/InterfaceController.h \
     include/Controller/Dialog/PackageController.h \
-    include/Controller/Dialog/SrcFolderController.h \
     include/Model/FilteredModel.h \
     include/Model/Javora.h \
-	include/View/Dialog/EnumDialog.h \
 	include/View/Dialog/FolderDialog.h \
-	include/View/Dialog/InterfaceDialog.h \
 	include/View/Widget/Console.h \
 	include/View/Widget/DCodeEditor.h \
 	include/View/Widget/JavaHighLighter.h \
@@ -45,18 +40,13 @@ HEADERS += include/View/Fenetre.h \
 	include/Controller/Dialog/ClassController.h
 				
 SOURCES += src/View/Fenetre.cpp \
-    src/Controller/Dialog/EnumController.cpp \
     src/Controller/Dialog/FolderController.cpp \
-    src/Controller/Dialog/InterfaceController.cpp \
     src/Controller/Dialog/PackageController.cpp \
-    src/Controller/Dialog/SrcFolderController.cpp \
     src/Model/ClassSubElement.cpp \
     src/Model/DAttribut.cpp \
     src/Model/DMethod.cpp \
     src/Model/FilteredModel.cpp \
-	src/View/Dialog/EnumDialog.cpp \
 	src/View/Dialog/FolderDialog.cpp \
-	src/View/Dialog/InterfaceDialog.cpp \
 	src/View/Widget/Console.cpp \
 	src/View/Widget/DCodeEditor.cpp \
 	src/View/Widget/JavaHighLighter.cpp \
