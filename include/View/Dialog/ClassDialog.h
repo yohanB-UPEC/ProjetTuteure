@@ -3,6 +3,8 @@
 
 #include <QtWidgets>
 #include "include/Controller/Dialog/ClassController.h"
+#include "include/Model/Javora.h"
+#include "include/Model/FilteredModel.h"
 
 class ClassDialog : public QDialog {
 	Q_OBJECT
@@ -10,16 +12,26 @@ class ClassDialog : public QDialog {
 	friend class ClassController;
 
 	public:
-        ClassDialog(QWidget *parent=0);
+        ClassDialog(QWidget *parent, Model *model, QFlags<Javora::ClassType> type);
 		
 	private:
+        Model *m_model;
+        FilteredModel *fm;
+        QFlags<Javora::ClassType> m_type;
+        QLineEdit *loc;
+        QLineEdit *name;
+        QButtonGroup *radioMod;
+        QCheckBox *abstract;
+        QCheckBox *final;
+        QLineEdit *superClass;
+        QLineEdit *interfaces;
+        QCheckBox *main;
+        QCheckBox *constructor;
 		QPushButton *valider;
-		QLineEdit *name;
-		QLineEdit *superClass;
-        QLineEdit *interFace;
-		QLineEdit *loc;
-		QLineEdit *loc2;
-		ClassController clc;
+        QPushButton *diaV;
+        ClassController clc;
+        QDialog locDia;
+        void createLocDia();
 };
 
 #endif

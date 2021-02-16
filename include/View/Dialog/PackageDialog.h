@@ -2,7 +2,9 @@
 #define PACKAGEDIALOG
 
 #include <QtWidgets>
+#include "include/Model/Javora.h"
 #include "include/Controller/Dialog/PackageController.h"
+#include "include/Model/FilteredModel.h"
 
 class PackageDialog : public QDialog {
 	Q_OBJECT
@@ -10,16 +12,15 @@ class PackageDialog : public QDialog {
     friend class PackageController;
 	
 	public:
-        PackageDialog(QWidget *parent=0);
+        PackageDialog(QWidget *parent, Model *model);
 		
 	private:
 		QPushButton *valider;
 		QLineEdit *name;
         QLineEdit *path;
-        QString loc;
-		QItemSelectionModel* selectionModel;
-		QFileSystemModel *filemodel;
+        QTreeView *pkgTree;
         PackageController pkd;
+        FilteredModel *fm;
 	
 };
 

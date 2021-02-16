@@ -71,3 +71,13 @@ void TreeItem::create(QString *path){
 	}
 	f.close();
 }
+
+TreeItem* TreeItem::getChild(QString str){
+    int size = m_children.size();
+    for(int row = 0; row<size;row++){
+        if(m_children.at(row)->label() == str ){
+            return m_children.at(row);
+        }
+    }
+    return nullptr;
+}

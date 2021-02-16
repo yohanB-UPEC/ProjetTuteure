@@ -1,25 +1,48 @@
 #include "include/View/Dialog/FolderDialog.h"
 
-FolderDialog::FolderDialog(QWidget *parent): QDialog(parent), fd(this){
-    this->resize(600,100);
+FolderDialog::FolderDialog(QWidget *parent, Model *model,QFlags<Javora::ModelType> type): QDialog(parent), fd(model,this), m_type(type){
+    this->resize(600,300);
     this->setMinimumWidth(500);
-    this->setWindowTitle("Création de dossier");
+    if(m_type.testFlag(Javora::Folder)){
+        this->setWindowTitle("Création d'un dossier");
+    }else if(m_type.testFlag(Javora::SourceFolder)){
+        this->setWindowTitle("Création d'un dossier de code source");
+    }else{
+        this->setWindowTitle("Error, type inconnue");
+        return;
+    }
 
     QVBoxLayout *layout = new QVBoxLayout();
 
+
+    tree = new QTreeView;
+    tree->setHeaderHidden(true);
+    if(m_type.testFlag(Javora::Folder)){
+        fm = new FilteredModel(Javora::Project | Javora::Folder);
+    }else{
+        fm = new FilteredModel(Javora::Project);
+    }
+    fm->setSourceModel(model);
+    tree->setModel(fm);
+    layout->addWidget(tree);
+
     QHBoxLayout *h1 = new QHBoxLayout();
-    QLabel *lab1 = new QLabel("Nom du dossier: ");
-    name = new QLineEdit();
+    QLabel *lab1 = new QLabel("Emplacement: ");
+    loc = new QLineEdit();
+    loc->setEnabled(false);
     h1->addWidget(lab1);
-    h1->addWidget(name);
+    h1->addWidget(loc);
+    layout->addLayout(h1);
+
 
     QHBoxLayout *h2 = new QHBoxLayout();
-    QLabel *lab2 = new QLabel("Emplacement: ");
-    loc = new QLineEdit();
-    QPushButton *browse = new QPushButton("Parcourir");
+    QLabel *lab2 = new QLabel("Nom du dossier: ");
+    name = new QLineEdit();
     h2->addWidget(lab2);
-    h2->addWidget(loc);
-    h2->addWidget(browse);
+    h2->addWidget(name);
+    layout->addLayout(h2);
+
+
 
 
     QHBoxLayout *h4 = new QHBoxLayout();
@@ -32,16 +55,13 @@ FolderDialog::FolderDialog(QWidget *parent): QDialog(parent), fd(this){
 
     QSpacerItem *si = new QSpacerItem(0,0,QSizePolicy::Expanding,QSizePolicy::Expanding);
 
-    layout->addLayout(h1);
-    layout->addLayout(h2);
     layout->addItem(si);
     layout->addLayout(h4);
     this->setLayout(layout);
 
 
-    connect(browse,SIGNAL(clicked()),&fd,SLOT(parcourir()));
     connect(annuler,SIGNAL(clicked()),this,SLOT(reject()));
-    connect(valider,SIGNAL(clicked()),this,SLOT(accept()));
+    connect(valider,SIGNAL(clicked()),&fd,SLOT(createFolder()));
     connect(name,SIGNAL(textChanged(QString)),&fd,SLOT(validate()));
-    connect(loc,SIGNAL(textChanged(QString)),&fd,SLOT(validate()));
+    connect(tree->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)), &fd, SLOT(selectedItem(const QItemSelection&, const QItemSelection&)));
 }

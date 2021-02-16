@@ -6,7 +6,7 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 	this->resize(1000,600);
 	this->setWindowTitle("Projet Dyst Editor");
 	this->setWindowIcon(DIcons::logo);
-	
+
 	menuFile = new MenuFile(this);
 	menuEdit = new MenuEdit(this);
 	menuPref = new MenuPref(this);

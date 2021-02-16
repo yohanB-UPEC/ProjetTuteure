@@ -24,7 +24,7 @@ void ProjectController::validate(){
 }
 
 void ProjectController::createProject(){
-	DProject *projet = new DProject(m_dial->getName(), m_dial->getLocation());
+    DProject *projet = new DProject(m_dial->getName(), m_dial->getLocation()+"/"+m_dial->getName());
 	DSourceFolder *sf = new DSourceFolder("src");
 	DFolder *f = new DFolder("res");
 	TreeItem *makefile = new TreeItem("Makefile");

@@ -13,9 +13,10 @@ DFolder::DFolder(QDomElement *e): TreeItem(e){
 				this->appendChild(new DFolder(&c));
 			}else if(c.tagName() == "TreeItem"){
 				this->appendChild(new TreeItem(&c));
-			}else if(c.tagName() == "DPackage" && className()=="DSourceFolder"){
+            }else if(c.tagName() == "DPackage" && className()=="DSourceFolder"){
 				this->appendChild(new DPackage(&c));
 			}else{
+                qDebug() << "className=" << className();
 				qDebug() << "fichier de config du projet incorrect balise:" << c.tagName() ;
 				QMessageBox::critical(nullptr,"DFolder::DFolder(QDomElement *e): l.17","fichier de configuration du projet incorrect balise: " +c.tagName());
 				return;

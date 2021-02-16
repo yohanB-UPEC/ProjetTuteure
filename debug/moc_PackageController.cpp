@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_PackageController_t {
-    QByteArrayData data[9];
-    char stringdata0[105];
+    QByteArrayData data[8];
+    char stringdata0[90];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -34,17 +34,16 @@ static const qt_meta_stringdata_PackageController_t qt_meta_stringdata_PackageCo
 QT_MOC_LITERAL(0, 0, 17), // "PackageController"
 QT_MOC_LITERAL(1, 18, 8), // "validate"
 QT_MOC_LITERAL(2, 27, 0), // ""
-QT_MOC_LITERAL(3, 28, 18), // "caracteresSpeciaux"
-QT_MOC_LITERAL(4, 47, 9), // "isExisted"
-QT_MOC_LITERAL(5, 57, 12), // "selectedItem"
-QT_MOC_LITERAL(6, 70, 14), // "QItemSelection"
-QT_MOC_LITERAL(7, 85, 8), // "selected"
-QT_MOC_LITERAL(8, 94, 10) // "deselected"
+QT_MOC_LITERAL(3, 28, 12), // "selectedItem"
+QT_MOC_LITERAL(4, 41, 14), // "QItemSelection"
+QT_MOC_LITERAL(5, 56, 8), // "selected"
+QT_MOC_LITERAL(6, 65, 10), // "deselected"
+QT_MOC_LITERAL(7, 76, 13) // "createPackage"
 
     },
-    "PackageController\0validate\0\0"
-    "caracteresSpeciaux\0isExisted\0selectedItem\0"
-    "QItemSelection\0selected\0deselected"
+    "PackageController\0validate\0\0selectedItem\0"
+    "QItemSelection\0selected\0deselected\0"
+    "createPackage"
 };
 #undef QT_MOC_LITERAL
 
@@ -54,7 +53,7 @@ static const uint qt_meta_data_PackageController[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -62,16 +61,14 @@ static const uint qt_meta_data_PackageController[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   34,    2, 0x0a /* Public */,
-       3,    0,   35,    2, 0x0a /* Public */,
-       4,    0,   36,    2, 0x0a /* Public */,
-       5,    2,   37,    2, 0x0a /* Public */,
+       1,    0,   29,    2, 0x0a /* Public */,
+       3,    2,   30,    2, 0x0a /* Public */,
+       7,    0,   35,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Bool,
-    QMetaType::Bool,
-    QMetaType::Void, 0x80000000 | 6, 0x80000000 | 6,    7,    8,
+    QMetaType::Void, 0x80000000 | 4, 0x80000000 | 4,    5,    6,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -83,17 +80,14 @@ void PackageController::qt_static_metacall(QObject *_o, QMetaObject::Call _c, in
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->validate(); break;
-        case 1: { bool _r = _t->caracteresSpeciaux();
-            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 2: { bool _r = _t->isExisted();
-            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 3: _t->selectedItem((*reinterpret_cast< const QItemSelection(*)>(_a[1])),(*reinterpret_cast< const QItemSelection(*)>(_a[2]))); break;
+        case 1: _t->selectedItem((*reinterpret_cast< const QItemSelection(*)>(_a[1])),(*reinterpret_cast< const QItemSelection(*)>(_a[2]))); break;
+        case 2: _t->createPackage(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 3:
+        case 1:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 1:
@@ -134,13 +128,13 @@ int PackageController::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 3;
     }
     return _id;
 }

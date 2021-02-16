@@ -27,16 +27,11 @@ class DMethod : public ClassSubElement {
 	
 	public:
 		DMethod(QString label, QString scope, QString type): ClassSubElement(label,scope,type), mParametres(){}
-		~DMethod(){
-			printf("destruction de la méthode\n");
-			while(!this->mParametres.empty()){
-				delete this->mParametres.back();
-				this->mParametres.pop_back();
-			}
-		}
+        ~DMethod();
 		
 		void addParametre(QString type, QString label){this->mParametres.push_back(new Parametre(type,label));}
 		std::vector<Parametre*>& parametres(){return this->mParametres;}
+        QString toString();
 		
 	private:
 		std::vector<Parametre*> mParametres;

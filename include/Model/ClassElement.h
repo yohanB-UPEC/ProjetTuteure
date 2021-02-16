@@ -7,7 +7,7 @@ class ClassElement{
 	
 	
 	public:
-		ClassElement(QString label, QString scope, QString type):mType(type),mLabel(label),mScope(scope),mFinal(false),mAbstract(false){}
+        ClassElement(QString label, QString scope, QString type):mType(type),mLabel(label),mScope(scope),mFinal(false),mAbstract(false){}
 		// getter
 		QString type(){return this->mType;}
 		QString label(){return this->mLabel;}

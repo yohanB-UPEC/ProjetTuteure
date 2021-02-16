@@ -1,6 +1,6 @@
 #include "include/View/Dialog/PackageDialog.h"
 
-PackageDialog::PackageDialog(QWidget *parent): QDialog(parent), pkd(this){
+PackageDialog::PackageDialog(QWidget *parent, Model *model): QDialog(parent), pkd(model, this){
 
 	/* paramètrage de la boîte de dialogue */
 
@@ -12,10 +12,11 @@ PackageDialog::PackageDialog(QWidget *parent): QDialog(parent), pkd(this){
 
 	/* explorateur de fichier */
 
-	filemodel = new QFileSystemModel;
-	filemodel->setRootPath(QDir::currentPath());
-	QTreeView *pkgTree = new QTreeView;
-    pkgTree->setModel(filemodel);
+    pkgTree = new QTreeView;
+    pkgTree->setHeaderHidden(true);
+    fm = new FilteredModel(Javora::Project | Javora::SourceFolder);
+    fm->setSourceModel(model);
+    pkgTree->setModel(fm);
 
     /* chemin du package */
 
@@ -24,11 +25,12 @@ PackageDialog::PackageDialog(QWidget *parent): QDialog(parent), pkd(this){
     path = new QLineEdit();
     h3->addWidget(lab2);
     h3->addWidget(path);
+    path->setEnabled(false);
 
     /* choix du nom du projet */
 	
 	QHBoxLayout *h1 = new QHBoxLayout();
-	QLabel *lab1 = new QLabel("Nom de projet: ");
+    QLabel *lab1 = new QLabel("Nom du package: ");
 	name = new QLineEdit();
 	h1->addWidget(lab1);
 	h1->addWidget(name);
@@ -55,8 +57,7 @@ PackageDialog::PackageDialog(QWidget *parent): QDialog(parent), pkd(this){
     /* écouteurs d'évenement */
 
     connect(annuler,SIGNAL(clicked()),this,SLOT(reject()));
-	connect(valider,SIGNAL(clicked()),this,SLOT(accept()));
+    connect(valider,SIGNAL(clicked()),&pkd,SLOT(createPackage()));
     connect(name,SIGNAL(textChanged(QString)),&pkd,SLOT(validate()));
-    connect(pkgTree->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)), &pkd, SLOT(validate()));
-    connect(pkgTree->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&,const QItemSelection&)), &pkd, SLOT(selectedItem(const QItemSelection&,const QItemSelection&)));
+    connect(pkgTree->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)), &pkd, SLOT(selectedItem(const QItemSelection&, const QItemSelection&)));
 }

@@ -8,7 +8,6 @@
 #include "../Dialog/InterfaceDialog.h"
 #include "../Dialog/EnumDialog.h"
 #include "../Dialog/FolderDialog.h"
-#include "../Dialog/SrcFolderDialog.h"
 
 class Fenetre; 
 

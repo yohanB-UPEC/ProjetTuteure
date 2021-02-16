@@ -33,37 +33,37 @@ void MenuNew::s_Project(){
 }
 
 void MenuNew::s_Package(){
-    PackageDialog packageDia(this->fen);
+    PackageDialog packageDia(this->fen, this->fen->getModel());
     int res = packageDia.exec();
     printf("packageDia = %d\n", res);
 }
 
 void MenuNew::s_Class(){
-    ClassDialog classDia(this->fen);
+    ClassDialog classDia(this->fen, this->fen->getModel(),Javora::Class);
     int res = classDia.exec();
     printf("classDia = %d\n", res);
 }
 
 void MenuNew::s_Interface(){
-    InterfaceDialog interfaceDia(this->fen);
-    int res = interfaceDia.exec();
+    ClassDialog classDia(this->fen, this->fen->getModel(),Javora::Interface);
+    int res = classDia.exec();
     printf("InterfaceDia = %d\n", res);
 }
 
 void MenuNew::s_Enum(){
-    EnumDialog enumDia(this->fen);
-    int res = enumDia.exec();
+    ClassDialog classDia(this->fen, this->fen->getModel(),Javora::Enum);
+    int res = classDia.exec();
     printf("EnumDia = %d\n", res);
 }
 
 void MenuNew::s_Folder(){
-    FolderDialog folderDia(this->fen);
+    FolderDialog folderDia(this->fen,this->fen->getModel(),Javora::Folder);
     int res = folderDia.exec();
     printf("folderDia = %d\n", res);
 }
 
 void MenuNew::s_SrcFolder(){
-    SrcFolderDialog srcFolderDia(this->fen);
+    FolderDialog srcFolderDia(this->fen,this->fen->getModel(),Javora::SourceFolder);
     int res = srcFolderDia.exec();
     printf("SrcfolderDia = %d\n", res);
 }

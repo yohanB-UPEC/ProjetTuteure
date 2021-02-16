@@ -25,11 +25,11 @@ DProject::DProject(QString path): TreeItem(), m_path(path){
 	while(!n.isNull()){
 		QDomElement e = n.toElement();
 		if(!e.isNull()){
-			if(e.tagName() == "DFolder"){
+            if(e.tagName() == "DSourceFolder"){
+                this->appendChild(new DSourceFolder(&e));
+            }else if(e.tagName() == "DFolder"){
 				this->appendChild(new DFolder(&e));
-			}else if(e.tagName() == "DSourceFolder"){
-				this->appendChild(new DSourceFolder(&e));
-			}else if(e.tagName() == "TreeItem"){
+            }else if(e.tagName() == "TreeItem"){
 				this->appendChild(new TreeItem(&e));
 			}else{
 				qDebug() << "fichier de config du projet incorrect balise:" << e.tagName() ;
@@ -46,7 +46,7 @@ QVariant DProject::getIcon(){
 }
 
 QString DProject::getPath(){
-	return this->m_path+"/"+m_label;
+    return this->m_path;
 }
 
 void DProject::save(QXmlStreamWriter *out){
@@ -57,7 +57,7 @@ void DProject::save(QXmlStreamWriter *out){
 		QMessageBox::critical(nullptr,"creation de dossier impossible","impossible de creer les dossier du path: " +path);
 		return;
 	}
-	QFile file(getPath()+"/.javora.jpml");
+    QFile file(path+"/.javora.jpml");
 	if(!file.open(QIODevice::WriteOnly | QIODevice::Text)){
 		qDebug() << "impossible d'écrire dans le fichier " << file.fileName() ;
 		QMessageBox::critical(nullptr,"erreur d'ecriture","impossible d'écrire dans le fichier .javora.jpml");

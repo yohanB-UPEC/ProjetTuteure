@@ -1,14 +1,15 @@
 #include "include/Controller/Dialog/FolderController.h"
 #include "include/View/Dialog/FolderDialog.h"
 
-FolderController::FolderController(FolderDialog *fd){
+FolderController::FolderController(Model *model, FolderDialog *fd){
     this->m_fd = fd;
+    this->m_model = model;
 }
 
 void FolderController::validate(){
     if(m_fd->name->text().size() > 0 && m_fd->name->text().size() > 0){
-        QFileInfo fi(m_fd->loc->text());
-        if(fi.isDir() && fi.isReadable() && fi.isWritable() && !fi.dir().exists(m_fd->name->text()) && caracteresSpeciaux() && !isExisted()){
+        TreeItem * tmp = (TreeItem*)m_chemin.internalPointer();
+        if((typeid(*tmp) == typeid(DProject) && m_fd->m_type.testFlag(Javora::SourceFolder)) || ((typeid(*tmp) == typeid(DProject) || typeid(*tmp) == typeid(DFolder)) && m_fd->m_type.testFlag(Javora::Folder))){
             m_fd->valider->setEnabled(true);
             return;
         }
@@ -16,23 +17,30 @@ void FolderController::validate(){
     m_fd->valider->setEnabled(false);
 }
 
-bool FolderController::caracteresSpeciaux(){
-    for(int i = 0; i < m_fd->name->text().size(); i++){
-        if(!(m_fd->name->text().at(i).isLetterOrNumber())){
-            return false;
-        }
+void FolderController::selectedItem(const QItemSelection& selected, const QItemSelection& deselected){
+    QModelIndex index = m_fd->fm->mapToSource(selected.indexes()[0]);
+    if(!index.isValid()){
+        return;
     }
-    return true;
+    TreeItem *next = (TreeItem*)index.internalPointer();
+    QString path = next->label();
+    while((next = next->parent()) != nullptr && next->parent() != nullptr){
+        path.prepend(tr("/"));
+        path.prepend(next->label());
+    }
+    m_fd->loc->setText(path);
+    m_chemin = index;
+    validate();
 }
 
-bool FolderController::isExisted(){
-    QDir dossier(m_fd->loc->text());
-    return dossier.exists(((QString)m_fd->name->text()));
-}
-
-void FolderController::parcourir(){
-    QString dir = QFileDialog::getExistingDirectory(m_fd, tr("Selectionne un dossier"),"./",QFileDialog::ShowDirsOnly);
-    if(dir.size() > 0){
-        m_fd->loc->setText(dir);
+void FolderController::createFolder(){
+    DFolder *f;
+    if(m_fd->m_type.testFlag(Javora::SourceFolder)){
+        f = new DSourceFolder(m_fd->name->text());
+    }else{
+        f = new DFolder(m_fd->name->text());
     }
+    m_model->insertRow(9999,f,m_chemin);
+    f->create();
+    m_fd->accept();
 }

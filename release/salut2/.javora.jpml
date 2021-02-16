@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Root>
-    <DProject label="salut2" path="C:/Users/Yohan/Documents/DUT2/C++/ProjetTuteure/release">
-        <DSourceFolder label="src"/>
+    <DProject label="salut2" path="C:/Users/Yohan/Documents/DUT2/C++/ProjetTuteure/release/salut2">
+        <DSourceFolder label="src">
+            <DPackage label="fr.SylarAdes.test">
+                <DJavaFile label="Rapport2.java"/>
+            </DPackage>
+        </DSourceFolder>
         <DFolder label="res"/>
         <TreeItem label="Makefile"/>
     </DProject>

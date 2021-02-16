@@ -2,6 +2,7 @@
 #define FOLDERCONTROLLER_H
 
 #include <QtWidgets>
+#include "include/Model/Model.h"
 
 class FolderDialog;
 
@@ -9,16 +10,17 @@ class FolderController : public QObject {
     Q_OBJECT
 
     public:
-        FolderController(FolderDialog *fd);
+        FolderController(Model *model, FolderDialog *fd);
 
     public slots:
-        void parcourir();
+        void selectedItem(const QItemSelection& selected, const QItemSelection& deselected);
         void validate();
-        bool caracteresSpeciaux();
-        bool isExisted();
+        void createFolder();
 
     private:
         FolderDialog *m_fd;
+        Model *m_model;
+        QModelIndex m_chemin;
 };
 
 #endif

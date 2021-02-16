@@ -17,7 +17,7 @@ class ClassSubElement : public ClassElement {
 		void setTransient(bool isTransient){this->mTransient = isTransient;}
 		void setSynchronized(bool isSynchronized){this->mSynchronized=isSynchronized;}
 		void setVolatile(bool isVolatile){this->mVolatile = isVolatile;}
-		
+        virtual QString toString();
 	private:
 		bool mStatic;
 		bool mTransient;

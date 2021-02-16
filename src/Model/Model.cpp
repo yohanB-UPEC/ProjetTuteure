@@ -122,3 +122,16 @@ bool Model::insertRow(int row, TreeItem *item, const QModelIndex &parent){
 	item->save();
 	emit endInsertRows();
 }
+
+QModelIndex Model::getItem(QString path){
+    QStringList l = path.split("/");
+    QModelIndex res;
+    TreeItem *tmp = &root;
+    for(int i = 0; i < l.size();i++){
+        tmp = tmp->getChild(l[i]);
+        if(tmp == nullptr)
+            break;
+        res = createIndex(i,0,tmp);
+    }
+    return res;
+}

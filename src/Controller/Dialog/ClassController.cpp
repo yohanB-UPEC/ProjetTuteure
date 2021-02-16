@@ -1,48 +1,90 @@
 #include "include/Controller/Dialog/ClassController.h"
 #include "include/View/Dialog/ClassDialog.h"
 
-ClassController::ClassController(ClassDialog *clc){
+ClassController::ClassController(Model *model, ClassDialog *clc){
 	this->m_clc = clc;
+    this->m_model = model;
 }
 
 void ClassController::validate(){
-    if(m_clc->name->text().size() > 0 && m_clc->loc->text().size() > 0 && m_clc->loc2->text().size() > 0 && caracteresSpeciaux() && !isExisted()){
-        QFileInfo fiPkg(m_clc->loc->text());
-        QFileInfo fiDoss(m_clc->loc2->text());
-        if(fiDoss.isDir() && fiDoss.isReadable() && fiDoss.isWritable() && !fiDoss.dir().exists(m_clc->name->text()) && fiPkg.isDir() && fiPkg.isReadable() && fiPkg.isWritable()){
-            m_clc->valider->setEnabled(true);
-        }
+    if(name == true && m_clc->loc->text().size() > 0){
+        m_clc->valider->setEnabled(true);
+        return;
+    }
+    m_clc->valider->setEnabled(false);
+}
+
+void ClassController::selectLocation(const QItemSelection& selected, const QItemSelection& deselected){
+    QModelIndex index = m_clc->fm->mapToSource(selected.indexes()[0]);
+    if(!index.isValid()){
+        m_clc->diaV->setEnabled(false);
+        return;
+    }
+    TreeItem *next = (TreeItem*)index.internalPointer();
+    if(typeid(*next) == typeid(DPackage)){
+        m_clc->diaV->setEnabled(true);
     }else{
-        m_clc->valider->setEnabled(false);
+        m_clc->diaV->setEnabled(false);
     }
+    m_chemintmp = index;
 }
 
-bool ClassController::caracteresSpeciaux(){
-	for(int i = 0; i < m_clc->name->text().size(); i++){
-		if(!(m_clc->name->text().at(i).isLetterOrNumber())){
-			return false;
-		}
-	}
-	return true;
-}
-
-bool ClassController::isExisted(){
-    QDir dossierPkg(m_clc->loc->text());
-	QDir dossier(m_clc->loc2->text());
-    if(!dossier.exists() || !dossierPkg.exists()) return true;
-	return dossier.exists(m_clc->name->text().append(".java"));
-}
-
-void ClassController::parcourir(){
-    QString dir = QFileDialog::getExistingDirectory(m_clc, tr("Selectionne un dossier"),"./",QFileDialog::ShowDirsOnly);
-    if(dir.size() > 0){
-        m_clc->loc->setText(dir);
+void ClassController::validateLocation(){
+    TreeItem *next = (TreeItem*)m_chemintmp.internalPointer();
+    QString path = next->label();
+    while((next = next->parent()) != nullptr && next->parent() != nullptr){
+        path.prepend(tr("/"));
+        path.prepend(next->label());
     }
+    m_clc->loc->setText(path);
+    m_chemin = m_chemintmp;
+    validate();
+    m_clc->locDia.accept();
 }
 
-void ClassController::parcourir2(){
-    QString dir = QFileDialog::getExistingDirectory(m_clc, tr("Selectionne un dossier"),"./",QFileDialog::ShowDirsOnly);
-    if(dir.size() > 0){
-        m_clc->loc2->setText(dir);
+void ClassController::validateName(const QString &text){
+    QRegularExpression reg("^[A-Z][A-Za-z0-9]*$");
+    if(reg.match(text).hasMatch()){
+        name=true;
+        m_clc->name->setStyleSheet("border: 1px solid black");
+    }else{
+        name=false;
+        m_clc->name->setStyleSheet("border: 1px solid red");
     }
+    validate();
+}
+
+void ClassController::createClass(){
+    DJavaFile *file = new DJavaFile(m_clc->name->text()+".java");
+    DClass *c = new DClass(m_clc->name->text());
+    if(m_clc->radioMod->checkedId() == 0){
+        c->setScope("public");
+        file->setPublicClass(c);
+    }else{
+        file->addClass(c);
+    }
+    if(m_clc->abstract->isChecked()){
+        c->setAbstract(true);
+    }
+    if(m_clc->final->isChecked()){
+        c->setFinal(true);
+    }
+    if(m_clc->m_type == Javora::Class){
+        c->setType("class");
+    }else if(m_clc->m_type == Javora::Interface){
+        c->setType("interface");
+    }else{
+        c->setType("enum");
+    }
+
+    if(m_clc->main->isChecked()){
+        DMethod *main = new DMethod("main","public","void");
+        main->setStatic(true);
+        main->addParametre("String[]","args");
+        c->methods().push_back(main);
+    }
+    m_model->insertRow(9999,file,m_chemin);
+    file->create();
+    m_clc->accept();
+
 }

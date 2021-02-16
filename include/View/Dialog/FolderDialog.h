@@ -3,6 +3,8 @@
 
 #include <QtWidgets>
 #include "include/Controller/Dialog/FolderController.h"
+#include "include/Model/FilteredModel.h"
+#include "include/Model/Javora.h"
 
 class FolderDialog : public QDialog {
     Q_OBJECT
@@ -10,15 +12,16 @@ class FolderDialog : public QDialog {
     friend class FolderController;
 
     public:
-        FolderDialog(QWidget *parent);
+        FolderDialog(QWidget *parent, Model *model, QFlags<Javora::ModelType> type = Javora::Folder);
 
     private:
         QPushButton *valider;
         QLineEdit *name;
         QLineEdit *loc;
-        QItemSelectionModel* selectionModel;
-        QFileSystemModel *filemodel;
+        QTreeView *tree;
         FolderController fd;
+        FilteredModel *fm;
+        QFlags<Javora::ModelType> m_type;
         //void selectedItem(const QItemSelection &selected, const QItemSelection &deselected);
 
 };

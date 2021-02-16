@@ -10,27 +10,28 @@ class DClass : public ClassElement {
 	
 	
 	public:
-		DClass(QString label, QString scope, QString type);
+        DClass(QString label="", QString scope="", QString type="");
 		~DClass();
 		// getter
-		std::list<DClass*>& classes(){return this->mClasses;}
-		std::list<DAttribut*>& attributs(){return this->mAttributs;}
-		std::list<DMethod*>& methods(){return this->mMethods;}
-		std::list<QString>& superClasses(){return this->mSuperClasses;}
-		std::list<QString>& implementedClasses(){return this->mImplementedClasses;}
+        QList<DClass*>& classes(){return this->mClasses;}
+        QList<DAttribut*>& attributs(){return this->mAttributs;}
+        QList<DMethod*>& methods(){return this->mMethods;}
+        QList<QString>& superClasses(){return this->mSuperClasses;}
+        QList<QString>& implementedClasses(){return this->mImplementedClasses;}
 		// getter
-		std::list<DClass*> findClasses(QString regex);
-		std::list<DMethod*> findMethods(QString regex);
-		std::list<DAttribut*> findAttributs(QString regex);
+        QList<DClass*> findClasses(QString regex);
+        QList<DMethod*> findMethods(QString regex);
+        QList<DAttribut*> findAttributs(QString regex);
 		DMethod* getMethod(QString label,unsigned int nbArgs, ...);
 		DAttribut* getAttribut(QString label);
+        QString toString();
 		
 	private:
-		std::list<DClass*> mClasses;
-		std::list<DAttribut*> mAttributs;
-		std::list<DMethod*> mMethods;
-		std::list<QString> mSuperClasses;
-		std::list<QString> mImplementedClasses;
+        QList<DClass*> mClasses;
+        QList<DAttribut*> mAttributs;
+        QList<DMethod*> mMethods;
+        QList<QString> mSuperClasses;
+        QList<QString> mImplementedClasses;
 };
 
 #endif

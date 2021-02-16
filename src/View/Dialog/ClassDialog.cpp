@@ -1,113 +1,151 @@
 #include "include/View/Dialog/ClassDialog.h"
 
-ClassDialog::ClassDialog(QWidget *parent): QDialog(parent), clc(this){
+ClassDialog::ClassDialog(QWidget *parent, Model *model, QFlags<Javora::ClassType> type): QDialog(parent),m_model(model), m_type(type), clc(model, this),locDia(this) {
 
 	/* Paramètrage de la boîte de dialogue */
 
-	this->resize(600,250);
 	this->setMinimumWidth(500);
-	this->setWindowTitle("Nouvelle classe");
+    if(type.testFlag(Javora::Class)){
+        this->resize(600,350);
+        this->setWindowTitle("Nouvelle classe");
+    }else if(type.testFlag(Javora::Interface)){
+        this->resize(600,200);
+        this->setWindowTitle("Nouvelle interface");
+    }else if(type.testFlag(Javora::Enum)){
+        this->resize(600,200);
+        this->setWindowTitle("Nouvelle enumération");
+    }else{
+        qDebug() << " la class ClassDialog ne gère que les boites de dialogue de création de class,interface et Enum";
+        return;
+    }
 
-	QVBoxLayout *layout = new QVBoxLayout();
+    QGridLayout *layout = new QGridLayout();
+    layout->setColumnStretch(1,2);
 
-	/* Choix du nom de la classe */
-	
-	QHBoxLayout *h1 = new QHBoxLayout();
-	QLabel *lab1 = new QLabel("Classe* ");
-	name = new QLineEdit();
-	QLabel *lab7 = new QLabel(".java");
-	h1->addWidget(lab1);
-	h1->addWidget(name);
-	h1->addWidget(lab7);
-
-	/* dossier source */
-
-    QHBoxLayout *h7 = new QHBoxLayout();
-    QLabel *lab6 = new QLabel("Emplacement du package: ");
+    // future emplacement de la classe
+    QLabel *lab = new QLabel("Emplacement: ");
     loc = new QLineEdit();
-    QPushButton *browse = new QPushButton("Parcourir");
-    h7->addWidget(lab6);
-    h7->addWidget(loc);
-    h7->addWidget(browse);
+    loc->setEnabled(false);
+    QPushButton *browse1 = new QPushButton("Parcourir");
+    layout->addWidget(lab,0,0,Qt::AlignLeft);
+    layout->addWidget(loc,0,1);
+    layout->addWidget(browse1,0,2,Qt::AlignHCenter);
 
-    /* package */
-
-    QHBoxLayout *h8 = new QHBoxLayout();
-    QLabel *lab5 = new QLabel("Emplacement du dossier: ");
-    loc2 = new QLineEdit();
-    QPushButton *browse2 = new QPushButton("Parcourir");
-    h8->addWidget(lab5);
-    h8->addWidget(loc2);
-    h8->addWidget(browse2);
-
-    /* Choix du (des) noms des super-classes */
-
-	QHBoxLayout *h2 = new QHBoxLayout();
-	QLabel *lab2 = new QLabel("Super-classe ");
-	superClass = new QLineEdit();
-	h2->addWidget(lab2);
-	h2->addWidget(superClass);
-
-    /* Choix du des nom(s) des interface(s) */
-
-	QHBoxLayout *h3 = new QHBoxLayout();
-	QLabel *lab3 = new QLabel("Interface ");
-    interFace = new QLineEdit();
-	h3->addWidget(lab3);
-    h3->addWidget(interFace);
-
-    /* Choix de la visibilité de la classe */
+    // Séparateur
+    QFrame *s1 = new QFrame();
+    s1->setFrameShape(QFrame::HLine);
+    layout->addWidget(s1,1,0,1,3);
 
 
-	QLabel *lab4 = new QLabel("Visibilité ");
-	QHBoxLayout *h4 = new QHBoxLayout();
+    // Nom de la classe
+    lab = new QLabel("Nom: ");
+    name = new QLineEdit();
+    layout->addWidget(lab,2,0);
+    layout->addWidget(name,2,1);
 
-    QRadioButton *radio1 = new QRadioButton(tr("public"));
-    QRadioButton *radio2 = new QRadioButton(tr("private"));
-    QRadioButton *radio3 = new QRadioButton(tr("protected"));
+    // Modifieurs de la classe
+    lab = new QLabel("Modifieurs: ");
+    radioMod = new QButtonGroup();
+    QHBoxLayout *h = new QHBoxLayout();
+    QRadioButton *rb1 = new QRadioButton("public");
+    QRadioButton *rb2 = new QRadioButton("package");
+    QRadioButton *rb3 = new QRadioButton("private");
+    QRadioButton *rb4 = new QRadioButton("protected");
+    rb3->setEnabled(false);
+    rb4->setEnabled(false);
+    radioMod->addButton(rb1,0);
+    radioMod->addButton(rb2,1);
+    radioMod->addButton(rb3,2);
+    radioMod->addButton(rb4,3);
+    h->addWidget(rb1);
+    h->addWidget(rb2);
+    h->addWidget(rb3);
+    h->addWidget(rb4);
+    layout->addWidget(lab,3,0);
+    layout->addLayout(h,3,1);
 
-    radio1->setChecked(true);
 
-    h4->addWidget(lab4);
-    h4->addWidget(radio1);
-    h4->addWidget(radio2);
-    h4->addWidget(radio3);
+    if(type.testFlag(Javora::Class)){
 
-    /* main */
+        h = new QHBoxLayout();
+        abstract = new QCheckBox("abstract");
+        final = new QCheckBox("final");
+        h->addWidget(abstract);
+        h->addWidget(final);
+        layout->addLayout(h,4,1);
 
-    QVBoxLayout *h6 = new QVBoxLayout();
-    QCheckBox *main = new QCheckBox("public static void main(String[] args)", this);
-    h6->addWidget(main);
+        // super classe
+        lab = new QLabel("Super class: ");
+        superClass = new QLineEdit();
+        layout->addWidget(lab,5,0);
+        layout->addWidget(superClass,5,1);
+    }
 
-    /* constructeur par défaut */
+    // implemented interfaces
+    lab = new QLabel("interfaces");
+    interfaces = new QLineEdit();
+    layout->addWidget(lab,6,0);
+    layout->addWidget(interfaces,6,1);
 
-    QCheckBox *constructor = new QCheckBox("constructeur par défaut", this);
-    h6->addWidget(constructor);
+    // question
+    if(type.testFlag(Javora::Class)){
+        lab = new QLabel("Quelle méthod voullez-vous créer");
+        main = new QCheckBox("public static void main(String[] args)");
+        constructor = new QCheckBox("les constructeurs depuis la superclass");
+        layout->addWidget(lab,7,0,1,3,Qt::AlignLeft);
+        layout->addWidget(main,8,1);
+        layout->addWidget(constructor,9,1);
+    }
+
+    QSpacerItem *si = new QSpacerItem(0,0,QSizePolicy::Expanding,QSizePolicy::Expanding);
+    layout->addItem(si,10,0,1,3);
+
+    // Séparateur
+    s1 = new QFrame();
+    s1->setFrameShape(QFrame::HLine);
+    layout->addWidget(s1,11,0,1,3);
+
+    valider = new QPushButton("Valider");
+    valider->setEnabled(false);
+    QPushButton *annuler = new QPushButton("Annuler");
+    h = new QHBoxLayout();
+    h->addWidget(annuler);
+    h->addWidget(valider);
+    layout->addLayout(h,12,0,1,3,Qt::AlignRight);
 
 
-    QHBoxLayout *h5 = new QHBoxLayout();
-	h5->setAlignment(Qt::AlignRight);
-	valider = new QPushButton("Valider");
-	QPushButton *annuler = new QPushButton("Annuler");
-	valider->setEnabled(false);
-	h5->addWidget(annuler);
-	h5->addWidget(valider);
-
-    layout->addLayout(h1);
-    layout->addLayout(h7);
-    layout->addLayout(h8);
-    layout->addLayout(h2);
-    layout->addLayout(h3);
-    layout->addLayout(h4);
-    layout->addLayout(h6);
-    layout->addLayout(h5);
     this->setLayout(layout);
 
+
+    createLocDia();
+    connect(browse1,SIGNAL(clicked()),&locDia,SLOT(exec()));
+    connect(name,SIGNAL(textChanged(const QString&)), &clc,SLOT(validateName(const QString&)));
     connect(annuler,SIGNAL(clicked()),this,SLOT(reject()));
-	connect(valider,SIGNAL(clicked()),this,SLOT(accept()));
-	connect(name,SIGNAL(textChanged(QString)),&clc,SLOT(validate()));
-    connect(loc,SIGNAL(textChanged(QString)),&clc,SLOT(validate()));
-    connect(loc2,SIGNAL(textChanged(QString)),&clc,SLOT(validate()));
-    connect(browse,SIGNAL(clicked()),&clc,SLOT(parcourir()));
-    connect(browse2,SIGNAL(clicked()),&clc,SLOT(parcourir2()));
+    connect(valider,SIGNAL(clicked()),&clc,SLOT(createClass()));
+}
+
+void ClassDialog::createLocDia(){
+    QVBoxLayout *layout = new QVBoxLayout();
+
+    QTreeView *tree = new QTreeView;
+    fm = new FilteredModel(Javora::Project | Javora::SourceFolder | Javora::Package);
+    fm->setSourceModel(m_model);
+    tree->setHeaderHidden(true);
+    tree->setModel(fm);
+    layout->addWidget(tree);
+
+    QHBoxLayout *h = new QHBoxLayout();
+    diaV = new QPushButton("Valider");
+    diaV->setEnabled(false);
+    QPushButton* a = new QPushButton("Annuler");
+    h->addWidget(a);
+    h->addWidget(diaV);
+    h->setAlignment(Qt::AlignRight);
+    layout->addLayout(h);
+
+    locDia.setLayout(layout);
+
+    connect(a,SIGNAL(clicked()),&locDia,SLOT(reject()));
+    connect(tree->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),&clc,SLOT(selectLocation(const QItemSelection&, const QItemSelection&)));
+    connect(diaV,SIGNAL(clicked()),&clc,SLOT(validateLocation()));
 }

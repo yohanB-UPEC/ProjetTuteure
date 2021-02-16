@@ -9,14 +9,14 @@ HEADERS += include/View/Fenetre.h \
     include/Controller/Dialog/InterfaceController.h \
     include/Controller/Dialog/PackageController.h \
     include/Controller/Dialog/SrcFolderController.h \
+    include/Model/FilteredModel.h \
+    include/Model/Javora.h \
 	include/View/Dialog/EnumDialog.h \
 	include/View/Dialog/FolderDialog.h \
 	include/View/Dialog/InterfaceDialog.h \
-	include/View/Dialog/SrcFolderDialog.h \
 	include/View/Widget/Console.h \
 	include/View/Widget/DCodeEditor.h \
 	include/View/Widget/JavaHighLighter.h \
-	include/View/Widget/DFilteredTreeView.h \
 	include/View/Menu/MenuFile.h \
 	include/View/Menu/MenuNew.h \
 	include/View/Menu/MenuEdit.h \
@@ -50,14 +50,16 @@ SOURCES += src/View/Fenetre.cpp \
     src/Controller/Dialog/InterfaceController.cpp \
     src/Controller/Dialog/PackageController.cpp \
     src/Controller/Dialog/SrcFolderController.cpp \
+    src/Model/ClassSubElement.cpp \
+    src/Model/DAttribut.cpp \
+    src/Model/DMethod.cpp \
+    src/Model/FilteredModel.cpp \
 	src/View/Dialog/EnumDialog.cpp \
 	src/View/Dialog/FolderDialog.cpp \
 	src/View/Dialog/InterfaceDialog.cpp \
-	src/View/Dialog/SrcFolderDialog.cpp \
 	src/View/Widget/Console.cpp \
 	src/View/Widget/DCodeEditor.cpp \
 	src/View/Widget/JavaHighLighter.cpp \
-	src/View/Widget/DFilteredTreeView.cpp \
 	src/View/Menu/MenuFile.cpp \
 	src/View/Menu/MenuNew.cpp \
 	src/View/Menu/MenuEdit.cpp \

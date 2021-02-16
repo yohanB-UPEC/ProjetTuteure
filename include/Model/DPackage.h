@@ -12,7 +12,7 @@ class DPackage : public TreeItem {
 		QVariant getIcon();
 		QString getPath();
 		void save(QXmlStreamWriter *out=nullptr);
-		void create(QString *path);
+        void create(QString *path=nullptr);
 		
 	private:
 	

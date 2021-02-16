@@ -24,6 +24,7 @@ class TreeItem{
 		virtual QString getPath();
 		virtual void save(QXmlStreamWriter *out=nullptr);
 		virtual void create(QString *path=nullptr);
+        TreeItem* getChild(QString str);
 		
 	protected:
 		QList<TreeItem*> m_children;
