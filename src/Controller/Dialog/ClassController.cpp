@@ -63,26 +63,28 @@ void ClassController::createClass(){
     }else{
         file->addClass(c);
     }
-    if(m_clc->abstract->isChecked()){
-        c->setAbstract(true);
-    }
-    if(m_clc->final->isChecked()){
-        c->setFinal(true);
-    }
+    qDebug() << "etape 1";
     if(m_clc->m_type == Javora::Class){
+        if(m_clc->abstract->isChecked()){
+            c->setAbstract(true);
+        }
+        if(m_clc->final->isChecked()){
+            c->setFinal(true);
+        }
         c->setType("class");
+        if(m_clc->main->isChecked()){
+            DMethod *main = new DMethod("main","public","void");
+            main->setStatic(true);
+            main->addParametre("String[]","args");
+            c->methods().push_back(main);
+        }
     }else if(m_clc->m_type == Javora::Interface){
         c->setType("interface");
     }else{
         c->setType("enum");
     }
 
-    if(m_clc->main->isChecked()){
-        DMethod *main = new DMethod("main","public","void");
-        main->setStatic(true);
-        main->addParametre("String[]","args");
-        c->methods().push_back(main);
-    }
+
     m_model->insertRow(9999,file,m_chemin);
     file->create();
     m_clc->accept();

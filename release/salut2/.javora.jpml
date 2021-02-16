@@ -4,6 +4,7 @@
         <DSourceFolder label="src">
             <DPackage label="fr.SylarAdes.test">
                 <DJavaFile label="Rapport2.java"/>
+                <DJavaFile label="Enum.java"/>
             </DPackage>
         </DSourceFolder>
         <DFolder label="res"/>
