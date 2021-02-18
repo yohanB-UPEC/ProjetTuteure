@@ -4,6 +4,7 @@ debug/FolderController.o
 debug/InterfaceController.o
 debug/PackageController.o
 debug/SrcFolderController.o
+debug/MenuEditController.o
 debug/SnippetController.o
 debug/DSnippet.o
 debug/EnumDialog.o
@@ -45,6 +46,7 @@ debug/moc_FolderController.o
 debug/moc_InterfaceController.o
 debug/moc_PackageController.o
 debug/moc_SrcFolderController.o
+debug/moc_MenuEditController.o
 debug/moc_DSnippet.o
 debug/moc_EnumDialog.o
 debug/moc_FolderDialog.o

@@ -4,6 +4,7 @@ release/FolderController.o
 release/InterfaceController.o
 release/PackageController.o
 release/SrcFolderController.o
+release/MenuEditController.o
 release/SnippetController.o
 release/DSnippet.o
 release/EnumDialog.o
@@ -45,6 +46,7 @@ release/moc_FolderController.o
 release/moc_InterfaceController.o
 release/moc_PackageController.o
 release/moc_SrcFolderController.o
+release/moc_MenuEditController.o
 release/moc_DSnippet.o
 release/moc_EnumDialog.o
 release/moc_FolderDialog.o

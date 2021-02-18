@@ -2,9 +2,20 @@
 
 DSnippetItem::DSnippetItem(QString nomLab, QListWidgetItem *item, QWidget *parent): QWidget(parent){
 
-    copy = new QPushButton("Copier");
-    modifier = new QPushButton("Modifier");
+    QIcon addI("res/icons/copy.png");
+    copy = new QPushButton(addI, "");
+    const QSize size = QSize(40, 40);
+    copy->setFixedSize(size);
+    copy->setToolTip("Copie le contenu du fichier");
+
+    QIcon addIc("res/icons/modify.png");
+    modifier = new QPushButton(addIc, "");
+    const QSize size2 = QSize(40, 40);
+    modifier->setFixedSize(size2);
+    modifier->setToolTip("Modifie le contenu du fichier");
+
     nomSnippet = new QLabel(nomLab);
+    nomSnippet->setStyleSheet("font-size: 15px;");
     QHBoxLayout *layout = new QHBoxLayout();
     layout->addWidget(nomSnippet);
     layout->addWidget(copy);

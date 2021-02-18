@@ -1,5 +1,8 @@
 #include <QProcess>
 #include <QWidget>
+#include <unistd.h>
+#include <signal.h>
+#include <sys/types.h>
 #include "include/View/Widget/Console.h"
 #include "include/View/Fenetre.h"
 
@@ -46,14 +49,12 @@ Console::~Console(){
 
 void Console::execCmd(){
     QByteArray arr = QByteArray::fromStdString(lineEdit->text().toStdString() + "\r\n");
-    /*QProcess *proc = new QProcess(nullptr);
+    QProcess *proc = new QProcess(this);
     proc->setProcessChannelMode(QProcess::MergedChannels);
     proc->start(lineEdit->text(), QStringList());
-    if(lineEdit->text().compare("ctrl-c") == 0){
-        qDebug() << "ctrl-c";
-        proc->terminate();
-        proc->kill();
-    }*/
+    if(lineEdit->text().compare("clear") == 0){
+        edit->clear();
+    }
     lineEdit->setText("");
     cmd->write(arr);
 }

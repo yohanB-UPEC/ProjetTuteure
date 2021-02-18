@@ -2,9 +2,10 @@
 
 DCodeEditor::DCodeEditor(QWidget *parent) : QPlainTextEdit(parent) {
 	leftArea = new LeftLineArea(this);	
-	QFont font("Consolas",11,QFont::Medium,false);
-	this->setFont(font);
-	new JavaHighLighter(this->document());
+    QFont font("Consolas",14,QFont::Medium,false);
+    this->setFont(font);
+
+    highlighter = new JavaHighLighter(this->document());
 	this->setTabStopDistance(32);
 	connect(this,SIGNAL(blockCountChanged(int)),this,SLOT(leftAreaWidthUpdate()));
 	connect(this,SIGNAL(updateRequest(QRect,int)),this,SLOT(scrollLeftAreaUpdate(QRect,int)));

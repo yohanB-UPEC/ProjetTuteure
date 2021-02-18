@@ -4,18 +4,22 @@
 #include <QMenu>
 #include <QLineEdit>
 #include <QTextEdit>
+#include "include/Controller/Menu/MenuEditController.h"
 
 class Fenetre;
 
 class MenuEdit : public QMenu {
 	Q_OBJECT
+
+    friend class MenuEditController;
 	
 	public:
-		MenuEdit(Fenetre *fen);
+        MenuEdit(Fenetre *fen=0);
 		
 	private:
         Fenetre *fen;
         QList<QTextEdit::ExtraSelection> extraSelections;
+        QDialog *dial;
 		QAction *cancel;
 		QAction *restore;
 		QAction *cut;
@@ -27,24 +31,14 @@ class MenuEdit : public QMenu {
 		QAction *search_next;
 		QAction *search_previous;
         QAction *replace;
+        QLabel *lab3;
+        QCheckBox *casse;
+        QRadioButton *radio2;
         QString motTmp;
         QLineEdit *mot;
         QLineEdit *newMot;
-
-    public slots:
-        void s_Copy();
-        void s_Paste();
-        void s_Cut();
-        void s_SelectAll();
-        void s_Undo();
-        void s_Redo();
-        void s_Search();
-        void s_SearchNext();
-        void s_SearchPrev();
-        void s_Suppr();
-        void find(QString mot);
-        void s_Replace();
-        void replaceAll();
+        MenuEditController me;
+        int count = 0;
 };
 
 #endif

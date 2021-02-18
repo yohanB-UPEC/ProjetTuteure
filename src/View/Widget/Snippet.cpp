@@ -9,10 +9,11 @@ Snippet::Snippet(Fenetre* fen, QWidget *parent): QWidget(parent){
     input = new QLineEdit();
     input->setPlaceholderText("Recherchez...");
     input->setStyleSheet("border-style: outset; border-width: 2px; border-color: darkgrey; border-radius: 10px;");
-    add = new QPushButton("+");
-    const QSize size = QSize(20, 20);
+    QIcon addI("res/icons/add.png");
+    add = new QPushButton(addI, "");
+    const QSize size = QSize(40, 40);
     add->setFixedSize(size);
-    add->setStyleSheet("background: blue; border-style: outset; border-radius: 10px; color: white; font: bold 20px;");
+    add->setStyleSheet("border: none;");
 
     QVBoxLayout *h2 = new QVBoxLayout();
 
@@ -87,6 +88,7 @@ void Snippet::getList(){
 
 void Snippet::addSnippet(){
     createDialog();
+    if(nomSnippet->text().size() == 0) return;
     QFile file("Snippets/" + nomSnippet->text() + ".java");
     if(!file.open(QIODevice::ReadWrite | QIODevice::Truncate)){
         qDebug() << "file failed" << file.errorString();

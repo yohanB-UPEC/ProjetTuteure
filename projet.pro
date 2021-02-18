@@ -9,6 +9,7 @@ HEADERS += include/View/Fenetre.h \
     include/Controller/Dialog/InterfaceController.h \
     include/Controller/Dialog/PackageController.h \
     include/Controller/Dialog/SrcFolderController.h \
+    include/Controller/Menu/MenuEditController.h \
     include/Controller/Widget/SnippetController.h \
     include/Model/DSnippet.h \
 		include/View/Dialog/EnumDialog.h \
@@ -53,6 +54,7 @@ SOURCES += src/View/Fenetre.cpp \
     src/Controller/Dialog/InterfaceController.cpp \
     src/Controller/Dialog/PackageController.cpp \
     src/Controller/Dialog/SrcFolderController.cpp \
+    src/Controller/Menu/MenuEditController.cpp \
     src/Controller/Widget/SnippetController.cpp \
     src/Model/DSnippet.cpp \
 		src/View/Dialog/EnumDialog.cpp \

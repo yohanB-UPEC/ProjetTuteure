@@ -12,7 +12,8 @@ class DCodeEditor : public QPlainTextEdit {
 		void leftAreaPaintEvent(QPaintEvent *event);
 	
 	private:
-		QWidget *leftArea;
+        QWidget *leftArea;
+        JavaHighLighter *highlighter;
 		
 	protected:
 		void resizeEvent(QResizeEvent *event);

@@ -30,10 +30,11 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
     snippet->setWidget(new Snippet(this));
     consoles = new QDockWidget("Consoles",this);
 
-    newCmd = new QPushButton("+");
+    QIcon addI("res/icons/add.png");
+    newCmd = new QPushButton(addI, "");
     const QSize size = QSize(20, 20);
     newCmd->setFixedSize(size);
-    newCmd->setStyleSheet("background: blue; border-style: outset; border-radius: 10px; color: white; font: bold 20px;");
+    newCmd->setStyleSheet("border: none;");
 
     QLabel *lab = new QLabel("Consoles");
     lab->setStyleSheet("font-size: 12px;");
