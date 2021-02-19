@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+    <DProject label="salut" path="C:/Users/Yohan/Documents/DUT2/C++/ProjetTuteure/release/salut">
+        <DSourceFolder label="src">
+            <DPackage label="fr.yohan.premier">
+                <DJavaFile label="Main.java"/>
+                <DJavaFile label="Location.java"/>
+                <DJavaFile label="Bonbon.java"/>
+            </DPackage>
+            <DPackage label="fr.sylarAdes.test2"/>
+        </DSourceFolder>
+        <DFolder label="res"/>
+        <TreeItem label="Makefile"/>
+    </DProject>
+</Root>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+    <DProject label="yo" path="/export/home/senart19/varange/public_html/PT/ProjetTuteure/gantt">
+        <DSourceFolder label="src"/>
+        <DFolder label="res"/>
+        <TreeItem label="Makefile"/>
+    </DProject>
+</Root>

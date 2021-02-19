@@ -81,8 +81,19 @@ void DClassTest::getMethod(){
 
 
 void DClassTest::naiveAnalyzer1(){
-	QFile dc("./test/test1.java");
-	NaiveAnalyzer na(dc);
+	QFile dc("./debug/test/test1.java");
+	if(!dc.open(QIODevice::ReadOnly | QIODevice::Text)){
+		COUT << "--> impossible d'ouvrir le fichier <-- \n";
+		QVERIFY(0);
+	}
+	JavaFileReader jfr(dc);
+	QChar res;
+	while((res = jfr.readChar()) != -1){
+		if(res == 0)
+			COUT << '|';
+		else
+			COUT << res;
+	}
 	QVERIFY(1);
 }
 

@@ -4,6 +4,7 @@
 #include <QtTest/QtTest>
 #include "include/Hierarchy/DClass.h"
 #include "include/Hierarchy/NaiveAnalyzer.h"
+#include "include/Hierarchy/JavaFileReader.h"
 
 class DClassTest: public QObject
 {
