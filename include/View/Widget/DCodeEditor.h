@@ -22,6 +22,7 @@ class DCodeEditor : public QPlainTextEdit {
 		void leftAreaWidthUpdate();
 		void scrollLeftAreaUpdate(const QRect &rect,int dy);
 		void highlightCurrentLine();
+        void keyPressEvent(QKeyEvent *event);
 };
 
 class LeftLineArea : public QWidget {

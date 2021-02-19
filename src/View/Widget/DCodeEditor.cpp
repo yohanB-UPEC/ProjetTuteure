@@ -9,8 +9,54 @@ DCodeEditor::DCodeEditor(QWidget *parent) : QPlainTextEdit(parent) {
 	this->setTabStopDistance(32);
 	connect(this,SIGNAL(blockCountChanged(int)),this,SLOT(leftAreaWidthUpdate()));
 	connect(this,SIGNAL(updateRequest(QRect,int)),this,SLOT(scrollLeftAreaUpdate(QRect,int)));
-	connect(this,SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+    connect(this,SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
 	leftAreaWidthUpdate();
+}
+
+void DCodeEditor::keyPressEvent(QKeyEvent *event) {
+    QPlainTextEdit::keyPressEvent(event);
+    int nombreTabulations = 0;
+    if(event->key() == Qt::Key_ParenLeft){
+        this->insertPlainText(")");
+        this->moveCursor(QTextCursor::PreviousCharacter);
+    }
+    if(event->key() == Qt::Key_BracketLeft){
+        this->insertPlainText("]");
+        this->moveCursor(QTextCursor::PreviousCharacter);
+    }
+    /*if(event->key() == Qt::Key_BraceLeft){
+        this->insertPlainText("}");
+        this->moveCursor(QTextCursor::PreviousCharacter);
+    }*/
+    if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return) {
+        QStringList lignes = this->toPlainText().split('\n');
+            int positionCurseur = this->textCursor().position();
+            int indexLigneCourante = -1;
+            int nombreCaracteres = 0;
+
+            for (int i = 0; i < lignes.size(); i++){
+                nombreCaracteres += lignes[i].size();
+                if (nombreCaracteres-1 == positionCurseur){
+                    indexLigneCourante = i;
+                    break;
+                }
+            }
+            if (indexLigneCourante == -1)
+                indexLigneCourante = lignes.size()-1;
+
+            nombreTabulations = lignes[indexLigneCourante-1].count('\t');
+
+            if(lignes[indexLigneCourante-1].contains('{'))
+                nombreTabulations++;
+
+            else if(lignes[indexLigneCourante-1].contains('}'))
+                nombreTabulations--;
+
+            for (int i = 0; i < nombreTabulations; i++)
+                this->insertPlainText("\t");
+            //this->moveCursor(QTextCursor::PreviousBlock);
+
+    }
 }
 
 void DCodeEditor::resizeEvent(QResizeEvent *event){

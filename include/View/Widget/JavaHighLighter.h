@@ -2,6 +2,7 @@
 #define JAVAHIGHLIGHTER
 
 #include <QtWidgets>
+#include "include/View/Menu/MenuPref.h"
 
 class JavaHighLighter : public QSyntaxHighlighter {
     Q_OBJECT
@@ -13,6 +14,8 @@ class JavaHighLighter : public QSyntaxHighlighter {
 
         QTextCharFormat stringsFormat;
         QTextCharFormat commentFormat;
+
+        MenuPref *menu;
     protected:
         void highlightBlock(const QString &text);
 

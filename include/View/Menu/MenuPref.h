@@ -4,6 +4,7 @@
 #include <QMenu>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QRadioButton>
 
 class Fenetre;
 class Console;
@@ -13,8 +14,8 @@ class MenuPref : public QMenu {
 	
 	public:
 		MenuPref(Fenetre *fen);
-        bool isDark = false;
         QString getNom(){return this->file;};
+        QRadioButton *getClear();
 		
 	private:
 		Fenetre *fen;
@@ -23,6 +24,7 @@ class MenuPref : public QMenu {
         QLineEdit *loc;
         QPushButton *valider;
         QString file = "powershell.exe";
+        QRadioButton *radio2;
 
     public slots:
         void s_Term();

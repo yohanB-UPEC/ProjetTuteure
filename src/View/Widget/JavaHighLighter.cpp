@@ -3,8 +3,12 @@
 JavaHighLighter::JavaHighLighter(QTextDocument *parent) : QSyntaxHighlighter(parent) {
     HighlightingRule rule;
 
-    keywordFormat.setForeground(QColor("#66D9EF"));
-    //keywordFormat.setFontWeight(QFont::Bold);
+    //if(menu == nullptr){
+    //    qDebug() << "null";
+    //}
+    //if(menu->getClear()->isChecked())
+        keywordFormat.setForeground(QColor("#66D9EF"));
+    //else keywordFormat.setForeground(Qt::blue);
     keywordFormat.setFontItalic(true);
     const QString keywordPatterns[] = {
         QStringLiteral("\\bchar\\b"), QStringLiteral("\\bclass\\b"), QStringLiteral("\\bconst\\b"),
@@ -21,6 +25,13 @@ JavaHighLighter::JavaHighLighter(QTextDocument *parent) : QSyntaxHighlighter(par
         highlightingRules.append(rule);
     }
 
+    //if(menu->getClear()->isChecked())
+        keywordFormat.setForeground(QColor("#66D9EF"));
+    //else keywordFormat.setForeground(Qt::blue);
+    rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Z][a-z]*\\b"));
+    rule.format = keywordFormat;
+    highlightingRules.append(rule);
+
     keywordFormat.setFontItalic(false);
     keywordFormat.setForeground(QColor("#AE81FF"));
     const QString userDefinedPatterns[] = {
@@ -32,20 +43,33 @@ JavaHighLighter::JavaHighLighter(QTextDocument *parent) : QSyntaxHighlighter(par
         highlightingRules.append(rule);
     }
 
+    keywordFormat.setForeground(QColor("#AE81FF"));
+    rule.pattern = QRegularExpression(QStringLiteral("[0-9]"));
+    rule.format = keywordFormat;
+    highlightingRules.append(rule);
+
     keywordFormat.setForeground(QColor("#F92672"));
     const QString keyPatterns[] = {
-        QStringLiteral("\\breturn\\b"), QStringLiteral("\\bpublic\\b"), QStringLiteral("\\bprivate\\b"), QStringLiteral("\\bprotected\\b"), QStringLiteral("\\bstatic\\b"), QStringLiteral("\\bnew\\b")
+        QStringLiteral("\\breturn\\b"), QStringLiteral("\\bpublic\\b"), QStringLiteral("\\bprivate\\b"), QStringLiteral("\\bprotected\\b"), QStringLiteral("\\bstatic\\b"), QStringLiteral("\\bnew\\b"),
+        QStringLiteral("\\bif\\b"), QStringLiteral("\\belse\\b"), QStringLiteral("\\bwhile\\b"), QStringLiteral("!"), QStringLiteral("<"), QStringLiteral(">"), QStringLiteral("="),
+        QStringLiteral("\\|"), QStringLiteral("&"), QStringLiteral("instanceof"), QStringLiteral("\\+"), QStringLiteral("\\-"), QStringLiteral("\\/"), QStringLiteral("\\*"), QStringLiteral("\\%"),
+        QStringLiteral("try"), QStringLiteral("catch"), QStringLiteral("\\["), QStringLiteral("\\]")
     };
     for (const QString &pattern : keyPatterns) {
         rule.pattern = QRegularExpression(pattern);
         rule.format = keywordFormat;
         highlightingRules.append(rule);
     }
-    //classFormat.setFontWeight(QFont::Bold);
-    classFormat.setForeground(Qt::darkMagenta);
-    rule.pattern = QRegularExpression(QStringLiteral("\\bQ[A-Za-z]+\\b"));
-    rule.format = classFormat;
-    highlightingRules.append(rule);
+
+    keywordFormat.setForeground(QColor("#FD971F"));
+    const QString thisPatterns[] = {
+        QStringLiteral("this")
+    };
+    for (const QString &pattern : thisPatterns) {
+        rule.pattern = QRegularExpression(pattern);
+        rule.format = keywordFormat;
+        highlightingRules.append(rule);
+    }
 
     singleLineCommentFormat.setForeground(QColor("#75715E"));
     rule.pattern = QRegularExpression(QStringLiteral("//[^\n]*"));
@@ -60,8 +84,14 @@ JavaHighLighter::JavaHighLighter(QTextDocument *parent) : QSyntaxHighlighter(par
     highlightingRules.append(rule);
 
     //functionFormat.setFontItalic(true);
-    functionFormat.setForeground(QColor("#A6E22E"));
+
+    functionFormat.setForeground(QColor("#66D9EF"));
     rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Za-z0-9_]+(?=\\()"));
+    rule.format = functionFormat;
+    highlightingRules.append(rule);
+
+    functionFormat.setForeground(QColor("#A6E22E"));
+    rule.pattern = QRegularExpression(QStringLiteral("\\b +[A-Za-z0-9_]+(?=\\()"));
     rule.format = functionFormat;
     highlightingRules.append(rule);
 
