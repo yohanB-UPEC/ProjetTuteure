@@ -2,17 +2,22 @@
 #define DCODEEDITOR
 
 #include <QtWidgets>
+#include "include/Model/TreeItem.h"
+#include "include/Controller/Widget/CodeEditorController.h"
 #include "JavaHighLighter.h"
+
 
 class DCodeEditor : public QPlainTextEdit {
 	Q_OBJECT
 	
 	public:
-		DCodeEditor(QWidget *parent = nullptr);
+        DCodeEditor(TreeItem *item=nullptr,QWidget *parent = nullptr);
 		void leftAreaPaintEvent(QPaintEvent *event);
+        CodeEditorController& getController(){return this->cec;}
 	
 	private:
 		QWidget *leftArea;
+        CodeEditorController cec;
 		
 	protected:
 		void resizeEvent(QResizeEvent *event);

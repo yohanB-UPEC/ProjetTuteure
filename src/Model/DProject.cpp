@@ -82,3 +82,13 @@ void DProject::save(QXmlStreamWriter *out){
 	delete out;
 	file.close();
 }
+
+bool DProject::setLabel(QString label){
+    bool res;
+    QFileInfo fi(m_path);
+    m_path = fi.path()+"/"+label;
+    if(!(res = TreeItem::setLabel(label))){
+        QFileInfo fi(m_path);
+        m_path = fi.path()+"/"+m_label;
+    }
+}

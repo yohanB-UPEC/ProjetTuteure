@@ -1,11 +1,14 @@
 debug/Fenetre.o
 debug/FolderController.o
 debug/PackageController.o
+debug/CodeEditorController.o
+debug/ExplorerDelegate.o
 debug/ClassSubElement.o
 debug/DAttribut.o
 debug/DMethod.o
 debug/FilteredModel.o
 debug/FolderDialog.o
+debug/MenuContextExplorer.o
 debug/Console.o
 debug/DCodeEditor.o
 debug/JavaHighLighter.o
@@ -36,8 +39,10 @@ debug/qrc_resources.o
 debug/moc_Fenetre.o
 debug/moc_FolderController.o
 debug/moc_PackageController.o
+debug/moc_CodeEditorController.o
 debug/moc_Javora.o
 debug/moc_FolderDialog.o
+debug/moc_MenuContextExplorer.o
 debug/moc_Console.o
 debug/moc_DCodeEditor.o
 debug/moc_JavaHighLighter.o
@@ -48,6 +53,7 @@ debug/moc_MenuPref.o
 debug/moc_MenuHelp.o
 debug/moc_ProjectDialog.o
 debug/moc_Model.o
+debug/moc_TreeItem.o
 debug/moc_Controller.o
 debug/moc_PackageDialog.o
 debug/moc_ClassDialog.o

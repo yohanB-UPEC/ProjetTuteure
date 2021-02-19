@@ -31,11 +31,7 @@ void ClassController::selectLocation(const QItemSelection& selected, const QItem
 
 void ClassController::validateLocation(){
     TreeItem *next = (TreeItem*)m_chemintmp.internalPointer();
-    QString path = next->label();
-    while((next = next->parent()) != nullptr && next->parent() != nullptr){
-        path.prepend(tr("/"));
-        path.prepend(next->label());
-    }
+    QString path = m_model->getRelativePath(next);
     m_clc->loc->setText(path);
     m_chemin = m_chemintmp;
     validate();
@@ -84,7 +80,9 @@ void ClassController::createClass(){
         c->setType("enum");
     }
 
-
+    if(!m_chemin.isValid()){
+        m_chemin = m_model->getItem(m_clc->loc->text());
+    }
     m_model->insertRow(9999,file,m_chemin);
     file->create();
     m_clc->accept();

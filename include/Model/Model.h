@@ -24,7 +24,7 @@ class Model : public QAbstractItemModel{
 		QVariant headerData(int section, Qt::Orientation orientation,int role) const;
 		bool insertRow(int row, TreeItem *item, const QModelIndex &parent = QModelIndex());
         QModelIndex getItem(QString path);
-
+        QString getRelativePath(TreeItem* item);
 	public slots:
 	
 	private:

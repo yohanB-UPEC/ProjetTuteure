@@ -28,11 +28,7 @@ void PackageController::selectedItem(const QItemSelection& selected, const QItem
         return;
     }
     TreeItem *next = (TreeItem*)index.internalPointer();
-    QString path = next->label();
-    while((next = next->parent()) != nullptr && next->parent() != nullptr){
-        path.prepend(tr("/"));
-        path.prepend(next->label());
-    }
+    QString path = m_model->getRelativePath(next);
     m_pkd->path->setText(path);
     m_chemin = index;
     validate();

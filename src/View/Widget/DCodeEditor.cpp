@@ -1,6 +1,6 @@
 #include "include/View/Widget/DCodeEditor.h"
 
-DCodeEditor::DCodeEditor(QWidget *parent) : QPlainTextEdit(parent) {
+DCodeEditor::DCodeEditor(TreeItem *item, QWidget *parent) : QPlainTextEdit(parent), cec(item,this){
 	leftArea = new LeftLineArea(this);	
 	QFont font("Consolas",11,QFont::Medium,false);
 	this->setFont(font);
@@ -63,7 +63,6 @@ void DCodeEditor::highlightCurrentLine()
 void DCodeEditor::scrollLeftAreaUpdate(const QRect &rect,int dy){
 	if(dy){
 		leftArea->scroll(0,dy);
-		//printf("%s\n",this->toPlainText().toStdString().c_str());
 	}else{
 		leftArea->update(0,rect.y(),leftArea->width(),rect.height());
 	}

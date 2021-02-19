@@ -3,15 +3,15 @@
 
 #include <QMenu>
 #include "MenuNew.h"
-
 class Fenetre;
+class MenuNew;
 
 class MenuFile : public QMenu {
 	Q_OBJECT
 	
 	public:
 		MenuFile(Fenetre *fen);
-		
+        MenuNew* getMenuNew(){return this->newf;}
 	private:
 		QAction *nouveau;
 		QAction *openFile;

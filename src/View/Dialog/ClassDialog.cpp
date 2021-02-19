@@ -118,6 +118,7 @@ ClassDialog::ClassDialog(QWidget *parent, Model *model, QFlags<Javora::ClassType
 
 
     createLocDia();
+    locationInit();
     connect(browse1,SIGNAL(clicked()),&locDia,SLOT(exec()));
     connect(name,SIGNAL(textChanged(const QString&)), &clc,SLOT(validateName(const QString&)));
     connect(annuler,SIGNAL(clicked()),this,SLOT(reject()));
@@ -148,4 +149,29 @@ void ClassDialog::createLocDia(){
     connect(a,SIGNAL(clicked()),&locDia,SLOT(reject()));
     connect(tree->selectionModel(), SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),&clc,SLOT(selectLocation(const QItemSelection&, const QItemSelection&)));
     connect(diaV,SIGNAL(clicked()),&clc,SLOT(validateLocation()));
+}
+
+void ClassDialog::locationInit(){
+    if(typeid(*parentWidget()) != typeid(Fenetre)){
+        return;
+    }
+    Fenetre *fen = (Fenetre*)parentWidget();
+    QModelIndex index = fen->getExplorer()->selectionModel()->currentIndex();
+    if(!index.isValid())
+        return;
+    TreeItem *item = (TreeItem*)index.internalPointer();
+    if(typeid(*item) == typeid(DJavaFile)){
+        loc->setText(m_model->getRelativePath(item->parent()));
+    }else if(typeid(*item) == typeid(DSourceFolder)){
+        int size = item->childCount();
+        for(int i = 0; i < size;i++){
+            TreeItem* child = item->child(i);
+            if(typeid(*child) == typeid(DPackage)){
+                loc->setText(m_model->getRelativePath(child));
+                break;
+            }
+        }
+    }else if(typeid(*item) == typeid(DPackage)){
+        loc->setText(m_model->getRelativePath(item));
+    }
 }

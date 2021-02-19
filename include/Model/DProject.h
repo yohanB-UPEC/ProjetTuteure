@@ -13,6 +13,7 @@ class DProject : public TreeItem {
 		QVariant getIcon();
 		QString getPath();
 		void save(QXmlStreamWriter *out=nullptr);
+        bool setLabel(QString label);
 	private:
 		QString m_path;
 };

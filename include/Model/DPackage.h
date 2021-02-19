@@ -13,7 +13,7 @@ class DPackage : public TreeItem {
 		QString getPath();
 		void save(QXmlStreamWriter *out=nullptr);
         void create(QString *path=nullptr);
-		
+        bool setLabel(QString label);
 	private:
 	
 };

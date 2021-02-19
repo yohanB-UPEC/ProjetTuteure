@@ -1,6 +1,6 @@
-package fr.SylarAdes.test;
+package fr.sylarAdes.test;
 
-public class Rapport2 {
+public class Main {
 
 	public static void main( String[] args ){
 

@@ -25,6 +25,7 @@ class DJavaFile : public TreeItem{
     public:
         void create(QString *path=nullptr);
         void save(QXmlStreamWriter *out);
+        bool setLabel(QString label);
 		
 	private:
         DClass* m_PublicClass;

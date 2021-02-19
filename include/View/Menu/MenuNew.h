@@ -5,8 +5,6 @@
 #include "../Dialog/ProjectDialog.h"
 #include "../Dialog/PackageDialog.h"
 #include "../Dialog/ClassDialog.h"
-#include "../Dialog/InterfaceDialog.h"
-#include "../Dialog/EnumDialog.h"
 #include "../Dialog/FolderDialog.h"
 
 class Fenetre; 

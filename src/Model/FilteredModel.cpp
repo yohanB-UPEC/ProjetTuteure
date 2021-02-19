@@ -3,6 +3,7 @@
 FilteredModel::FilteredModel(QFlags<Javora::ModelType> filtre): QSortFilterProxyModel(), m_filtre(filtre){
 }
 
+
 bool FilteredModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const{
     QModelIndex index = sourceModel()->index(source_row, 0, source_parent);
     if(!index.isValid()){
@@ -19,4 +20,10 @@ bool FilteredModel::filterAcceptsRow(int source_row, const QModelIndex &source_p
             return true;
     }
     return false;
+}
+
+Qt::ItemFlags FilteredModel::flags(const QModelIndex &index) const{
+    if (!index.isValid())
+        return Qt::NoItemFlags;
+    return (Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 }

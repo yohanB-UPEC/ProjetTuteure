@@ -24,7 +24,7 @@ MenuNew::MenuNew(Fenetre* fen) : QMenu(){
 }
 
 void MenuNew::s_File(){
-    this->fen->getCentral()->addTab(new DCodeEditor(),"nouveau");
+    this->fen->getCentral()->addTab(new DCodeEditor(nullptr,this->fen->getCentral()),"nouveau");
 }
 void MenuNew::s_Project(){
     ProjectDialog proDia(this->fen, this->fen->getModel());

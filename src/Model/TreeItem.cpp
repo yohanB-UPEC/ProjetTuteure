@@ -81,3 +81,33 @@ TreeItem* TreeItem::getChild(QString str){
     }
     return nullptr;
 }
+
+bool TreeItem::setLabel(QString label){
+    QFileInfo fi(getPath());
+    if(!QFile::rename(fi.path()+"/"+m_label,fi.path()+"/"+label)){
+        QMessageBox::warning(nullptr,"erreur renommage","impossible de renommer le fichier "+fi.path()+"/"+label);
+        return false;
+    }
+    this->m_label = label;
+    emit rename(fi.path()+"/"+label);
+    propagRename();
+    return true;
+}
+
+void TreeItem::propagRename(){
+    QList<TreeItem*>::iterator next;
+    for(next=m_children.begin();next != m_children.end();++next){
+        emit (*next)->rename((*next)->getPath());
+        (*next)->propagRename();
+    }
+}
+
+bool TreeItem::exist(const QString& label){
+    QList<TreeItem*>::iterator next;
+    for(next=m_children.begin();next != m_children.end();++next){
+        if((*next)->label() == label){
+            return true;
+        }
+    }
+    return false;
+}

@@ -59,3 +59,36 @@ void DPackage::create(QString *path){
 	qDebug() << "creation du dossier " << dir.path();
 	dir.mkpath(dir.path());
 }
+
+bool DPackage::setLabel(QString label){
+    QString path(label);
+    path.replace(".","/");
+    QString parentPath(this->m_parent->getPath());
+    QString nPath(parentPath+"/"+path);
+    QString oldPath(getPath());
+
+    QDir dir(parentPath);
+    if(!dir.mkpath(nPath)){
+        QMessageBox::warning(nullptr,"erreur renommage","impossible créer l'arborescence du package "+label);
+        return false;
+    }
+
+    dir.cd(oldPath);
+    dir.setFilter(QDir::Files | QDir::Hidden);
+    QFileInfoList list = dir.entryInfoList();
+    for(int i = 0; i < list.size();i++){
+        QFile::rename(list[i].absoluteFilePath(),nPath+"/"+list[i].fileName());
+    }
+    int tmp = m_label.count(".");
+    while(tmp > 0 && dir.isEmpty()){
+        QString suppr(dir.dirName());
+        dir.cd("..");
+        dir.rmdir(suppr);
+        tmp--;
+    }
+
+    this->m_label = label;
+    emit rename(nPath);
+    this->propagRename();
+    return true;
+}

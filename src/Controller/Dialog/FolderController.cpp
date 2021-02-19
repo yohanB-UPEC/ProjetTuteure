@@ -23,11 +23,7 @@ void FolderController::selectedItem(const QItemSelection& selected, const QItemS
         return;
     }
     TreeItem *next = (TreeItem*)index.internalPointer();
-    QString path = next->label();
-    while((next = next->parent()) != nullptr && next->parent() != nullptr){
-        path.prepend(tr("/"));
-        path.prepend(next->label());
-    }
+    QString path = m_model->getRelativePath(next);
     m_fd->loc->setText(path);
     m_chemin = index;
     validate();

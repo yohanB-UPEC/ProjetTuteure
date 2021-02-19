@@ -5,6 +5,7 @@
 #include "include/Controller/Dialog/ClassController.h"
 #include "include/Model/Javora.h"
 #include "include/Model/FilteredModel.h"
+#include "include/View/Fenetre.h"
 
 class ClassDialog : public QDialog {
 	Q_OBJECT
@@ -32,6 +33,7 @@ class ClassDialog : public QDialog {
         ClassController clc;
         QDialog locDia;
         void createLocDia();
+        void locationInit();
 };
 
 #endif

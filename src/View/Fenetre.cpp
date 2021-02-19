@@ -26,9 +26,11 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 	consoles->setFeatures(QDockWidget::DockWidgetMovable);
 	explorer->setFeatures(QDockWidget::DockWidgetMovable);
 	
-	//QFileSystemModel *filemodel = new QFileSystemModel;
-    //filemodel->setRootPath(QDir::currentPath());
-    QTreeView *tree = new QTreeView;
+    tree = new QTreeView;
+    tree->setDragDropMode(QAbstractItemView::DragOnly);
+    tree->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    tree->setContextMenuPolicy(Qt::CustomContextMenu);
+    tree->setItemDelegate(new ExplorerDelegate());
     tree->setHeaderHidden(true);
 	explorer->setWidget(tree);
     tree->setModel(model);
@@ -38,5 +40,9 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 	this->addDockWidget(Qt::RightDockWidgetArea,snippet);
 	this->addDockWidget(Qt::BottomDockWidgetArea,consoles);
 	this->addDockWidget(Qt::LeftDockWidgetArea,explorer);
-	
+
+
+    connect(tree,SIGNAL(doubleClicked(const QModelIndex)),controller,SLOT(doubleClickOpen(const QModelIndex)));
+    connect(central,SIGNAL(tabCloseRequested(int)),controller,SLOT(closeEditor(int)));
+    connect(tree,SIGNAL(customContextMenuRequested(const QPoint&)),controller,SLOT(explorerContextMenu(const QPoint&)));
 }

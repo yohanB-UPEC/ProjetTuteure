@@ -7,21 +7,19 @@ MenuFile::MenuFile(Fenetre *fen) : QMenu("Fichier"){
 	openFile = this->addAction("Open File");
 	recentFiles = this->addAction("Recent Files");
 	this->addSeparator();
-	closeEditor = this->addAction("Close Editor");
-	closeAllEditor = this->addAction("Close All Editors");
+    closeEditor = this->addAction("Close Editor",fen->getController(),SLOT(closeEditor()),QKeySequence(Qt::CTRL + Qt::Key_W));
+    closeAllEditor = this->addAction("Close All Editors",fen->getController(),SLOT(closeAllEditor()),QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_W));
 	this->addSeparator();
-	save = this->addAction("Save");
+    save = this->addAction("Save",fen->getController(), SLOT(saveEditor()), QKeySequence(Qt::CTRL + Qt::Key_S) );
 	saveAs = this->addAction("Save As");
-	saveAll = this->addAction("Save All");
+    saveAll = this->addAction("Save All",fen->getController(), SLOT(saveAllEditor()), QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_S));
 	this->addSeparator();
 	properties = this->addAction("Propriétés");
 	this->addSeparator();
-	quitter = this->addAction("Quitter");
+    quitter = this->addAction("Quitter",qApp,SLOT(closeAllWindows()));
 	
 	newf = new MenuNew(fen);
 	nouveau->setMenu(newf);
-	
-	connect(quitter,SIGNAL(triggered()),qApp,SLOT(closeAllWindows()));
 	
 	this->fen->menuBar()->addMenu(this);
 }

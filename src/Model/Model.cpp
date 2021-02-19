@@ -77,18 +77,24 @@ bool Model::hasChildren(const QModelIndex &parent) const{
 Qt::ItemFlags Model::flags(const QModelIndex &index) const{
 	if (!index.isValid())
         return Qt::NoItemFlags;
-	return (Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
+    return (Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable);
 }
 
 bool Model::setData(const QModelIndex &index, const QVariant &value, int role){
-	if(index.isValid()){
-		if(role == Qt::DisplayRole){
-			((TreeItem*)index.internalPointer())->setLabel(value.toString());
-			emit dataChanged(index,index);
-			return true;
-		}
-	}
-	
+    if(!index.isValid()){
+        return false;
+    }
+
+    if(role == Qt::EditRole){
+        TreeItem* item = ((TreeItem*)index.internalPointer());
+        if(!item->setLabel(value.toString())){
+            return false;
+        }
+        emit dataChanged(index,index);
+        item->save();
+        return true;
+    }
+
 	return false;
 }
 
@@ -125,13 +131,21 @@ bool Model::insertRow(int row, TreeItem *item, const QModelIndex &parent){
 
 QModelIndex Model::getItem(QString path){
     QStringList l = path.split("/");
-    QModelIndex res;
     TreeItem *tmp = &root;
-    for(int i = 0; i < l.size();i++){
+    int i;
+    for( i = 0; i < l.size();i++){
         tmp = tmp->getChild(l[i]);
         if(tmp == nullptr)
-            break;
-        res = createIndex(i,0,tmp);
+            return QModelIndex();
     }
-    return res;
+    return createIndex(tmp->row(),0,tmp);
+}
+
+QString Model::getRelativePath(TreeItem* item){
+    QString path = item->label();
+    while((item = item->parent()) != nullptr && item->parent() != nullptr){
+        path.prepend(tr("/"));
+        path.prepend(item->label());
+    }
+    return path;
 }

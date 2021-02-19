@@ -6,9 +6,12 @@ RESOURCES = resources.qrc
 HEADERS += include/View/Fenetre.h \
     include/Controller/Dialog/FolderController.h \
     include/Controller/Dialog/PackageController.h \
+    include/Controller/Widget/CodeEditorController.h \
+    include/Controller/Widget/ExplorerDelegate.h \
     include/Model/FilteredModel.h \
     include/Model/Javora.h \
 	include/View/Dialog/FolderDialog.h \
+    include/View/Menu/MenuContextExplorer.h \
 	include/View/Widget/Console.h \
 	include/View/Widget/DCodeEditor.h \
 	include/View/Widget/JavaHighLighter.h \
@@ -42,11 +45,14 @@ HEADERS += include/View/Fenetre.h \
 SOURCES += src/View/Fenetre.cpp \
     src/Controller/Dialog/FolderController.cpp \
     src/Controller/Dialog/PackageController.cpp \
+    src/Controller/Widget/CodeEditorController.cpp \
+    src/Controller/Widget/ExplorerDelegate.cpp \
     src/Model/ClassSubElement.cpp \
     src/Model/DAttribut.cpp \
     src/Model/DMethod.cpp \
     src/Model/FilteredModel.cpp \
 	src/View/Dialog/FolderDialog.cpp \
+    src/View/Menu/MenuContextExplorer.cpp \
 	src/View/Widget/Console.cpp \
 	src/View/Widget/DCodeEditor.cpp \
 	src/View/Widget/JavaHighLighter.cpp \

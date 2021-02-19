@@ -53,9 +53,6 @@ FolderDialog::FolderDialog(QWidget *parent, Model *model,QFlags<Javora::ModelTyp
     h4->addWidget(annuler);
     h4->addWidget(valider);
 
-    QSpacerItem *si = new QSpacerItem(0,0,QSizePolicy::Expanding,QSizePolicy::Expanding);
-
-    layout->addItem(si);
     layout->addLayout(h4);
     this->setLayout(layout);
 

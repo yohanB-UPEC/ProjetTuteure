@@ -10,23 +10,27 @@
 #include "Menu/MenuPref.h"
 #include "Menu/MenuHelp.h"
 #include "Widget/Console.h"
+#include "include/Controller/Widget/ExplorerDelegate.h"
 
-
+class MenuFile;
 
 class Fenetre : public QMainWindow {
 	Q_OBJECT
-	
+    friend class Controller;
 	public:
 		Fenetre(Model *model);
 		QTabWidget* getCentral(){return central;}
 		Model* getModel(){return this->model;}
+        Controller* getController(){return this->controller;}
+        MenuFile* getMenuFile(){return this->menuFile;}
+        QTreeView* getExplorer(){return this->tree;}
 	private:
 		MenuFile *menuFile;
 		MenuEdit *menuEdit;
 		MenuPref *menuPref;
 		MenuHelp *menuHelp;
         Console *console;
-		
+        QTreeView *tree;
 		QTabWidget *central;
 		
 		Model *model;

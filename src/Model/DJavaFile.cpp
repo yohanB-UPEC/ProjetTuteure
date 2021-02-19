@@ -74,3 +74,10 @@ void DJavaFile::create(QString *path){
     }
     f.close();
 }
+
+bool DJavaFile::setLabel(QString label){
+    if(!label.endsWith(".java")){
+        label.append(".java");
+    }
+    return TreeItem::setLabel(label);
+}
