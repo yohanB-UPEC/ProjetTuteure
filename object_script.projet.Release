@@ -34,6 +34,10 @@ release/PackageDialog.o
 release/ClassDialog.o
 release/ProjectController.o
 release/ClassController.o
+release/SnippetController.o
+release/MenuEditController.o
+release/DSnippetItem.o
+release/Snippet.o
 release/main.o
 release/qrc_resources.o
 release/moc_Fenetre.o
@@ -59,3 +63,6 @@ release/moc_PackageDialog.o
 release/moc_ClassDialog.o
 release/moc_ProjectController.o
 release/moc_ClassController.o
+release/moc_MenuEditController.o
+release/moc_DSnippetItem.o
+release/moc_Snippet.o

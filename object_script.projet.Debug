@@ -34,6 +34,10 @@ debug/PackageDialog.o
 debug/ClassDialog.o
 debug/ProjectController.o
 debug/ClassController.o
+debug/SnippetController.o
+debug/MenuEditController.o
+debug/DSnippetItem.o
+debug/Snippet.o
 debug/main.o
 debug/qrc_resources.o
 debug/moc_Fenetre.o
@@ -59,3 +63,6 @@ debug/moc_PackageDialog.o
 debug/moc_ClassDialog.o
 debug/moc_ProjectController.o
 debug/moc_ClassController.o
+debug/moc_MenuEditController.o
+debug/moc_DSnippetItem.o
+debug/moc_Snippet.o

@@ -21,8 +21,13 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_FolderController_t {
+<<<<<<< HEAD
     QByteArrayData data[8];
     char stringdata0[88];
+=======
+    QByteArrayData data[6];
+    char stringdata0[66];
+>>>>>>> Jeremy
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,6 +37,7 @@ struct qt_meta_stringdata_FolderController_t {
 static const qt_meta_stringdata_FolderController_t qt_meta_stringdata_FolderController = {
     {
 QT_MOC_LITERAL(0, 0, 16), // "FolderController"
+<<<<<<< HEAD
 QT_MOC_LITERAL(1, 17, 12), // "selectedItem"
 QT_MOC_LITERAL(2, 30, 0), // ""
 QT_MOC_LITERAL(3, 31, 14), // "QItemSelection"
@@ -44,6 +50,17 @@ QT_MOC_LITERAL(7, 75, 12) // "createFolder"
     "FolderController\0selectedItem\0\0"
     "QItemSelection\0selected\0deselected\0"
     "validate\0createFolder"
+=======
+QT_MOC_LITERAL(1, 17, 9), // "parcourir"
+QT_MOC_LITERAL(2, 27, 0), // ""
+QT_MOC_LITERAL(3, 28, 8), // "validate"
+QT_MOC_LITERAL(4, 37, 18), // "caracteresSpeciaux"
+QT_MOC_LITERAL(5, 56, 9) // "isExisted"
+
+    },
+    "FolderController\0parcourir\0\0validate\0"
+    "caracteresSpeciaux\0isExisted"
+>>>>>>> Jeremy
 };
 #undef QT_MOC_LITERAL
 
@@ -53,7 +70,11 @@ static const uint qt_meta_data_FolderController[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
+<<<<<<< HEAD
        3,   14, // methods
+=======
+       4,   14, // methods
+>>>>>>> Jeremy
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -61,6 +82,7 @@ static const uint qt_meta_data_FolderController[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
+<<<<<<< HEAD
        1,    2,   29,    2, 0x0a /* Public */,
        6,    0,   34,    2, 0x0a /* Public */,
        7,    0,   35,    2, 0x0a /* Public */,
@@ -69,6 +91,18 @@ static const uint qt_meta_data_FolderController[] = {
     QMetaType::Void, 0x80000000 | 3, 0x80000000 | 3,    4,    5,
     QMetaType::Void,
     QMetaType::Void,
+=======
+       1,    0,   34,    2, 0x0a /* Public */,
+       3,    0,   35,    2, 0x0a /* Public */,
+       4,    0,   36,    2, 0x0a /* Public */,
+       5,    0,   37,    2, 0x0a /* Public */,
+
+ // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Bool,
+    QMetaType::Bool,
+>>>>>>> Jeremy
 
        0        // eod
 };
@@ -79,6 +113,7 @@ void FolderController::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
         auto *_t = static_cast<FolderController *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
+<<<<<<< HEAD
         case 0: _t->selectedItem((*reinterpret_cast< const QItemSelection(*)>(_a[1])),(*reinterpret_cast< const QItemSelection(*)>(_a[2]))); break;
         case 1: _t->validate(); break;
         case 2: _t->createFolder(); break;
@@ -96,6 +131,16 @@ void FolderController::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int
             }
             break;
         }
+=======
+        case 0: _t->parcourir(); break;
+        case 1: _t->validate(); break;
+        case 2: { bool _r = _t->caracteresSpeciaux();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
+        case 3: { bool _r = _t->isExisted();
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
+        default: ;
+        }
+>>>>>>> Jeremy
     }
 }
 
@@ -128,6 +173,7 @@ int FolderController::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
+<<<<<<< HEAD
         if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 3;
@@ -135,6 +181,15 @@ int FolderController::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
         _id -= 3;
+=======
+        if (_id < 4)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 4;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 4)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 4;
+>>>>>>> Jeremy
     }
     return _id;
 }

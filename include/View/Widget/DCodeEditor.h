@@ -18,6 +18,8 @@ class DCodeEditor : public QPlainTextEdit {
 	private:
 		QWidget *leftArea;
         CodeEditorController cec;
+        JavaHighLighter *highlighter;
+
 		
 	protected:
 		void resizeEvent(QResizeEvent *event);
@@ -26,6 +28,7 @@ class DCodeEditor : public QPlainTextEdit {
 		void leftAreaWidthUpdate();
 		void scrollLeftAreaUpdate(const QRect &rect,int dy);
 		void highlightCurrentLine();
+        void keyPressEvent(QKeyEvent *event);
 };
 
 class LeftLineArea : public QWidget {

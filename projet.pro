@@ -10,38 +10,40 @@ HEADERS += include/View/Fenetre.h \
     include/Controller/Widget/ExplorerDelegate.h \
     include/Model/FilteredModel.h \
     include/Model/Javora.h \
-	include/View/Dialog/FolderDialog.h \
+    include/View/Dialog/FolderDialog.h \
     include/View/Menu/MenuContextExplorer.h \
-	include/View/Widget/Console.h \
-	include/View/Widget/DCodeEditor.h \
-	include/View/Widget/JavaHighLighter.h \
-	include/View/Menu/MenuFile.h \
-	include/View/Menu/MenuNew.h \
-	include/View/Menu/MenuEdit.h \
-	include/View/Menu/MenuPref.h \
-	include/View/Menu/MenuHelp.h \
-	include/View/Dialog/ProjectDialog.h \
-	include/Model/ClassElement.h \
-	include/Model/ClassSubElement.h \
-	include/Model/DAttribut.h \
-	include/Model/DMethod.h \
-	include/Model/DClass.h \
-	include/Model/DJavaFile.h \
-	include/Model/Model.h \
-	include/Model/TreeItem.h \
-	include/Model/DIcons.h \
-	include/Model/DProject.h \
-	include/Model/DSourceFolder.h \
-	include/Model/DFolder.h \
-	include/Model/DPackage.h \
-	include/Compiler/NaiveAnalyzer.h \
-	include/Compiler/JavaFileReader.h \
-	include/Controller/Controller.h \
-	include/View/Dialog/PackageDialog.h \
-	include/View/Dialog/ClassDialog.h \
-	include/Controller/Dialog/ProjectController.h \
-	include/Controller/Dialog/ClassController.h
-				
+    include/View/Widget/Console.h \
+    include/View/Widget/DCodeEditor.h \
+    include/View/Widget/JavaHighLighter.h \
+    include/View/Menu/MenuFile.h \
+    include/View/Menu/MenuNew.h \
+    include/View/Menu/MenuEdit.h \
+    include/View/Menu/MenuPref.h \
+    include/View/Menu/MenuHelp.h \
+    include/View/Dialog/ProjectDialog.h \
+    include/Model/ClassElement.h \
+    include/Model/ClassSubElement.h \
+    include/Model/DAttribut.h \
+    include/Model/DMethod.h \
+    include/Model/DClass.h \
+    include/Model/DJavaFile.h \
+    include/Model/Model.h \
+    include/Model/TreeItem.h \
+    include/Model/DIcons.h \
+    include/Model/DProject.h \
+    include/Model/DSourceFolder.h \
+    include/Model/DFolder.h \
+    include/Model/DPackage.h \
+    include/Controller/Controller.h \
+    include/View/Dialog/PackageDialog.h \
+    include/View/Dialog/ClassDialog.h \
+    include/Controller/Dialog/ProjectController.h \
+    include/Controller/Dialog/ClassController.h \
+    include/Controller/Widget/SnippetController.h \
+    include/Controller/Menu/MenuEditController.h \
+    include/View/Widget/DSnippetItem.h \
+    include/View/Widget/Snippet.h
+
 SOURCES += src/View/Fenetre.cpp \
     src/Controller/Dialog/FolderController.cpp \
     src/Controller/Dialog/PackageController.cpp \
@@ -51,34 +53,38 @@ SOURCES += src/View/Fenetre.cpp \
     src/Model/DAttribut.cpp \
     src/Model/DMethod.cpp \
     src/Model/FilteredModel.cpp \
-	src/View/Dialog/FolderDialog.cpp \
+    src/View/Dialog/FolderDialog.cpp \
     src/View/Menu/MenuContextExplorer.cpp \
-	src/View/Widget/Console.cpp \
-	src/View/Widget/DCodeEditor.cpp \
-	src/View/Widget/JavaHighLighter.cpp \
-	src/View/Menu/MenuFile.cpp \
-	src/View/Menu/MenuNew.cpp \
-	src/View/Menu/MenuEdit.cpp \
-	src/View/Menu/MenuPref.cpp \
-	src/View/Menu/MenuHelp.cpp \
-	src/View/Dialog/ProjectDialog.cpp \
-	src/Model/DClass.cpp \
-	src/Model/DJavaFile.cpp \
-	src/Model/Model.cpp \
-	src/Model/TreeItem.cpp \
-	src/Model/DIcons.cpp \
-	src/Model/DProject.cpp \
-	src/Model/DSourceFolder.cpp \
-	src/Model/DFolder.cpp \
-	src/Model/DPackage.cpp \
-	src/Compiler/NaiveAnalyzer.cpp \
-	src/Compiler/JavaFileReader.cpp \
-	src/Controller/Controller.cpp \
-	src/View/Dialog/PackageDialog.cpp \
-	src/View/Dialog/ClassDialog.cpp \
-	src/Controller/Dialog/ProjectController.cpp \
-	src/Controller/Dialog/ClassController.cpp
-		
+    src/View/Widget/Console.cpp \
+    src/View/Widget/DCodeEditor.cpp \
+    src/View/Widget/JavaHighLighter.cpp \
+    src/View/Menu/MenuFile.cpp \
+    src/View/Menu/MenuNew.cpp \
+    src/View/Menu/MenuEdit.cpp \
+    src/View/Menu/MenuPref.cpp \
+    src/View/Menu/MenuHelp.cpp \
+    src/View/Dialog/ProjectDialog.cpp \
+    src/Model/DClass.cpp \
+    src/Model/DJavaFile.cpp \
+    src/Model/Model.cpp \
+    src/Model/TreeItem.cpp \
+    src/Model/DIcons.cpp \
+    src/Model/DProject.cpp \
+    src/Model/DSourceFolder.cpp \
+    src/Model/DFolder.cpp \
+    src/Model/DPackage.cpp \
+    src/Compiler/NaiveAnalyzer.cpp \
+    src/Compiler/JavaFileReader.cpp \
+    src/Controller/Controller.cpp \
+    src/View/Dialog/PackageDialog.cpp \
+    src/View/Dialog/ClassDialog.cpp \
+    src/Controller/Dialog/ProjectController.cpp \
+    src/Controller/Dialog/ClassController.cpp \
+    src/Controller/Widget/SnippetController.cpp \
+    src/Controller/Menu/MenuEditController.cpp \
+    src/View/Widget/DSnippetItem.cpp \
+    src/View/Widget/Snippet.cpp
+
 test_conf {
 	TARGET = my_app_test
 	QT += testlib
