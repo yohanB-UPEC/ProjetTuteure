@@ -19,11 +19,14 @@ class DCodeEditor : public QPlainTextEdit {
 		QWidget *leftArea;
         CodeEditorController cec;
         JavaHighLighter *highlighter;
-        void highlightCouple(QString left, QString right);
+        void highlightCoupleNext(QString left, QString right);
+        void highlightCouplePrev(QString left, QString right);
+        QMap<int, QString> map;
 
 		
 	protected:
-		void resizeEvent(QResizeEvent *event);
+        void resizeEvent(QResizeEvent *event);
+        void paintEvent(QPaintEvent* event);
 		
 	public slots:
 		void leftAreaWidthUpdate();

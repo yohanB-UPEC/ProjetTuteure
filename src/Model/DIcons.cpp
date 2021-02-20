@@ -11,6 +11,7 @@ QIcon DIcons::src_folder;
 QIcon DIcons::add;
 QIcon DIcons::copy;
 QIcon DIcons::modify;
+QIcon DIcons::remove;
 
 void DIcons::init(){
 	DIcons::logo.addFile(":/res/icons/logo.png");
@@ -25,4 +26,5 @@ void DIcons::init(){
     DIcons::add.addFile(":/res/icons/add.png");
     DIcons::copy.addFile(":/res/icons/copy.png");
     DIcons::modify.addFile(":/res/icons/modify.png");
+    DIcons::remove.addFile(":/res/icons/delete.png");
 }

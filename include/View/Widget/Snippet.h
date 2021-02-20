@@ -36,6 +36,7 @@ class Snippet : public QWidget {
         void validate(QString nomSnippet);
         void copyFile(QString name);
         void modifyFile(QString name);
+        void deleteFile(QString name);
 };
 
 #endif

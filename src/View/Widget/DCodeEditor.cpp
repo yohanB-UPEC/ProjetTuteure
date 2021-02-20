@@ -14,7 +14,75 @@ DCodeEditor::DCodeEditor(TreeItem *item, QWidget *parent) : QPlainTextEdit(paren
 	leftAreaWidthUpdate();
 }
 
-void DCodeEditor::highlightCouple(QString left, QString right){
+void DCodeEditor::highlightCouplePrev(QString left, QString right){
+    int pos = this->textCursor().positionInBlock();
+    if(pos >= this->textCursor().block().text().size() || pos < 0) return;
+    QChar suivChar = this->textCursor().block().text().at(pos);
+    if(suivChar != right) return;
+    QTextBlock next = this->textCursor().block();
+    int count = 0, index = -1;
+    while(1){
+        QString str = next.text();
+        for(; pos >= 0; pos--){
+            if(str[pos] == left){
+                count++;
+            }
+            else if(str[pos] == right)
+                count--;
+            if(count == 0){
+                index = next.position() + pos;
+                break;
+            }
+        }
+        if(count == 0) break;
+        if(next == this->document()->begin()){
+            if(index == -1){
+                //map.insert(this->textCursor().position(), "expected " + left);
+                break;
+            }
+        }
+        pos = next.previous().text().length()-1;
+        next = next.previous();
+    }
+    if(index == -1){
+        qDebug() << "yes";
+        map.insert(this->textCursor().position(), "expected " + left);
+        return;
+    }
+    QList<QTextEdit::ExtraSelection> extraSelections;
+    QTextEdit::ExtraSelection selection;
+
+    selection.format.setForeground(Qt::red);
+    selection.format.setBackground(Qt::black);
+    selection.cursor = textCursor();
+    selection.cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+
+    QTextEdit::ExtraSelection selection2;
+
+    selection2.format = selection.format;
+    selection2.cursor = textCursor();
+    selection2.cursor.setPosition(index, QTextCursor::MoveAnchor);
+    selection2.cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+    extraSelections.append(selection2);
+
+    extraSelections.append(selection);
+    setExtraSelections(extraSelections);
+}
+
+void DCodeEditor::paintEvent(QPaintEvent* event){
+    QPlainTextEdit::paintEvent(event);
+    QPainter painter(viewport());
+    painter.setPen(Qt::red);
+    painter.setFont(QFont("Arial", 15));
+    //qDebug() << map.size() << " str = " << map.value(0);
+    /*QMap<int, QString>::iterator iter = map.begin();
+    while(iter != map.end()){
+        //qDebug() << iter.value();
+        painter.drawText(100, 100, iter.value());
+    }*/
+}
+
+void DCodeEditor::highlightCoupleNext(QString left, QString right){
     int pos = this->textCursor().positionInBlock();
     if(pos >= this->textCursor().block().text().size()) return;
     QChar suivChar = this->textCursor().block().text().at(pos);
@@ -43,7 +111,6 @@ void DCodeEditor::highlightCouple(QString left, QString right){
 
     selection.format.setForeground(Qt::red);
     selection.format.setBackground(Qt::black);
-    selection.cursor.select(QTextCursor::Document);
     selection.cursor = textCursor();
     selection.cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
 
@@ -51,7 +118,6 @@ void DCodeEditor::highlightCouple(QString left, QString right){
 
     selection2.format = selection.format;
     selection2.cursor = textCursor();
-    selection2.cursor.select(QTextCursor::Document);
     selection2.cursor.setPosition(index, QTextCursor::MoveAnchor);
     selection2.cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
     extraSelections.append(selection2);
@@ -61,9 +127,12 @@ void DCodeEditor::highlightCouple(QString left, QString right){
 }
 
 void DCodeEditor::highlightCouples(){
-    highlightCouple("{", "}");
-    highlightCouple("(", ")");
-    highlightCouple("[", "]");
+    highlightCoupleNext("{", "}");
+    highlightCoupleNext("(", ")");
+    highlightCoupleNext("[", "]");
+    highlightCouplePrev("{", "}");
+    highlightCouplePrev("(", ")");
+    highlightCouplePrev("[", "]");
 }
 
 void DCodeEditor::keyPressEvent(QKeyEvent *event) {
@@ -80,6 +149,15 @@ void DCodeEditor::keyPressEvent(QKeyEvent *event) {
         this->insertPlainText(")");
         this->moveCursor(QTextCursor::PreviousCharacter);
     }
+    if(event->key() == Qt::Key_Apostrophe){
+        this->insertPlainText("'");
+        this->moveCursor(QTextCursor::PreviousCharacter);
+    }
+    if(event->key() == Qt::Key_QuoteDbl){
+        this->insertPlainText("\"");
+        this->moveCursor(QTextCursor::PreviousCharacter);
+    }
+
     if(event->key() == Qt::Key_BracketLeft){
         this->insertPlainText("]");
         this->moveCursor(QTextCursor::PreviousCharacter);
@@ -96,6 +174,12 @@ void DCodeEditor::keyPressEvent(QKeyEvent *event) {
             this->textCursor().deleteChar();
         }
         if(!suivChar.isNull() && !prevChar.isNull() && prevChar == '{' && suivChar == '}'){
+            this->textCursor().deleteChar();
+        }
+        if(!suivChar.isNull() && !prevChar.isNull() && prevChar == '\'' && suivChar == '\''){
+            this->textCursor().deleteChar();
+        }
+        if(!suivChar.isNull() && !prevChar.isNull() && prevChar == '\"' && suivChar == '\"'){
             this->textCursor().deleteChar();
         }
     }
@@ -163,7 +247,7 @@ void DCodeEditor::leftAreaPaintEvent(QPaintEvent *event){
 	QRect rect = blockBoundingGeometry(qtb).translated(contentOffset()).toRect();
 	while(qtb.isValid() && rect.y() <= event->rect().bottom()){	
 		if(qtb.isVisible() && rect.bottom() >= event->rect().top() ){
-			painter.drawText(0,rect.y(),leftArea->width(),fontMetrics().height(),Qt::AlignRight,QString::number(qtb.blockNumber()+1)+" ");						
+            painter.drawText(0,rect.y(),leftArea->width(),fontMetrics().height(),Qt::AlignRight,QString::number(qtb.blockNumber()+1)+" ");
 		}
 		qtb = qtb.next();
 		rect = blockBoundingGeometry(qtb).translated(contentOffset()).toRect();

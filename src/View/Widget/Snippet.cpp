@@ -104,6 +104,7 @@ void Snippet::addToList(QString snippetname){
 
     connect(dlistItem,SIGNAL(sig(QString)),this,SLOT(copyFile(QString)));
     connect(dlistItem,SIGNAL(sig_modify(QString)),this,SLOT(modifyFile(QString)));
+    connect(dlistItem,SIGNAL(sig_delete(QString)),this,SLOT(deleteFile(QString)));
 }
 
 void Snippet::copyFile(QString name){
@@ -158,6 +159,25 @@ void Snippet::modifyFile(QString name){
     }
     QTextStream flux(&file);
     editor->appendPlainText(flux.readAll());
+}
+
+void Snippet::deleteFile(QString name){
+    QDirIterator it("Snippets");
+    while(it.hasNext()){
+        QFile file(it.next());
+        QFileInfo info(file);
+        QString filename = info.baseName();
+        if(filename == name){
+            qDebug() << name;
+            file.remove();
+            for(int i = 0; i < listWidget->count(); i++){
+                QListWidgetItem *item = listWidget->item(i);
+                item->setHidden(true);
+            }
+            getList();
+            return;
+        }
+    }
 }
 
 void Snippet::validate(QString nomSnippet){

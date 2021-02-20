@@ -12,5 +12,6 @@
 	<file>res/icons/add.png</file>
 	<file>res/icons/modify.png</file>
 	<file>res/icons/copy.png</file>
+	<file>res/icons/delete.png</file>
 </qresource>
 </RCC>
