@@ -14,23 +14,20 @@ DCodeEditor::DCodeEditor(TreeItem *item, QWidget *parent) : QPlainTextEdit(paren
 	leftAreaWidthUpdate();
 }
 
-void DCodeEditor::highlightCouples(){
-    qDebug() << "on rentre";
+void DCodeEditor::highlightCouple(QString left, QString right){
     int pos = this->textCursor().positionInBlock();
     if(pos >= this->textCursor().block().text().size()) return;
     QChar suivChar = this->textCursor().block().text().at(pos);
-    if(suivChar != "{") return;
-    qDebug() << "on rentre1";
+    if(suivChar != left) return;
+
     QTextBlock next = this->textCursor().block();
     int count = 0, index = -1;
     while(next != this->document()->end()){
         QString str = next.text();
-        qDebug() << "nouvelle ligne";
         for(; pos < str.length(); pos++){
-            qDebug() << "on rentre2 = " << str[pos];
-            if(str[pos] == "{")
+            if(str[pos] == left)
                 count++;
-            else if(str[pos] == "}")
+            else if(str[pos] == right)
                 count--;
             if(count == 0){
                 index = next.position() + pos;
@@ -38,14 +35,10 @@ void DCodeEditor::highlightCouples(){
             }
         }
         if(count == 0) break;
-        qDebug() << "on rentre3";
         next = next.next();
         pos = 0;
     }
-    qDebug() << "on rentre4";
     QList<QTextEdit::ExtraSelection> extraSelections;
-
-
     QTextEdit::ExtraSelection selection;
 
     selection.format.setForeground(Qt::red);
@@ -65,6 +58,12 @@ void DCodeEditor::highlightCouples(){
 
     extraSelections.append(selection);
     setExtraSelections(extraSelections);
+}
+
+void DCodeEditor::highlightCouples(){
+    highlightCouple("{", "}");
+    highlightCouple("(", ")");
+    highlightCouple("[", "]");
 }
 
 void DCodeEditor::keyPressEvent(QKeyEvent *event) {

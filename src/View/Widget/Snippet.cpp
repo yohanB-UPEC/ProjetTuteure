@@ -127,11 +127,21 @@ void Snippet::copyFile(QString name){
     editor->appendPlainText(content);
     editor->selectAll();
     editor->copy();
+    QMessageBox msgBox(QMessageBox::Information, "fichier copié", "fichier copié");
+    msgBox.exec();
 }
 
 void Snippet::modifyFile(QString name){
     DCodeEditor *editor = new DCodeEditor();
+    int i = 0;
+    for(; i < this->fen->getCentral()->count(); i++){
+        if(this->fen->getCentral()->tabText(i) == (name + ".java")){
+            this->fen->getCentral()->setCurrentWidget(this->fen->getCentral()->widget(i));
+            return;
+        }
+    }
     this->fen->getCentral()->addTab(editor, name + ".java");
+    this->fen->getCentral()->setCurrentWidget(this->fen->getCentral()->widget(i));
     QFile file("Snippets/" + name + ".java");
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
         for(int i = 0; i < listWidget->count(); i++){
@@ -149,7 +159,6 @@ void Snippet::modifyFile(QString name){
     QTextStream flux(&file);
     editor->appendPlainText(flux.readAll());
 }
-
 
 void Snippet::validate(QString nomSnippet){
     if(nomSnippet.size() > 0 && caracteresSpeciaux(nomSnippet))

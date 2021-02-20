@@ -14,6 +14,7 @@ void MenuEditController::s_SearchPrev(){
         return;
     }
     DCodeEditor *editor = (DCodeEditor*) m_me->fen->getCentral()->currentWidget();
+    if(editor == nullptr) return;
     if(m_me->extraSelections.size() > 0){
         m_me->extraSelections.clear();
     }
@@ -63,6 +64,7 @@ void MenuEditController::s_SearchNext(){
         return;
     }
     DCodeEditor *editor = (DCodeEditor*) m_me->fen->getCentral()->currentWidget();
+    if(editor == nullptr) return;
     if(m_me->extraSelections.size() > 0){
         m_me->extraSelections.clear();
     }
@@ -108,42 +110,50 @@ void MenuEditController::s_SearchNext(){
 
 void MenuEditController::s_Undo(){
     DCodeEditor *editor = (DCodeEditor*) m_me->fen->getCentral()->currentWidget();
+    if(editor == nullptr) return;
     editor->undo();
 }
 
 void MenuEditController::s_Redo(){
     DCodeEditor *editor = (DCodeEditor*) m_me->fen->getCentral()->currentWidget();
+    if(editor == nullptr) return;
     editor->redo();
 }
 
 void MenuEditController::s_Cut(){
     DCodeEditor *editor = (DCodeEditor*) m_me->fen->getCentral()->currentWidget();
+    if(editor == nullptr) return;
     editor->cut();
 }
 
 void MenuEditController::s_Copy(){
     DCodeEditor *editor = (DCodeEditor*) m_me->fen->getCentral()->currentWidget();
+    if(editor == nullptr) return;
     editor->copy();
 }
 
 void MenuEditController::s_Paste(){
     DCodeEditor *editor = (DCodeEditor*) m_me->fen->getCentral()->currentWidget();
+    if(editor == nullptr) return;
     editor->paste();
 }
 
 void MenuEditController::s_Suppr(){
     DCodeEditor *editor = (DCodeEditor*) m_me->fen->getCentral()->currentWidget();
+    if(editor == nullptr) return;
     editor->clear();
 }
 
 
 void MenuEditController::s_SelectAll(){
     DCodeEditor *editor = (DCodeEditor*) m_me->fen->getCentral()->currentWidget();
+    if(editor == nullptr) return;
     editor->selectAll();
 }
 
 void MenuEditController::find(QString mot){
     DCodeEditor *editor = (DCodeEditor*) m_me->fen->getCentral()->currentWidget();
+    if(editor == nullptr) return;
     editor->moveCursor(QTextCursor::Start);
     QColor color(Qt::yellow);
     m_me->motTmp = mot;
@@ -217,6 +227,7 @@ void MenuEditController::s_Search(){
     h2->addWidget(next);
 
     QLabel *lab2 = new QLabel();
+    lab2->setStyleSheet("padding-bottom: 5px; border-style: outset; border-bottom-width: 2px; border-bottom-color: rgb(127,127,255);");
     lab2->setText("\nMode de recherche");
     QRadioButton *radio1 = new QRadioButton(tr("Mode normal"));
     m_me->radio2 = new QRadioButton(tr("Expression régulière"));
@@ -285,9 +296,11 @@ void MenuEditController::s_Replace(){
 void MenuEditController::replaceAll(){
     if(m_me->newMot->text().isEmpty()) return;
     DCodeEditor *editor = (DCodeEditor*) m_me->fen->getCentral()->currentWidget();
+    if(editor == nullptr) return;
     QList<QTextEdit::ExtraSelection> extraSelections;
     editor->moveCursor(QTextCursor::Start);
     QColor color(Qt::yellow);
+    bool isExist = false;
     while(editor->find(m_me->mot->text())){
         QTextEdit::ExtraSelection extra;
         extra.format.setBackground(color);
@@ -295,9 +308,16 @@ void MenuEditController::replaceAll(){
         extraSelections.append(extra);
         QTextCursor qc = editor->textCursor();
         if(qc.hasSelection()){
+            isExist = true;
             qc.insertText(m_me->newMot->text());
         } else
             break;
+    }
+    if(!isExist){
+        QMessageBox msgBox(QMessageBox::Warning, "Mot inexistant", "Le mot n'existe pas.");
+        msgBox.exec();
+        s_Replace();
+        return;
     }
     editor->setExtraSelections(extraSelections);
 }

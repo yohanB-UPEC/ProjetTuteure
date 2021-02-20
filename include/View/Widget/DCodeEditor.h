@@ -19,6 +19,7 @@ class DCodeEditor : public QPlainTextEdit {
 		QWidget *leftArea;
         CodeEditorController cec;
         JavaHighLighter *highlighter;
+        void highlightCouple(QString left, QString right);
 
 		
 	protected:
