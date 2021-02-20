@@ -6,14 +6,75 @@ DCodeEditor::DCodeEditor(TreeItem *item, QWidget *parent) : QPlainTextEdit(paren
     this->setFont(font);
 
     highlighter = new JavaHighLighter(this->document());
-	this->setTabStopDistance(32);
+    this->setTabStopDistance(this->fontMetrics().horizontalAdvance(' ') * 4);
 	connect(this,SIGNAL(blockCountChanged(int)),this,SLOT(leftAreaWidthUpdate()));
 	connect(this,SIGNAL(updateRequest(QRect,int)),this,SLOT(scrollLeftAreaUpdate(QRect,int)));
     connect(this,SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+    connect(this,SIGNAL(cursorPositionChanged()), this, SLOT(highlightCouples()));
 	leftAreaWidthUpdate();
 }
 
+void DCodeEditor::highlightCouples(){
+    qDebug() << "on rentre";
+    int pos = this->textCursor().positionInBlock();
+    if(pos >= this->textCursor().block().text().size()) return;
+    QChar suivChar = this->textCursor().block().text().at(pos);
+    if(suivChar != "{") return;
+    qDebug() << "on rentre1";
+    QTextBlock next = this->textCursor().block();
+    int count = 0, index = -1;
+    while(next != this->document()->end()){
+        QString str = next.text();
+        qDebug() << "nouvelle ligne";
+        for(; pos < str.length(); pos++){
+            qDebug() << "on rentre2 = " << str[pos];
+            if(str[pos] == "{")
+                count++;
+            else if(str[pos] == "}")
+                count--;
+            if(count == 0){
+                index = next.position() + pos;
+                break;
+            }
+        }
+        if(count == 0) break;
+        qDebug() << "on rentre3";
+        next = next.next();
+        pos = 0;
+    }
+    qDebug() << "on rentre4";
+    QList<QTextEdit::ExtraSelection> extraSelections;
+
+
+    QTextEdit::ExtraSelection selection;
+
+    selection.format.setForeground(Qt::red);
+    selection.format.setBackground(Qt::black);
+    selection.cursor.select(QTextCursor::Document);
+    selection.cursor = textCursor();
+    selection.cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+
+    QTextEdit::ExtraSelection selection2;
+
+    selection2.format = selection.format;
+    selection2.cursor = textCursor();
+    selection2.cursor.select(QTextCursor::Document);
+    selection2.cursor.setPosition(index, QTextCursor::MoveAnchor);
+    selection2.cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+    extraSelections.append(selection2);
+
+    extraSelections.append(selection);
+    setExtraSelections(extraSelections);
+}
+
 void DCodeEditor::keyPressEvent(QKeyEvent *event) {
+    int pos = this->textCursor().positionInBlock();
+    QChar prevChar;
+    if(pos > 0)
+        prevChar = this->textCursor().block().text().at(pos-1);
+    QChar suivChar;
+    if(pos < this->textCursor().block().text().size())
+        suivChar = this->textCursor().block().text().at(pos);
     QPlainTextEdit::keyPressEvent(event);
     int nombreTabulations = 0;
     if(event->key() == Qt::Key_ParenLeft){
@@ -24,38 +85,61 @@ void DCodeEditor::keyPressEvent(QKeyEvent *event) {
         this->insertPlainText("]");
         this->moveCursor(QTextCursor::PreviousCharacter);
     }
-    /*if(event->key() == Qt::Key_BraceLeft){
+    if(event->key() == Qt::Key_BraceLeft){
         this->insertPlainText("}");
         this->moveCursor(QTextCursor::PreviousCharacter);
-    }*/
+    }
+    if(event->key() == Qt::Key_Backspace){
+        if(!suivChar.isNull() && !prevChar.isNull() && prevChar == '(' && suivChar == ')'){
+            this->textCursor().deleteChar();
+        }
+        if(!suivChar.isNull() && !prevChar.isNull() && prevChar == '[' && suivChar == ']'){
+            this->textCursor().deleteChar();
+        }
+        if(!suivChar.isNull() && !prevChar.isNull() && prevChar == '{' && suivChar == '}'){
+            this->textCursor().deleteChar();
+        }
+    }
     if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return) {
-        QStringList lignes = this->toPlainText().split('\n');
-            int positionCurseur = this->textCursor().position();
-            int indexLigneCourante = -1;
-            int nombreCaracteres = 0;
-
-            for (int i = 0; i < lignes.size(); i++){
-                nombreCaracteres += lignes[i].size();
-                if (nombreCaracteres-1 == positionCurseur){
-                    indexLigneCourante = i;
-                    break;
+        QString prevLine = this->textCursor().block().previous().text();
+        int pos = this->textCursor().positionInBlock();
+        if(prevLine.isEmpty()) return;
+        int i = 0, nbSpace = 0;
+        while(i < prevLine.length() && prevLine[i] == "\t"){
+            nombreTabulations++;
+            i++;
+        }
+        i = 0;
+        if(nombreTabulations == 0){
+            while(i < prevLine.length() && prevLine[i] == " "){
+                nbSpace++;
+                if(nbSpace == 4){
+                    nombreTabulations++;
+                    nbSpace = 0;
                 }
+                i++;
             }
-            if (indexLigneCourante == -1)
-                indexLigneCourante = lignes.size()-1;
+        }
+        if(prevLine.trimmed().endsWith("{")){
+            nombreTabulations++;
+        }
 
-            nombreTabulations = lignes[indexLigneCourante-1].count('\t');
+        QChar prevChar = this->textCursor().block().previous().text().at(this->textCursor().block().previous().text().size()-1);
+        QChar suivChar;
+        if(pos < this->textCursor().block().text().size())
+            suivChar = this->textCursor().block().text().at(pos);
 
-            if(lignes[indexLigneCourante-1].contains('{'))
-                nombreTabulations++;
-
-            else if(lignes[indexLigneCourante-1].contains('}'))
-                nombreTabulations--;
-
-            for (int i = 0; i < nombreTabulations; i++)
+        for(int j = 0; j < nombreTabulations; j++){
+            this->insertPlainText("\t");
+        }
+        if(!suivChar.isNull() && prevChar == '{' && suivChar == '}'){
+            this->insertPlainText("\n");
+            for(int j = 0; j < nombreTabulations-1; j++){
                 this->insertPlainText("\t");
-            //this->moveCursor(QTextCursor::PreviousBlock);
-
+            }
+            this->moveCursor(QTextCursor::PreviousBlock);
+            this->moveCursor(QTextCursor::EndOfBlock);
+        }
     }
 }
 

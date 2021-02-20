@@ -9,8 +9,7 @@ Snippet::Snippet(Fenetre* fen, QWidget *parent): QWidget(parent){
     input = new QLineEdit();
     input->setPlaceholderText("Recherchez...");
     input->setStyleSheet("border-style: outset; border-width: 2px; border-color: darkgrey; border-radius: 10px; color: black;");
-    QIcon addI("res/icons/add.png");
-    add = new QPushButton(addI, "");
+    add = new QPushButton(DIcons::add, "");
     const QSize size = QSize(40, 40);
     add->setFixedSize(size);
     add->setStyleSheet("border: none;");

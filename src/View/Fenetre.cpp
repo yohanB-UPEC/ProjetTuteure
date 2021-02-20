@@ -31,8 +31,7 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
     snippet->setWidget(new Snippet(this));
     consoles = new QDockWidget("Consoles",this);
 
-    QIcon addI("res/icons/add.png");
-    newCmd = new QPushButton(addI, "");
+    newCmd = new QPushButton(DIcons::add, "");
     const QSize size = QSize(20, 20);
     newCmd->setFixedSize(size);
     newCmd->setStyleSheet("border: none;");

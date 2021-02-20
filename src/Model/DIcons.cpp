@@ -8,6 +8,9 @@ QIcon DIcons::java_file;
 QIcon DIcons::package;
 QIcon DIcons::folder;
 QIcon DIcons::src_folder;
+QIcon DIcons::add;
+QIcon DIcons::copy;
+QIcon DIcons::modify;
 
 void DIcons::init(){
 	DIcons::logo.addFile(":/res/icons/logo.png");
@@ -19,4 +22,7 @@ void DIcons::init(){
 	DIcons::projet.addFile(":/res/icons/projet.png");
 	DIcons::folder.addFile(":/res/icons/folder.png");
 	DIcons::src_folder.addFile(":/res/icons/java_folder.png");
+    DIcons::add.addFile(":/res/icons/add.png");
+    DIcons::copy.addFile(":/res/icons/copy.png");
+    DIcons::modify.addFile(":/res/icons/modify.png");
 }

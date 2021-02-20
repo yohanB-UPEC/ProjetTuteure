@@ -2,6 +2,7 @@
 #define DSNIPPETITEM_H
 
 #include <QtWidgets>
+#include "include/Model/DIcons.h"
 
 class DSnippetItem : public QWidget {
     Q_OBJECT

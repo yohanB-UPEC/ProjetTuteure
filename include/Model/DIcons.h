@@ -15,6 +15,9 @@ class DIcons{
 		static QIcon package;
 		static QIcon folder;
 		static QIcon src_folder;
+        static QIcon add;
+        static QIcon copy;
+        static QIcon modify;
 		
 		
 		
