@@ -16,6 +16,7 @@ class CodeEditorController : public QObject {
         bool isItem(TreeItem *test);
     private slots:
         void rename(QString path);
+        void fileSuppr();
     private:
         TreeItem *m_item;
         DCodeEditor *m_view;

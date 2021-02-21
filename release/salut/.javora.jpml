@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Root>
-    <DProject label="salut" path="C:/Users/Yohan/Documents/DUT2/C++/ProjetTuteure/release/salut">
+    <DProject label="salut" path="C:/Users/Yohan/Documents/DUT2/C++/ProjetTuteure/release/salut" id="39fe2ee2-76ee-403b-9ebd-6e0988a923e1">
         <DSourceFolder label="src">
-            <DPackage label="fr.yohan.premier">
+            <DPackage label="fr.sylarades.test">
                 <DJavaFile label="Main.java"/>
                 <DJavaFile label="Location.java"/>
-                <DJavaFile label="Bonbon.java"/>
             </DPackage>
-            <DPackage label="fr.sylarAdes.test2"/>
         </DSourceFolder>
         <DFolder label="res"/>
         <TreeItem label="Makefile"/>

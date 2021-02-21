@@ -12,6 +12,7 @@ class MenuContextExplorer : public QMenu{
 
     public slots:
         void s_rename();
+        void s_suppr();
     private:
         QModelIndex m_item;
         Model *m_model;

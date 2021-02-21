@@ -21,13 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ClassController_t {
-<<<<<<< HEAD
     QByteArrayData data[11];
     char stringdata0[123];
-=======
-    QByteArrayData data[7];
-    char stringdata0[76];
->>>>>>> Jeremy
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,7 +34,6 @@ static const qt_meta_stringdata_ClassController_t qt_meta_stringdata_ClassContro
 QT_MOC_LITERAL(0, 0, 15), // "ClassController"
 QT_MOC_LITERAL(1, 16, 8), // "validate"
 QT_MOC_LITERAL(2, 25, 0), // ""
-<<<<<<< HEAD
 QT_MOC_LITERAL(3, 26, 14), // "selectLocation"
 QT_MOC_LITERAL(4, 41, 14), // "QItemSelection"
 QT_MOC_LITERAL(5, 56, 8), // "selected"
@@ -54,16 +48,6 @@ QT_MOC_LITERAL(10, 111, 11) // "createClass"
     "QItemSelection\0selected\0deselected\0"
     "validateLocation\0validateName\0text\0"
     "createClass"
-=======
-QT_MOC_LITERAL(3, 26, 18), // "caracteresSpeciaux"
-QT_MOC_LITERAL(4, 45, 9), // "isExisted"
-QT_MOC_LITERAL(5, 55, 9), // "parcourir"
-QT_MOC_LITERAL(6, 65, 10) // "parcourir2"
-
-    },
-    "ClassController\0validate\0\0caracteresSpeciaux\0"
-    "isExisted\0parcourir\0parcourir2"
->>>>>>> Jeremy
 };
 #undef QT_MOC_LITERAL
 
@@ -82,7 +66,6 @@ static const uint qt_meta_data_ClassController[] = {
 
  // slots: name, argc, parameters, tag, flags
        1,    0,   39,    2, 0x0a /* Public */,
-<<<<<<< HEAD
        3,    2,   40,    2, 0x0a /* Public */,
        7,    0,   45,    2, 0x0a /* Public */,
        8,    1,   46,    2, 0x0a /* Public */,
@@ -93,18 +76,6 @@ static const uint qt_meta_data_ClassController[] = {
     QMetaType::Void, 0x80000000 | 4, 0x80000000 | 4,    5,    6,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,    9,
-=======
-       3,    0,   40,    2, 0x0a /* Public */,
-       4,    0,   41,    2, 0x0a /* Public */,
-       5,    0,   42,    2, 0x0a /* Public */,
-       6,    0,   43,    2, 0x0a /* Public */,
-
- // slots: parameters
-    QMetaType::Void,
-    QMetaType::Bool,
-    QMetaType::Bool,
-    QMetaType::Void,
->>>>>>> Jeremy
     QMetaType::Void,
 
        0        // eod
@@ -117,7 +88,6 @@ void ClassController::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->validate(); break;
-<<<<<<< HEAD
         case 1: _t->selectLocation((*reinterpret_cast< const QItemSelection(*)>(_a[1])),(*reinterpret_cast< const QItemSelection(*)>(_a[2]))); break;
         case 2: _t->validateLocation(); break;
         case 3: _t->validateName((*reinterpret_cast< const QString(*)>(_a[1]))); break;
@@ -136,16 +106,6 @@ void ClassController::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int 
             }
             break;
         }
-=======
-        case 1: { bool _r = _t->caracteresSpeciaux();
-            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 2: { bool _r = _t->isExisted();
-            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 3: _t->parcourir(); break;
-        case 4: _t->parcourir2(); break;
-        default: ;
-        }
->>>>>>> Jeremy
     }
 }
 
@@ -183,11 +143,7 @@ int ClassController::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         if (_id < 5)
-<<<<<<< HEAD
             qt_static_metacall(this, _c, _id, _a);
-=======
-            *reinterpret_cast<int*>(_a[0]) = -1;
->>>>>>> Jeremy
         _id -= 5;
     }
     return _id;

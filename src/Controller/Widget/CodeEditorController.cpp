@@ -27,6 +27,7 @@ void CodeEditorController::open(){
     m_view->setUndoRedoEnabled(true);
     m_view->document()->setModified(false);
     connect(m_item,SIGNAL(rename(QString)),this,SLOT(rename(QString)));
+    connect(m_item,SIGNAL(suppr()),this,SLOT(fileSuppr()));
     qDebug() << "open";
 }
 
@@ -60,6 +61,7 @@ bool CodeEditorController::close(){
     }else if(res == QMessageBox::Cancel){
         return false;
     }
+
     return true;
 }
 
@@ -71,10 +73,17 @@ bool CodeEditorController::isItem(TreeItem *test){
 }
 
 void CodeEditorController::rename(QString path){
-    qDebug() << "CodeEditorController::rename  " << path;
     m_path = path;
     if(typeid(*(m_view->parentWidget()->parentWidget())) == typeid(QTabWidget)){
         QTabWidget* tab = (QTabWidget*)m_view->parentWidget()->parentWidget();
         tab->setTabText(tab->indexOf(m_view),m_item->label());
+    }
+}
+
+void CodeEditorController::fileSuppr(){
+    if(typeid(*(m_view->parentWidget()->parentWidget())) == typeid(QTabWidget)){
+        QTabWidget* tab = (QTabWidget*)m_view->parentWidget()->parentWidget();
+        tab->removeTab(tab->indexOf(m_view));
+        delete m_view;
     }
 }

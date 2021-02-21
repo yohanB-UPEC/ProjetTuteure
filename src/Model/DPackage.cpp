@@ -79,7 +79,7 @@ bool DPackage::setLabel(QString label){
     for(int i = 0; i < list.size();i++){
         QFile::rename(list[i].absoluteFilePath(),nPath+"/"+list[i].fileName());
     }
-    int tmp = m_label.count(".");
+    int tmp = m_label.count(".")+1;
     while(tmp > 0 && dir.isEmpty()){
         QString suppr(dir.dirName());
         dir.cd("..");
@@ -91,4 +91,23 @@ bool DPackage::setLabel(QString label){
     emit rename(nPath);
     this->propagRename();
     return true;
+}
+
+void DPackage::removeFiles(){
+    Q_CHECK_PTR(m_parent);
+    QDir dir(getPath());
+    if(!dir.exists()){
+        return;
+    }
+    qDebug() << "suppression du package";
+    int tmp = m_label.count(".");
+    dir.removeRecursively();
+    dir.cd("..");
+    while(tmp >0 && dir.isEmpty()){
+        QString name(dir.dirName());
+        qDebug() << "remove le dossier " << name;
+        dir.cd("..");
+        dir.rmdir(name);
+        tmp--;
+    }
 }

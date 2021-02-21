@@ -14,6 +14,10 @@ class DPackage : public TreeItem {
 		void save(QXmlStreamWriter *out=nullptr);
         void create(QString *path=nullptr);
         bool setLabel(QString label);
+
+    protected:
+        void removeFiles();
+
 	private:
 	
 };

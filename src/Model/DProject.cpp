@@ -1,7 +1,7 @@
 #include "include/Model/DProject.h"
 
-DProject::DProject(QString label, QString path): TreeItem(label), m_path(path){
-	
+DProject::DProject(QString label, QString path): TreeItem(label), m_path(path),m_id(QUuid::createUuid().toString(QUuid::WithoutBraces)){
+    qDebug() << "uuid= " << getId();
 }
 DProject::DProject(QString path): TreeItem(), m_path(path){
 	QDomDocument doc(".javora");
@@ -20,6 +20,7 @@ DProject::DProject(QString path): TreeItem(), m_path(path){
 	
 	QDomElement root = doc.documentElement();
 	QDomElement projet = root.lastChildElement("DProject");
+    m_id = projet.attribute("id",QUuid::createUuid().toString(QUuid::WithoutBraces));
 	m_label = projet.attribute("label","inconnue");
 	QDomNode n = projet.firstChild();
 	while(!n.isNull()){
@@ -72,6 +73,7 @@ void DProject::save(QXmlStreamWriter *out){
 	out->writeStartElement("DProject");
 	out->writeAttribute("label",m_label);
 	out->writeAttribute("path",m_path);
+    out->writeAttribute("id",m_id);
 	
 	for(int i = 0; i < m_children.size();i++){
 		m_children.at(i)->save(out);
@@ -91,4 +93,12 @@ bool DProject::setLabel(QString label){
         QFileInfo fi(m_path);
         m_path = fi.path()+"/"+m_label;
     }
+}
+
+void DProject::removeFiles(){
+    QDir dir(getPath());
+    if(!dir.exists()){
+        return;
+    }
+    dir.removeRecursively();
 }

@@ -25,6 +25,7 @@ class Model : public QAbstractItemModel{
 		bool insertRow(int row, TreeItem *item, const QModelIndex &parent = QModelIndex());
         QModelIndex getItem(QString path);
         QString getRelativePath(TreeItem* item);
+        bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex(),bool deleteFiles=false);
 	public slots:
 	
 	private:

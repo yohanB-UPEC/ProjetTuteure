@@ -32,9 +32,9 @@ void ProjectController::createProject(){
 	projet->appendChild(f);
 	projet->appendChild(makefile);
 	
-	sf->create();
-	f->create();
-	makefile->create();
+    sf->create();
+    f->create();
+    makefile->create();
 	
 	m_model->insertRow(9999,projet);
 	m_dial->accept();

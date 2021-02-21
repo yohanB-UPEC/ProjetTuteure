@@ -59,3 +59,12 @@ void DFolder::create(QString *path){
 	qDebug() << "creation du dossier " << dir.path();
 	dir.mkpath(dir.path());	
 }
+
+void DFolder::removeFiles(){
+    Q_CHECK_PTR(m_parent);
+    QDir dir(m_parent->getPath());
+    if(!dir.exists()){
+        return;
+    }
+    dir.rmdir(m_label);
+}

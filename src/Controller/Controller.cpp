@@ -33,7 +33,11 @@ void  Controller::closeEditor(int index){
     if(edit==nullptr)
         return;
     if(edit->getController().close()){
-        this->fen->getCentral()->removeTab(this->fen->getCentral()->currentIndex());
+        if(index < 0){
+            this->fen->getCentral()->removeTab(this->fen->getCentral()->currentIndex());
+        }else{
+            this->fen->getCentral()->removeTab(index);
+        }
         delete edit;
     }
 }

@@ -19,24 +19,32 @@ class TreeItem: public QObject{
         virtual bool setLabel(QString label);
         bool exist(const QString& label);
 		void appendChild(TreeItem* item, int row = 999999);
-		int row(){return (m_parent==nullptr)?m_parent->m_children.indexOf(this):0;}
+        int row(){return (m_parent!=nullptr)?m_parent->m_children.indexOf(this):0;}
 		virtual QVariant getIcon();
 		void setParent(TreeItem* parent = nullptr){this->m_parent = parent;}
 		virtual QString getPath();
 		virtual void save(QXmlStreamWriter *out=nullptr);
 		virtual void create(QString *path=nullptr);
         TreeItem* getChild(QString str);
-		
+        void removeChild(int row, bool deleteFiles );
+
+    protected:
+        virtual void removeFiles();
+
 	protected:
 		QList<TreeItem*> m_children;
 		TreeItem* m_parent;
 		QString m_label;
 
+
     signals:
         void rename(QString);
+        void suppr();
 
     protected:
         void propagRename();
+        void propagSuppr();
+
 };
 
 #endif

@@ -13,6 +13,10 @@ class DFolder : public TreeItem {
 		void save(QXmlStreamWriter *out=nullptr);
 		virtual const QString className() const;
 		void create(QString *path =nullptr);
+
+    protected:
+        void removeFiles();
+
 	private:
 	
 };

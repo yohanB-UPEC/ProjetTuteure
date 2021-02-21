@@ -19,7 +19,6 @@ void TreeItem::appendChild(TreeItem* item,int row){
 	}else{
 		this->m_children.insert(row,item);
 	}
-	
 	item->setParent(this);
 }
 
@@ -60,7 +59,7 @@ void TreeItem::create(QString *path){
 	}else{
 		file.setFile(*path+"/"+m_label);
 	}
-	
+
 	QDir dir = file.absoluteDir();
 	dir.mkpath(dir.path());	
 	qDebug() << "creation du fichier " << file.absoluteFilePath();
@@ -110,4 +109,27 @@ bool TreeItem::exist(const QString& label){
         }
     }
     return false;
+}
+
+void TreeItem::propagSuppr(){
+    QList<TreeItem*>::iterator next;
+    for(next=m_children.begin();next != m_children.end();++next){
+        emit (*next)->suppr();
+        (*next)->propagSuppr();
+    }
+}
+
+void TreeItem::removeChild(int row, bool deleteFiles){
+    TreeItem *child = this->m_children.at(row);
+    this->m_children.removeAt(row);
+    emit child->suppr();
+    child->propagSuppr();
+    if(deleteFiles){
+        child->removeFiles();
+    }
+    delete child;
+}
+
+void TreeItem::removeFiles(){
+    QFile::remove(getPath());
 }

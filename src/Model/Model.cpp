@@ -107,13 +107,13 @@ QVariant Model::headerData(int section, Qt::Orientation orientation,int role) co
 
 bool Model::insertRow(int row, TreeItem *item, const QModelIndex &parent){
 	TreeItem *p;
+    qDebug() <<"Model::insertRow ";
 	if(parent.isValid()){
 		p = (TreeItem*)parent.internalPointer();
 	}else{
 		p = &root;
 		settings.beginGroup("Projects");
-		int key = settings.allKeys().size();
-		settings.setValue(QString("pro"+key),item->getPath());
+        settings.setValue(((DProject*)item)->getId(),item->getPath());
 		settings.endGroup();
 	}
 
@@ -148,4 +148,31 @@ QString Model::getRelativePath(TreeItem* item){
         path.prepend(item->label());
     }
     return path;
+}
+
+bool Model::removeRows(int row, int count, const QModelIndex &parent,bool deleteFiles){
+    TreeItem *p;
+    if(!parent.isValid()){
+        p = &root;
+    }else{
+        p = (TreeItem*)parent.internalPointer();
+    }
+    if(p->childCount() < row+count){
+        return false;
+    }
+
+    emit beginRemoveRows(parent,row,row+count-1);
+    while(count > 0){
+        TreeItem* child = p->child(row);
+        if(typeid(*child) == typeid(DProject)){
+            settings.beginGroup("Projects");
+            settings.remove(((DProject*)child)->getId());
+            settings.endGroup();
+        }
+        p->removeChild(row,deleteFiles);
+        count--;
+    }
+    emit endRemoveRows();
+    p->save();
+    return true;
 }
