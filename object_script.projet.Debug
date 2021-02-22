@@ -7,6 +7,7 @@ debug/ClassSubElement.o
 debug/DAttribut.o
 debug/DMethod.o
 debug/FilteredModel.o
+debug/MakefileFactory.o
 debug/FolderDialog.o
 debug/MenuContextExplorer.o
 debug/Console.o

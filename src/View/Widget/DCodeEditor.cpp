@@ -1,18 +1,23 @@
 #include "include/View/Widget/DCodeEditor.h"
 
-DCodeEditor::DCodeEditor(TreeItem *item, QWidget *parent) : QPlainTextEdit(parent), cec(item,this){
-	leftArea = new LeftLineArea(this);	
+DCodeEditor::DCodeEditor(TreeItem *item, QWidget *parent) : QPlainTextEdit(parent), cec(this,item){
+    this->constructeur();
+}
+DCodeEditor::DCodeEditor(QString &path,QWidget *parent) : QPlainTextEdit(parent), cec(this,path){
+    this->constructeur();
+}
+void DCodeEditor::constructeur(){
+    leftArea = new LeftLineArea(this);
     QFont font("Consolas",14,QFont::Medium,false);
     this->setFont(font);
 
     highlighter = new JavaHighLighter(this->document());
-	this->setTabStopDistance(32);
-	connect(this,SIGNAL(blockCountChanged(int)),this,SLOT(leftAreaWidthUpdate()));
-	connect(this,SIGNAL(updateRequest(QRect,int)),this,SLOT(scrollLeftAreaUpdate(QRect,int)));
+    this->setTabStopDistance(32);
+    connect(this,SIGNAL(blockCountChanged(int)),this,SLOT(leftAreaWidthUpdate()));
+    connect(this,SIGNAL(updateRequest(QRect,int)),this,SLOT(scrollLeftAreaUpdate(QRect,int)));
     connect(this,SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
-	leftAreaWidthUpdate();
+    leftAreaWidthUpdate();
 }
-
 void DCodeEditor::keyPressEvent(QKeyEvent *event) {
     QPlainTextEdit::keyPressEvent(event);
     int nombreTabulations = 0;

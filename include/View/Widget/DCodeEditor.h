@@ -12,6 +12,7 @@ class DCodeEditor : public QPlainTextEdit {
 	
 	public:
         DCodeEditor(TreeItem *item=nullptr,QWidget *parent = nullptr);
+        DCodeEditor(QString &path,QWidget *parent = nullptr);
 		void leftAreaPaintEvent(QPaintEvent *event);
         CodeEditorController& getController(){return this->cec;}
 	
@@ -19,6 +20,7 @@ class DCodeEditor : public QPlainTextEdit {
 		QWidget *leftArea;
         CodeEditorController cec;
         JavaHighLighter *highlighter;
+        void constructeur();
 
 		
 	protected:

@@ -1,15 +1,17 @@
 #include "include/Controller/Widget/CodeEditorController.h"
 #include "include/View/Widget/DCodeEditor.h"
 
-CodeEditorController::CodeEditorController(TreeItem *item, DCodeEditor *view){
-    this->m_item = item;
-    this->m_view = view;
+CodeEditorController::CodeEditorController(DCodeEditor *view, TreeItem *item): m_item(item),m_view(view) {
     if(item != nullptr){
         m_path = item->getPath();
         open();
-
     }
-    qDebug() << "connect";
+}
+
+CodeEditorController::CodeEditorController(DCodeEditor *view, QString path):m_item(nullptr),m_view(view),m_path(path){
+   if(!m_path.isNull()){
+        open();
+   }
 }
 
 void CodeEditorController::open(){
@@ -26,9 +28,13 @@ void CodeEditorController::open(){
     file.close();
     m_view->setUndoRedoEnabled(true);
     m_view->document()->setModified(false);
-    connect(m_item,SIGNAL(rename(QString)),this,SLOT(rename(QString)));
-    connect(m_item,SIGNAL(suppr()),this,SLOT(fileSuppr()));
-    qDebug() << "open";
+    if(m_item != nullptr){
+        connect(m_item,SIGNAL(rename(QString)),this,SLOT(rename(QString)));
+        connect(m_item,SIGNAL(suppr()),this,SLOT(fileSuppr()));
+    }
+    QTextCursor cursor = m_view->textCursor();
+    cursor.movePosition(QTextCursor::Start);
+    m_view->setTextCursor(cursor);
 }
 
 void CodeEditorController::save(){
@@ -67,6 +73,15 @@ bool CodeEditorController::close(){
 
 bool CodeEditorController::isItem(TreeItem *test){
     if(test == m_item){
+        return true;
+    }
+    return false;
+}
+bool CodeEditorController::isFile(const QString file){
+    if(m_path.isNull()||m_path.isEmpty()){
+        return false;
+    }
+    if(m_path == file){
         return true;
     }
     return false;

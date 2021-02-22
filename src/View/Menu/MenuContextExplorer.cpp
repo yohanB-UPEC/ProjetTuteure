@@ -15,7 +15,7 @@ MenuContextExplorer::MenuContextExplorer(QModelIndex item, Model *model, Fenetre
     this->addSeparator();
     this->addAction("Lancer");
     this->addAction("Compiler");
-    this->addAction("Générer Makefile");
+    this->addAction("Générer Makefile",this,SLOT(s_makefile()));
 
 
 }
@@ -41,4 +41,13 @@ void MenuContextExplorer::s_suppr(){
     }
     qDebug() << "MenuContextExplorer::s_suppr  item a supprimer: " << item->label() << " num=" << item->row() << "  path: "<< item->getPath() ;
     m_model->removeRows(item->row(),1,m_item.parent(),deleteFiles);
+}
+
+void MenuContextExplorer::s_makefile(){
+    TreeItem *item = (TreeItem*)m_item.internalPointer();
+    while(typeid(*item) != typeid(DProject)){
+        item = item->parent();
+    }
+    qDebug() << "début le la creation du makefile";
+    ((DProject*)item)->createMakefile();
 }

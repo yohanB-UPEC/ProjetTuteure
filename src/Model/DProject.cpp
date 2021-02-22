@@ -8,7 +8,7 @@ DProject::DProject(QString path): TreeItem(), m_path(path){
 	QFile file(path+"/.javora.jpml");
 	if(!file.open(QIODevice::ReadOnly)){
 		qDebug() << "impossible de lire le fichier de config du projet " <<  path+"/.javora.jpml";
-		QMessageBox::critical(nullptr,"DProject::DProject(QString path): l.9","impossible de lire le fichier de configuration du projet: " +path+"/.javora.jpml");
+        QMessageBox::critical(nullptr,"DProject::DProject(QString path): l.11","impossible de lire le fichier de configuration du projet: " +path+"/.javora.jpml");
 		m_label="Error: Fichiers illisible";
 		return;
 	}
@@ -101,4 +101,9 @@ void DProject::removeFiles(){
         return;
     }
     dir.removeRecursively();
+}
+
+void DProject::createMakefile(){
+    MakefileFactory mff(this);
+    mff.writeMakefile();
 }

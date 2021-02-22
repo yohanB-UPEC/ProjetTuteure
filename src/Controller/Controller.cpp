@@ -7,7 +7,7 @@ Controller::Controller(Fenetre *fen, Model *model){
 	
 }
 
-void Controller::doubleClickOpen(const QModelIndex &index){
+void Controller::openEditor(const QModelIndex &index){
     TreeItem *item = (TreeItem*)index.internalPointer();
     if(typeid(*item) == typeid(TreeItem) || typeid(*item) == typeid(DJavaFile) ){
         QTabWidget *tab = this->fen->getCentral();
@@ -21,6 +21,25 @@ void Controller::doubleClickOpen(const QModelIndex &index){
         tab->addTab(edit,item->label());
         tab->setCurrentWidget(edit);
     }
+}
+
+void Controller::openEditor(QString path){
+    QTabWidget *tab = this->fen->getCentral();
+    for(int i = 0; i < tab->count();i++){
+        if(((DCodeEditor*)tab->widget(i))->getController().isFile(path)){
+            tab->setCurrentWidget(tab->widget(i));
+            return;
+        }
+    }
+    DCodeEditor *edit = new DCodeEditor(path);
+    QString name;
+    if(path.isNull() || path.isEmpty()){
+        name = "nouveau";
+    }else{
+        name = QFileInfo(path).fileName();
+    }
+    tab->addTab(edit,name);
+    tab->setCurrentWidget(edit);
 }
 
 void  Controller::closeEditor(int index){

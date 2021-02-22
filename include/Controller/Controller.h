@@ -16,7 +16,8 @@ class Controller : public QObject{
 		Controller(Fenetre *fen, Model *model);
 		
 	public slots:
-        void doubleClickOpen(const QModelIndex &index);
+        void openEditor(const QModelIndex &index);
+        void openEditor(QString path=QString());
         void closeEditor(int index = -1);
         void closeAllEditor();
         void saveEditor();

@@ -10,6 +10,7 @@ HEADERS += include/View/Fenetre.h \
     include/Controller/Widget/ExplorerDelegate.h \
     include/Model/FilteredModel.h \
     include/Model/Javora.h \
+    include/Model/MakefileFactory.h \
     include/View/Dialog/FolderDialog.h \
     include/View/Menu/MenuContextExplorer.h \
     include/View/Widget/Console.h \
@@ -53,6 +54,7 @@ SOURCES += src/View/Fenetre.cpp \
     src/Model/DAttribut.cpp \
     src/Model/DMethod.cpp \
     src/Model/FilteredModel.cpp \
+    src/Model/MakefileFactory.cpp \
     src/View/Dialog/FolderDialog.cpp \
     src/View/Menu/MenuContextExplorer.cpp \
     src/View/Widget/Console.cpp \

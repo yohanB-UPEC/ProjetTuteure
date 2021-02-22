@@ -72,7 +72,7 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 	this->addDockWidget(Qt::LeftDockWidgetArea,explorer);
 
 
-    connect(tree,SIGNAL(doubleClicked(const QModelIndex)),controller,SLOT(doubleClickOpen(const QModelIndex)));
+    connect(tree,SIGNAL(doubleClicked(const QModelIndex)),controller,SLOT(openEditor(const QModelIndex)));
     connect(central,SIGNAL(tabCloseRequested(int)),controller,SLOT(closeEditor(int)));
     connect(tree,SIGNAL(customContextMenuRequested(const QPoint&)),controller,SLOT(explorerContextMenu(const QPoint&)));
     connect(newCmd,SIGNAL(clicked()),this,SLOT(s_newCmd()));
