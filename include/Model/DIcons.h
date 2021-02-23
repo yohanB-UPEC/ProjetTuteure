@@ -19,6 +19,9 @@ class DIcons{
         static QIcon copy;
         static QIcon modify;
         static QIcon remove;
+        static QIcon copyDark;
+        static QIcon modifyDark;
+        static QIcon removeDark;
         static QIcon stop;
 		
 		

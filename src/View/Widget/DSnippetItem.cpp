@@ -36,6 +36,10 @@ QPushButton *DSnippetItem::getModifier(){
     return modifier;
 }
 
+QPushButton *DSnippetItem::getDel(){
+    return del;
+}
+
 QLabel *DSnippetItem::getNomSnippet(){
     return nomSnippet;
 }

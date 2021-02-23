@@ -72,6 +72,9 @@ void MenuPrefController::s_Dark(){
     newPalette.setColor(QPalette::Disabled, QPalette::Text, QColor(127, 127, 127));
     m_mp->fen->getSnippet()->getDSnippetItem()->getNomSnippet()->setStyleSheet("color: white; font-size: 15px;");
     m_mp->fen->getLabel()->setStyleSheet("color: white; font-size: 12px;");
+    m_mp->fen->getSnippet()->getDSnippetItem()->getCopy()->setIcon(DIcons::copyDark);
+    m_mp->fen->getSnippet()->getDSnippetItem()->getModifier()->setIcon(DIcons::modifyDark);
+    m_mp->fen->getSnippet()->getDSnippetItem()->getDel()->setIcon(DIcons::removeDark);
     qApp->setPalette(newPalette);
 }
 
@@ -79,6 +82,9 @@ void MenuPrefController::s_Clair(){
     qApp->setPalette(QApplication::style()->standardPalette());
     m_mp->fen->getSnippet()->getDSnippetItem()->getNomSnippet()->setStyleSheet("color: black; font-size: 15px;");
     m_mp->fen->getLabel()->setStyleSheet("color: black; font-size: 12px;");
+    m_mp->fen->getSnippet()->getDSnippetItem()->getCopy()->setIcon(DIcons::copy);
+    m_mp->fen->getSnippet()->getDSnippetItem()->getModifier()->setIcon(DIcons::modify);
+    m_mp->fen->getSnippet()->getDSnippetItem()->getDel()->setIcon(DIcons::remove);
 }
 
 void MenuPrefController::s_Term(){

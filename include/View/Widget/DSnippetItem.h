@@ -11,6 +11,7 @@ class DSnippetItem : public QWidget {
         DSnippetItem(QString nomLab, QListWidgetItem *item, QWidget *parent=nullptr);
         QPushButton *getCopy();
         QPushButton *getModifier();
+        QPushButton *getDel();
         QLabel *getNomSnippet();
         QWidget *getWidget();
 
