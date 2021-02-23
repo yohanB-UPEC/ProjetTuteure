@@ -12,4 +12,4 @@ class ExplorerDelegate: public QStyledItemDelegate{
     private:
 };
 
-#endif // EXPLORERDELEGATE_H
+#endif

@@ -5,33 +5,31 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QRadioButton>
+#include "include/Controller/Menu/MenuPrefController.h"
 
 class Fenetre;
 class Console;
 
 class MenuPref : public QMenu {
 	Q_OBJECT
+
+    friend class MenuPrefController;
 	
 	public:
 		MenuPref(Fenetre *fen);
         QString getNom(){return this->file;};
         QRadioButton *getClear();
-		
-	private:
-		Fenetre *fen;
+
+    private:
+        Fenetre *fen;
+        MenuPref *m_mp;
         QAction *term;
         QAction *theme;
         QLineEdit *loc;
         QPushButton *valider;
         QString file = "powershell.exe";
         QRadioButton *radio2;
-
-    public slots:
-        void s_Term();
-        void s_Theme();
-        void s_Dark();
-        void s_Clair();
-        void parcourir();
+        MenuPrefController mp;
 };
 
 #endif

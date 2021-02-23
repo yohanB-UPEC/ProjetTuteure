@@ -13,6 +13,7 @@ class Console : public QWidget {
         ~Console();
         QPlainTextEdit *getEdit();
         QLineEdit *getLineEdit();
+        QProcess *getProc(){return this->cmd;}
         QString getCmd(){return this->nomCmd;}
         void setCmd(QString nomCmd){this->nomCmd = nomCmd;}
 
@@ -25,9 +26,13 @@ class Console : public QWidget {
         QAction *newCmd;
         QString nomCmd;
 
+    protected:
+        bool eventFilter(QObject *obj, QEvent *event);
+
     public slots:
         void readStdOut();
         void execCmd();
+
 };
 
 #endif

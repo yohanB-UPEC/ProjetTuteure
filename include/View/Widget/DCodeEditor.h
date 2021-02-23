@@ -22,6 +22,7 @@ class DCodeEditor : public QPlainTextEdit {
         void highlightCoupleNext(QString left, QString right);
         void highlightCouplePrev(QString left, QString right);
         QMap<int, QString> map;
+        QString textTab;
 
 		
 	protected:
@@ -34,6 +35,7 @@ class DCodeEditor : public QPlainTextEdit {
 		void highlightCurrentLine();
         void keyPressEvent(QKeyEvent *event);
         void highlightCouples();
+        void tab();
 };
 
 class LeftLineArea : public QWidget {

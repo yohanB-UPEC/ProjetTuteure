@@ -1,17 +1,24 @@
 #include "include/View/Widget/DCodeEditor.h"
 
 DCodeEditor::DCodeEditor(TreeItem *item, QWidget *parent) : QPlainTextEdit(parent), cec(item,this){
-	leftArea = new LeftLineArea(this);	
+    leftArea = new LeftLineArea(this);
     QFont font("Consolas",14,QFont::Medium,false);
     this->setFont(font);
 
     highlighter = new JavaHighLighter(this->document());
     this->setTabStopDistance(this->fontMetrics().horizontalAdvance(' ') * 4);
-	connect(this,SIGNAL(blockCountChanged(int)),this,SLOT(leftAreaWidthUpdate()));
-	connect(this,SIGNAL(updateRequest(QRect,int)),this,SLOT(scrollLeftAreaUpdate(QRect,int)));
+    connect(this,SIGNAL(blockCountChanged(int)),this,SLOT(leftAreaWidthUpdate()));
+    connect(this,SIGNAL(updateRequest(QRect,int)),this,SLOT(scrollLeftAreaUpdate(QRect,int)));
     connect(this,SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
     connect(this,SIGNAL(cursorPositionChanged()), this, SLOT(highlightCouples()));
-	leftAreaWidthUpdate();
+    connect(this,SIGNAL(selectionChanged()), this, SLOT(tab()));
+    leftAreaWidthUpdate();
+}
+
+void DCodeEditor::tab(){
+    QString newText = this->textCursor().selection().toPlainText().replace("\n", "\n\t");
+    if(newText != "" && newText != "\t")
+        textTab = newText;
 }
 
 void DCodeEditor::highlightCouplePrev(QString left, QString right){
@@ -45,7 +52,6 @@ void DCodeEditor::highlightCouplePrev(QString left, QString right){
         next = next.previous();
     }
     if(index == -1){
-        qDebug() << "yes";
         map.insert(this->textCursor().position(), "expected " + left);
         return;
     }
@@ -145,6 +151,11 @@ void DCodeEditor::keyPressEvent(QKeyEvent *event) {
         suivChar = this->textCursor().block().text().at(pos);
     QPlainTextEdit::keyPressEvent(event);
     int nombreTabulations = 0;
+
+    if(event->key() == Qt::Key_Tab){
+        this->insertPlainText(textTab);
+        textTab = "";
+    }
     if(event->key() == Qt::Key_ParenLeft){
         this->insertPlainText(")");
         this->moveCursor(QTextCursor::PreviousCharacter);
@@ -227,55 +238,55 @@ void DCodeEditor::keyPressEvent(QKeyEvent *event) {
 }
 
 void DCodeEditor::resizeEvent(QResizeEvent *event){
-	leftArea->setGeometry(0,0,leftArea->width(),event->size().height());
+    leftArea->setGeometry(0,0,leftArea->width(),event->size().height());
 }
 
 void DCodeEditor::leftAreaWidthUpdate(){
-	QFontMetrics fm(this->font());
-	int nbC = std::to_string(this->blockCount()+1).size();
-	int width = (nbC+4) * fm.boundingRect("4").width();
-	this->setViewportMargins(width,0,0,0);
-	leftArea->setGeometry(0,0,width,this->height());	
+    QFontMetrics fm(this->font());
+    int nbC = std::to_string(this->blockCount()+1).size();
+    int width = (nbC+4) * fm.boundingRect("4").width();
+    this->setViewportMargins(width,0,0,0);
+    leftArea->setGeometry(0,0,width,this->height());
 }
 
 void DCodeEditor::leftAreaPaintEvent(QPaintEvent *event){
-	QPainter painter(leftArea);
-	painter.setFont(this->font());
+    QPainter painter(leftArea);
+    painter.setFont(this->font());
     //painter.fillRect(0,event->rect().y(),event->rect().width(),event->rect().height(),QColor::fromRgb(54,50,50));
-	
-	QTextBlock qtb = this->firstVisibleBlock();
-	QRect rect = blockBoundingGeometry(qtb).translated(contentOffset()).toRect();
-	while(qtb.isValid() && rect.y() <= event->rect().bottom()){	
-		if(qtb.isVisible() && rect.bottom() >= event->rect().top() ){
+
+    QTextBlock qtb = this->firstVisibleBlock();
+    QRect rect = blockBoundingGeometry(qtb).translated(contentOffset()).toRect();
+    while(qtb.isValid() && rect.y() <= event->rect().bottom()){
+        if(qtb.isVisible() && rect.bottom() >= event->rect().top() ){
             painter.drawText(0,rect.y(),leftArea->width(),fontMetrics().height(),Qt::AlignRight,QString::number(qtb.blockNumber()+1)+" ");
-		}
-		qtb = qtb.next();
-		rect = blockBoundingGeometry(qtb).translated(contentOffset()).toRect();
-	}
-	
+        }
+        qtb = qtb.next();
+        rect = blockBoundingGeometry(qtb).translated(contentOffset()).toRect();
+    }
+
 }
 
 void DCodeEditor::highlightCurrentLine(){
     QList<QTextEdit::ExtraSelection> extraSelections;
 
 
-	QTextEdit::ExtraSelection selection;
+    QTextEdit::ExtraSelection selection;
 
     //QColor lineColor = QColor::fromRgb(54,50,50);
 
     //selection.format.setBackground(lineColor);
-	selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-	selection.cursor = textCursor();
-	selection.cursor.clearSelection();
-	extraSelections.append(selection);
+    selection.format.setProperty(QTextFormat::FullWidthSelection, true);
+    selection.cursor = textCursor();
+    selection.cursor.clearSelection();
+    extraSelections.append(selection);
 
     setExtraSelections(extraSelections);
 }
 
 void DCodeEditor::scrollLeftAreaUpdate(const QRect &rect,int dy){
-	if(dy){
-		leftArea->scroll(0,dy);
-	}else{
-		leftArea->update(0,rect.y(),leftArea->width(),rect.height());
-	}
+    if(dy){
+        leftArea->scroll(0,dy);
+    }else{
+        leftArea->update(0,rect.y(),leftArea->width(),rect.height());
+    }
 }

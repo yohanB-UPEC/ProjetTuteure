@@ -4,14 +4,18 @@
 #include <QtWidgets>
 #include <QListView>
 #include "include/View/Widget/DSnippetItem.h"
+#include "include/Controller/Widget/SnippetController.h"
 
 class Fenetre;
 
 class Snippet : public QWidget {
     Q_OBJECT
 
+    friend class SnippetController;
+
     public:
         Snippet(Fenetre* fen, QWidget *parent=0);
+        DSnippetItem* getDSnippetItem() {return this->dlistItem;}
 
     private:
         QVBoxLayout *layout;
@@ -25,18 +29,12 @@ class Snippet : public QWidget {
         QLineEdit *nomSnippet;
         QString filename;
         Fenetre *fen;
+        DSnippetItem *dlistItem;
+        SnippetController sni;
         void addToList(QString snippetname);
         void getList();
         void createDialog();
         bool caracteresSpeciaux(QString nomSnippet);
-
-    public slots:
-        void isDeleted();
-        void addSnippet();
-        void validate(QString nomSnippet);
-        void copyFile(QString name);
-        void modifyFile(QString name);
-        void deleteFile(QString name);
 };
 
 #endif
