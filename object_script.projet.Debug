@@ -39,6 +39,7 @@ debug/SnippetController.o
 debug/MenuEditController.o
 debug/DSnippetItem.o
 debug/Snippet.o
+debug/TitleBar.o
 debug/main.o
 debug/qrc_resources.o
 debug/moc_Fenetre.o
@@ -67,3 +68,4 @@ debug/moc_ClassController.o
 debug/moc_MenuEditController.o
 debug/moc_DSnippetItem.o
 debug/moc_Snippet.o
+debug/moc_TitleBar.o

@@ -24,7 +24,7 @@ Console::Console(Fenetre *fen, QWidget *parent) : QWidget(parent){
         cmd = new QProcess(parent);
         cmd->setProcessChannelMode(QProcess::MergedChannels);
 
-        cmd->start(this->fen->getMenuPref()->getNom(), QStringList());
+        //cmd->start(this->fen->getMenuPref()->getNom(), QStringList());
         connect(cmd, SIGNAL(readyRead()), this, SLOT(readStdOut()));
         connect(lineEdit, SIGNAL(editingFinished()), this, SLOT(execCmd()));
 }

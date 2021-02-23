@@ -43,7 +43,8 @@ HEADERS += include/View/Fenetre.h \
     include/Controller/Widget/SnippetController.h \
     include/Controller/Menu/MenuEditController.h \
     include/View/Widget/DSnippetItem.h \
-    include/View/Widget/Snippet.h
+    include/View/Widget/Snippet.h \
+    include/View/Widget/TitleBar.h
 
 SOURCES += src/View/Fenetre.cpp \
     src/Controller/Dialog/FolderController.cpp \
@@ -85,7 +86,8 @@ SOURCES += src/View/Fenetre.cpp \
     src/Controller/Widget/SnippetController.cpp \
     src/Controller/Menu/MenuEditController.cpp \
     src/View/Widget/DSnippetItem.cpp \
-    src/View/Widget/Snippet.cpp
+    src/View/Widget/Snippet.cpp \
+    src/View/Widget/TitleBar.cpp
 
 test_conf {
 	TARGET = my_app_test

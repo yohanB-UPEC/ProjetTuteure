@@ -12,7 +12,7 @@ MenuPref::MenuPref(Fenetre *fen) : QMenu("Préférences"){
 	this->fen->menuBar()->addMenu(this);
 
     connect(theme,SIGNAL(triggered()),this,SLOT(s_Theme()));
-    connect(term,SIGNAL(triggered()),this,SLOT(s_Term()));
+    //connect(term,SIGNAL(triggered()),this,SLOT(s_Term()));
 	
 }
 
@@ -85,11 +85,11 @@ void MenuPref::s_Dark(){
 }
 
 void MenuPref::s_Clair(){
-    qApp->setPalette(this->style()->standardPalette());
+    qApp->setPalette(qApp->style()->standardPalette());
     qApp->setStyle(QStyleFactory::create("default"));
     qApp->setStyleSheet("");
 }
-
+/*
 void MenuPref::s_Term(){
     if(this->fen->getConsole() == nullptr){
         QMessageBox msgBox(QMessageBox::Warning, "Erreur Terminal", "Erreur Terminal");
@@ -151,5 +151,5 @@ void MenuPref::parcourir(){
         msgBox.exec();
     }
     this->fen->getConsole()->setCmd(file);
-}
+}*/
 

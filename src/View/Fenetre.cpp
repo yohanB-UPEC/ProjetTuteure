@@ -21,16 +21,49 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
     central->setMovable(true);
 	this->setCentralWidget(central);
 
-    central2 = new QTabWidget(this);
-    central2->setTabsClosable(true);
-    central2->setMovable(true);
 
-	
+    tree = new QTreeView;
+    tree->setDragDropMode(QAbstractItemView::DragOnly);
+    tree->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    tree->setContextMenuPolicy(Qt::CustomContextMenu);
+    tree->setItemDelegate(new ExplorerDelegate());
+    tree->setHeaderHidden(true);
+    tree->setModel(model);
+
+
+    /*central2 = new QTabWidget(this);
+    central2->setTabsClosable(true);
+    central2->setMovable(true);*/
+
 	
     QDockWidget *snippet = new QDockWidget("Snippets",this);
-    snippet->setWidget(new Snippet(this));
-    consoles = new QDockWidget("Consoles",this);
+    QDockWidget *explorer = new QDockWidget("Explorateur",this);
+    QDockWidget *consoles = new QDockWidget("Consoles",this);
 
+    snippet->setFeatures(QDockWidget::DockWidgetMovable);
+    consoles->setFeatures(QDockWidget::DockWidgetMovable);
+    explorer->setFeatures(QDockWidget::DockWidgetMovable);
+
+    this->addDockWidget(Qt::RightDockWidgetArea,snippet);
+    this->addDockWidget(Qt::BottomDockWidgetArea,consoles);
+    this->addDockWidget(Qt::LeftDockWidgetArea,explorer);
+
+
+    consoles->setTitleBarWidget(new TitleBar());
+    snippet->setTitleBarWidget(new TitleBar());
+
+    snippet->setWidget(new Snippet(this));
+    explorer->setWidget(tree);
+
+
+
+
+
+
+
+
+
+/*
     QIcon addI("res/icons/add.png");
     newCmd = new QPushButton(addI, "");
     const QSize size = QSize(20, 20);
@@ -49,37 +82,23 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 
     layout->addWidget(lab);
     layout->addWidget(newCmd, Qt::AlignVCenter);
-    consoles->setTitleBarWidget(title_bar);
-    QDockWidget *explorer = new QDockWidget("Explorateur",this);
-	
-	snippet->setFeatures(QDockWidget::DockWidgetMovable);
-	consoles->setFeatures(QDockWidget::DockWidgetMovable);
-	explorer->setFeatures(QDockWidget::DockWidgetMovable);
-	
 
-    tree = new QTreeView;
-    tree->setDragDropMode(QAbstractItemView::DragOnly);
-    tree->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    tree->setContextMenuPolicy(Qt::CustomContextMenu);
-    tree->setItemDelegate(new ExplorerDelegate());
-    tree->setHeaderHidden(true);
-	explorer->setWidget(tree);
-    tree->setModel(model);
+    consoles->setTitleBarWidget(title_bar);*/
+
 	
-    consoles->setWidget(central2);
-	this->addDockWidget(Qt::RightDockWidgetArea,snippet);
-	this->addDockWidget(Qt::BottomDockWidgetArea,consoles);
-	this->addDockWidget(Qt::LeftDockWidgetArea,explorer);
+	
+    //consoles->setWidget(central2);
+
 
 
     connect(tree,SIGNAL(doubleClicked(const QModelIndex)),controller,SLOT(openEditor(const QModelIndex)));
     connect(central,SIGNAL(tabCloseRequested(int)),controller,SLOT(closeEditor(int)));
     connect(tree,SIGNAL(customContextMenuRequested(const QPoint&)),controller,SLOT(explorerContextMenu(const QPoint&)));
-    connect(newCmd,SIGNAL(clicked()),this,SLOT(s_newCmd()));
+    //connect(newCmd,SIGNAL(clicked()),this,SLOT(s_newCmd()));
 
 }
-
+/*
 void Fenetre::s_newCmd(){
     console = new Console(this, consoles);
     central2->addTab(console,"nouveau");
-}
+}*/

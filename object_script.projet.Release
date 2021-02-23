@@ -39,6 +39,7 @@ release/SnippetController.o
 release/MenuEditController.o
 release/DSnippetItem.o
 release/Snippet.o
+release/TitleBar.o
 release/main.o
 release/qrc_resources.o
 release/moc_Fenetre.o
@@ -67,3 +68,4 @@ release/moc_ClassController.o
 release/moc_MenuEditController.o
 release/moc_DSnippetItem.o
 release/moc_Snippet.o
+release/moc_TitleBar.o

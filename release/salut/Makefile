@@ -16,3 +16,11 @@ bin/fr/yohan/test2/Coord.class: src/fr/yohan/test2/Coord.java
 jar:
 	jar cvfe salut.jar <classMain>  -C bin fr -C res
 
+jbrard@aramis.fr
+jbrard@aramis.fr
+jbrard@aramis.fr
+jbrard@aramis.fr
+jbrard@aramis.fr
+jbrard@aramis.fr
+jbrard@aramis.fr
+jbrard@aramis.fr
