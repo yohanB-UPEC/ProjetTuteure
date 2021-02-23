@@ -48,12 +48,17 @@ JavaHighLighter::JavaHighLighter(QTextDocument *parent) : QSyntaxHighlighter(par
     rule.format = keywordFormat;
     highlightingRules.append(rule);
 
+    functionFormat.setForeground(QColor("#66D9EF"));
+    rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Za-z0-9_]+(?=\\()"));
+    rule.format = functionFormat;
+    highlightingRules.append(rule);
+
     keywordFormat.setForeground(QColor("#F92672"));
     const QString keyPatterns[] = {
         QStringLiteral("\\breturn\\b"), QStringLiteral("\\bpublic\\b"), QStringLiteral("\\bprivate\\b"), QStringLiteral("\\bprotected\\b"), QStringLiteral("\\bstatic\\b"), QStringLiteral("\\bnew\\b"),
         QStringLiteral("\\bif\\b"), QStringLiteral("\\belse\\b"), QStringLiteral("\\bwhile\\b"), QStringLiteral("!"), QStringLiteral("<"), QStringLiteral(">"), QStringLiteral("="),
         QStringLiteral("\\|"), QStringLiteral("&"), QStringLiteral("instanceof"), QStringLiteral("\\+"), QStringLiteral("\\-"), QStringLiteral("\\/"), QStringLiteral("\\*"), QStringLiteral("\\%"),
-        QStringLiteral("try"), QStringLiteral("catch"), QStringLiteral("\\["), QStringLiteral("\\]")
+        QStringLiteral("try"), QStringLiteral("catch"), QStringLiteral("\\["), QStringLiteral("\\]"), QStringLiteral("\\bpackage\\b"), QStringLiteral("\\bimport\\b")
     };
     for (const QString &pattern : keyPatterns) {
         rule.pattern = QRegularExpression(pattern);
@@ -84,11 +89,6 @@ JavaHighLighter::JavaHighLighter(QTextDocument *parent) : QSyntaxHighlighter(par
     highlightingRules.append(rule);
 
     //functionFormat.setFontItalic(true);
-
-    functionFormat.setForeground(QColor("#66D9EF"));
-    rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Za-z0-9_]+(?=\\()"));
-    rule.format = functionFormat;
-    highlightingRules.append(rule);
 
     functionFormat.setForeground(QColor("#A6E22E"));
     rule.pattern = QRegularExpression(QStringLiteral("\\b +[A-Za-z0-9_]+(?=\\()"));

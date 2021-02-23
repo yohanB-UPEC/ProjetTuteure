@@ -8,6 +8,14 @@ QIcon DIcons::java_file;
 QIcon DIcons::package;
 QIcon DIcons::folder;
 QIcon DIcons::src_folder;
+QIcon DIcons::add;
+QIcon DIcons::copy;
+QIcon DIcons::modify;
+QIcon DIcons::remove;
+QIcon DIcons::copyDark;
+QIcon DIcons::modifyDark;
+QIcon DIcons::removeDark;
+QIcon DIcons::stop;
 
 void DIcons::init(){
 	DIcons::logo.addFile(":/res/icons/logo.png");
@@ -19,4 +27,12 @@ void DIcons::init(){
 	DIcons::projet.addFile(":/res/icons/projet.png");
 	DIcons::folder.addFile(":/res/icons/folder.png");
 	DIcons::src_folder.addFile(":/res/icons/java_folder.png");
+    DIcons::add.addFile(":/res/icons/add.png");
+    DIcons::copy.addFile(":/res/icons/copy.png");
+    DIcons::modify.addFile(":/res/icons/modify.png");
+    DIcons::remove.addFile(":/res/icons/delete.png");
+    DIcons::copyDark.addFile(":/res/icons/copyDark.png");
+    DIcons::modifyDark.addFile(":/res/icons/modifyDark.png");
+    DIcons::removeDark.addFile(":/res/icons/deleteDark.png");
+    DIcons::stop.addFile(":/res/icons/stop.png");
 }

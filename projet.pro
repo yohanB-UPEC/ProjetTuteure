@@ -6,6 +6,7 @@ RESOURCES = resources.qrc
 HEADERS += include/View/Fenetre.h \
     include/Controller/Dialog/FolderController.h \
     include/Controller/Dialog/PackageController.h \
+    include/Controller/Menu/MenuPrefController.h \
     include/Controller/Widget/CodeEditorController.h \
     include/Controller/Widget/ExplorerDelegate.h \
     include/Model/FilteredModel.h \
@@ -47,8 +48,10 @@ HEADERS += include/View/Fenetre.h \
 SOURCES += src/View/Fenetre.cpp \
     src/Controller/Dialog/FolderController.cpp \
     src/Controller/Dialog/PackageController.cpp \
+    src/Controller/Menu/MenuPrefController.cpp \
     src/Controller/Widget/CodeEditorController.cpp \
     src/Controller/Widget/ExplorerDelegate.cpp \
+    src/Controller/Widget/SnippetController.cpp \
     src/Model/ClassSubElement.cpp \
     src/Model/DAttribut.cpp \
     src/Model/DMethod.cpp \
@@ -80,7 +83,6 @@ SOURCES += src/View/Fenetre.cpp \
     src/View/Dialog/ClassDialog.cpp \
     src/Controller/Dialog/ProjectController.cpp \
     src/Controller/Dialog/ClassController.cpp \
-    src/Controller/Widget/SnippetController.cpp \
     src/Controller/Menu/MenuEditController.cpp \
     src/View/Widget/DSnippetItem.cpp \
     src/View/Widget/Snippet.cpp

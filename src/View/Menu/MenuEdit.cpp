@@ -34,7 +34,6 @@ MenuEdit::MenuEdit(Fenetre *fen) : QMenu("Edition"), me(this){
     replace->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_H));
 	
     this->fen->menuBar()->addMenu(this);
-
     connect(cancel,SIGNAL(triggered()),&me,SLOT(s_Undo()));
     connect(restore,SIGNAL(triggered()),&me,SLOT(s_Redo()));
     connect(cut,SIGNAL(triggered()),&me,SLOT(s_Cut()));

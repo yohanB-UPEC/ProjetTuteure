@@ -9,5 +9,13 @@
 	<file>res/icons/package_f.png</file>
 	<file>res/icons/package_o.png</file>
 	<file>res/icons/projet.png</file>
+	<file>res/icons/add.png</file>
+	<file>res/icons/modify.png</file>
+	<file>res/icons/copy.png</file>
+	<file>res/icons/delete.png</file>
+	<file>res/icons/modifyDark.png</file>
+	<file>res/icons/copyDark.png</file>
+	<file>res/icons/deleteDark.png</file>
+	<file>res/icons/stop.png</file>
 </qresource>
 </RCC>

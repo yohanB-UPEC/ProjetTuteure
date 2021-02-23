@@ -28,9 +28,9 @@ void MenuHelp::s_About(){
 
     QHBoxLayout *h = new QHBoxLayout();
     QLabel *lab = new QLabel();
-    QPixmap pixmap("res/icons/logo.png");
-    lab->setPixmap(pixmap);
-    lab->resize(pixmap.size());
+    const QSize size2(100, 100);
+    DIcons::logo.pixmap(size2);
+    lab->setPixmap(DIcons::logo.pixmap(size2));
     h->addWidget(lab);
 
     QLabel *content = new QLabel();

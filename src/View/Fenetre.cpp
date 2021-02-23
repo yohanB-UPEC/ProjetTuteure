@@ -27,17 +27,21 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 
 	
 	
-    QDockWidget *snippet = new QDockWidget("Snippets",this);
-    snippet->setWidget(new Snippet(this));
+    QDockWidget *snippetDock = new QDockWidget("Snippets",this);
+    snippet = new Snippet(this);
+    snippetDock->setWidget(snippet);
     consoles = new QDockWidget("Consoles",this);
 
-    QIcon addI("res/icons/add.png");
-    newCmd = new QPushButton(addI, "");
+    newCmd = new QPushButton(DIcons::add, "");
     const QSize size = QSize(20, 20);
     newCmd->setFixedSize(size);
     newCmd->setStyleSheet("border: none;");
 
-    QLabel *lab = new QLabel("Consoles");
+    stopProc = new QPushButton(DIcons::stop, "");
+    stopProc->setFixedSize(size);
+    stopProc->setStyleSheet("border: none;");
+
+    lab = new QLabel("Consoles");
     lab->setStyleSheet("font-size: 12px;");
 
     QWidget *title_bar = new QWidget();
@@ -48,11 +52,12 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
     title_bar->setLayout(layout);
 
     layout->addWidget(lab);
+    layout->addWidget(stopProc, Qt::AlignVCenter);
     layout->addWidget(newCmd, Qt::AlignVCenter);
     consoles->setTitleBarWidget(title_bar);
     QDockWidget *explorer = new QDockWidget("Explorateur",this);
 	
-	snippet->setFeatures(QDockWidget::DockWidgetMovable);
+    snippetDock->setFeatures(QDockWidget::DockWidgetMovable);
 	consoles->setFeatures(QDockWidget::DockWidgetMovable);
 	explorer->setFeatures(QDockWidget::DockWidgetMovable);
 	
@@ -67,19 +72,29 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
     tree->setModel(model);
 	
     consoles->setWidget(central2);
-	this->addDockWidget(Qt::RightDockWidgetArea,snippet);
+    this->addDockWidget(Qt::RightDockWidgetArea,snippetDock);
 	this->addDockWidget(Qt::BottomDockWidgetArea,consoles);
 	this->addDockWidget(Qt::LeftDockWidgetArea,explorer);
 
 
     connect(tree,SIGNAL(doubleClicked(const QModelIndex)),controller,SLOT(doubleClickOpen(const QModelIndex)));
     connect(central,SIGNAL(tabCloseRequested(int)),controller,SLOT(closeEditor(int)));
+    connect(central2,SIGNAL(tabCloseRequested(int)),controller,SLOT(closeEditor(int)));
     connect(tree,SIGNAL(customContextMenuRequested(const QPoint&)),controller,SLOT(explorerContextMenu(const QPoint&)));
     connect(newCmd,SIGNAL(clicked()),this,SLOT(s_newCmd()));
+    connect(stopProc,SIGNAL(clicked()),this,SLOT(s_stopProc()));
 
 }
 
 void Fenetre::s_newCmd(){
     console = new Console(this, consoles);
     central2->addTab(console,"nouveau");
+}
+
+void Fenetre::s_stopProc(){
+     QProcess *process = new QProcess(this);
+     process->start ("java.exe", QStringList());
+     qDebug() << process->processId();
+     //process->write(tr("taskkill /f /pid %1\n").arg(process->processId()).toLatin1());
+    //system("taskkill /im java.exe /f");
 }

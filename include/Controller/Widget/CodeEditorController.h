@@ -23,4 +23,4 @@ class CodeEditorController : public QObject {
         QString m_path;
 };
 
-#endif // CODEEDITORCONTROLLER_H
+#endif
