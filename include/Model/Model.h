@@ -7,6 +7,8 @@
 #include "DSourceFolder.h"
 #include "DFolder.h"
 #include "DPackage.h"
+#include "ConsoleModel.h"
+
 
 class Model : public QAbstractItemModel{
 	Q_OBJECT
@@ -26,11 +28,13 @@ class Model : public QAbstractItemModel{
         QModelIndex getItem(QString path);
         QString getRelativePath(TreeItem* item);
         bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex(),bool deleteFiles=false);
+        ConsoleModel* getConsole(){return &console;};
 	public slots:
 	
 	private:
 		TreeItem root;
 		QSettings settings;
+        ConsoleModel console;
 
 };
 

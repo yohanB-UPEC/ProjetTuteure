@@ -12,7 +12,7 @@ MenuPref::MenuPref(Fenetre *fen) : QMenu("Préférences"){
 	this->fen->menuBar()->addMenu(this);
 
     connect(theme,SIGNAL(triggered()),this,SLOT(s_Theme()));
-    //connect(term,SIGNAL(triggered()),this,SLOT(s_Term()));
+    connect(term,SIGNAL(triggered()),this,SLOT(s_Term()));
 	
 }
 
@@ -89,56 +89,12 @@ void MenuPref::s_Clair(){
     qApp->setStyle(QStyleFactory::create("default"));
     qApp->setStyleSheet("");
 }
-/*
+
 void MenuPref::s_Term(){
-    if(this->fen->getConsole() == nullptr){
-        QMessageBox msgBox(QMessageBox::Warning, "Erreur Terminal", "Erreur Terminal");
-        msgBox.setText("Ouvrez un terminal pour modifier le terminal par défaut");
-        msgBox.exec();
-        return;
-    }
-    QDialog *dial = new QDialog();
-    const QSize size(470, 170);
-    dial->setFixedSize(size);
-    dial->setWindowTitle("Choix du terminal");
-
-    QVBoxLayout *lay = new QVBoxLayout();
-
-    QHBoxLayout *h = new QHBoxLayout();
-    QLabel *lab = new QLabel("Emplacement du terminal (exe): ");
-
-    loc = new QLineEdit();
-    QPushButton *browse = new QPushButton("Parcourir");
-    h->addWidget(lab);
-    h->addWidget(loc);
-    h->addWidget(browse);
-
-
-    QVBoxLayout *h2 = new QVBoxLayout();
-    QLabel *lab2 = new QLabel("Réouvrez un terminal pour que la modification s'applique");
-    h2->addWidget(lab2);
-
-    QHBoxLayout *h1 = new QHBoxLayout();
-    h1->setAlignment(Qt::AlignRight);
-    valider = new QPushButton("valider");
-    valider->setEnabled(false);
-    QPushButton *fermer = new QPushButton("Fermer");
-
-    h1->addWidget(valider);
-    h1->addWidget(fermer);
-
-    lay->addLayout(h);
-    lay->addLayout(h2);
-    lay->addLayout(h1);
-
-    dial->setLayout(lay);
-
-    connect(browse,SIGNAL(clicked()),this,SLOT(parcourir()));
-    connect(valider,SIGNAL(clicked()),dial,SLOT(accept()));
-    connect(fermer,SIGNAL(clicked()),dial,SLOT(reject()));
-    dial->exec();
+    ConsoleDialog cd(this->fen->getModel()->getConsole(), this->fen);
+    cd.exec();
 }
-
+/*
 void MenuPref::parcourir(){
     file = QFileDialog::getOpenFileName(this, tr("Selectionnez un fichier"));
     QList<QString> list = file.split(".");

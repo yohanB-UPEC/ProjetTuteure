@@ -38,7 +38,7 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 	
     QDockWidget *snippet = new QDockWidget("Snippets",this);
     QDockWidget *explorer = new QDockWidget("Explorateur",this);
-    QDockWidget *consoles = new QDockWidget("Consoles",this);
+    QDockWidget *consoles = new QDockWidget("Terminale de commande:  ",this);
 
     snippet->setFeatures(QDockWidget::DockWidgetMovable);
     consoles->setFeatures(QDockWidget::DockWidgetMovable);
@@ -48,8 +48,11 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
     this->addDockWidget(Qt::BottomDockWidgetArea,consoles);
     this->addDockWidget(Qt::LeftDockWidgetArea,explorer);
 
+    TitleBar *consoleBar = new TitleBar();
+    consoles->setTitleBarWidget(consoleBar);
+    ConsoleTabWidget *consoleTabs = new ConsoleTabWidget(consoleBar,model->getConsole());
+    consoles->setWidget(consoleTabs);
 
-    consoles->setTitleBarWidget(new TitleBar());
     snippet->setTitleBarWidget(new TitleBar());
 
     snippet->setWidget(new Snippet(this));

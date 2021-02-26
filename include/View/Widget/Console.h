@@ -3,13 +3,12 @@
 
 #include <QtWidgets>
 
-class Fenetre;
 
 class Console : public QWidget {
     Q_OBJECT
 
     public:
-        Console(Fenetre *fen, QWidget *parent);
+        Console(QWidget *parent=nullptr);
         ~Console();
         QPlainTextEdit *getEdit();
         QLineEdit *getLineEdit();
@@ -17,7 +16,6 @@ class Console : public QWidget {
         void setCmd(QString nomCmd){this->nomCmd = nomCmd;}
 
     private:
-        Fenetre *fen;
         QPlainTextEdit *edit;
         QLineEdit *lineEdit;
         QProcess *cmd;

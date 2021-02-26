@@ -8,6 +8,7 @@ class TitleBar : public QWidget {
     Q_OBJECT
     public:
         TitleBar(QWidget *parent = nullptr);
+        void addLayout(QLayout *layout);
 
     protected:
         void changeEvent(QEvent *event);

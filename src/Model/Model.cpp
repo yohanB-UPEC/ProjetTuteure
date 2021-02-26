@@ -1,6 +1,6 @@
 #include "include/Model/Model.h"
 
-Model::Model(): QAbstractItemModel(), root("root"), settings("config.ini",QSettings::IniFormat){
+Model::Model(): QAbstractItemModel(), root("root"), settings("config.ini",QSettings::IniFormat), console(&settings){
 	settings.beginGroup("Projects");
 	QStringList keys = settings.allKeys();
 	for(int i = 0; i < keys.size(); i++){
@@ -8,7 +8,7 @@ Model::Model(): QAbstractItemModel(), root("root"), settings("config.ini",QSetti
 		if(!path.isNull() && path.isValid()){
 			root.appendChild(new DProject(path.toString()));
 		}
-	}
+    }
 	settings.endGroup();
 	printf("Constructeur\n");
 }

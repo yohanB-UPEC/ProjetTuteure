@@ -5,6 +5,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QRadioButton>
+#include "include/View/Dialog/ConsoleDialog.h"
 
 class Fenetre;
 class Console;
@@ -27,7 +28,7 @@ class MenuPref : public QMenu {
         QRadioButton *radio2;
 
     public slots:
-        //void s_Term();
+        void s_Term();
         void s_Theme();
         void s_Dark();
         void s_Clair();

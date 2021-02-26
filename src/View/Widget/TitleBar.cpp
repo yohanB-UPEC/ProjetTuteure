@@ -1,7 +1,7 @@
 #include "include/View/Widget/TitleBar.h"
 
 TitleBar::TitleBar(QWidget *parent): QWidget(parent){
-    this->setBackgroundRole(QPalette::WindowText);
+    m_layout.setColumnStretch(1,2);
     m_layout.addWidget(&m_title,0,0);
     this->setLayout(&m_layout);
 
@@ -30,4 +30,10 @@ void TitleBar::paintEvent(QPaintEvent* event){
     p.drawRect(rect);
 
 
+}
+
+void TitleBar::addLayout(QLayout *layout){
+
+    qDebug() << "setLayout";
+    this->m_layout.addLayout(layout,0,1);
 }

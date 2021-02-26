@@ -6,8 +6,8 @@
 #include "include/View/Widget/Console.h"
 #include "include/View/Fenetre.h"
 
-Console::Console(Fenetre *fen, QWidget *parent) : QWidget(parent){
-        this->fen = fen;
+Console::Console(QWidget *parent) : QWidget(parent){
+
         QVBoxLayout *vb = new QVBoxLayout();
 
         edit = new QPlainTextEdit(this);
@@ -24,7 +24,7 @@ Console::Console(Fenetre *fen, QWidget *parent) : QWidget(parent){
         cmd = new QProcess(parent);
         cmd->setProcessChannelMode(QProcess::MergedChannels);
 
-        //cmd->start(this->fen->getMenuPref()->getNom(), QStringList());
+        cmd->start("powershell.exe", QStringList());
         connect(cmd, SIGNAL(readyRead()), this, SLOT(readStdOut()));
         connect(lineEdit, SIGNAL(editingFinished()), this, SLOT(execCmd()));
 }
@@ -58,7 +58,3 @@ void Console::execCmd(){
     lineEdit->setText("");
     cmd->write(arr);
 }
-/*
-void Console::s_Console(){
-    this->fen->getCentral()->addTab(new Console(),"nouveau");
-}*/

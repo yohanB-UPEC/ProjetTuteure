@@ -13,6 +13,7 @@
 #include "Widget/Console.h"
 #include "include/Controller/Widget/ExplorerDelegate.h"
 #include "Widget/TitleBar.h"
+#include "Widget/ConsoleTabWidget.h"
 
 class MenuFile;
 
