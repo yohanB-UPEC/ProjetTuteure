@@ -27,23 +27,16 @@ class Fenetre : public QMainWindow {
         Controller* getController(){return this->controller;}
         MenuFile* getMenuFile(){return this->menuFile;}
         QTreeView* getExplorer(){return this->tree;}
-        //Console* getConsole(){return this->console;}
         MenuPref* getMenuPref(){return this->menuPref;}
 	private:
 		MenuFile *menuFile;
 		MenuEdit *menuEdit;
 		MenuPref *menuPref;
 		MenuHelp *menuHelp;
-        //Console *console;
         QTreeView *tree;
-        //QPushButton *newCmd;
 		QTabWidget *central;
-        //QTabWidget *central2;
 		Model *model;
 		Controller *controller;
-
-    public slots:
-        //void s_newCmd();
 		
 };
 

@@ -73,5 +73,11 @@ void ConsoleTabWidget::openMenuAdd(){
 
 void ConsoleTabWidget::addConsole(){
     QAction *tmp = (QAction*)sender();
-    this->addConsole(new Console(),tmp->text());
+    int size = m_model->rowCount();
+    for(int i = 0; i < size; i++){
+        if(*(QString*)m_model->index(i,0).internalPointer() == tmp->text()){
+            this->addConsole(new Console(*(QString*)m_model->index(i,1).internalPointer()),tmp->text());
+            return;
+        }
+    }
 }

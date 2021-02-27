@@ -30,11 +30,6 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
     tree->setHeaderHidden(true);
     tree->setModel(model);
 
-
-    /*central2 = new QTabWidget(this);
-    central2->setTabsClosable(true);
-    central2->setMovable(true);*/
-
 	
     QDockWidget *snippet = new QDockWidget("Snippets",this);
     QDockWidget *explorer = new QDockWidget("Explorateur",this);
@@ -61,47 +56,9 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 
 
 
-
-
-
-
-
-/*
-    QIcon addI("res/icons/add.png");
-    newCmd = new QPushButton(addI, "");
-    const QSize size = QSize(20, 20);
-    newCmd->setFixedSize(size);
-    newCmd->setStyleSheet("border: none;");
-
-    QLabel *lab = new QLabel("Consoles");
-    lab->setStyleSheet("font-size: 12px;");
-
-    QWidget *title_bar = new QWidget();
-    title_bar->setMaximumHeight(25);
-    QHBoxLayout *layout = new QHBoxLayout();
-    layout->setContentsMargins(5,0,50,0);
-
-    title_bar->setLayout(layout);
-
-    layout->addWidget(lab);
-    layout->addWidget(newCmd, Qt::AlignVCenter);
-
-    consoles->setTitleBarWidget(title_bar);*/
-
-	
-	
-    //consoles->setWidget(central2);
-
-
-
     connect(tree,SIGNAL(doubleClicked(const QModelIndex)),controller,SLOT(openEditor(const QModelIndex)));
     connect(central,SIGNAL(tabCloseRequested(int)),controller,SLOT(closeEditor(int)));
     connect(tree,SIGNAL(customContextMenuRequested(const QPoint&)),controller,SLOT(explorerContextMenu(const QPoint&)));
-    //connect(newCmd,SIGNAL(clicked()),this,SLOT(s_newCmd()));
 
 }
-/*
-void Fenetre::s_newCmd(){
-    console = new Console(this, consoles);
-    central2->addTab(console,"nouveau");
-}*/
+

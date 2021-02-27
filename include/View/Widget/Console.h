@@ -4,28 +4,26 @@
 #include <QtWidgets>
 
 
-class Console : public QWidget {
+class Console : public QPlainTextEdit {
     Q_OBJECT
 
     public:
-        Console(QWidget *parent=nullptr);
+        Console(QString &cmdLancement, QWidget *parent=nullptr);
         ~Console();
-        QPlainTextEdit *getEdit();
-        QLineEdit *getLineEdit();
-        QString getCmd(){return this->nomCmd;}
-        void setCmd(QString nomCmd){this->nomCmd = nomCmd;}
+
+    protected:
+        void keyPressEvent(QKeyEvent *e);
+
+    private slots:
+        void read();
+    public slots:
+        void sendCtrlC();
 
     private:
-        QPlainTextEdit *edit;
-        QLineEdit *lineEdit;
-        QProcess *cmd;
-        QMenu *menu;
-        QAction *newCmd;
-        QString nomCmd;
+        int lastLineSize;
+        QProcess cmd;
 
-    public slots:
-        void readStdOut();
-        void execCmd();
+
 };
 
 #endif

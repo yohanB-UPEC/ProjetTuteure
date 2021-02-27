@@ -2194,9 +2194,6 @@ debug/moc_ConsoleController.cpp: include/Controller/Dialog/ConsoleController.h \
 		C:/qt5-build/qtbase/include/QtWidgets/qwizard.h \
 		C:/qt5/qtbase/src/widgets/dialogs/qwizard.h \
 		C:/qt5-build/qtbase/include/QtWidgets/qtwidgetsversion.h \
-		include/View/Dialog/ConsoleDialog.h \
-		include/Model/ConsoleModel.h \
-		include/Controller/Dialog/ConsoleController.h \
 		debug/moc_predefs.h \
 		C:/qt5-build/qtbase/bin/moc.exe
 	C:\qt5-build\qtbase\bin\moc.exe $(DEFINES) --include C:/Users/Yohan/Documents/DUT2/C++/ProjetTuteure/debug/moc_predefs.h -IC:/qt5/qtbase/mkspecs/win32-g++ -IC:/Users/Yohan/Documents/DUT2/C++/ProjetTuteure -IC:/qt5-build/qtbase/include -IC:/qt5-build/qtbase/include/QtWidgets -IC:/qt5-build/qtbase/include/QtGui -IC:/qt5-build/qtbase/include/QtXml -IC:/qt5-build/qtbase/include/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include\Controller\Dialog\ConsoleController.h -o debug\moc_ConsoleController.cpp
@@ -6790,7 +6787,6 @@ debug/moc_ConsoleDialog.cpp: include/View/Dialog/ConsoleDialog.h \
 		C:/qt5-build/qtbase/include/QtWidgets/qtwidgetsversion.h \
 		include/Model/ConsoleModel.h \
 		include/Controller/Dialog/ConsoleController.h \
-		include/View/Dialog/ConsoleDialog.h \
 		debug/moc_predefs.h \
 		C:/qt5-build/qtbase/bin/moc.exe
 	C:\qt5-build\qtbase\bin\moc.exe $(DEFINES) --include C:/Users/Yohan/Documents/DUT2/C++/ProjetTuteure/debug/moc_predefs.h -IC:/qt5/qtbase/mkspecs/win32-g++ -IC:/Users/Yohan/Documents/DUT2/C++/ProjetTuteure -IC:/qt5-build/qtbase/include -IC:/qt5-build/qtbase/include/QtWidgets -IC:/qt5-build/qtbase/include/QtGui -IC:/qt5-build/qtbase/include/QtXml -IC:/qt5-build/qtbase/include/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include\View\Dialog\ConsoleDialog.h -o debug\moc_ConsoleDialog.cpp
@@ -10398,6 +10394,7 @@ debug/moc_ConsoleTabWidget.cpp: include/View/Widget/ConsoleTabWidget.h \
 		C:/qt5-build/qtbase/include/QtWidgets/QDockWidget \
 		include/View/Widget/Console.h \
 		include/Model/DIcons.h \
+		include/Model/ConsoleModel.h \
 		debug/moc_predefs.h \
 		C:/qt5-build/qtbase/bin/moc.exe
 	C:\qt5-build\qtbase\bin\moc.exe $(DEFINES) --include C:/Users/Yohan/Documents/DUT2/C++/ProjetTuteure/debug/moc_predefs.h -IC:/qt5/qtbase/mkspecs/win32-g++ -IC:/Users/Yohan/Documents/DUT2/C++/ProjetTuteure -IC:/qt5-build/qtbase/include -IC:/qt5-build/qtbase/include/QtWidgets -IC:/qt5-build/qtbase/include/QtGui -IC:/qt5-build/qtbase/include/QtXml -IC:/qt5-build/qtbase/include/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include\View\Widget\ConsoleTabWidget.h -o debug\moc_ConsoleTabWidget.cpp
@@ -40036,7 +40033,8 @@ debug/ConsoleTabWidget.o: src/View/Widget/ConsoleTabWidget.cpp include/View/Widg
 		include/View/Widget/TitleBar.h \
 		C:/qt5-build/qtbase/include/QtWidgets/QDockWidget \
 		include/View/Widget/Console.h \
-		include/Model/DIcons.h
+		include/Model/DIcons.h \
+		include/Model/ConsoleModel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\ConsoleTabWidget.o src\View\Widget\ConsoleTabWidget.cpp
 
 debug/DCodeEditor.o: src/View/Widget/DCodeEditor.cpp include/View/Widget/DCodeEditor.h \
