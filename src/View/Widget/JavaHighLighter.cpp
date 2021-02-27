@@ -7,6 +7,10 @@ JavaHighLighter::JavaHighLighter(QTextDocument *parent) : QSyntaxHighlighter(par
     //    qDebug() << "null";
     //}
     //if(menu->getClear()->isChecked())
+    /*quotationFormat.setForeground(QColor("#E6DB74"));
+    rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
+    rule.format = quotationFormat;
+    highlightingRules.append(rule);*/
         keywordFormat.setForeground(QColor("#66D9EF"));
     //else keywordFormat.setForeground(Qt::blue);
     keywordFormat.setFontItalic(true);
@@ -24,6 +28,7 @@ JavaHighLighter::JavaHighLighter(QTextDocument *parent) : QSyntaxHighlighter(par
         rule.format = keywordFormat;
         highlightingRules.append(rule);
     }
+
 
     //if(menu->getClear()->isChecked())
         keywordFormat.setForeground(QColor("#66D9EF"));
@@ -83,11 +88,6 @@ JavaHighLighter::JavaHighLighter(QTextDocument *parent) : QSyntaxHighlighter(par
 
     multiLineCommentFormat.setForeground(QColor("#75715E"));
 
-    quotationFormat.setForeground(QColor("#E6DB74"));
-    rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
-    rule.format = quotationFormat;
-    highlightingRules.append(rule);
-
     //functionFormat.setFontItalic(true);
 
     functionFormat.setForeground(QColor("#A6E22E"));
@@ -97,6 +97,8 @@ JavaHighLighter::JavaHighLighter(QTextDocument *parent) : QSyntaxHighlighter(par
 
     commentStartExpression = QRegularExpression(QStringLiteral("/\\*"));
     commentEndExpression = QRegularExpression(QStringLiteral("\\*/"));
+
+    stringsFormat.setForeground(QColor("#E6DB74"));
 }
 
 void JavaHighLighter::highlightBlock(const QString &text) {
@@ -125,5 +127,17 @@ void JavaHighLighter::highlightBlock(const QString &text) {
         }
         setFormat(startIndex, commentLength, multiLineCommentFormat);
         startIndex = text.indexOf(commentStartExpression, startIndex + commentLength);
+    }
+
+    int quote = -1;
+    for(int i = 0; i < text.length();i++){
+        if(text.at(i) == '"'){
+            if(quote == -1){
+                quote = i;
+            }else{
+                setFormat(quote, i+1-quote, stringsFormat);
+                quote = -1;
+            }
+        }
     }
 }

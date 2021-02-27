@@ -48,43 +48,15 @@ QRadioButton *MenuPref::getClear(){
 }
 
 void MenuPrefController::s_Dark(){
-    qApp->setStyle(QStyleFactory::create("Fusion"));
-
-    QPalette newPalette;
-    newPalette.setColor(QPalette::Window, QColor("#272822"));
-    newPalette.setColor(QPalette::WindowText, Qt::white);
-    newPalette.setColor(QPalette::Base, QColor("#272822"));
-    newPalette.setColor(QPalette::AlternateBase, QColor( 45,  45, 45));
-    newPalette.setColor(QPalette::PlaceholderText, QColor(127, 127, 127));
-    newPalette.setColor(QPalette::Text, Qt::white);
-    newPalette.setColor(QPalette::Button, QColor(45, 45, 45));
-    newPalette.setColor(QPalette::ButtonText, QColor(212, 212, 212));
-    newPalette.setColor(QPalette::BrightText, QColor(240, 240, 240));
-    newPalette.setColor(QPalette::Highlight, QColor(38, 79, 120));
-    newPalette.setColor(QPalette::HighlightedText, QColor(240, 240, 240));
-
-    newPalette.setColor(QPalette::Light, QColor("#272822"));
-    newPalette.setColor(QPalette::Midlight, QColor(52, 52, 52));
-    newPalette.setColor(QPalette::Dark, QColor(30, 30, 30));
-    newPalette.setColor(QPalette::Mid, QColor("#272822"));
-    newPalette.setColor(QPalette::Shadow, QColor(0, 0, 0));
-
-    newPalette.setColor(QPalette::Disabled, QPalette::Text, QColor(127, 127, 127));
-    m_mp->fen->getSnippet()->getDSnippetItem()->getNomSnippet()->setStyleSheet("color: white; font-size: 15px;");
-    m_mp->fen->getLabel()->setStyleSheet("color: white; font-size: 12px;");
-    m_mp->fen->getSnippet()->getDSnippetItem()->getCopy()->setIcon(DIcons::copyDark);
-    m_mp->fen->getSnippet()->getDSnippetItem()->getModifier()->setIcon(DIcons::modifyDark);
-    m_mp->fen->getSnippet()->getDSnippetItem()->getDel()->setIcon(DIcons::removeDark);
-    qApp->setPalette(newPalette);
+    QFile f(":/res/qss/style.qss");
+    if(f.open(QFile::ReadOnly)) {
+        qApp->setStyleSheet(QString(f.readAll()));
+        f.close();
+    }
 }
 
 void MenuPrefController::s_Clair(){
-    qApp->setPalette(QApplication::style()->standardPalette());
-    m_mp->fen->getSnippet()->getDSnippetItem()->getNomSnippet()->setStyleSheet("color: black; font-size: 15px;");
-    m_mp->fen->getLabel()->setStyleSheet("color: black; font-size: 12px;");
-    m_mp->fen->getSnippet()->getDSnippetItem()->getCopy()->setIcon(DIcons::copy);
-    m_mp->fen->getSnippet()->getDSnippetItem()->getModifier()->setIcon(DIcons::modify);
-    m_mp->fen->getSnippet()->getDSnippetItem()->getDel()->setIcon(DIcons::remove);
+    qApp->setStyleSheet("");
 }
 
 void MenuPrefController::s_Term(){

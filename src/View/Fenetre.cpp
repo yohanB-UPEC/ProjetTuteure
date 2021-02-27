@@ -76,7 +76,6 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 	this->addDockWidget(Qt::BottomDockWidgetArea,consoles);
 	this->addDockWidget(Qt::LeftDockWidgetArea,explorer);
 
-
     connect(tree,SIGNAL(doubleClicked(const QModelIndex)),controller,SLOT(doubleClickOpen(const QModelIndex)));
     connect(central,SIGNAL(tabCloseRequested(int)),controller,SLOT(closeEditor(int)));
     connect(central2,SIGNAL(tabCloseRequested(int)),controller,SLOT(closeEditor(int)));
@@ -92,9 +91,4 @@ void Fenetre::s_newCmd(){
 }
 
 void Fenetre::s_stopProc(){
-     QProcess *process = new QProcess(this);
-     process->start ("java.exe", QStringList());
-     qDebug() << process->processId();
-     //process->write(tr("taskkill /f /pid %1\n").arg(process->processId()).toLatin1());
-    //system("taskkill /im java.exe /f");
 }
