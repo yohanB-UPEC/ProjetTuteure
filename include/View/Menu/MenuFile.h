@@ -25,6 +25,9 @@ class MenuFile : public QMenu {
 		QAction *quitter;
 		MenuNew *newf;
 		Fenetre *fen;
+
+    public slots:
+        void s_open();
 };
 
 #endif

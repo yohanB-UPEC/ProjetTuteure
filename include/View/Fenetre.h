@@ -12,6 +12,8 @@
 #include "Widget/Console.h"
 #include "include/Controller/Widget/ExplorerDelegate.h"
 #include "include/View/Widget/Snippet.h"
+#include "Widget/TitleBar.h"
+#include "Widget/ConsoleTabWidget.h"
 
 class MenuFile;
 
@@ -25,30 +27,17 @@ class Fenetre : public QMainWindow {
         Controller* getController(){return this->controller;}
         MenuFile* getMenuFile(){return this->menuFile;}
         QTreeView* getExplorer(){return this->tree;}
-        Console* getConsole(){return this->console;}
         MenuPref* getMenuPref(){return this->menuPref;}
-        Snippet* getSnippet(){return this->snippet;}
-        QLabel* getLabel(){return this->lab;}
 	private:
 		MenuFile *menuFile;
 		MenuEdit *menuEdit;
 		MenuPref *menuPref;
 		MenuHelp *menuHelp;
-        Console *console;
-        Snippet *snippet;
+
         QTreeView *tree;
-        QPushButton *newCmd;
-        QPushButton *stopProc;
-        QDockWidget *consoles;
 		QTabWidget *central;
-        QTabWidget *central2;
-        QLabel *lab;
 		Model *model;
 		Controller *controller;
-
-    public slots:
-        void s_newCmd();
-        void s_stopProc();
 		
 };
 

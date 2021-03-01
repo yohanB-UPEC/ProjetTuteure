@@ -6,6 +6,9 @@
                 <DJavaFile label="Main.java"/>
                 <DJavaFile label="Location.java"/>
             </DPackage>
+            <DPackage label="fr.yohan.test2">
+                <DJavaFile label="Coord.java"/>
+            </DPackage>
         </DSourceFolder>
         <DFolder label="res"/>
         <TreeItem label="Makefile"/>

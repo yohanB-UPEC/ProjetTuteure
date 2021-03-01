@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+    <DProject label="Bonbon" path="C:/Users/Yohan/Documents/DUT2/C++/ProjetTuteure/release/Bonbon" id="552933b3-7653-4e1d-a4b9-188710cde8c6">
+        <DSourceFolder label="src">
+            <DPackage label="fr.sylarades.test">
+                <DJavaFile label="Main.java"/>
+                <DJavaFile label="Coord.java"/>
+            </DPackage>
+        </DSourceFolder>
+        <DFolder label="res"/>
+        <TreeItem label="Makefile"/>
+    </DProject>
+</Root>

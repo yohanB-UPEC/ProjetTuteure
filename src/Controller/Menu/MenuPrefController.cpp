@@ -6,6 +6,12 @@ MenuPrefController::MenuPrefController(MenuPref *mp){
     this->m_mp = mp;
 }
 
+void MenuPrefController::s_Term(){
+    ConsoleDialog cd(this->m_mp->fen->getModel()->getConsole(), this->m_mp->fen);
+    cd.exec();
+}
+
+/*
 void MenuPrefController::s_Theme(){
     QDialog *dial = new QDialog();
     const QSize size(320, 100);
@@ -135,17 +141,4 @@ void MenuPrefController::s_Term(){
     connect(fermer,SIGNAL(clicked()),dial,SLOT(reject()));
     dial->exec();
 }
-
-void MenuPrefController::parcourir(){
-    m_mp->file = QFileDialog::getOpenFileName(m_mp, tr("Selectionnez un fichier"));
-    QList<QString> list = m_mp->file.split(".");
-    if(list.size() > 0 && list.at(list.size()-1) == "exe" && m_mp->file.size() > 0){
-        m_mp->loc->setText(m_mp->file);
-        m_mp->valider->setEnabled(true);
-    } else {
-        QMessageBox msgBox(QMessageBox::Warning, "Mauvaise extension", "Mauvaise extension");
-        msgBox.setText("Le fichier doit avoir l'extension .exe (" + list.at(list.size()-1) + ")");
-        msgBox.exec();
-    }
-    m_mp->fen->getConsole()->setCmd(m_mp->file);
-}
+*/

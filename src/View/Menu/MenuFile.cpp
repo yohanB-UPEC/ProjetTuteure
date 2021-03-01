@@ -4,7 +4,7 @@
 MenuFile::MenuFile(Fenetre *fen) : QMenu("Fichier"){
 	this->fen = fen;
 	nouveau = this->addAction("New");
-	openFile = this->addAction("Open File");
+    openFile = this->addAction("Open File",this,SLOT(s_open()),QKeySequence(Qt::CTRL + Qt::Key_O));
 	recentFiles = this->addAction("Recent Files");
 	this->addSeparator();
     closeEditor = this->addAction("Close Editor",fen->getController(),SLOT(closeEditor()),QKeySequence(Qt::CTRL + Qt::Key_W));
@@ -22,4 +22,9 @@ MenuFile::MenuFile(Fenetre *fen) : QMenu("Fichier"){
 	nouveau->setMenu(newf);
 	
 	this->fen->menuBar()->addMenu(this);
+}
+
+void MenuFile::s_open(){
+    QString path = QFileDialog::getOpenFileName(fen);
+    fen->getController()->openEditor(path);
 }

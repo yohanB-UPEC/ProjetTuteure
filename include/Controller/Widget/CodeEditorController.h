@@ -9,11 +9,13 @@ class DCodeEditor;
 class CodeEditorController : public QObject {
     Q_OBJECT
     public:
-        CodeEditorController(TreeItem *item, DCodeEditor *view);
+        CodeEditorController(DCodeEditor *view,TreeItem *item);
+        CodeEditorController(DCodeEditor *view,QString path);
         void open();
         void save();
         bool close();
         bool isItem(TreeItem *test);
+        bool isFile(const QString file);
     private slots:
         void rename(QString path);
         void fileSuppr();

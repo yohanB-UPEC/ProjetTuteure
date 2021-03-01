@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QRadioButton>
 #include "include/Controller/Menu/MenuPrefController.h"
+#include "include/View/Dialog/ConsoleDialog.h"
 
 class Fenetre;
 class Console;
@@ -17,7 +18,6 @@ class MenuPref : public QMenu {
 	
 	public:
 		MenuPref(Fenetre *fen);
-        QString getNom(){return this->file;};
         QRadioButton *getClear();
 
     private:
@@ -25,11 +25,9 @@ class MenuPref : public QMenu {
         MenuPref *m_mp;
         QAction *term;
         QAction *theme;
-        QLineEdit *loc;
-        QPushButton *valider;
-        QString file = "powershell.exe";
         QRadioButton *radio2;
         MenuPrefController mp;
+
 };
 
 #endif

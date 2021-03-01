@@ -14,3 +14,8 @@ MenuPref::MenuPref(Fenetre *fen) : QMenu("Préférences"), mp(this){
     connect(term,SIGNAL(triggered()),&mp,SLOT(s_Term()));
 	
 }
+
+
+
+
+

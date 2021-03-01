@@ -1,6 +1,12 @@
 #include "include/View/Widget/DCodeEditor.h"
 
-DCodeEditor::DCodeEditor(TreeItem *item, QWidget *parent) : QPlainTextEdit(parent), cec(item,this){
+DCodeEditor::DCodeEditor(TreeItem *item, QWidget *parent) : QPlainTextEdit(parent), cec(this,item){
+    this->constructeur();
+}
+DCodeEditor::DCodeEditor(QString &path,QWidget *parent) : QPlainTextEdit(parent), cec(this,path){
+    this->constructeur();
+}
+void DCodeEditor::constructeur(){
     leftArea = new LeftLineArea(this);
     QFont font("Consolas",14,QFont::Medium,false);
     this->setFont(font);
@@ -44,17 +50,13 @@ void DCodeEditor::highlightCouplePrev(QString left, QString right){
         if(count == 0) break;
         if(next == this->document()->begin()){
             if(index == -1){
-                //map.insert(this->textCursor().position(), "expected " + left);
                 break;
             }
         }
         pos = next.previous().text().length()-1;
         next = next.previous();
     }
-    if(index == -1){
-        map.insert(this->textCursor().position(), "expected " + left);
-        return;
-    }
+
     QList<QTextEdit::ExtraSelection> extraSelections;
     QTextEdit::ExtraSelection selection;
 
@@ -73,19 +75,6 @@ void DCodeEditor::highlightCouplePrev(QString left, QString right){
 
     extraSelections.append(selection);
     setExtraSelections(extraSelections);
-}
-
-void DCodeEditor::paintEvent(QPaintEvent* event){
-    QPlainTextEdit::paintEvent(event);
-    QPainter painter(viewport());
-    painter.setPen(Qt::red);
-    painter.setFont(QFont("Arial", 15));
-    //qDebug() << map.size() << " str = " << map.value(0);
-    /*QMap<int, QString>::iterator iter = map.begin();
-    while(iter != map.end()){
-        //qDebug() << iter.value();
-        painter.drawText(100, 100, iter.value());
-    }*/
 }
 
 void DCodeEditor::highlightCoupleNext(QString left, QString right){
@@ -140,7 +129,6 @@ void DCodeEditor::highlightCouples(){
     highlightCouplePrev("(", ")");
     highlightCouplePrev("[", "]");
 }
-
 void DCodeEditor::keyPressEvent(QKeyEvent *event) {
     int pos = this->textCursor().positionInBlock();
     QChar prevChar;

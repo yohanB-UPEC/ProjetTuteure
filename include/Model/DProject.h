@@ -4,6 +4,7 @@
 #include "TreeItem.h"
 #include "DFolder.h"
 #include "DSourceFolder.h"
+#include "MakefileFactory.h"
 
 class DProject : public TreeItem {
 	
@@ -15,7 +16,7 @@ class DProject : public TreeItem {
         QString getId() {return this->m_id;}
 		void save(QXmlStreamWriter *out=nullptr);
         bool setLabel(QString label);
-
+        void createMakefile();
     protected:
         void removeFiles();
 
