@@ -25,4 +25,4 @@ class ConsoleController : public QObject{
 
 };
 
-#endif // CONSOLECONTROLLER_H
+#endif
