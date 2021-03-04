@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+    <DProject label="projet" path="C:/Users/Yohan/Documents/DUT2/C++/ProjetTuteure2/release/projet" id="a884e882-0da0-4ba7-9c08-56e82ce62a09">
+        <DSourceFolder label="src">
+            <DPackage label="fr.sylar.de">
+                <DJavaFile label="Main.java"/>
+            </DPackage>
+        </DSourceFolder>
+        <DFolder label="res"/>
+        <TreeItem label="Makefile"/>
+    </DProject>
+</Root>

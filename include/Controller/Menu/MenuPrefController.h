@@ -15,10 +15,8 @@ class MenuPrefController : public QObject {
 
     public slots:
         void s_Term();
-        /*void s_Theme();
         void s_Dark();
         void s_Clair();
-        void parcourir();*/
 };
 
 #endif

@@ -3,7 +3,6 @@
 
 #include <QtWidgets>
 
-
 class ConsoleDialog;
 
 class ConsoleController : public QObject{
