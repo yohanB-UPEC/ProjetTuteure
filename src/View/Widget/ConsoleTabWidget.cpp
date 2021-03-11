@@ -1,6 +1,6 @@
 #include "include/View/Widget/ConsoleTabWidget.h"
 
-ConsoleTabWidget::ConsoleTabWidget(TitleBar *title,ConsoleModel *model, QWidget *parent): QStackedWidget(parent), m_title(title), m_model(model){
+ConsoleTabWidget::ConsoleTabWidget(TitleBar *title, Fenetre *parent): QStackedWidget(parent), m_title(title), m_model(parent->getModel()->getConsole()), m_parent(parent){
     QPushButton *croix = new QPushButton(this->style()->standardIcon(QStyle::SP_TitleBarCloseButton),"");
     QPushButton *start = new QPushButton(this->style()->standardIcon(QStyle::SP_MediaPlay),"");
     QPushButton *stop = new QPushButton(this->style()->standardIcon(QStyle::SP_MediaStop),"");
@@ -76,7 +76,15 @@ void ConsoleTabWidget::addConsole(){
     int size = m_model->rowCount();
     for(int i = 0; i < size; i++){
         if(*(QString*)m_model->index(i,0).internalPointer() == tmp->text()){
-            this->addConsole(new Console(*(QString*)m_model->index(i,1).internalPointer()),tmp->text());
+            QString path= QDir::currentPath();
+            if(this->m_parent->getExplorer()->selectionModel()->hasSelection()){
+                TreeItem *item = (TreeItem*)this->m_parent->getExplorer()->selectionModel()->selectedIndexes()[0].internalPointer();
+                while(typeid(*item) != typeid(DProject)){
+                    item = item->parent();
+                }
+                path = item->getPath();
+            }
+            this->addConsole(new Console(*(QString*)m_model->index(i,1).internalPointer(),path),tmp->text());
             return;
         }
     }

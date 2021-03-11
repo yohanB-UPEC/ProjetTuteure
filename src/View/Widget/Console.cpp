@@ -7,8 +7,9 @@
 #include "include/View/Fenetre.h"
 
 
-Console::Console(QString &cmdLancement, QWidget *parent) : QPlainTextEdit(parent), cmd(this){
-    this->setStyleSheet("background-color: #242424; color: white; font-family: cursive; font-size: 15px;");
+Console::Console(QString &cmdLancement,QString basePath, QWidget *parent) : QPlainTextEdit(parent), cmd(this),lastLineSize(0), histoIndex(0) {
+    this->setStyleSheet("background-color: #242424; color: white; font-family: Arial, cursive; font-size: 15px;");
+    this->cmd.setWorkingDirectory(basePath);
     cmd.setProcessChannelMode(QProcess::MergedChannels);
     QStringList arg;
     QStringList tmp = cmdLancement.split(" ");
@@ -36,22 +37,54 @@ void Console::read(){
     lastLineSize = this->document()->lastBlock().text().size();
 }
 
-void Console::keyPressEvent(QKeyEvent *e){
-
-    if(e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return){
-        qDebug() << "key enter pressed";
-        QString res = this->document()->lastBlock().text().mid(lastLineSize);
+QTextCursor Console::getCurrentCmd(){
+        int res = this->document()->lastBlock().text().mid(lastLineSize).size();
         QTextCursor cursor = this->textCursor();
         cursor.movePosition(QTextCursor::End);
-        cursor.movePosition(QTextCursor::PreviousCharacter,QTextCursor::KeepAnchor,res.size());
+        cursor.movePosition(QTextCursor::PreviousCharacter,QTextCursor::KeepAnchor,res);
+        return cursor;
+}
+void Console::keyPressEvent(QKeyEvent *e){
+
+    if(e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return){    
+        QTextCursor cursor = this->getCurrentCmd();
+        QString res = cursor.selectedText();
         cursor.removeSelectedText();
         if(res == "clear"){
             this->clear();
             res= "";
         }
+        this->historique.append(res);
+        histoIndex = this->historique.size()-1;
+        currentCmd = "";
         cmd.write(QByteArray::fromStdString(res.toStdString() + "\n"));
         return;
     }
+
+    if(e->key() == Qt::Key_Up){
+    	QTextCursor cursor = this->getCurrentCmd();
+    	if(histoIndex == this->historique.size()-1){
+    		currentCmd = cursor.selectedText();
+    	}
+        cursor.removeSelectedText();
+        this->insertPlainText(this->historique[histoIndex]);
+        if(histoIndex>0)
+        	histoIndex--;
+        return;
+    }else if(e->key() == Qt::Key_Down){
+    	QTextCursor cursor = this->getCurrentCmd();
+        cursor.removeSelectedText();
+        if(histoIndex<historique.size())
+        	histoIndex++;
+        if(histoIndex==historique.size()){
+        	this->insertPlainText(currentCmd);
+        	histoIndex--;
+        }else{
+        	this->insertPlainText(this->historique[histoIndex]);
+        }
+        return;
+    }
+
     if(this->textCursor().block() != this->document()->lastBlock() ||
       (this->textCursor().positionInBlock() < lastLineSize && e->key() != Qt::Key_Backspace) ||
       (this->textCursor().positionInBlock() <= lastLineSize && e->key() == Qt::Key_Backspace)){

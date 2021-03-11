@@ -8,8 +8,9 @@ class Console : public QPlainTextEdit {
     Q_OBJECT
 
     public:
-        Console(QString &cmdLancement, QWidget *parent=nullptr);
+        Console(QString &cmdLancement,QString basePath, QWidget *parent=nullptr);
         ~Console();
+        QTextCursor getCurrentCmd();
 
     protected:
         void keyPressEvent(QKeyEvent *e);
@@ -22,6 +23,9 @@ class Console : public QPlainTextEdit {
     private:
         int lastLineSize;
         QProcess cmd;
+        QVector<QString> historique;
+        QString currentCmd;
+        int  histoIndex;
 
 
 };

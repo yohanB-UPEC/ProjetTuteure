@@ -2,6 +2,7 @@
 #define CONSOLETABWIDGET_H
 
 #include <QtWidgets>
+#include "include/View/Fenetre.h"
 #include "include/View/Widget/TitleBar.h"
 #include "include/View/Widget/Console.h"
 #include "include/Model/DIcons.h"
@@ -10,7 +11,7 @@
 class ConsoleTabWidget : public QStackedWidget {
     Q_OBJECT
     public:
-        ConsoleTabWidget(TitleBar *title,ConsoleModel *model,QWidget *parent=nullptr);
+        ConsoleTabWidget(TitleBar *title,Fenetre *parent);
         void addConsole(Console *c, const QString &label);
     public slots:
         void removeConsole(int index = -1);
@@ -22,6 +23,7 @@ class ConsoleTabWidget : public QStackedWidget {
         QComboBox m_selection;
         QPushButton m_add;
         ConsoleModel *m_model;
+        Fenetre *m_parent;
 };
 
 #endif // CONSOLETABWIDGET_H

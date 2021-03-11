@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+    <DProject label="samut" path="/export/home/senart19/bordes/Desktop/pt/ProjetTuteure/release/samut" id="515734b9-ec61-4d3f-8b82-b3457f16c4f5">
+        <DSourceFolder label="src">
+            <DPackage label="fr.yohan.test">
+                <DJavaFile label="Main.java"/>
+            </DPackage>
+        </DSourceFolder>
+        <DFolder label="res"/>
+        <TreeItem label="Makefile"/>
+    </DProject>
+</Root>

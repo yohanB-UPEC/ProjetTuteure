@@ -93,6 +93,7 @@ bool DProject::setLabel(QString label){
         QFileInfo fi(m_path);
         m_path = fi.path()+"/"+m_label;
     }
+    return res;
 }
 
 void DProject::removeFiles(){

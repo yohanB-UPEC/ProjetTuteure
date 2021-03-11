@@ -45,7 +45,7 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 
     TitleBar *consoleBar = new TitleBar();
     consoles->setTitleBarWidget(consoleBar);
-    ConsoleTabWidget *consoleTabs = new ConsoleTabWidget(consoleBar,model->getConsole());
+    ConsoleTabWidget *consoleTabs = new ConsoleTabWidget(consoleBar,this);
     consoles->setWidget(consoleTabs);
 
     snippet->setTitleBarWidget(new TitleBar());

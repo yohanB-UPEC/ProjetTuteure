@@ -127,6 +127,7 @@ bool Model::insertRow(int row, TreeItem *item, const QModelIndex &parent){
 	p->appendChild(item, row);
 	item->save();
 	emit endInsertRows();
+	return true;
 }
 
 QModelIndex Model::getItem(QString path){
