@@ -29,7 +29,7 @@ Snippet::Snippet(Fenetre* fen, QWidget *parent): QWidget(parent), sni(this){
 
     /* Création du dossier Snippet */
 
-    QString path = "Snippets";
+    QString path = QCoreApplication::applicationDirPath()+"/Snippets";
     QDir dir;
     if(dir.mkpath(path) == false){
         qDebug() << "Failed dir";
@@ -74,7 +74,7 @@ void Snippet::createDialog(){
 }
 
 void Snippet::getList(){
-    QDirIterator it("Snippets");
+    QDirIterator it(QCoreApplication::applicationDirPath()+"/Snippets");
     while(it.hasNext()){
         QFile file(it.next());
         QFileInfo info(file);

@@ -93,6 +93,7 @@ SOURCES       = src/View/Fenetre.cpp \
 		src/Controller/Controller.cpp \
 		src/View/Dialog/PackageDialog.cpp \
 		src/View/Dialog/ClassDialog.cpp \
+		src/View/Dialog/QuestionDialog.cpp \
 		src/Controller/Dialog/ProjectController.cpp \
 		src/Controller/Dialog/ClassController.cpp \
 		src/Controller/Menu/MenuEditController.cpp \
@@ -126,6 +127,7 @@ SOURCES       = src/View/Fenetre.cpp \
 		moc_Controller.cpp \
 		moc_PackageDialog.cpp \
 		moc_ClassDialog.cpp \
+		moc_QuestionDialog.cpp \
 		moc_ProjectController.cpp \
 		moc_ClassController.cpp \
 		moc_SnippetController.cpp \
@@ -174,6 +176,7 @@ OBJECTS       = Fenetre.o \
 		Controller.o \
 		PackageDialog.o \
 		ClassDialog.o \
+		QuestionDialog.o \
 		ProjectController.o \
 		ClassController.o \
 		MenuEditController.o \
@@ -208,6 +211,7 @@ OBJECTS       = Fenetre.o \
 		moc_Controller.o \
 		moc_PackageDialog.o \
 		moc_ClassDialog.o \
+		moc_QuestionDialog.o \
 		moc_ProjectController.o \
 		moc_ClassController.o \
 		moc_SnippetController.o \
@@ -425,6 +429,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		include/Controller/Controller.h \
 		include/View/Dialog/PackageDialog.h \
 		include/View/Dialog/ClassDialog.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/Controller/Dialog/ProjectController.h \
 		include/Controller/Dialog/ClassController.h \
 		include/Controller/Widget/SnippetController.h \
@@ -472,6 +477,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		src/Controller/Controller.cpp \
 		src/View/Dialog/PackageDialog.cpp \
 		src/View/Dialog/ClassDialog.cpp \
+		src/View/Dialog/QuestionDialog.cpp \
 		src/Controller/Dialog/ProjectController.cpp \
 		src/Controller/Dialog/ClassController.cpp \
 		src/Controller/Menu/MenuEditController.cpp \
@@ -859,8 +865,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents include/View/Fenetre.h include/Controller/Dialog/ConsoleController.h include/Controller/Dialog/FolderController.h include/Controller/Dialog/PackageController.h include/Controller/Menu/MenuPrefController.h include/Controller/Widget/CodeEditorController.h include/Controller/Widget/ExplorerDelegate.h include/Model/ConsoleModel.h include/Model/FilteredModel.h include/Model/Javora.h include/Model/MakefileFactory.h include/View/Dialog/ConsoleDialog.h include/View/Dialog/FolderDialog.h include/View/Menu/MenuContextExplorer.h include/View/Widget/Console.h include/View/Widget/ConsoleTabWidget.h include/View/Widget/DCodeEditor.h include/View/Widget/JavaHighLighter.h include/View/Menu/MenuFile.h include/View/Menu/MenuNew.h include/View/Menu/MenuEdit.h include/View/Menu/MenuPref.h include/View/Menu/MenuHelp.h include/View/Dialog/ProjectDialog.h include/Model/ClassElement.h include/Model/ClassSubElement.h include/Model/DAttribut.h include/Model/DMethod.h include/Model/DClass.h include/Model/DJavaFile.h include/Model/Model.h include/Model/TreeItem.h include/Model/DIcons.h include/Model/DProject.h include/Model/DSourceFolder.h include/Model/DFolder.h include/Model/DPackage.h include/Controller/Controller.h include/View/Dialog/PackageDialog.h include/View/Dialog/ClassDialog.h include/Controller/Dialog/ProjectController.h include/Controller/Dialog/ClassController.h include/Controller/Widget/SnippetController.h include/Controller/Menu/MenuEditController.h include/View/Widget/DSnippetItem.h include/View/Widget/Snippet.h include/View/Widget/TitleBar.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/View/Fenetre.cpp src/Controller/Dialog/FolderController.cpp src/Controller/Dialog/PackageController.cpp src/Controller/Menu/MenuPrefController.cpp src/Controller/Widget/CodeEditorController.cpp src/Controller/Widget/ExplorerDelegate.cpp src/Controller/Widget/snippetcontroller.cpp src/Model/ClassSubElement.cpp src/Model/ConsoleModel.cpp src/Model/DAttribut.cpp src/Model/DMethod.cpp src/Model/FilteredModel.cpp src/Model/MakefileFactory.cpp src/View/Dialog/ConsoleController.cpp src/View/Dialog/ConsoleDialog.cpp src/View/Dialog/FolderDialog.cpp src/View/Menu/MenuContextExplorer.cpp src/View/Widget/Console.cpp src/View/Widget/ConsoleTabWidget.cpp src/View/Widget/DCodeEditor.cpp src/View/Widget/JavaHighLighter.cpp src/View/Menu/MenuFile.cpp src/View/Menu/MenuNew.cpp src/View/Menu/MenuEdit.cpp src/View/Menu/MenuPref.cpp src/View/Menu/MenuHelp.cpp src/View/Dialog/ProjectDialog.cpp src/Model/DClass.cpp src/Model/DJavaFile.cpp src/Model/Model.cpp src/Model/TreeItem.cpp src/Model/DIcons.cpp src/Model/DProject.cpp src/Model/DSourceFolder.cpp src/Model/DFolder.cpp src/Model/DPackage.cpp src/Compiler/NaiveAnalyzer.cpp src/Compiler/JavaFileReader.cpp src/Controller/Controller.cpp src/View/Dialog/PackageDialog.cpp src/View/Dialog/ClassDialog.cpp src/Controller/Dialog/ProjectController.cpp src/Controller/Dialog/ClassController.cpp src/Controller/Menu/MenuEditController.cpp src/View/Widget/DSnippetItem.cpp src/View/Widget/Snippet.cpp src/View/Widget/TitleBar.cpp src/main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents include/View/Fenetre.h include/Controller/Dialog/ConsoleController.h include/Controller/Dialog/FolderController.h include/Controller/Dialog/PackageController.h include/Controller/Menu/MenuPrefController.h include/Controller/Widget/CodeEditorController.h include/Controller/Widget/ExplorerDelegate.h include/Model/ConsoleModel.h include/Model/FilteredModel.h include/Model/Javora.h include/Model/MakefileFactory.h include/View/Dialog/ConsoleDialog.h include/View/Dialog/FolderDialog.h include/View/Menu/MenuContextExplorer.h include/View/Widget/Console.h include/View/Widget/ConsoleTabWidget.h include/View/Widget/DCodeEditor.h include/View/Widget/JavaHighLighter.h include/View/Menu/MenuFile.h include/View/Menu/MenuNew.h include/View/Menu/MenuEdit.h include/View/Menu/MenuPref.h include/View/Menu/MenuHelp.h include/View/Dialog/ProjectDialog.h include/Model/ClassElement.h include/Model/ClassSubElement.h include/Model/DAttribut.h include/Model/DMethod.h include/Model/DClass.h include/Model/DJavaFile.h include/Model/Model.h include/Model/TreeItem.h include/Model/DIcons.h include/Model/DProject.h include/Model/DSourceFolder.h include/Model/DFolder.h include/Model/DPackage.h include/Controller/Controller.h include/View/Dialog/PackageDialog.h include/View/Dialog/ClassDialog.h include/View/Dialog/QuestionDialog.h include/Controller/Dialog/ProjectController.h include/Controller/Dialog/ClassController.h include/Controller/Widget/SnippetController.h include/Controller/Menu/MenuEditController.h include/View/Widget/DSnippetItem.h include/View/Widget/Snippet.h include/View/Widget/TitleBar.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/View/Fenetre.cpp src/Controller/Dialog/FolderController.cpp src/Controller/Dialog/PackageController.cpp src/Controller/Menu/MenuPrefController.cpp src/Controller/Widget/CodeEditorController.cpp src/Controller/Widget/ExplorerDelegate.cpp src/Controller/Widget/snippetcontroller.cpp src/Model/ClassSubElement.cpp src/Model/ConsoleModel.cpp src/Model/DAttribut.cpp src/Model/DMethod.cpp src/Model/FilteredModel.cpp src/Model/MakefileFactory.cpp src/View/Dialog/ConsoleController.cpp src/View/Dialog/ConsoleDialog.cpp src/View/Dialog/FolderDialog.cpp src/View/Menu/MenuContextExplorer.cpp src/View/Widget/Console.cpp src/View/Widget/ConsoleTabWidget.cpp src/View/Widget/DCodeEditor.cpp src/View/Widget/JavaHighLighter.cpp src/View/Menu/MenuFile.cpp src/View/Menu/MenuNew.cpp src/View/Menu/MenuEdit.cpp src/View/Menu/MenuPref.cpp src/View/Menu/MenuHelp.cpp src/View/Dialog/ProjectDialog.cpp src/Model/DClass.cpp src/Model/DJavaFile.cpp src/Model/Model.cpp src/Model/TreeItem.cpp src/Model/DIcons.cpp src/Model/DProject.cpp src/Model/DSourceFolder.cpp src/Model/DFolder.cpp src/Model/DPackage.cpp src/Compiler/NaiveAnalyzer.cpp src/Compiler/JavaFileReader.cpp src/Controller/Controller.cpp src/View/Dialog/PackageDialog.cpp src/View/Dialog/ClassDialog.cpp src/View/Dialog/QuestionDialog.cpp src/Controller/Dialog/ProjectController.cpp src/Controller/Dialog/ClassController.cpp src/Controller/Menu/MenuEditController.cpp src/View/Widget/DSnippetItem.cpp src/View/Widget/Snippet.cpp src/View/Widget/TitleBar.cpp src/main.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -917,9 +923,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/qt/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector-strong -fno-plt -Wall -W -dM -E -o moc_predefs.h /usr/lib/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_Fenetre.cpp moc_ConsoleController.cpp moc_FolderController.cpp moc_PackageController.cpp moc_MenuPrefController.cpp moc_CodeEditorController.cpp moc_ConsoleModel.cpp moc_Javora.cpp moc_ConsoleDialog.cpp moc_FolderDialog.cpp moc_MenuContextExplorer.cpp moc_Console.cpp moc_ConsoleTabWidget.cpp moc_DCodeEditor.cpp moc_JavaHighLighter.cpp moc_MenuFile.cpp moc_MenuNew.cpp moc_MenuEdit.cpp moc_MenuPref.cpp moc_MenuHelp.cpp moc_ProjectDialog.cpp moc_Model.cpp moc_TreeItem.cpp moc_Controller.cpp moc_PackageDialog.cpp moc_ClassDialog.cpp moc_ProjectController.cpp moc_ClassController.cpp moc_SnippetController.cpp moc_MenuEditController.cpp moc_DSnippetItem.cpp moc_Snippet.cpp moc_TitleBar.cpp
+compiler_moc_header_make_all: moc_Fenetre.cpp moc_ConsoleController.cpp moc_FolderController.cpp moc_PackageController.cpp moc_MenuPrefController.cpp moc_CodeEditorController.cpp moc_ConsoleModel.cpp moc_Javora.cpp moc_ConsoleDialog.cpp moc_FolderDialog.cpp moc_MenuContextExplorer.cpp moc_Console.cpp moc_ConsoleTabWidget.cpp moc_DCodeEditor.cpp moc_JavaHighLighter.cpp moc_MenuFile.cpp moc_MenuNew.cpp moc_MenuEdit.cpp moc_MenuPref.cpp moc_MenuHelp.cpp moc_ProjectDialog.cpp moc_Model.cpp moc_TreeItem.cpp moc_Controller.cpp moc_PackageDialog.cpp moc_ClassDialog.cpp moc_QuestionDialog.cpp moc_ProjectController.cpp moc_ClassController.cpp moc_SnippetController.cpp moc_MenuEditController.cpp moc_DSnippetItem.cpp moc_Snippet.cpp moc_TitleBar.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_Fenetre.cpp moc_ConsoleController.cpp moc_FolderController.cpp moc_PackageController.cpp moc_MenuPrefController.cpp moc_CodeEditorController.cpp moc_ConsoleModel.cpp moc_Javora.cpp moc_ConsoleDialog.cpp moc_FolderDialog.cpp moc_MenuContextExplorer.cpp moc_Console.cpp moc_ConsoleTabWidget.cpp moc_DCodeEditor.cpp moc_JavaHighLighter.cpp moc_MenuFile.cpp moc_MenuNew.cpp moc_MenuEdit.cpp moc_MenuPref.cpp moc_MenuHelp.cpp moc_ProjectDialog.cpp moc_Model.cpp moc_TreeItem.cpp moc_Controller.cpp moc_PackageDialog.cpp moc_ClassDialog.cpp moc_ProjectController.cpp moc_ClassController.cpp moc_SnippetController.cpp moc_MenuEditController.cpp moc_DSnippetItem.cpp moc_Snippet.cpp moc_TitleBar.cpp
+	-$(DEL_FILE) moc_Fenetre.cpp moc_ConsoleController.cpp moc_FolderController.cpp moc_PackageController.cpp moc_MenuPrefController.cpp moc_CodeEditorController.cpp moc_ConsoleModel.cpp moc_Javora.cpp moc_ConsoleDialog.cpp moc_FolderDialog.cpp moc_MenuContextExplorer.cpp moc_Console.cpp moc_ConsoleTabWidget.cpp moc_DCodeEditor.cpp moc_JavaHighLighter.cpp moc_MenuFile.cpp moc_MenuNew.cpp moc_MenuEdit.cpp moc_MenuPref.cpp moc_MenuHelp.cpp moc_ProjectDialog.cpp moc_Model.cpp moc_TreeItem.cpp moc_Controller.cpp moc_PackageDialog.cpp moc_ClassDialog.cpp moc_QuestionDialog.cpp moc_ProjectController.cpp moc_ClassController.cpp moc_SnippetController.cpp moc_MenuEditController.cpp moc_DSnippetItem.cpp moc_Snippet.cpp moc_TitleBar.cpp
 moc_Fenetre.cpp: include/View/Fenetre.h \
 		/usr/include/qt/QtWidgets/QtWidgets \
 		/usr/include/qt/QtWidgets/QtWidgetsDepends \
@@ -6698,11 +6704,68 @@ moc_ConsoleTabWidget.cpp: include/View/Widget/ConsoleTabWidget.h \
 		/usr/include/qt/QtWidgets/qwidgetaction.h \
 		/usr/include/qt/QtWidgets/qwizard.h \
 		/usr/include/qt/QtWidgets/qtwidgetsversion.h \
+		include/View/Fenetre.h \
+		include/Model/Model.h \
+		include/Model/TreeItem.h \
+		/usr/include/qt/QtXml/QDomElement \
+		/usr/include/qt/QtXml/qdom.h \
+		/usr/include/qt/QtXml/qtxmlglobal.h \
+		/usr/include/qt/QtXml/qtxml-config.h \
+		include/Model/DIcons.h \
+		include/Model/DProject.h \
+		include/Model/DFolder.h \
+		include/Model/DPackage.h \
+		include/Model/DJavaFile.h \
+		include/Model/DClass.h \
+		include/Model/DMethod.h \
+		include/Model/ClassSubElement.h \
+		include/Model/ClassElement.h \
+		/usr/include/qt/QtCore/QString \
+		/usr/include/qt/QtCore/QVector \
+		include/Model/DAttribut.h \
+		/usr/include/qt/QtCore/QRegularExpressionMatch \
+		/usr/include/qt/QtCore/QRegularExpression \
+		include/Model/DSourceFolder.h \
+		include/Model/MakefileFactory.h \
+		include/Model/ConsoleModel.h \
+		include/Controller/Controller.h \
+		include/View/Widget/DCodeEditor.h \
+		include/Controller/Widget/CodeEditorController.h \
+		include/View/Widget/JavaHighLighter.h \
+		include/View/Menu/MenuPref.h \
+		/usr/include/qt/QtWidgets/QMenu \
+		/usr/include/qt/QtWidgets/QLineEdit \
+		/usr/include/qt/QtWidgets/QPushButton \
+		/usr/include/qt/QtWidgets/QRadioButton \
+		include/Controller/Menu/MenuPrefController.h \
+		include/View/Dialog/ConsoleDialog.h \
+		include/Controller/Dialog/ConsoleController.h \
+		include/View/Menu/MenuContextExplorer.h \
+		include/View/Menu/MenuFile.h \
+		include/View/Menu/MenuNew.h \
+		include/View/Dialog/ProjectDialog.h \
+		include/Controller/Dialog/ProjectController.h \
+		include/View/Dialog/PackageDialog.h \
+		include/Model/Javora.h \
+		include/Controller/Dialog/PackageController.h \
+		include/Model/FilteredModel.h \
+		include/View/Dialog/ClassDialog.h \
+		include/Controller/Dialog/ClassController.h \
+		include/View/Dialog/FolderDialog.h \
+		include/Controller/Dialog/FolderController.h \
+		include/View/Menu/MenuEdit.h \
+		/usr/include/qt/QtWidgets/QTextEdit \
+		include/Controller/Menu/MenuEditController.h \
+		include/View/Menu/MenuHelp.h \
+		include/View/Widget/Console.h \
+		include/Controller/Widget/ExplorerDelegate.h \
+		include/View/Widget/Snippet.h \
+		/usr/include/qt/QtWidgets/QListView \
+		include/View/Widget/DSnippetItem.h \
+		include/Controller/Widget/SnippetController.h \
 		include/View/Widget/TitleBar.h \
 		/usr/include/qt/QtWidgets/QDockWidget \
-		include/View/Widget/Console.h \
-		include/Model/DIcons.h \
-		include/Model/ConsoleModel.h \
+		include/View/Widget/ConsoleTabWidget.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /export/home/senart19/bordes/Desktop/pt/ProjetTuteure/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/export/home/senart19/bordes/Desktop/pt/ProjetTuteure -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtXml -I/usr/include/qt/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include/View/Widget/ConsoleTabWidget.h -o moc_ConsoleTabWidget.cpp
@@ -12738,6 +12801,11 @@ moc_ClassDialog.cpp: include/View/Dialog/ClassDialog.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /export/home/senart19/bordes/Desktop/pt/ProjetTuteure/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/export/home/senart19/bordes/Desktop/pt/ProjetTuteure -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtXml -I/usr/include/qt/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include/View/Dialog/ClassDialog.h -o moc_ClassDialog.cpp
+
+moc_QuestionDialog.cpp: include/View/Dialog/QuestionDialog.h \
+		moc_predefs.h \
+		/usr/bin/moc
+	/usr/bin/moc $(DEFINES) --include /export/home/senart19/bordes/Desktop/pt/ProjetTuteure/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/export/home/senart19/bordes/Desktop/pt/ProjetTuteure -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtXml -I/usr/include/qt/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include/View/Dialog/QuestionDialog.h -o moc_QuestionDialog.cpp
 
 moc_ProjectController.cpp: include/Controller/Dialog/ProjectController.h \
 		/usr/include/qt/QtWidgets/QtWidgets \
@@ -24057,11 +24125,67 @@ ConsoleTabWidget.o: src/View/Widget/ConsoleTabWidget.cpp include/View/Widget/Con
 		/usr/include/qt/QtWidgets/qwidgetaction.h \
 		/usr/include/qt/QtWidgets/qwizard.h \
 		/usr/include/qt/QtWidgets/qtwidgetsversion.h \
-		include/View/Widget/TitleBar.h \
-		/usr/include/qt/QtWidgets/QDockWidget \
-		include/View/Widget/Console.h \
+		include/View/Fenetre.h \
+		include/Model/Model.h \
+		include/Model/TreeItem.h \
+		/usr/include/qt/QtXml/QDomElement \
+		/usr/include/qt/QtXml/qdom.h \
+		/usr/include/qt/QtXml/qtxmlglobal.h \
+		/usr/include/qt/QtXml/qtxml-config.h \
 		include/Model/DIcons.h \
-		include/Model/ConsoleModel.h
+		include/Model/DProject.h \
+		include/Model/DFolder.h \
+		include/Model/DPackage.h \
+		include/Model/DJavaFile.h \
+		include/Model/DClass.h \
+		include/Model/DMethod.h \
+		include/Model/ClassSubElement.h \
+		include/Model/ClassElement.h \
+		/usr/include/qt/QtCore/QString \
+		/usr/include/qt/QtCore/QVector \
+		include/Model/DAttribut.h \
+		/usr/include/qt/QtCore/QRegularExpressionMatch \
+		/usr/include/qt/QtCore/QRegularExpression \
+		include/Model/DSourceFolder.h \
+		include/Model/MakefileFactory.h \
+		include/Model/ConsoleModel.h \
+		include/Controller/Controller.h \
+		include/View/Widget/DCodeEditor.h \
+		include/Controller/Widget/CodeEditorController.h \
+		include/View/Widget/JavaHighLighter.h \
+		include/View/Menu/MenuPref.h \
+		/usr/include/qt/QtWidgets/QMenu \
+		/usr/include/qt/QtWidgets/QLineEdit \
+		/usr/include/qt/QtWidgets/QPushButton \
+		/usr/include/qt/QtWidgets/QRadioButton \
+		include/Controller/Menu/MenuPrefController.h \
+		include/View/Dialog/ConsoleDialog.h \
+		include/Controller/Dialog/ConsoleController.h \
+		include/View/Menu/MenuContextExplorer.h \
+		include/View/Menu/MenuFile.h \
+		include/View/Menu/MenuNew.h \
+		include/View/Dialog/ProjectDialog.h \
+		include/Controller/Dialog/ProjectController.h \
+		include/View/Dialog/PackageDialog.h \
+		include/Model/Javora.h \
+		include/Controller/Dialog/PackageController.h \
+		include/Model/FilteredModel.h \
+		include/View/Dialog/ClassDialog.h \
+		include/Controller/Dialog/ClassController.h \
+		include/View/Dialog/FolderDialog.h \
+		include/Controller/Dialog/FolderController.h \
+		include/View/Menu/MenuEdit.h \
+		/usr/include/qt/QtWidgets/QTextEdit \
+		include/Controller/Menu/MenuEditController.h \
+		include/View/Menu/MenuHelp.h \
+		include/View/Widget/Console.h \
+		include/Controller/Widget/ExplorerDelegate.h \
+		include/View/Widget/Snippet.h \
+		/usr/include/qt/QtWidgets/QListView \
+		include/View/Widget/DSnippetItem.h \
+		include/Controller/Widget/SnippetController.h \
+		include/View/Widget/TitleBar.h \
+		/usr/include/qt/QtWidgets/QDockWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ConsoleTabWidget.o src/View/Widget/ConsoleTabWidget.cpp
 
 DCodeEditor.o: src/View/Widget/DCodeEditor.cpp include/View/Widget/DCodeEditor.h \
@@ -34017,6 +34141,9 @@ ClassDialog.o: src/View/Dialog/ClassDialog.cpp include/View/Dialog/ClassDialog.h
 		include/View/Widget/ConsoleTabWidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ClassDialog.o src/View/Dialog/ClassDialog.cpp
 
+QuestionDialog.o: src/View/Dialog/QuestionDialog.cpp include/View/Dialog/QuestionDialog.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o QuestionDialog.o src/View/Dialog/QuestionDialog.cpp
+
 ProjectController.o: src/Controller/Dialog/ProjectController.cpp include/Controller/Dialog/ProjectController.h \
 		/usr/include/qt/QtWidgets/QtWidgets \
 		/usr/include/qt/QtWidgets/QtWidgetsDepends \
@@ -37602,6 +37729,9 @@ moc_PackageDialog.o: moc_PackageDialog.cpp
 
 moc_ClassDialog.o: moc_ClassDialog.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ClassDialog.o moc_ClassDialog.cpp
+
+moc_QuestionDialog.o: moc_QuestionDialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_QuestionDialog.o moc_QuestionDialog.cpp
 
 moc_ProjectController.o: moc_ProjectController.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ProjectController.o moc_ProjectController.cpp

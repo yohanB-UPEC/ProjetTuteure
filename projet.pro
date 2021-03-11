@@ -43,6 +43,7 @@ HEADERS += include/View/Fenetre.h \
     include/Controller/Controller.h \
     include/View/Dialog/PackageDialog.h \
     include/View/Dialog/ClassDialog.h \
+    include/View/Dialog/QuestionDialog.h \
     include/Controller/Dialog/ProjectController.h \
     include/Controller/Dialog/ClassController.h \
     include/Controller/Widget/SnippetController.h \
@@ -92,6 +93,7 @@ SOURCES += src/View/Fenetre.cpp \
     src/Controller/Controller.cpp \
     src/View/Dialog/PackageDialog.cpp \
     src/View/Dialog/ClassDialog.cpp \
+    src/View/Dialog/QuestionDialog.cpp \
     src/Controller/Dialog/ProjectController.cpp \
     src/Controller/Dialog/ClassController.cpp \
     src/Controller/Menu/MenuEditController.cpp \

@@ -2,6 +2,7 @@
 #define MENUCONTEXTEXPLORER_H
 
 #include "include/Model/Model.h"
+#include "include/View/Dialog/QuestionDialog.h"
 
 class Fenetre;
 

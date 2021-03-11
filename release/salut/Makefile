@@ -8,5 +8,5 @@ bin/fr/yohan/test/Main.class: src/fr/yohan/test/Main.java
 	 $(JCC) $(JFLAGS) -sourcepath src src/fr/yohan/test/Main.java
 
 jar:
-	jar cvfe samut.jar <classMain>  -C bin fr -C res
+	jar cvfe salut.jar <classMain>  -C bin fr -C res
 

@@ -8,7 +8,7 @@ SnippetController::SnippetController(Snippet *sni){
 void SnippetController::addSnippet(){
     m_sni->createDialog();
     if(m_sni->nomSnippet->text().size() == 0) return;
-    QFile file("Snippets/" + m_sni->nomSnippet->text() + ".java");
+    QFile file(QCoreApplication::applicationDirPath()+"/Snippets/" + m_sni->nomSnippet->text() + ".java");
     if(!file.open(QIODevice::ReadWrite | QIODevice::Truncate)){
         qDebug() << "file failed" << file.errorString();
     }
@@ -16,7 +16,7 @@ void SnippetController::addSnippet(){
 }
 
 void SnippetController::copyFile(QString name){
-    QFile file("Snippets/" + name + ".java");
+    QFile file(QCoreApplication::applicationDirPath()+"/Snippets/" + name + ".java");
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
         for(int i = 0; i < m_sni->listWidget->count(); i++){
             QListWidgetItem *item = m_sni->listWidget->item(i);
@@ -36,41 +36,14 @@ void SnippetController::copyFile(QString name){
     editor->appendPlainText(content);
     editor->selectAll();
     editor->copy();
-    QMessageBox msgBox(QMessageBox::Information, "fichier copié", "fichier copié");
-    msgBox.exec();
 }
 
 void SnippetController::modifyFile(QString name){
-    DCodeEditor *editor = new DCodeEditor();
-    int i = 0;
-    for(; i < m_sni->fen->getCentral()->count(); i++){
-        if(m_sni->fen->getCentral()->tabText(i) == (name + ".java")){
-            m_sni->fen->getCentral()->setCurrentWidget(m_sni->fen->getCentral()->widget(i));
-            return;
-        }
-    }
-    m_sni->fen->getCentral()->addTab(editor, name + ".java");
-    m_sni->fen->getCentral()->setCurrentWidget(m_sni->fen->getCentral()->widget(i));
-    QFile file("Snippets/" + name + ".java");
-    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
-        for(int i = 0; i < m_sni->listWidget->count(); i++){
-            QListWidgetItem *item = m_sni->listWidget->item(i);
-            QString nom = ((DSnippetItem*) m_sni->listWidget->itemWidget(item))->getNomSnippet()->text();
-            if(name == nom){
-                item->setHidden(true);
-            }
-        }
-        QMessageBox msgBox(QMessageBox::Critical, "Fichier inexistant", "Le fichier est introuvable");
-        msgBox.setText("Le fichier n'existe pas");
-        msgBox.exec();
-        return;
-    }
-    QTextStream flux(&file);
-    editor->appendPlainText(flux.readAll());
+    m_sni->fen->getController()->openEditor(QCoreApplication::applicationDirPath()+"/Snippets/" + name + ".java");
 }
 
 void SnippetController::deleteFile(QString name){
-    QDirIterator it("Snippets");
+    QDirIterator it(QCoreApplication::applicationDirPath()+"/Snippets");
     while(it.hasNext()){
         QFile file(it.next());
         QFileInfo info(file);

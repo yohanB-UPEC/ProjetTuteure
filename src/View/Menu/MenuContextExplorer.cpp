@@ -27,19 +27,19 @@ void MenuContextExplorer::s_suppr(){
     TreeItem *item = (TreeItem*)this->m_item.internalPointer();
     bool deleteFiles=true;
     if(typeid(*item) == typeid(DProject)){
-        QMessageBox msg(m_fen);
-        msg.setWindowTitle("suppression d'un projet");
-        msg.setText("Voulez-vous supprimer le projet " + item->label()+" ?");
-        msg.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-        msg.setDefaultButton(QMessageBox::No);
-        QCheckBox box("supprimer le contenu du projet sur le disque",&msg);
-        int res = msg.exec();
-        if(res == QMessageBox::No){
+        QuestionDialog dial("supression d'un projet", "Voulez-vous supprimer le projet " + item->label()+" ?","supprimer le contenu du projet sur le disque",m_fen);
+        QPushButton *yes = new QPushButton("Oui");
+        QPushButton *no = new QPushButton("Non");
+        connect(yes,SIGNAL(clicked()),&dial,SLOT(accept()));
+        connect(no,SIGNAL(clicked()),&dial,SLOT(reject()));
+        dial.getButtonLayout()->addWidget(no);
+        dial.getButtonLayout()->addWidget(yes);
+        int res = dial.exec();
+        if(res == 0){
             return;
         }
-        deleteFiles = box.isChecked();
+        deleteFiles = dial.isChecked();
     }
-    qDebug() << "MenuContextExplorer::s_suppr  item a supprimer: " << item->label() << " num=" << item->row() << "  path: "<< item->getPath() ;
     m_model->removeRows(item->row(),1,m_item.parent(),deleteFiles);
 }
 
