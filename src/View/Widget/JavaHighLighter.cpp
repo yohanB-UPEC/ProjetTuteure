@@ -31,7 +31,7 @@ JavaHighLighter::JavaHighLighter(QTextDocument *parent) : QSyntaxHighlighter(par
 
 
     //if(menu->getClear()->isChecked())
-        keywordFormat.setForeground(QColor("#66D9EF"));
+    keywordFormat.setForeground(QColor("#66D9EF"));
     //else keywordFormat.setForeground(Qt::blue);
     rule.pattern = QRegularExpression(QStringLiteral("\\b[A-Z][a-z]*\\b"));
     rule.format = keywordFormat;
@@ -81,12 +81,7 @@ JavaHighLighter::JavaHighLighter(QTextDocument *parent) : QSyntaxHighlighter(par
         highlightingRules.append(rule);
     }
 
-    singleLineCommentFormat.setForeground(QColor("#75715E"));
-    rule.pattern = QRegularExpression(QStringLiteral("//[^\n]*"));
-    rule.format = singleLineCommentFormat;
-    highlightingRules.append(rule);
-
-    multiLineCommentFormat.setForeground(QColor("#75715E"));
+    commentFormat.setForeground(QColor("#75715E"));
 
     //functionFormat.setFontItalic(true);
 
@@ -94,9 +89,6 @@ JavaHighLighter::JavaHighLighter(QTextDocument *parent) : QSyntaxHighlighter(par
     rule.pattern = QRegularExpression(QStringLiteral("\\b +[A-Za-z0-9_]+(?=\\()"));
     rule.format = functionFormat;
     highlightingRules.append(rule);
-
-    commentStartExpression = QRegularExpression(QStringLiteral("/\\*"));
-    commentEndExpression = QRegularExpression(QStringLiteral("\\*/"));
 
     stringsFormat.setForeground(QColor("#E6DB74"));
 }
@@ -112,32 +104,72 @@ void JavaHighLighter::highlightBlock(const QString &text) {
     setCurrentBlockState(0);
 
     int startIndex = 0;
-    if (previousBlockState() != 1)
-        startIndex = text.indexOf(commentStartExpression);
-
-    while (startIndex >= 0) {
-        QRegularExpressionMatch match = commentEndExpression.match(text, startIndex);
-        int endIndex = match.capturedStart();
-        int commentLength = 0;
-        if (endIndex == -1) {
+    if(previousBlockState() == 1){
+        startIndex = text.indexOf("*/");
+        if(startIndex == -1){
             setCurrentBlockState(1);
-            commentLength = text.length() - startIndex;
-        } else {
-            commentLength = endIndex - startIndex + match.capturedLength();
+            setFormat(0,text.length(),commentFormat);
+            return;
         }
-        setFormat(startIndex, commentLength, multiLineCommentFormat);
-        startIndex = text.indexOf(commentStartExpression, startIndex + commentLength);
+        startIndex+=2;
+        setFormat(0,startIndex,commentFormat);
+    }else if(previousBlockState() == 2){
+        startIndex = text.indexOf(QRegExp("\""));
+        if(startIndex == -1){
+            setCurrentBlockState(2);
+            if(text.trimmed().endsWith("\\")){
+                setFormat(0,text.length(),stringsFormat);
+            }     
+            return;
+        }
+        startIndex++;
+        setFormat(0,startIndex,stringsFormat);
     }
 
-    int quote = -1;
-    for(int i = 0; i < text.length();i++){
-        if(text.at(i) == '"'){
-            if(quote == -1){
-                quote = i;
-            }else{
-                setFormat(quote, i+1-quote, stringsFormat);
-                quote = -1;
+    for(int i = startIndex; i < text.length();i++){
+        if(text[i] == "/"){
+            if(text[i+1] == "/"){
+                setFormat(i,text.length(),commentFormat);
+                return;
+            }else if(text[i+1] == "*"){
+                int start = i;
+                bool isClose = false;
+                for(i=i+2;i < text.length();i++){
+                    if(text[i] == "*" && i+1 < text.length() && text[i+1]=="/"){
+                        i++;
+                        setFormat(start, i-start+1,commentFormat);
+                        isClose = true;
+                        break;
+                    }
+                }
+                if(!isClose){
+                    setFormat(start, text.length(),commentFormat);
+                    setCurrentBlockState(1);
+                    return;
+                }
+            }
+        }else if(text[i] == "\""){
+            int start = i;
+            for(++i;i < text.length();i++){
+                if(text[i] == "\""){
+                    setFormat(start, i-start+1,stringsFormat);
+                    break;
+                }else if(text[i] == "\\"){
+                    int j;
+                    for(j = ++i;j<text.length();j++){
+                        if(!text[j].isSpace()){
+                            break;
+                        }
+                    }
+                    if(j >= text.length()){
+                       setFormat(start, j-start,stringsFormat);
+                       setCurrentBlockState(2);
+                       return; 
+                    }
+                }
             }
         }
     }
+
+    
 }
