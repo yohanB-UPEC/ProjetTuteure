@@ -2,20 +2,21 @@
 
 DSnippetItem::DSnippetItem(QString nomLab, QListWidgetItem *item, QWidget *parent): QWidget(parent){
 
-    copy = new QPushButton(DIcons::copy, "");
+    copy = new QPushButton("");
     const QSize size = QSize(40, 40);
     copy->setFixedSize(size);
     copy->setToolTip("Copie le contenu du fichier");
 
-    modifier = new QPushButton(DIcons::modify, "");
+    modifier = new QPushButton("");
     modifier->setFixedSize(size);
     modifier->setToolTip("Modifie le contenu du fichier");
 
-    del = new QPushButton(DIcons::remove, "");
+    del = new QPushButton("");
     del->setFixedSize(size);
     del->setToolTip("Supprime le snippet");
 
     nomSnippet = new QLabel(nomLab);
+    nomSnippet->setProperty("nameSnippet", true);
     nomSnippet->setStyleSheet("font-size: 15px;");
     QHBoxLayout *layout = new QHBoxLayout();
     layout->addWidget(nomSnippet);

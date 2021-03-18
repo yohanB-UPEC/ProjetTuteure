@@ -4,6 +4,7 @@ TitleBar::TitleBar(QWidget *parent): QWidget(parent){
     m_layout.setColumnStretch(1,2);
     m_layout.addWidget(&m_title,0,0);
     this->setLayout(&m_layout);
+    this->setProperty("titlebar", true);
 
     m_layout.setContentsMargins(0,0,0,0);
     this->setContentsMargins(0,0,0,0);
@@ -21,15 +22,10 @@ void TitleBar::changeEvent(QEvent *event){
 }
 
 void TitleBar::paintEvent(QPaintEvent* event){
+    QStyleOption opt;
+    opt.init(this);
     QPainter p(this);
-    QRect rect = this->rect();
-    rect.setWidth(rect.width()-p.pen().width());
-    rect.setHeight(rect.height()-p.pen().width());
-    p.fillRect(rect,QColor(218,218,218));
-    p.setPen(QColor(185,185,185));
-    p.drawRect(rect);
-
-
+    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 }
 
 void TitleBar::addLayout(QLayout *layout){

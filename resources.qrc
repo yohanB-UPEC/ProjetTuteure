@@ -19,6 +19,5 @@
         <file>res/icons/stop.png</file>
         <file>res/icons/open.png</file>
         <file>res/icons/close.png</file>
-        <file>res/qss/style.qss</file>
     </qresource>
 </RCC>

@@ -1,5 +1,8 @@
 <RCC>
   <qresource>
+    <file>light/copy.png</file>
+    <file>light/modify.png</file>
+    <file>light/delete.png</file>
     <file>light/hmovetoolbar.svg</file>
     <file>light/vmovetoolbar.svg</file>
     <file>light/hsepartoolbar.svg</file>
@@ -83,6 +86,10 @@
     <file>dark/radio_checked_disabled.svg</file>
     <file>dark/radio_unchecked.svg</file>
     <file>dark/radio_unchecked_disabled.svg</file>
+    <file>dark/copy.png</file>
+    <file>dark/modify.png</file>
+    <file>dark/delete.png</file>
+    <file>dark/open.png</file>
     <file>light.qss</file>
     <file>dark.qss</file>
   </qresource>

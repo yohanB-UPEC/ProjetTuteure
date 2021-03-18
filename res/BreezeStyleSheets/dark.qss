@@ -1,40 +1,3 @@
-/*
- *  BreezeDark stylesheet.
- *
- *  :author: Colin Duquesnoy
- *  :editor: Alex Huszagh
- *  :license: MIT, see LICENSE.md
- *
- *  This is originally a fork of QDarkStyleSheet, and is based on Breeze/
- *  BreezeDark color scheme, but is in no way affiliated with KDE.
- *
- * ---------------------------------------------------------------------
- *  The MIT License (MIT)
- *
- * Copyright (c) <2013-2014> <Colin Duquesnoy>
- * Copyright (c) <2015-2016> <Alex Huszagh>
- *
- * Permission is hereby granted, free of charge, to any person obtaining
- * a copy of this software and associated documentation files (the
- * "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish,
- * distribute, sublicense, and/or sell copies of the Software, and to
- * permit persons to whom the Software is furnished to do so, subject to
- * the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
- * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
- * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
- * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
- * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
- * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
- * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * ---------------------------------------------------------------------
- */
-
 QToolTip
 {
     border: 0.1ex solid #eff0f1;
@@ -45,11 +8,15 @@ QToolTip
     opacity: 200;
 }
 
+QObject::separator:hover {
+  background: #39a5dd;
+}
+
 QWidget
 {
     color: #eff0f1;
     background-color: #31363b;
-    selection-background-color:#3daee9;
+    selection-background-color:#3e4f5e;
     selection-color: #eff0f1;
     background-clip: border;
     border-image: none;
@@ -59,13 +26,13 @@ QWidget
 
 QWidget:item:hover
 {
-    background-color: #3daee9;
+    background-color: #3e4f5e;
     color: #eff0f1;
 }
 
 QWidget:item:selected
 {
-    background-color: #3daee9;
+    background-color: #3e4f5e;
 }
 
 
@@ -309,7 +276,7 @@ QMenu::indicator:exclusive:checked:selected
 QMenu::right-arrow
 {
     margin: 0.5ex;
-    border-image: url(:/light/right_arrow.svg);
+    border-image: url(:/light/open.png);
     width: 0.6ex;
     height: 0.9ex;
 }
@@ -396,7 +363,7 @@ QScrollBar::handle:horizontal
 QScrollBar::add-line:horizontal
 {
     margin: 0px 0.3ex 0px 0.3ex;
-    border-image: url(:/dark/right_arrow_disabled.svg);
+    border-image: url(:/dark/open.png);
     width: 1ex;
     height: 1ex;
     subcontrol-position: right;
@@ -525,7 +492,7 @@ QTextEdit
 
 QPlainTextEdit
 {
-    background-color: #232629;;
+    background-color: #232629;
     color: #eff0f1;
     border-radius: 0.2ex;
     border: 0.1ex solid #76797c;
@@ -537,6 +504,10 @@ QHeaderView::section
     color: #eff0f1;
     padding: 0.5ex;
     border: 0.1ex solid #76797c;
+}
+
+QListWidget::item QPushButton::first{
+    border-image: url(:/dark/copy.png);    
 }
 
 QSizeGrip
@@ -552,20 +523,21 @@ QMainWindow::separator
     color: white;
     padding-left: 0.4ex;
     spacing: 0.2ex;
-    border: 0.1ex dashed #76797c;
+  
 }
 
 QMainWindow::separator:hover
 {
 
-    background-color: #787876;
+    background-color: #39a5dd;
+    width: 2px;
     color: white;
     padding-left: 0.4ex;
     border: 0.1ex solid #76797c;
     spacing: 0.2ex;
 }
 
-QMenu::separator
+QMenu::separator        
 {
     height: 0.1ex;
     background-color: #76797c;
@@ -591,6 +563,7 @@ QFrame[frameShape="6"]  /* QFrame::StyledPanel == 0x0006 */
 
 QStackedWidget
 {
+    min-width: 200px;
     border: 0.1ex transparent black;
 }
 
@@ -674,7 +647,6 @@ QComboBox
     border: 0.1ex solid #76797c;
     border-radius: 0.2ex;
     padding: 0.5ex;
-    min-width: 7.5ex;
 }
 
 QPushButton:checked
@@ -820,9 +792,28 @@ QAbstractSpinBox::down-arrow:hover
     width: 0.9ex;
     height: 0.6ex;
 }
+*[nameSnippet="true"]{
+    background: transparent;
+    color: white;
+    border: 0ex solid black;
+}
+
+*[titlebar="true"] QPushButton{
+    background: transparent;
+    border-top: #454b52;
+    border-bottom: #454b52;
+}
+
+*[titlebar="true"]{
+    background: #232629;
+    border: 1px solid #454b52;
+    min-height: 20px;
+
+}
 
 QLabel
 {
+    background: transparent;
     border: 0ex solid black;
 }
 
@@ -1121,7 +1112,7 @@ QTabBar::tab:right:!selected:first:hover
 
 QTabBar QToolButton::right-arrow:enabled
 {
-    border-image: url(:/dark/right_arrow.svg);
+    border-image: url(:/dark/open.png);
 }
 
 QTabBar QToolButton::left-arrow:enabled
@@ -1131,7 +1122,7 @@ QTabBar QToolButton::left-arrow:enabled
 
 QTabBar QToolButton::right-arrow:disabled
 {
-    border-image: url(:/dark/right_arrow_disabled.svg);
+    border-image: url(:/dark/open.png);
 }
 
 QTabBar QToolButton::left-arrow:disabled
@@ -1183,6 +1174,7 @@ QDockWidget::close-button:pressed
 QTreeView,
 QListView
 {
+    margin-top: 10px;
     border: 0.1ex solid #76797c;
     background-color: #232629;
 }
@@ -1216,40 +1208,11 @@ QTreeView::branch:open:has-children:has-siblings
     image: url(:/dark/branch_open.svg);
 }
 
-/*
-QTreeView::branch:has-siblings:!adjoins-item {
-        background: cyan;
-}
-
-QTreeView::branch:has-siblings:adjoins-item {
-        background: red;
-}
-
-QTreeView::branch:!has-children:!has-siblings:adjoins-item {
-        background: blue;
-}
-
-QTreeView::branch:closed:has-children:has-siblings {
-        background: pink;
-}
-
-QTreeView::branch:has-children:!has-siblings:closed {
-        background: gray;
-}
-
-QTreeView::branch:open:has-children:has-siblings {
-        background: magenta;
-}
-
-QTreeView::branch:open:has-children:!has-siblings {
-        background: green;
-}
-*/
-
 QTableView::item,
 QListView::item,
 QTreeView::item
 {
+    background: #232629;
     padding: 0.3ex;
 }
 
@@ -1257,7 +1220,7 @@ QTableView::item:!selected:hover,
 QListView::item:!selected:hover,
 QTreeView::item:!selected:hover
 {
-    background-color: rgba(61, 173, 232, 0.2);
+    background-color: #3b3b3b;
     outline: 0;
     color: #eff0f1;
     padding: 0.3ex;
@@ -1275,7 +1238,7 @@ QSlider::groove:horizontal
 
 QSlider::handle:horizontal
 {
-    background: #232629;
+    background: red;
     border: 0.1ex solid #626568;
     width: 1.6ex;
     height: 1.6ex;
@@ -1414,7 +1377,7 @@ QTableView::item:pressed,
 QListView::item:pressed,
 QTreeView::item:pressed
 {
-    background: #3daee9;
+    background: #3e4f5e;
     color: #eff0f1;
 }
 
@@ -1422,14 +1385,14 @@ QTableView::item:selected:active,
 QTreeView::item:selected:active,
 QListView::item:selected:active
 {
-    background: #3daee9;
+    background: #3e4f5e;
     color: #eff0f1;
 }
 
 QListView::item:selected:hover,
 QTreeView::item:selected:hover
 {
-    background-color: #47b8f3;
+    background-color: #3e4f5e;
     color: #eff0f1;
 }
 

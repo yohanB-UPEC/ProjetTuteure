@@ -17,7 +17,6 @@ class MenuPrefController : public QObject {
         void s_Term();
         void s_Dark();
         void s_Clair();
-        void s_DarkJeremy();
 };
 
 #endif

@@ -7,7 +7,7 @@ ConsoleTabWidget::ConsoleTabWidget(TitleBar *title, Fenetre *parent): QStackedWi
     m_add.setIcon(DIcons::add);
     croix->setPalette(QPalette(Qt::red));
     QHBoxLayout *layout = new QHBoxLayout;
-    m_selection.setMinimumWidth(150);
+    m_selection.setMinimumWidth(200);
     layout->addWidget(&m_selection);
     layout->addWidget(croix);
     layout->addWidget(start);

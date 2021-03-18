@@ -31,11 +31,4 @@ void MenuPrefController::s_Clair(){
     }
 }
 
-void MenuPrefController::s_DarkJeremy(){
-    QFile f(":/res/qss/style.qss");
-    if(f.open(QFile::ReadOnly)) {
-        qApp->setStyleSheet(QString(f.readAll()));
-        f.close();
-    }
-}
 

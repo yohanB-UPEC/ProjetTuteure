@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+    <DProject label="sa" path="/export/home/senart19/varange/public_html/ProjetTuteure/debug/sa" id="7e7b77db-ac62-4b7e-b733-12e200c63646">
+        <DSourceFolder label="src"/>
+        <DFolder label="res"/>
+        <TreeItem label="Makefile"/>
+    </DProject>
+</Root>
