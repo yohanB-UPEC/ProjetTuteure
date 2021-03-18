@@ -1,7 +1,8 @@
 
 QT += core gui widgets xml
 CONFIG += console
-RESOURCES = resources.qrc
+RESOURCES = resources.qrc \
+            res/BreezeStyleSheets/breeze.qrc
 
 HEADERS += include/View/Fenetre.h \
     include/Controller/Dialog/ConsoleController.h \

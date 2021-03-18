@@ -16,7 +16,7 @@ QRadioButton *MenuPref::getClear(){
 }
 
 void MenuPrefController::s_Dark(){
-    QFile f(":/res/qss/style.qss");
+    QFile f(":dark.qss");
     if(f.open(QFile::ReadOnly)) {
         qApp->setStyleSheet(QString(f.readAll()));
         f.close();
@@ -24,7 +24,18 @@ void MenuPrefController::s_Dark(){
 }
 
 void MenuPrefController::s_Clair(){
-    qApp->setStyleSheet("");
+    QFile f(":light.qss");
+    if(f.open(QFile::ReadOnly)) {
+        qApp->setStyleSheet(QString(f.readAll()));
+        f.close();
+    }
 }
 
+void MenuPrefController::s_DarkJeremy(){
+    QFile f(":/res/qss/style.qss");
+    if(f.open(QFile::ReadOnly)) {
+        qApp->setStyleSheet(QString(f.readAll()));
+        f.close();
+    }
+}
 

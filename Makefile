@@ -101,6 +101,7 @@ SOURCES       = src/View/Fenetre.cpp \
 		src/View/Widget/Snippet.cpp \
 		src/View/Widget/TitleBar.cpp \
 		src/main.cpp qrc_resources.cpp \
+		qrc_breeze.cpp \
 		moc_Fenetre.cpp \
 		moc_ConsoleController.cpp \
 		moc_FolderController.cpp \
@@ -185,6 +186,7 @@ OBJECTS       = Fenetre.o \
 		TitleBar.o \
 		main.o \
 		qrc_resources.o \
+		qrc_breeze.o \
 		moc_Fenetre.o \
 		moc_ConsoleController.o \
 		moc_FolderController.o \
@@ -668,6 +670,7 @@ Makefile: projet.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/mkspec
 		/usr/lib/qt/mkspecs/features/lex.prf \
 		projet.pro \
 		resources.qrc \
+		res/BreezeStyleSheets/breeze.qrc \
 		/usr/lib/libQt5Widgets.prl \
 		/usr/lib/libQt5Gui.prl \
 		/usr/lib/libQt5Xml.prl \
@@ -845,6 +848,7 @@ Makefile: projet.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/mkspec
 /usr/lib/qt/mkspecs/features/lex.prf:
 projet.pro:
 resources.qrc:
+res/BreezeStyleSheets/breeze.qrc:
 /usr/lib/libQt5Widgets.prl:
 /usr/lib/libQt5Gui.prl:
 /usr/lib/libQt5Xml.prl:
@@ -863,7 +867,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents resources.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents resources.qrc res/BreezeStyleSheets/breeze.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents include/View/Fenetre.h include/Controller/Dialog/ConsoleController.h include/Controller/Dialog/FolderController.h include/Controller/Dialog/PackageController.h include/Controller/Menu/MenuPrefController.h include/Controller/Widget/CodeEditorController.h include/Controller/Widget/ExplorerDelegate.h include/Model/ConsoleModel.h include/Model/FilteredModel.h include/Model/Javora.h include/Model/MakefileFactory.h include/View/Dialog/ConsoleDialog.h include/View/Dialog/FolderDialog.h include/View/Menu/MenuContextExplorer.h include/View/Widget/Console.h include/View/Widget/ConsoleTabWidget.h include/View/Widget/DCodeEditor.h include/View/Widget/JavaHighLighter.h include/View/Menu/MenuFile.h include/View/Menu/MenuNew.h include/View/Menu/MenuEdit.h include/View/Menu/MenuPref.h include/View/Menu/MenuHelp.h include/View/Dialog/ProjectDialog.h include/Model/ClassElement.h include/Model/ClassSubElement.h include/Model/DAttribut.h include/Model/DMethod.h include/Model/DClass.h include/Model/DJavaFile.h include/Model/Model.h include/Model/TreeItem.h include/Model/DIcons.h include/Model/DProject.h include/Model/DSourceFolder.h include/Model/DFolder.h include/Model/DPackage.h include/Controller/Controller.h include/View/Dialog/PackageDialog.h include/View/Dialog/ClassDialog.h include/View/Dialog/QuestionDialog.h include/Controller/Dialog/ProjectController.h include/Controller/Dialog/ClassController.h include/Controller/Widget/SnippetController.h include/Controller/Menu/MenuEditController.h include/View/Widget/DSnippetItem.h include/View/Widget/Snippet.h include/View/Widget/TitleBar.h $(DISTDIR)/
 	$(COPY_FILE) --parents src/View/Fenetre.cpp src/Controller/Dialog/FolderController.cpp src/Controller/Dialog/PackageController.cpp src/Controller/Menu/MenuPrefController.cpp src/Controller/Widget/CodeEditorController.cpp src/Controller/Widget/ExplorerDelegate.cpp src/Controller/Widget/snippetcontroller.cpp src/Model/ClassSubElement.cpp src/Model/ConsoleModel.cpp src/Model/DAttribut.cpp src/Model/DMethod.cpp src/Model/FilteredModel.cpp src/Model/MakefileFactory.cpp src/View/Dialog/ConsoleController.cpp src/View/Dialog/ConsoleDialog.cpp src/View/Dialog/FolderDialog.cpp src/View/Menu/MenuContextExplorer.cpp src/View/Widget/Console.cpp src/View/Widget/ConsoleTabWidget.cpp src/View/Widget/DCodeEditor.cpp src/View/Widget/JavaHighLighter.cpp src/View/Menu/MenuFile.cpp src/View/Menu/MenuNew.cpp src/View/Menu/MenuEdit.cpp src/View/Menu/MenuPref.cpp src/View/Menu/MenuHelp.cpp src/View/Dialog/ProjectDialog.cpp src/Model/DClass.cpp src/Model/DJavaFile.cpp src/Model/Model.cpp src/Model/TreeItem.cpp src/Model/DIcons.cpp src/Model/DProject.cpp src/Model/DSourceFolder.cpp src/Model/DFolder.cpp src/Model/DPackage.cpp src/Compiler/NaiveAnalyzer.cpp src/Compiler/JavaFileReader.cpp src/Controller/Controller.cpp src/View/Dialog/PackageDialog.cpp src/View/Dialog/ClassDialog.cpp src/View/Dialog/QuestionDialog.cpp src/Controller/Dialog/ProjectController.cpp src/Controller/Dialog/ClassController.cpp src/Controller/Menu/MenuEditController.cpp src/View/Widget/DSnippetItem.cpp src/View/Widget/Snippet.cpp src/View/Widget/TitleBar.cpp src/main.cpp $(DISTDIR)/
@@ -890,9 +894,9 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all: qrc_resources.cpp
+compiler_rcc_make_all: qrc_resources.cpp qrc_breeze.cpp
 compiler_rcc_clean:
-	-$(DEL_FILE) qrc_resources.cpp
+	-$(DEL_FILE) qrc_resources.cpp qrc_breeze.cpp
 qrc_resources.cpp: resources.qrc \
 		/usr/bin/rcc \
 		res/qss/style.qss \
@@ -916,6 +920,95 @@ qrc_resources.cpp: resources.qrc \
 		res/icons/projet.png \
 		res/icons/stop.png
 	/usr/bin/rcc -name resources resources.qrc -o qrc_resources.cpp
+
+qrc_breeze.cpp: res/BreezeStyleSheets/breeze.qrc \
+		/usr/bin/rcc \
+		res/BreezeStyleSheets/light.qss \
+		res/BreezeStyleSheets/dark.qss \
+		res/BreezeStyleSheets/light/checkbox_checked_disabled.svg \
+		res/BreezeStyleSheets/light/sizegrip.svg \
+		res/BreezeStyleSheets/light/radio_checked-hover.svg \
+		res/BreezeStyleSheets/light/undock-hover.svg \
+		res/BreezeStyleSheets/light/stylesheet-branch-more.svg \
+		res/BreezeStyleSheets/light/down_arrow.svg \
+		res/BreezeStyleSheets/light/branch_closed-on.svg \
+		res/BreezeStyleSheets/light/checkbox_unchecked_disabled.svg \
+		res/BreezeStyleSheets/light/branch_open.svg \
+		res/BreezeStyleSheets/light/left_arrow.svg \
+		res/BreezeStyleSheets/light/stylesheet-branch-end.svg \
+		res/BreezeStyleSheets/light/stylesheet-branch-end-open.svg \
+		res/BreezeStyleSheets/light/undock.svg \
+		res/BreezeStyleSheets/light/checkbox_indeterminate_disabled.svg \
+		res/BreezeStyleSheets/light/hsepartoolbar.svg \
+		res/BreezeStyleSheets/light/right_arrow.svg \
+		res/BreezeStyleSheets/light/checkbox_indeterminate-hover.svg \
+		res/BreezeStyleSheets/light/checkbox_unchecked-hover.svg \
+		res/BreezeStyleSheets/light/checkbox_indeterminate.svg \
+		res/BreezeStyleSheets/light/stylesheet-vline.svg \
+		res/BreezeStyleSheets/light/branch_closed.svg \
+		res/BreezeStyleSheets/light/down_arrow_disabled.svg \
+		res/BreezeStyleSheets/light/right_arrow_disabled.svg \
+		res/BreezeStyleSheets/light/down_arrow-hover.svg \
+		res/BreezeStyleSheets/light/branch_open-on.svg \
+		res/BreezeStyleSheets/light/stylesheet-branch-end-closed.svg \
+		res/BreezeStyleSheets/light/up_arrow-hover.svg \
+		res/BreezeStyleSheets/light/checkbox_checked-hover.svg \
+		res/BreezeStyleSheets/light/vsepartoolbars.svg \
+		res/BreezeStyleSheets/light/transparent.svg \
+		res/BreezeStyleSheets/light/close.svg \
+		res/BreezeStyleSheets/light/radio_unchecked-hover.svg \
+		res/BreezeStyleSheets/light/vmovetoolbar.svg \
+		res/BreezeStyleSheets/light/radio_checked_disabled.svg \
+		res/BreezeStyleSheets/light/checkbox_checked.svg \
+		res/BreezeStyleSheets/light/up_arrow_disabled.svg \
+		res/BreezeStyleSheets/light/close-pressed.svg \
+		res/BreezeStyleSheets/light/up_arrow.svg \
+		res/BreezeStyleSheets/light/left_arrow_disabled.svg \
+		res/BreezeStyleSheets/light/close-hover.svg \
+		res/BreezeStyleSheets/light/radio_unchecked_disabled.svg \
+		res/BreezeStyleSheets/light/hmovetoolbar.svg \
+		res/BreezeStyleSheets/light/radio_checked.svg \
+		res/BreezeStyleSheets/dark/checkbox_checked_disabled.svg \
+		res/BreezeStyleSheets/dark/sizegrip.svg \
+		res/BreezeStyleSheets/dark/undock-hover.svg \
+		res/BreezeStyleSheets/dark/stylesheet-branch-more.svg \
+		res/BreezeStyleSheets/dark/down_arrow.svg \
+		res/BreezeStyleSheets/dark/radio_unchecked.svg \
+		res/BreezeStyleSheets/dark/branch_closed-on.svg \
+		res/BreezeStyleSheets/dark/checkbox_unchecked_disabled.svg \
+		res/BreezeStyleSheets/dark/branch_open.svg \
+		res/BreezeStyleSheets/dark/left_arrow.svg \
+		res/BreezeStyleSheets/dark/stylesheet-branch-end.svg \
+		res/BreezeStyleSheets/dark/stylesheet-branch-end-open.svg \
+		res/BreezeStyleSheets/dark/undock.svg \
+		res/BreezeStyleSheets/dark/checkbox_indeterminate_disabled.svg \
+		res/BreezeStyleSheets/dark/hsepartoolbar.svg \
+		res/BreezeStyleSheets/dark/right_arrow.svg \
+		res/BreezeStyleSheets/dark/checkbox_indeterminate.svg \
+		res/BreezeStyleSheets/dark/stylesheet-vline.svg \
+		res/BreezeStyleSheets/dark/branch_closed.svg \
+		res/BreezeStyleSheets/dark/down_arrow_disabled.svg \
+		res/BreezeStyleSheets/dark/right_arrow_disabled.svg \
+		res/BreezeStyleSheets/dark/down_arrow-hover.svg \
+		res/BreezeStyleSheets/dark/branch_open-on.svg \
+		res/BreezeStyleSheets/dark/stylesheet-branch-end-closed.svg \
+		res/BreezeStyleSheets/dark/up_arrow-hover.svg \
+		res/BreezeStyleSheets/dark/vsepartoolbars.svg \
+		res/BreezeStyleSheets/dark/transparent.svg \
+		res/BreezeStyleSheets/dark/close.svg \
+		res/BreezeStyleSheets/dark/vmovetoolbar.svg \
+		res/BreezeStyleSheets/dark/radio_checked_disabled.svg \
+		res/BreezeStyleSheets/dark/checkbox_checked.svg \
+		res/BreezeStyleSheets/dark/up_arrow_disabled.svg \
+		res/BreezeStyleSheets/dark/close-pressed.svg \
+		res/BreezeStyleSheets/dark/up_arrow.svg \
+		res/BreezeStyleSheets/dark/left_arrow_disabled.svg \
+		res/BreezeStyleSheets/dark/close-hover.svg \
+		res/BreezeStyleSheets/dark/checkbox_unchecked.svg \
+		res/BreezeStyleSheets/dark/radio_unchecked_disabled.svg \
+		res/BreezeStyleSheets/dark/radio_checked.svg \
+		res/BreezeStyleSheets/dark/hmovetoolbar.svg
+	/usr/bin/rcc -name breeze res/BreezeStyleSheets/breeze.qrc -o qrc_breeze.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
@@ -1422,6 +1515,7 @@ moc_Fenetre.cpp: include/View/Fenetre.h \
 		include/View/Dialog/ConsoleDialog.h \
 		include/Controller/Dialog/ConsoleController.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
 		include/View/Dialog/ProjectDialog.h \
@@ -5776,6 +5870,7 @@ moc_MenuContextExplorer.cpp: include/View/Menu/MenuContextExplorer.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/View/Dialog/QuestionDialog.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /export/home/senart19/bordes/Desktop/pt/ProjetTuteure/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/export/home/senart19/bordes/Desktop/pt/ProjetTuteure -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtXml -I/usr/include/qt/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include/View/Menu/MenuContextExplorer.h -o moc_MenuContextExplorer.cpp
@@ -6741,6 +6836,7 @@ moc_ConsoleTabWidget.cpp: include/View/Widget/ConsoleTabWidget.h \
 		include/View/Dialog/ConsoleDialog.h \
 		include/Controller/Dialog/ConsoleController.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
 		include/View/Dialog/ProjectDialog.h \
@@ -8230,6 +8326,7 @@ moc_MenuFile.cpp: include/View/Menu/MenuFile.h \
 		include/View/Dialog/ConsoleDialog.h \
 		include/Controller/Dialog/ConsoleController.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuEdit.h \
 		/usr/include/qt/QtWidgets/QTextEdit \
@@ -8755,6 +8852,7 @@ moc_MenuNew.cpp: include/View/Menu/MenuNew.h \
 		include/View/Dialog/ConsoleDialog.h \
 		include/Controller/Dialog/ConsoleController.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
 		include/View/Dialog/FolderDialog.h \
@@ -11782,6 +11880,7 @@ moc_Controller.cpp: include/Controller/Controller.h \
 		/usr/include/qt/QtCore/QRegularExpression \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
+		include/View/Dialog/QuestionDialog.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /export/home/senart19/bordes/Desktop/pt/ProjetTuteure/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/export/home/senart19/bordes/Desktop/pt/ProjetTuteure -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtXml -I/usr/include/qt/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include/Controller/Controller.h -o moc_Controller.cpp
@@ -12776,6 +12875,7 @@ moc_ClassDialog.cpp: include/View/Dialog/ClassDialog.h \
 		include/View/Dialog/ConsoleDialog.h \
 		include/Controller/Dialog/ConsoleController.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
 		include/View/Dialog/ProjectDialog.h \
@@ -12803,6 +12903,465 @@ moc_ClassDialog.cpp: include/View/Dialog/ClassDialog.h \
 	/usr/bin/moc $(DEFINES) --include /export/home/senart19/bordes/Desktop/pt/ProjetTuteure/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/export/home/senart19/bordes/Desktop/pt/ProjetTuteure -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtXml -I/usr/include/qt/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include/View/Dialog/ClassDialog.h -o moc_ClassDialog.cpp
 
 moc_QuestionDialog.cpp: include/View/Dialog/QuestionDialog.h \
+		/usr/include/qt/QtWidgets/QtWidgets \
+		/usr/include/qt/QtWidgets/QtWidgetsDepends \
+		/usr/include/qt/QtCore/QtCore \
+		/usr/include/qt/QtCore/QtCoreDepends \
+		/usr/include/qt/QtCore/qglobal.h \
+		/usr/include/qt/QtCore/qconfig-bootstrapped.h \
+		/usr/include/qt/QtCore/qconfig.h \
+		/usr/include/qt/QtCore/qtcore-config.h \
+		/usr/include/qt/QtCore/qsystemdetection.h \
+		/usr/include/qt/QtCore/qprocessordetection.h \
+		/usr/include/qt/QtCore/qcompilerdetection.h \
+		/usr/include/qt/QtCore/qtypeinfo.h \
+		/usr/include/qt/QtCore/qsysinfo.h \
+		/usr/include/qt/QtCore/qlogging.h \
+		/usr/include/qt/QtCore/qflags.h \
+		/usr/include/qt/QtCore/qatomic.h \
+		/usr/include/qt/QtCore/qbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt/QtCore/qgenericatomic.h \
+		/usr/include/qt/QtCore/qatomic_cxx11.h \
+		/usr/include/qt/QtCore/qatomic_msvc.h \
+		/usr/include/qt/QtCore/qglobalstatic.h \
+		/usr/include/qt/QtCore/qmutex.h \
+		/usr/include/qt/QtCore/qnumeric.h \
+		/usr/include/qt/QtCore/qversiontagging.h \
+		/usr/include/qt/QtCore/qabstractanimation.h \
+		/usr/include/qt/QtCore/qobject.h \
+		/usr/include/qt/QtCore/qobjectdefs.h \
+		/usr/include/qt/QtCore/qnamespace.h \
+		/usr/include/qt/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt/QtCore/qstring.h \
+		/usr/include/qt/QtCore/qchar.h \
+		/usr/include/qt/QtCore/qbytearray.h \
+		/usr/include/qt/QtCore/qrefcount.h \
+		/usr/include/qt/QtCore/qarraydata.h \
+		/usr/include/qt/QtCore/qstringliteral.h \
+		/usr/include/qt/QtCore/qstringalgorithms.h \
+		/usr/include/qt/QtCore/qstringview.h \
+		/usr/include/qt/QtCore/qstringbuilder.h \
+		/usr/include/qt/QtCore/qlist.h \
+		/usr/include/qt/QtCore/qalgorithms.h \
+		/usr/include/qt/QtCore/qiterator.h \
+		/usr/include/qt/QtCore/qhashfunctions.h \
+		/usr/include/qt/QtCore/qpair.h \
+		/usr/include/qt/QtCore/qbytearraylist.h \
+		/usr/include/qt/QtCore/qstringlist.h \
+		/usr/include/qt/QtCore/qregexp.h \
+		/usr/include/qt/QtCore/qstringmatcher.h \
+		/usr/include/qt/QtCore/qcoreevent.h \
+		/usr/include/qt/QtCore/qscopedpointer.h \
+		/usr/include/qt/QtCore/qmetatype.h \
+		/usr/include/qt/QtCore/qvarlengtharray.h \
+		/usr/include/qt/QtCore/qcontainerfwd.h \
+		/usr/include/qt/QtCore/qobject_impl.h \
+		/usr/include/qt/QtCore/qabstracteventdispatcher.h \
+		/usr/include/qt/QtCore/qeventloop.h \
+		/usr/include/qt/QtCore/qabstractitemmodel.h \
+		/usr/include/qt/QtCore/qvariant.h \
+		/usr/include/qt/QtCore/qmap.h \
+		/usr/include/qt/QtCore/qdebug.h \
+		/usr/include/qt/QtCore/qhash.h \
+		/usr/include/qt/QtCore/qtextstream.h \
+		/usr/include/qt/QtCore/qiodevice.h \
+		/usr/include/qt/QtCore/qlocale.h \
+		/usr/include/qt/QtCore/qshareddata.h \
+		/usr/include/qt/QtCore/qvector.h \
+		/usr/include/qt/QtCore/qpoint.h \
+		/usr/include/qt/QtCore/qset.h \
+		/usr/include/qt/QtCore/qcontiguouscache.h \
+		/usr/include/qt/QtCore/qsharedpointer.h \
+		/usr/include/qt/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt/QtCore/qabstractnativeeventfilter.h \
+		/usr/include/qt/QtCore/qabstractproxymodel.h \
+		/usr/include/qt/QtCore/qabstractstate.h \
+		/usr/include/qt/QtCore/qabstracttransition.h \
+		/usr/include/qt/QtCore/qanimationgroup.h \
+		/usr/include/qt/QtCore/qarraydataops.h \
+		/usr/include/qt/QtCore/qarraydatapointer.h \
+		/usr/include/qt/QtCore/qbasictimer.h \
+		/usr/include/qt/QtCore/qbitarray.h \
+		/usr/include/qt/QtCore/qbuffer.h \
+		/usr/include/qt/QtCore/qbytearraymatcher.h \
+		/usr/include/qt/QtCore/qcache.h \
+		/usr/include/qt/QtCore/qcborarray.h \
+		/usr/include/qt/QtCore/qcborvalue.h \
+		/usr/include/qt/QtCore/qdatetime.h \
+		/usr/include/qt/QtCore/qcborcommon.h \
+		/usr/include/qt/QtCore/qregularexpression.h \
+		/usr/include/qt/QtCore/qurl.h \
+		/usr/include/qt/QtCore/qurlquery.h \
+		/usr/include/qt/QtCore/quuid.h \
+		/usr/include/qt/QtCore/qcbormap.h \
+		/usr/include/qt/QtCore/qcborstream.h \
+		/usr/include/qt/QtCore/qfloat16.h \
+		/usr/include/qt/QtCore/qcollator.h \
+		/usr/include/qt/QtCore/qcommandlineoption.h \
+		/usr/include/qt/QtCore/qcommandlineparser.h \
+		/usr/include/qt/QtCore/qcoreapplication.h \
+		/usr/include/qt/QtCore/qcryptographichash.h \
+		/usr/include/qt/QtCore/qdatastream.h \
+		/usr/include/qt/QtCore/qdeadlinetimer.h \
+		/usr/include/qt/QtCore/qelapsedtimer.h \
+		/usr/include/qt/QtCore/qdir.h \
+		/usr/include/qt/QtCore/qfileinfo.h \
+		/usr/include/qt/QtCore/qfile.h \
+		/usr/include/qt/QtCore/qfiledevice.h \
+		/usr/include/qt/QtCore/qdiriterator.h \
+		/usr/include/qt/QtCore/qeasingcurve.h \
+		/usr/include/qt/QtCore/qendian.h \
+		/usr/include/qt/QtCore/qeventtransition.h \
+		/usr/include/qt/QtCore/qexception.h \
+		/usr/include/qt/QtCore/qfactoryinterface.h \
+		/usr/include/qt/QtCore/qfileselector.h \
+		/usr/include/qt/QtCore/QObject \
+		/usr/include/qt/QtCore/QStringList \
+		/usr/include/qt/QtCore/qfilesystemwatcher.h \
+		/usr/include/qt/QtCore/qfinalstate.h \
+		/usr/include/qt/QtCore/qfuture.h \
+		/usr/include/qt/QtCore/qfutureinterface.h \
+		/usr/include/qt/QtCore/qrunnable.h \
+		/usr/include/qt/QtCore/qresultstore.h \
+		/usr/include/qt/QtCore/qfuturesynchronizer.h \
+		/usr/include/qt/QtCore/qfuturewatcher.h \
+		/usr/include/qt/QtCore/qhistorystate.h \
+		/usr/include/qt/QtCore/qidentityproxymodel.h \
+		/usr/include/qt/QtCore/qisenum.h \
+		/usr/include/qt/QtCore/qitemselectionmodel.h \
+		/usr/include/qt/QtCore/qjsonarray.h \
+		/usr/include/qt/QtCore/qjsonvalue.h \
+		/usr/include/qt/QtCore/qjsondocument.h \
+		/usr/include/qt/QtCore/qjsonobject.h \
+		/usr/include/qt/QtCore/qlibrary.h \
+		/usr/include/qt/QtCore/qlibraryinfo.h \
+		/usr/include/qt/QtCore/qversionnumber.h \
+		/usr/include/qt/QtCore/qline.h \
+		/usr/include/qt/QtCore/qlinkedlist.h \
+		/usr/include/qt/QtCore/qlockfile.h \
+		/usr/include/qt/QtCore/qloggingcategory.h \
+		/usr/include/qt/QtCore/qmargins.h \
+		/usr/include/qt/QtCore/qmath.h \
+		/usr/include/qt/QtCore/qmessageauthenticationcode.h \
+		/usr/include/qt/QtCore/qmetaobject.h \
+		/usr/include/qt/QtCore/qmimedata.h \
+		/usr/include/qt/QtCore/qmimedatabase.h \
+		/usr/include/qt/QtCore/qmimetype.h \
+		/usr/include/qt/QtCore/qobjectcleanuphandler.h \
+		/usr/include/qt/QtCore/qoperatingsystemversion.h \
+		/usr/include/qt/QtCore/qparallelanimationgroup.h \
+		/usr/include/qt/QtCore/qpauseanimation.h \
+		/usr/include/qt/QtCore/qplugin.h \
+		/usr/include/qt/QtCore/qpointer.h \
+		/usr/include/qt/QtCore/qpluginloader.h \
+		/usr/include/qt/QtCore/qprocess.h \
+		/usr/include/qt/QtCore/qpropertyanimation.h \
+		/usr/include/qt/QtCore/qvariantanimation.h \
+		/usr/include/qt/QtCore/qqueue.h \
+		/usr/include/qt/QtCore/qrandom.h \
+		/usr/include/qt/QtCore/qreadwritelock.h \
+		/usr/include/qt/QtCore/qrect.h \
+		/usr/include/qt/QtCore/qsize.h \
+		/usr/include/qt/QtCore/qresource.h \
+		/usr/include/qt/QtCore/qsavefile.h \
+		/usr/include/qt/QtCore/qscopedvaluerollback.h \
+		/usr/include/qt/QtCore/qscopeguard.h \
+		/usr/include/qt/QtCore/qsemaphore.h \
+		/usr/include/qt/QtCore/qsequentialanimationgroup.h \
+		/usr/include/qt/QtCore/qsettings.h \
+		/usr/include/qt/QtCore/qsharedmemory.h \
+		/usr/include/qt/QtCore/qsignalmapper.h \
+		/usr/include/qt/QtCore/qsignaltransition.h \
+		/usr/include/qt/QtCore/qsocketnotifier.h \
+		/usr/include/qt/QtCore/qsortfilterproxymodel.h \
+		/usr/include/qt/QtCore/qstack.h \
+		/usr/include/qt/QtCore/qstandardpaths.h \
+		/usr/include/qt/QtCore/qstate.h \
+		/usr/include/qt/QtCore/qstatemachine.h \
+		/usr/include/qt/QtCore/qstorageinfo.h \
+		/usr/include/qt/QtCore/qstringlistmodel.h \
+		/usr/include/qt/QtCore/qsystemsemaphore.h \
+		/usr/include/qt/QtCore/qtemporarydir.h \
+		/usr/include/qt/QtCore/qtemporaryfile.h \
+		/usr/include/qt/QtCore/qtextboundaryfinder.h \
+		/usr/include/qt/QtCore/qtextcodec.h \
+		/usr/include/qt/QtCore/qthread.h \
+		/usr/include/qt/QtCore/qthreadpool.h \
+		/usr/include/qt/QtCore/qthreadstorage.h \
+		/usr/include/qt/QtCore/qtimeline.h \
+		/usr/include/qt/QtCore/qtimer.h \
+		/usr/include/qt/QtCore/qtimezone.h \
+		/usr/include/qt/QtCore/qtranslator.h \
+		/usr/include/qt/QtCore/qtypetraits.h \
+		/usr/include/qt/QtCore/qwaitcondition.h \
+		/usr/include/qt/QtCore/qwineventnotifier.h \
+		/usr/include/qt/QtCore/qxmlstream.h \
+		/usr/include/qt/QtCore/qtcoreversion.h \
+		/usr/include/qt/QtGui/QtGui \
+		/usr/include/qt/QtGui/QtGuiDepends \
+		/usr/include/qt/QtGui/qtguiglobal.h \
+		/usr/include/qt/QtGui/qtgui-config.h \
+		/usr/include/qt/QtGui/qabstracttextdocumentlayout.h \
+		/usr/include/qt/QtGui/qtextlayout.h \
+		/usr/include/qt/QtGui/qcolor.h \
+		/usr/include/qt/QtGui/qrgb.h \
+		/usr/include/qt/QtGui/qrgba64.h \
+		/usr/include/qt/QtGui/qevent.h \
+		/usr/include/qt/QtGui/qwindowdefs.h \
+		/usr/include/qt/QtGui/qwindowdefs_win.h \
+		/usr/include/qt/QtGui/qregion.h \
+		/usr/include/qt/QtGui/qkeysequence.h \
+		/usr/include/qt/QtGui/qvector2d.h \
+		/usr/include/qt/QtGui/qtouchdevice.h \
+		/usr/include/qt/QtGui/qtextformat.h \
+		/usr/include/qt/QtGui/qfont.h \
+		/usr/include/qt/QtGui/qpen.h \
+		/usr/include/qt/QtGui/qbrush.h \
+		/usr/include/qt/QtGui/qmatrix.h \
+		/usr/include/qt/QtGui/qpolygon.h \
+		/usr/include/qt/QtGui/qtransform.h \
+		/usr/include/qt/QtGui/qpainterpath.h \
+		/usr/include/qt/QtGui/qimage.h \
+		/usr/include/qt/QtGui/qpaintdevice.h \
+		/usr/include/qt/QtGui/qpixelformat.h \
+		/usr/include/qt/QtGui/qpixmap.h \
+		/usr/include/qt/QtGui/qtextoption.h \
+		/usr/include/qt/QtGui/qglyphrun.h \
+		/usr/include/qt/QtGui/qrawfont.h \
+		/usr/include/qt/QtGui/qfontdatabase.h \
+		/usr/include/qt/QtGui/qtextcursor.h \
+		/usr/include/qt/QtGui/qtextdocument.h \
+		/usr/include/qt/QtGui/qpalette.h \
+		/usr/include/qt/QtGui/qaccessible.h \
+		/usr/include/qt/QtGui/qaccessiblebridge.h \
+		/usr/include/qt/QtGui/qaccessibleobject.h \
+		/usr/include/qt/QtGui/qaccessibleplugin.h \
+		/usr/include/qt/QtGui/qbackingstore.h \
+		/usr/include/qt/QtGui/qwindow.h \
+		/usr/include/qt/QtCore/QEvent \
+		/usr/include/qt/QtCore/QMargins \
+		/usr/include/qt/QtCore/QRect \
+		/usr/include/qt/QtGui/qsurface.h \
+		/usr/include/qt/QtGui/qsurfaceformat.h \
+		/usr/include/qt/QtGui/qicon.h \
+		/usr/include/qt/QtGui/qcursor.h \
+		/usr/include/qt/QtGui/qbitmap.h \
+		/usr/include/qt/QtGui/qclipboard.h \
+		/usr/include/qt/QtGui/qdesktopservices.h \
+		/usr/include/qt/QtGui/qdrag.h \
+		/usr/include/qt/QtGui/qfontinfo.h \
+		/usr/include/qt/QtGui/qfontmetrics.h \
+		/usr/include/qt/QtGui/qgenericmatrix.h \
+		/usr/include/qt/QtGui/qgenericplugin.h \
+		/usr/include/qt/QtGui/qgenericpluginfactory.h \
+		/usr/include/qt/QtGui/qguiapplication.h \
+		/usr/include/qt/QtGui/qinputmethod.h \
+		/usr/include/qt/QtGui/qiconengine.h \
+		/usr/include/qt/QtGui/qiconengineplugin.h \
+		/usr/include/qt/QtGui/qimageiohandler.h \
+		/usr/include/qt/QtGui/qimagereader.h \
+		/usr/include/qt/QtGui/qimagewriter.h \
+		/usr/include/qt/QtGui/qmatrix4x4.h \
+		/usr/include/qt/QtGui/qvector3d.h \
+		/usr/include/qt/QtGui/qvector4d.h \
+		/usr/include/qt/QtGui/qquaternion.h \
+		/usr/include/qt/QtGui/qmovie.h \
+		/usr/include/qt/QtGui/qoffscreensurface.h \
+		/usr/include/qt/QtGui/qopengl.h \
+		/usr/include/qt/QtCore/qt_windows.h \
+		/usr/include/qt/QtGui/qopengles2ext.h \
+		/usr/include/qt/QtGui/qopenglext.h \
+		/usr/include/qt/QtGui/qopenglbuffer.h \
+		/usr/include/qt/QtGui/qopenglcontext.h \
+		/usr/include/qt/QtCore/QScopedPointer \
+		/usr/include/qt/QtGui/QSurfaceFormat \
+		/usr/include/qt/QtGui/qopenglversionfunctions.h \
+		/usr/include/qt/QtGui/qopengldebug.h \
+		/usr/include/qt/QtGui/qopenglextrafunctions.h \
+		/usr/include/qt/QtGui/qopenglfunctions.h \
+		/usr/include/qt/QtGui/qopenglframebufferobject.h \
+		/usr/include/qt/QtGui/qopenglpaintdevice.h \
+		/usr/include/qt/QtGui/qopenglpixeltransferoptions.h \
+		/usr/include/qt/QtCore/QSharedDataPointer \
+		/usr/include/qt/QtGui/qopenglshaderprogram.h \
+		/usr/include/qt/QtGui/qopengltexture.h \
+		/usr/include/qt/QtGui/qopengltextureblitter.h \
+		/usr/include/qt/QtGui/QMatrix3x3 \
+		/usr/include/qt/QtGui/QMatrix4x4 \
+		/usr/include/qt/QtGui/qopengltimerquery.h \
+		/usr/include/qt/QtGui/qopenglvertexarrayobject.h \
+		/usr/include/qt/QtGui/qopenglwindow.h \
+		/usr/include/qt/QtGui/QPaintDeviceWindow \
+		/usr/include/qt/QtGui/qpaintdevicewindow.h \
+		/usr/include/qt/QtGui/QWindow \
+		/usr/include/qt/QtGui/QPaintDevice \
+		/usr/include/qt/QtGui/QOpenGLContext \
+		/usr/include/qt/QtGui/QImage \
+		/usr/include/qt/QtGui/qpagedpaintdevice.h \
+		/usr/include/qt/QtGui/qpagelayout.h \
+		/usr/include/qt/QtGui/qpagesize.h \
+		/usr/include/qt/QtGui/qpaintengine.h \
+		/usr/include/qt/QtGui/qpainter.h \
+		/usr/include/qt/QtGui/qpdfwriter.h \
+		/usr/include/qt/QtGui/qpicture.h \
+		/usr/include/qt/QtGui/qpictureformatplugin.h \
+		/usr/include/qt/QtGui/qpixmapcache.h \
+		/usr/include/qt/QtGui/qrasterwindow.h \
+		/usr/include/qt/QtGui/qscreen.h \
+		/usr/include/qt/QtCore/QList \
+		/usr/include/qt/QtCore/QSize \
+		/usr/include/qt/QtCore/QSizeF \
+		/usr/include/qt/QtGui/QTransform \
+		/usr/include/qt/QtGui/qsessionmanager.h \
+		/usr/include/qt/QtGui/qstandarditemmodel.h \
+		/usr/include/qt/QtGui/qstatictext.h \
+		/usr/include/qt/QtGui/qstylehints.h \
+		/usr/include/qt/QtGui/qsyntaxhighlighter.h \
+		/usr/include/qt/QtGui/qtextobject.h \
+		/usr/include/qt/QtGui/qtextdocumentfragment.h \
+		/usr/include/qt/QtGui/qtextdocumentwriter.h \
+		/usr/include/qt/QtGui/qtextlist.h \
+		/usr/include/qt/QtGui/qtexttable.h \
+		/usr/include/qt/QtGui/qvalidator.h \
+		/usr/include/qt/QtGui/qtguiversion.h \
+		/usr/include/qt/QtWidgets/qtwidgetsglobal.h \
+		/usr/include/qt/QtWidgets/qtwidgets-config.h \
+		/usr/include/qt/QtWidgets/qabstractbutton.h \
+		/usr/include/qt/QtWidgets/qwidget.h \
+		/usr/include/qt/QtWidgets/qsizepolicy.h \
+		/usr/include/qt/QtWidgets/qabstractitemdelegate.h \
+		/usr/include/qt/QtWidgets/qstyleoption.h \
+		/usr/include/qt/QtWidgets/qabstractspinbox.h \
+		/usr/include/qt/QtWidgets/qslider.h \
+		/usr/include/qt/QtWidgets/qabstractslider.h \
+		/usr/include/qt/QtWidgets/qstyle.h \
+		/usr/include/qt/QtWidgets/qtabbar.h \
+		/usr/include/qt/QtWidgets/qtabwidget.h \
+		/usr/include/qt/QtWidgets/qrubberband.h \
+		/usr/include/qt/QtWidgets/qframe.h \
+		/usr/include/qt/QtWidgets/qabstractitemview.h \
+		/usr/include/qt/QtWidgets/qabstractscrollarea.h \
+		/usr/include/qt/QtWidgets/qaccessiblewidget.h \
+		/usr/include/qt/QtWidgets/qaction.h \
+		/usr/include/qt/QtWidgets/qactiongroup.h \
+		/usr/include/qt/QtWidgets/qapplication.h \
+		/usr/include/qt/QtWidgets/qdesktopwidget.h \
+		/usr/include/qt/QtWidgets/qboxlayout.h \
+		/usr/include/qt/QtWidgets/qlayout.h \
+		/usr/include/qt/QtWidgets/qlayoutitem.h \
+		/usr/include/qt/QtWidgets/qgridlayout.h \
+		/usr/include/qt/QtWidgets/qbuttongroup.h \
+		/usr/include/qt/QtWidgets/qcalendarwidget.h \
+		/usr/include/qt/QtWidgets/qcheckbox.h \
+		/usr/include/qt/QtWidgets/qcolordialog.h \
+		/usr/include/qt/QtWidgets/qdialog.h \
+		/usr/include/qt/QtWidgets/qcolormap.h \
+		/usr/include/qt/QtWidgets/qcolumnview.h \
+		/usr/include/qt/QtWidgets/qcombobox.h \
+		/usr/include/qt/QtWidgets/qcommandlinkbutton.h \
+		/usr/include/qt/QtWidgets/qpushbutton.h \
+		/usr/include/qt/QtWidgets/qcommonstyle.h \
+		/usr/include/qt/QtWidgets/qcompleter.h \
+		/usr/include/qt/QtWidgets/qdatawidgetmapper.h \
+		/usr/include/qt/QtWidgets/qdatetimeedit.h \
+		/usr/include/qt/QtWidgets/qdial.h \
+		/usr/include/qt/QtWidgets/qdialogbuttonbox.h \
+		/usr/include/qt/QtWidgets/qdirmodel.h \
+		/usr/include/qt/QtWidgets/qfileiconprovider.h \
+		/usr/include/qt/QtWidgets/qdockwidget.h \
+		/usr/include/qt/QtWidgets/qdrawutil.h \
+		/usr/include/qt/QtWidgets/qerrormessage.h \
+		/usr/include/qt/QtWidgets/qfiledialog.h \
+		/usr/include/qt/QtWidgets/qfilesystemmodel.h \
+		/usr/include/qt/QtWidgets/qfocusframe.h \
+		/usr/include/qt/QtWidgets/qfontcombobox.h \
+		/usr/include/qt/QtWidgets/qfontdialog.h \
+		/usr/include/qt/QtWidgets/qformlayout.h \
+		/usr/include/qt/QtWidgets/QLayout \
+		/usr/include/qt/QtWidgets/qgesture.h \
+		/usr/include/qt/QtWidgets/qgesturerecognizer.h \
+		/usr/include/qt/QtWidgets/qgraphicsanchorlayout.h \
+		/usr/include/qt/QtWidgets/qgraphicsitem.h \
+		/usr/include/qt/QtWidgets/qgraphicslayout.h \
+		/usr/include/qt/QtWidgets/qgraphicslayoutitem.h \
+		/usr/include/qt/QtWidgets/qgraphicseffect.h \
+		/usr/include/qt/QtWidgets/qgraphicsgridlayout.h \
+		/usr/include/qt/QtWidgets/qgraphicsitemanimation.h \
+		/usr/include/qt/QtWidgets/qgraphicslinearlayout.h \
+		/usr/include/qt/QtWidgets/qgraphicsproxywidget.h \
+		/usr/include/qt/QtWidgets/qgraphicswidget.h \
+		/usr/include/qt/QtWidgets/qgraphicsscene.h \
+		/usr/include/qt/QtWidgets/qgraphicssceneevent.h \
+		/usr/include/qt/QtWidgets/qgraphicstransform.h \
+		/usr/include/qt/QtGui/QVector3D \
+		/usr/include/qt/QtWidgets/qgraphicsview.h \
+		/usr/include/qt/QtWidgets/qscrollarea.h \
+		/usr/include/qt/QtWidgets/qgroupbox.h \
+		/usr/include/qt/QtWidgets/qheaderview.h \
+		/usr/include/qt/QtWidgets/qinputdialog.h \
+		/usr/include/qt/QtWidgets/qlineedit.h \
+		/usr/include/qt/QtWidgets/qitemdelegate.h \
+		/usr/include/qt/QtWidgets/qitemeditorfactory.h \
+		/usr/include/qt/QtWidgets/qkeyeventtransition.h \
+		/usr/include/qt/QtWidgets/qkeysequenceedit.h \
+		/usr/include/qt/QtWidgets/qlabel.h \
+		/usr/include/qt/QtWidgets/qlcdnumber.h \
+		/usr/include/qt/QtWidgets/qlistview.h \
+		/usr/include/qt/QtWidgets/qlistwidget.h \
+		/usr/include/qt/QtWidgets/qmainwindow.h \
+		/usr/include/qt/QtWidgets/qmdiarea.h \
+		/usr/include/qt/QtWidgets/qmdisubwindow.h \
+		/usr/include/qt/QtWidgets/qmenu.h \
+		/usr/include/qt/QtWidgets/qmenubar.h \
+		/usr/include/qt/QtWidgets/qmessagebox.h \
+		/usr/include/qt/QtWidgets/qmouseeventtransition.h \
+		/usr/include/qt/QtWidgets/qopenglwidget.h \
+		/usr/include/qt/QtWidgets/QWidget \
+		/usr/include/qt/QtWidgets/qplaintextedit.h \
+		/usr/include/qt/QtWidgets/qtextedit.h \
+		/usr/include/qt/QtWidgets/qprogressbar.h \
+		/usr/include/qt/QtWidgets/qprogressdialog.h \
+		/usr/include/qt/QtWidgets/qproxystyle.h \
+		/usr/include/qt/QtWidgets/QCommonStyle \
+		/usr/include/qt/QtWidgets/qradiobutton.h \
+		/usr/include/qt/QtWidgets/qscrollbar.h \
+		/usr/include/qt/QtWidgets/qscroller.h \
+		/usr/include/qt/QtCore/QPointF \
+		/usr/include/qt/QtWidgets/QScrollerProperties \
+		/usr/include/qt/QtWidgets/qscrollerproperties.h \
+		/usr/include/qt/QtCore/QMetaType \
+		/usr/include/qt/QtCore/QVariant \
+		/usr/include/qt/QtWidgets/qshortcut.h \
+		/usr/include/qt/QtWidgets/qsizegrip.h \
+		/usr/include/qt/QtWidgets/qspinbox.h \
+		/usr/include/qt/QtWidgets/qsplashscreen.h \
+		/usr/include/qt/QtWidgets/qsplitter.h \
+		/usr/include/qt/QtWidgets/qstackedlayout.h \
+		/usr/include/qt/QtWidgets/qstackedwidget.h \
+		/usr/include/qt/QtWidgets/qstatusbar.h \
+		/usr/include/qt/QtWidgets/qstyleditemdelegate.h \
+		/usr/include/qt/QtWidgets/qstylefactory.h \
+		/usr/include/qt/QtWidgets/qstylepainter.h \
+		/usr/include/qt/QtWidgets/qstyleplugin.h \
+		/usr/include/qt/QtWidgets/qsystemtrayicon.h \
+		/usr/include/qt/QtWidgets/qtableview.h \
+		/usr/include/qt/QtWidgets/qtablewidget.h \
+		/usr/include/qt/QtWidgets/qtextbrowser.h \
+		/usr/include/qt/QtWidgets/qtoolbar.h \
+		/usr/include/qt/QtWidgets/qtoolbox.h \
+		/usr/include/qt/QtWidgets/qtoolbutton.h \
+		/usr/include/qt/QtWidgets/qtooltip.h \
+		/usr/include/qt/QtWidgets/qtreeview.h \
+		/usr/include/qt/QtWidgets/qtreewidget.h \
+		/usr/include/qt/QtWidgets/qtreewidgetitemiterator.h \
+		/usr/include/qt/QtWidgets/qundogroup.h \
+		/usr/include/qt/QtWidgets/qundostack.h \
+		/usr/include/qt/QtWidgets/qundoview.h \
+		/usr/include/qt/QtWidgets/qwhatsthis.h \
+		/usr/include/qt/QtWidgets/qwidgetaction.h \
+		/usr/include/qt/QtWidgets/qwizard.h \
+		/usr/include/qt/QtWidgets/qtwidgetsversion.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /export/home/senart19/bordes/Desktop/pt/ProjetTuteure/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/export/home/senart19/bordes/Desktop/pt/ProjetTuteure -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtXml -I/usr/include/qt/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include/View/Dialog/QuestionDialog.h -o moc_QuestionDialog.cpp
@@ -16637,6 +17196,7 @@ Fenetre.o: src/View/Fenetre.cpp /usr/include/qt/QtWidgets/qsizepolicy.h \
 		include/View/Dialog/ConsoleDialog.h \
 		include/Controller/Dialog/ConsoleController.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
 		include/View/Dialog/ProjectDialog.h \
@@ -18136,6 +18696,7 @@ MenuPrefController.o: src/Controller/Menu/MenuPrefController.cpp include/Control
 		include/Controller/Widget/CodeEditorController.h \
 		include/View/Widget/JavaHighLighter.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
 		include/View/Dialog/ProjectDialog.h \
@@ -19624,6 +20185,7 @@ snippetcontroller.o: src/Controller/Widget/snippetcontroller.cpp include/Control
 		include/View/Dialog/ConsoleDialog.h \
 		include/Controller/Dialog/ConsoleController.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
 		include/View/Dialog/ProjectDialog.h \
@@ -23101,6 +23663,7 @@ MenuContextExplorer.o: src/View/Menu/MenuContextExplorer.cpp include/View/Menu/M
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Fenetre.h \
 		include/Controller/Controller.h \
 		include/View/Widget/DCodeEditor.h \
@@ -23639,6 +24202,7 @@ Console.o: src/View/Widget/Console.cpp /usr/include/qt/QtCore/QProcess \
 		include/View/Dialog/ConsoleDialog.h \
 		include/Controller/Dialog/ConsoleController.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
 		include/View/Dialog/ProjectDialog.h \
@@ -24162,6 +24726,7 @@ ConsoleTabWidget.o: src/View/Widget/ConsoleTabWidget.cpp include/View/Widget/Con
 		include/View/Dialog/ConsoleDialog.h \
 		include/Controller/Dialog/ConsoleController.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
 		include/View/Dialog/ProjectDialog.h \
@@ -25644,6 +26209,7 @@ MenuFile.o: src/View/Menu/MenuFile.cpp include/View/Menu/MenuFile.h \
 		include/View/Dialog/ConsoleDialog.h \
 		include/Controller/Dialog/ConsoleController.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuEdit.h \
 		/usr/include/qt/QtWidgets/QTextEdit \
 		include/Controller/Menu/MenuEditController.h \
@@ -26166,6 +26732,7 @@ MenuNew.o: src/View/Menu/MenuNew.cpp include/View/Menu/MenuNew.h \
 		include/View/Dialog/ConsoleDialog.h \
 		include/Controller/Dialog/ConsoleController.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuEdit.h \
 		/usr/include/qt/QtWidgets/QTextEdit \
@@ -26683,6 +27250,7 @@ MenuEdit.o: src/View/Menu/MenuEdit.cpp include/View/Menu/MenuEdit.h \
 		include/Model/MakefileFactory.h \
 		include/Controller/Controller.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
 		include/View/Dialog/ProjectDialog.h \
@@ -27203,6 +27771,7 @@ MenuPref.o: src/View/Menu/MenuPref.cpp include/View/Menu/MenuPref.h \
 		include/Controller/Widget/CodeEditorController.h \
 		include/View/Widget/JavaHighLighter.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
 		include/View/Dialog/ProjectDialog.h \
@@ -27726,6 +28295,7 @@ MenuHelp.o: src/View/Menu/MenuHelp.cpp include/View/Menu/MenuPref.h \
 		include/Controller/Widget/CodeEditorController.h \
 		include/View/Widget/JavaHighLighter.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
 		include/View/Dialog/ProjectDialog.h \
@@ -33102,6 +33672,7 @@ Controller.o: src/Controller/Controller.cpp include/Controller/Controller.h \
 		/usr/include/qt/QtCore/QRegularExpression \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Fenetre.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
@@ -34118,6 +34689,7 @@ ClassDialog.o: src/View/Dialog/ClassDialog.cpp include/View/Dialog/ClassDialog.h
 		include/View/Dialog/ConsoleDialog.h \
 		include/Controller/Dialog/ConsoleController.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
 		include/View/Dialog/ProjectDialog.h \
@@ -34141,7 +34713,466 @@ ClassDialog.o: src/View/Dialog/ClassDialog.cpp include/View/Dialog/ClassDialog.h
 		include/View/Widget/ConsoleTabWidget.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ClassDialog.o src/View/Dialog/ClassDialog.cpp
 
-QuestionDialog.o: src/View/Dialog/QuestionDialog.cpp include/View/Dialog/QuestionDialog.h
+QuestionDialog.o: src/View/Dialog/QuestionDialog.cpp include/View/Dialog/QuestionDialog.h \
+		/usr/include/qt/QtWidgets/QtWidgets \
+		/usr/include/qt/QtWidgets/QtWidgetsDepends \
+		/usr/include/qt/QtCore/QtCore \
+		/usr/include/qt/QtCore/QtCoreDepends \
+		/usr/include/qt/QtCore/qglobal.h \
+		/usr/include/qt/QtCore/qconfig-bootstrapped.h \
+		/usr/include/qt/QtCore/qconfig.h \
+		/usr/include/qt/QtCore/qtcore-config.h \
+		/usr/include/qt/QtCore/qsystemdetection.h \
+		/usr/include/qt/QtCore/qprocessordetection.h \
+		/usr/include/qt/QtCore/qcompilerdetection.h \
+		/usr/include/qt/QtCore/qtypeinfo.h \
+		/usr/include/qt/QtCore/qsysinfo.h \
+		/usr/include/qt/QtCore/qlogging.h \
+		/usr/include/qt/QtCore/qflags.h \
+		/usr/include/qt/QtCore/qatomic.h \
+		/usr/include/qt/QtCore/qbasicatomic.h \
+		/usr/include/qt/QtCore/qatomic_bootstrap.h \
+		/usr/include/qt/QtCore/qgenericatomic.h \
+		/usr/include/qt/QtCore/qatomic_cxx11.h \
+		/usr/include/qt/QtCore/qatomic_msvc.h \
+		/usr/include/qt/QtCore/qglobalstatic.h \
+		/usr/include/qt/QtCore/qmutex.h \
+		/usr/include/qt/QtCore/qnumeric.h \
+		/usr/include/qt/QtCore/qversiontagging.h \
+		/usr/include/qt/QtCore/qabstractanimation.h \
+		/usr/include/qt/QtCore/qobject.h \
+		/usr/include/qt/QtCore/qobjectdefs.h \
+		/usr/include/qt/QtCore/qnamespace.h \
+		/usr/include/qt/QtCore/qobjectdefs_impl.h \
+		/usr/include/qt/QtCore/qstring.h \
+		/usr/include/qt/QtCore/qchar.h \
+		/usr/include/qt/QtCore/qbytearray.h \
+		/usr/include/qt/QtCore/qrefcount.h \
+		/usr/include/qt/QtCore/qarraydata.h \
+		/usr/include/qt/QtCore/qstringliteral.h \
+		/usr/include/qt/QtCore/qstringalgorithms.h \
+		/usr/include/qt/QtCore/qstringview.h \
+		/usr/include/qt/QtCore/qstringbuilder.h \
+		/usr/include/qt/QtCore/qlist.h \
+		/usr/include/qt/QtCore/qalgorithms.h \
+		/usr/include/qt/QtCore/qiterator.h \
+		/usr/include/qt/QtCore/qhashfunctions.h \
+		/usr/include/qt/QtCore/qpair.h \
+		/usr/include/qt/QtCore/qbytearraylist.h \
+		/usr/include/qt/QtCore/qstringlist.h \
+		/usr/include/qt/QtCore/qregexp.h \
+		/usr/include/qt/QtCore/qstringmatcher.h \
+		/usr/include/qt/QtCore/qcoreevent.h \
+		/usr/include/qt/QtCore/qscopedpointer.h \
+		/usr/include/qt/QtCore/qmetatype.h \
+		/usr/include/qt/QtCore/qvarlengtharray.h \
+		/usr/include/qt/QtCore/qcontainerfwd.h \
+		/usr/include/qt/QtCore/qobject_impl.h \
+		/usr/include/qt/QtCore/qabstracteventdispatcher.h \
+		/usr/include/qt/QtCore/qeventloop.h \
+		/usr/include/qt/QtCore/qabstractitemmodel.h \
+		/usr/include/qt/QtCore/qvariant.h \
+		/usr/include/qt/QtCore/qmap.h \
+		/usr/include/qt/QtCore/qdebug.h \
+		/usr/include/qt/QtCore/qhash.h \
+		/usr/include/qt/QtCore/qtextstream.h \
+		/usr/include/qt/QtCore/qiodevice.h \
+		/usr/include/qt/QtCore/qlocale.h \
+		/usr/include/qt/QtCore/qshareddata.h \
+		/usr/include/qt/QtCore/qvector.h \
+		/usr/include/qt/QtCore/qpoint.h \
+		/usr/include/qt/QtCore/qset.h \
+		/usr/include/qt/QtCore/qcontiguouscache.h \
+		/usr/include/qt/QtCore/qsharedpointer.h \
+		/usr/include/qt/QtCore/qsharedpointer_impl.h \
+		/usr/include/qt/QtCore/qabstractnativeeventfilter.h \
+		/usr/include/qt/QtCore/qabstractproxymodel.h \
+		/usr/include/qt/QtCore/qabstractstate.h \
+		/usr/include/qt/QtCore/qabstracttransition.h \
+		/usr/include/qt/QtCore/qanimationgroup.h \
+		/usr/include/qt/QtCore/qarraydataops.h \
+		/usr/include/qt/QtCore/qarraydatapointer.h \
+		/usr/include/qt/QtCore/qbasictimer.h \
+		/usr/include/qt/QtCore/qbitarray.h \
+		/usr/include/qt/QtCore/qbuffer.h \
+		/usr/include/qt/QtCore/qbytearraymatcher.h \
+		/usr/include/qt/QtCore/qcache.h \
+		/usr/include/qt/QtCore/qcborarray.h \
+		/usr/include/qt/QtCore/qcborvalue.h \
+		/usr/include/qt/QtCore/qdatetime.h \
+		/usr/include/qt/QtCore/qcborcommon.h \
+		/usr/include/qt/QtCore/qregularexpression.h \
+		/usr/include/qt/QtCore/qurl.h \
+		/usr/include/qt/QtCore/qurlquery.h \
+		/usr/include/qt/QtCore/quuid.h \
+		/usr/include/qt/QtCore/qcbormap.h \
+		/usr/include/qt/QtCore/qcborstream.h \
+		/usr/include/qt/QtCore/qfloat16.h \
+		/usr/include/qt/QtCore/qcollator.h \
+		/usr/include/qt/QtCore/qcommandlineoption.h \
+		/usr/include/qt/QtCore/qcommandlineparser.h \
+		/usr/include/qt/QtCore/qcoreapplication.h \
+		/usr/include/qt/QtCore/qcryptographichash.h \
+		/usr/include/qt/QtCore/qdatastream.h \
+		/usr/include/qt/QtCore/qdeadlinetimer.h \
+		/usr/include/qt/QtCore/qelapsedtimer.h \
+		/usr/include/qt/QtCore/qdir.h \
+		/usr/include/qt/QtCore/qfileinfo.h \
+		/usr/include/qt/QtCore/qfile.h \
+		/usr/include/qt/QtCore/qfiledevice.h \
+		/usr/include/qt/QtCore/qdiriterator.h \
+		/usr/include/qt/QtCore/qeasingcurve.h \
+		/usr/include/qt/QtCore/qendian.h \
+		/usr/include/qt/QtCore/qeventtransition.h \
+		/usr/include/qt/QtCore/qexception.h \
+		/usr/include/qt/QtCore/qfactoryinterface.h \
+		/usr/include/qt/QtCore/qfileselector.h \
+		/usr/include/qt/QtCore/QObject \
+		/usr/include/qt/QtCore/QStringList \
+		/usr/include/qt/QtCore/qfilesystemwatcher.h \
+		/usr/include/qt/QtCore/qfinalstate.h \
+		/usr/include/qt/QtCore/qfuture.h \
+		/usr/include/qt/QtCore/qfutureinterface.h \
+		/usr/include/qt/QtCore/qrunnable.h \
+		/usr/include/qt/QtCore/qresultstore.h \
+		/usr/include/qt/QtCore/qfuturesynchronizer.h \
+		/usr/include/qt/QtCore/qfuturewatcher.h \
+		/usr/include/qt/QtCore/qhistorystate.h \
+		/usr/include/qt/QtCore/qidentityproxymodel.h \
+		/usr/include/qt/QtCore/qisenum.h \
+		/usr/include/qt/QtCore/qitemselectionmodel.h \
+		/usr/include/qt/QtCore/qjsonarray.h \
+		/usr/include/qt/QtCore/qjsonvalue.h \
+		/usr/include/qt/QtCore/qjsondocument.h \
+		/usr/include/qt/QtCore/qjsonobject.h \
+		/usr/include/qt/QtCore/qlibrary.h \
+		/usr/include/qt/QtCore/qlibraryinfo.h \
+		/usr/include/qt/QtCore/qversionnumber.h \
+		/usr/include/qt/QtCore/qline.h \
+		/usr/include/qt/QtCore/qlinkedlist.h \
+		/usr/include/qt/QtCore/qlockfile.h \
+		/usr/include/qt/QtCore/qloggingcategory.h \
+		/usr/include/qt/QtCore/qmargins.h \
+		/usr/include/qt/QtCore/qmath.h \
+		/usr/include/qt/QtCore/qmessageauthenticationcode.h \
+		/usr/include/qt/QtCore/qmetaobject.h \
+		/usr/include/qt/QtCore/qmimedata.h \
+		/usr/include/qt/QtCore/qmimedatabase.h \
+		/usr/include/qt/QtCore/qmimetype.h \
+		/usr/include/qt/QtCore/qobjectcleanuphandler.h \
+		/usr/include/qt/QtCore/qoperatingsystemversion.h \
+		/usr/include/qt/QtCore/qparallelanimationgroup.h \
+		/usr/include/qt/QtCore/qpauseanimation.h \
+		/usr/include/qt/QtCore/qplugin.h \
+		/usr/include/qt/QtCore/qpointer.h \
+		/usr/include/qt/QtCore/qpluginloader.h \
+		/usr/include/qt/QtCore/qprocess.h \
+		/usr/include/qt/QtCore/qpropertyanimation.h \
+		/usr/include/qt/QtCore/qvariantanimation.h \
+		/usr/include/qt/QtCore/qqueue.h \
+		/usr/include/qt/QtCore/qrandom.h \
+		/usr/include/qt/QtCore/qreadwritelock.h \
+		/usr/include/qt/QtCore/qrect.h \
+		/usr/include/qt/QtCore/qsize.h \
+		/usr/include/qt/QtCore/qresource.h \
+		/usr/include/qt/QtCore/qsavefile.h \
+		/usr/include/qt/QtCore/qscopedvaluerollback.h \
+		/usr/include/qt/QtCore/qscopeguard.h \
+		/usr/include/qt/QtCore/qsemaphore.h \
+		/usr/include/qt/QtCore/qsequentialanimationgroup.h \
+		/usr/include/qt/QtCore/qsettings.h \
+		/usr/include/qt/QtCore/qsharedmemory.h \
+		/usr/include/qt/QtCore/qsignalmapper.h \
+		/usr/include/qt/QtCore/qsignaltransition.h \
+		/usr/include/qt/QtCore/qsocketnotifier.h \
+		/usr/include/qt/QtCore/qsortfilterproxymodel.h \
+		/usr/include/qt/QtCore/qstack.h \
+		/usr/include/qt/QtCore/qstandardpaths.h \
+		/usr/include/qt/QtCore/qstate.h \
+		/usr/include/qt/QtCore/qstatemachine.h \
+		/usr/include/qt/QtCore/qstorageinfo.h \
+		/usr/include/qt/QtCore/qstringlistmodel.h \
+		/usr/include/qt/QtCore/qsystemsemaphore.h \
+		/usr/include/qt/QtCore/qtemporarydir.h \
+		/usr/include/qt/QtCore/qtemporaryfile.h \
+		/usr/include/qt/QtCore/qtextboundaryfinder.h \
+		/usr/include/qt/QtCore/qtextcodec.h \
+		/usr/include/qt/QtCore/qthread.h \
+		/usr/include/qt/QtCore/qthreadpool.h \
+		/usr/include/qt/QtCore/qthreadstorage.h \
+		/usr/include/qt/QtCore/qtimeline.h \
+		/usr/include/qt/QtCore/qtimer.h \
+		/usr/include/qt/QtCore/qtimezone.h \
+		/usr/include/qt/QtCore/qtranslator.h \
+		/usr/include/qt/QtCore/qtypetraits.h \
+		/usr/include/qt/QtCore/qwaitcondition.h \
+		/usr/include/qt/QtCore/qwineventnotifier.h \
+		/usr/include/qt/QtCore/qxmlstream.h \
+		/usr/include/qt/QtCore/qtcoreversion.h \
+		/usr/include/qt/QtGui/QtGui \
+		/usr/include/qt/QtGui/QtGuiDepends \
+		/usr/include/qt/QtGui/qtguiglobal.h \
+		/usr/include/qt/QtGui/qtgui-config.h \
+		/usr/include/qt/QtGui/qabstracttextdocumentlayout.h \
+		/usr/include/qt/QtGui/qtextlayout.h \
+		/usr/include/qt/QtGui/qcolor.h \
+		/usr/include/qt/QtGui/qrgb.h \
+		/usr/include/qt/QtGui/qrgba64.h \
+		/usr/include/qt/QtGui/qevent.h \
+		/usr/include/qt/QtGui/qwindowdefs.h \
+		/usr/include/qt/QtGui/qwindowdefs_win.h \
+		/usr/include/qt/QtGui/qregion.h \
+		/usr/include/qt/QtGui/qkeysequence.h \
+		/usr/include/qt/QtGui/qvector2d.h \
+		/usr/include/qt/QtGui/qtouchdevice.h \
+		/usr/include/qt/QtGui/qtextformat.h \
+		/usr/include/qt/QtGui/qfont.h \
+		/usr/include/qt/QtGui/qpen.h \
+		/usr/include/qt/QtGui/qbrush.h \
+		/usr/include/qt/QtGui/qmatrix.h \
+		/usr/include/qt/QtGui/qpolygon.h \
+		/usr/include/qt/QtGui/qtransform.h \
+		/usr/include/qt/QtGui/qpainterpath.h \
+		/usr/include/qt/QtGui/qimage.h \
+		/usr/include/qt/QtGui/qpaintdevice.h \
+		/usr/include/qt/QtGui/qpixelformat.h \
+		/usr/include/qt/QtGui/qpixmap.h \
+		/usr/include/qt/QtGui/qtextoption.h \
+		/usr/include/qt/QtGui/qglyphrun.h \
+		/usr/include/qt/QtGui/qrawfont.h \
+		/usr/include/qt/QtGui/qfontdatabase.h \
+		/usr/include/qt/QtGui/qtextcursor.h \
+		/usr/include/qt/QtGui/qtextdocument.h \
+		/usr/include/qt/QtGui/qpalette.h \
+		/usr/include/qt/QtGui/qaccessible.h \
+		/usr/include/qt/QtGui/qaccessiblebridge.h \
+		/usr/include/qt/QtGui/qaccessibleobject.h \
+		/usr/include/qt/QtGui/qaccessibleplugin.h \
+		/usr/include/qt/QtGui/qbackingstore.h \
+		/usr/include/qt/QtGui/qwindow.h \
+		/usr/include/qt/QtCore/QEvent \
+		/usr/include/qt/QtCore/QMargins \
+		/usr/include/qt/QtCore/QRect \
+		/usr/include/qt/QtGui/qsurface.h \
+		/usr/include/qt/QtGui/qsurfaceformat.h \
+		/usr/include/qt/QtGui/qicon.h \
+		/usr/include/qt/QtGui/qcursor.h \
+		/usr/include/qt/QtGui/qbitmap.h \
+		/usr/include/qt/QtGui/qclipboard.h \
+		/usr/include/qt/QtGui/qdesktopservices.h \
+		/usr/include/qt/QtGui/qdrag.h \
+		/usr/include/qt/QtGui/qfontinfo.h \
+		/usr/include/qt/QtGui/qfontmetrics.h \
+		/usr/include/qt/QtGui/qgenericmatrix.h \
+		/usr/include/qt/QtGui/qgenericplugin.h \
+		/usr/include/qt/QtGui/qgenericpluginfactory.h \
+		/usr/include/qt/QtGui/qguiapplication.h \
+		/usr/include/qt/QtGui/qinputmethod.h \
+		/usr/include/qt/QtGui/qiconengine.h \
+		/usr/include/qt/QtGui/qiconengineplugin.h \
+		/usr/include/qt/QtGui/qimageiohandler.h \
+		/usr/include/qt/QtGui/qimagereader.h \
+		/usr/include/qt/QtGui/qimagewriter.h \
+		/usr/include/qt/QtGui/qmatrix4x4.h \
+		/usr/include/qt/QtGui/qvector3d.h \
+		/usr/include/qt/QtGui/qvector4d.h \
+		/usr/include/qt/QtGui/qquaternion.h \
+		/usr/include/qt/QtGui/qmovie.h \
+		/usr/include/qt/QtGui/qoffscreensurface.h \
+		/usr/include/qt/QtGui/qopengl.h \
+		/usr/include/qt/QtCore/qt_windows.h \
+		/usr/include/qt/QtGui/qopengles2ext.h \
+		/usr/include/qt/QtGui/qopenglext.h \
+		/usr/include/qt/QtGui/qopenglbuffer.h \
+		/usr/include/qt/QtGui/qopenglcontext.h \
+		/usr/include/qt/QtCore/QScopedPointer \
+		/usr/include/qt/QtGui/QSurfaceFormat \
+		/usr/include/qt/QtGui/qopenglversionfunctions.h \
+		/usr/include/qt/QtGui/qopengldebug.h \
+		/usr/include/qt/QtGui/qopenglextrafunctions.h \
+		/usr/include/qt/QtGui/qopenglfunctions.h \
+		/usr/include/qt/QtGui/qopenglframebufferobject.h \
+		/usr/include/qt/QtGui/qopenglpaintdevice.h \
+		/usr/include/qt/QtGui/qopenglpixeltransferoptions.h \
+		/usr/include/qt/QtCore/QSharedDataPointer \
+		/usr/include/qt/QtGui/qopenglshaderprogram.h \
+		/usr/include/qt/QtGui/qopengltexture.h \
+		/usr/include/qt/QtGui/qopengltextureblitter.h \
+		/usr/include/qt/QtGui/QMatrix3x3 \
+		/usr/include/qt/QtGui/QMatrix4x4 \
+		/usr/include/qt/QtGui/qopengltimerquery.h \
+		/usr/include/qt/QtGui/qopenglvertexarrayobject.h \
+		/usr/include/qt/QtGui/qopenglwindow.h \
+		/usr/include/qt/QtGui/QPaintDeviceWindow \
+		/usr/include/qt/QtGui/qpaintdevicewindow.h \
+		/usr/include/qt/QtGui/QWindow \
+		/usr/include/qt/QtGui/QPaintDevice \
+		/usr/include/qt/QtGui/QOpenGLContext \
+		/usr/include/qt/QtGui/QImage \
+		/usr/include/qt/QtGui/qpagedpaintdevice.h \
+		/usr/include/qt/QtGui/qpagelayout.h \
+		/usr/include/qt/QtGui/qpagesize.h \
+		/usr/include/qt/QtGui/qpaintengine.h \
+		/usr/include/qt/QtGui/qpainter.h \
+		/usr/include/qt/QtGui/qpdfwriter.h \
+		/usr/include/qt/QtGui/qpicture.h \
+		/usr/include/qt/QtGui/qpictureformatplugin.h \
+		/usr/include/qt/QtGui/qpixmapcache.h \
+		/usr/include/qt/QtGui/qrasterwindow.h \
+		/usr/include/qt/QtGui/qscreen.h \
+		/usr/include/qt/QtCore/QList \
+		/usr/include/qt/QtCore/QSize \
+		/usr/include/qt/QtCore/QSizeF \
+		/usr/include/qt/QtGui/QTransform \
+		/usr/include/qt/QtGui/qsessionmanager.h \
+		/usr/include/qt/QtGui/qstandarditemmodel.h \
+		/usr/include/qt/QtGui/qstatictext.h \
+		/usr/include/qt/QtGui/qstylehints.h \
+		/usr/include/qt/QtGui/qsyntaxhighlighter.h \
+		/usr/include/qt/QtGui/qtextobject.h \
+		/usr/include/qt/QtGui/qtextdocumentfragment.h \
+		/usr/include/qt/QtGui/qtextdocumentwriter.h \
+		/usr/include/qt/QtGui/qtextlist.h \
+		/usr/include/qt/QtGui/qtexttable.h \
+		/usr/include/qt/QtGui/qvalidator.h \
+		/usr/include/qt/QtGui/qtguiversion.h \
+		/usr/include/qt/QtWidgets/qtwidgetsglobal.h \
+		/usr/include/qt/QtWidgets/qtwidgets-config.h \
+		/usr/include/qt/QtWidgets/qabstractbutton.h \
+		/usr/include/qt/QtWidgets/qwidget.h \
+		/usr/include/qt/QtWidgets/qsizepolicy.h \
+		/usr/include/qt/QtWidgets/qabstractitemdelegate.h \
+		/usr/include/qt/QtWidgets/qstyleoption.h \
+		/usr/include/qt/QtWidgets/qabstractspinbox.h \
+		/usr/include/qt/QtWidgets/qslider.h \
+		/usr/include/qt/QtWidgets/qabstractslider.h \
+		/usr/include/qt/QtWidgets/qstyle.h \
+		/usr/include/qt/QtWidgets/qtabbar.h \
+		/usr/include/qt/QtWidgets/qtabwidget.h \
+		/usr/include/qt/QtWidgets/qrubberband.h \
+		/usr/include/qt/QtWidgets/qframe.h \
+		/usr/include/qt/QtWidgets/qabstractitemview.h \
+		/usr/include/qt/QtWidgets/qabstractscrollarea.h \
+		/usr/include/qt/QtWidgets/qaccessiblewidget.h \
+		/usr/include/qt/QtWidgets/qaction.h \
+		/usr/include/qt/QtWidgets/qactiongroup.h \
+		/usr/include/qt/QtWidgets/qapplication.h \
+		/usr/include/qt/QtWidgets/qdesktopwidget.h \
+		/usr/include/qt/QtWidgets/qboxlayout.h \
+		/usr/include/qt/QtWidgets/qlayout.h \
+		/usr/include/qt/QtWidgets/qlayoutitem.h \
+		/usr/include/qt/QtWidgets/qgridlayout.h \
+		/usr/include/qt/QtWidgets/qbuttongroup.h \
+		/usr/include/qt/QtWidgets/qcalendarwidget.h \
+		/usr/include/qt/QtWidgets/qcheckbox.h \
+		/usr/include/qt/QtWidgets/qcolordialog.h \
+		/usr/include/qt/QtWidgets/qdialog.h \
+		/usr/include/qt/QtWidgets/qcolormap.h \
+		/usr/include/qt/QtWidgets/qcolumnview.h \
+		/usr/include/qt/QtWidgets/qcombobox.h \
+		/usr/include/qt/QtWidgets/qcommandlinkbutton.h \
+		/usr/include/qt/QtWidgets/qpushbutton.h \
+		/usr/include/qt/QtWidgets/qcommonstyle.h \
+		/usr/include/qt/QtWidgets/qcompleter.h \
+		/usr/include/qt/QtWidgets/qdatawidgetmapper.h \
+		/usr/include/qt/QtWidgets/qdatetimeedit.h \
+		/usr/include/qt/QtWidgets/qdial.h \
+		/usr/include/qt/QtWidgets/qdialogbuttonbox.h \
+		/usr/include/qt/QtWidgets/qdirmodel.h \
+		/usr/include/qt/QtWidgets/qfileiconprovider.h \
+		/usr/include/qt/QtWidgets/qdockwidget.h \
+		/usr/include/qt/QtWidgets/qdrawutil.h \
+		/usr/include/qt/QtWidgets/qerrormessage.h \
+		/usr/include/qt/QtWidgets/qfiledialog.h \
+		/usr/include/qt/QtWidgets/qfilesystemmodel.h \
+		/usr/include/qt/QtWidgets/qfocusframe.h \
+		/usr/include/qt/QtWidgets/qfontcombobox.h \
+		/usr/include/qt/QtWidgets/qfontdialog.h \
+		/usr/include/qt/QtWidgets/qformlayout.h \
+		/usr/include/qt/QtWidgets/QLayout \
+		/usr/include/qt/QtWidgets/qgesture.h \
+		/usr/include/qt/QtWidgets/qgesturerecognizer.h \
+		/usr/include/qt/QtWidgets/qgraphicsanchorlayout.h \
+		/usr/include/qt/QtWidgets/qgraphicsitem.h \
+		/usr/include/qt/QtWidgets/qgraphicslayout.h \
+		/usr/include/qt/QtWidgets/qgraphicslayoutitem.h \
+		/usr/include/qt/QtWidgets/qgraphicseffect.h \
+		/usr/include/qt/QtWidgets/qgraphicsgridlayout.h \
+		/usr/include/qt/QtWidgets/qgraphicsitemanimation.h \
+		/usr/include/qt/QtWidgets/qgraphicslinearlayout.h \
+		/usr/include/qt/QtWidgets/qgraphicsproxywidget.h \
+		/usr/include/qt/QtWidgets/qgraphicswidget.h \
+		/usr/include/qt/QtWidgets/qgraphicsscene.h \
+		/usr/include/qt/QtWidgets/qgraphicssceneevent.h \
+		/usr/include/qt/QtWidgets/qgraphicstransform.h \
+		/usr/include/qt/QtGui/QVector3D \
+		/usr/include/qt/QtWidgets/qgraphicsview.h \
+		/usr/include/qt/QtWidgets/qscrollarea.h \
+		/usr/include/qt/QtWidgets/qgroupbox.h \
+		/usr/include/qt/QtWidgets/qheaderview.h \
+		/usr/include/qt/QtWidgets/qinputdialog.h \
+		/usr/include/qt/QtWidgets/qlineedit.h \
+		/usr/include/qt/QtWidgets/qitemdelegate.h \
+		/usr/include/qt/QtWidgets/qitemeditorfactory.h \
+		/usr/include/qt/QtWidgets/qkeyeventtransition.h \
+		/usr/include/qt/QtWidgets/qkeysequenceedit.h \
+		/usr/include/qt/QtWidgets/qlabel.h \
+		/usr/include/qt/QtWidgets/qlcdnumber.h \
+		/usr/include/qt/QtWidgets/qlistview.h \
+		/usr/include/qt/QtWidgets/qlistwidget.h \
+		/usr/include/qt/QtWidgets/qmainwindow.h \
+		/usr/include/qt/QtWidgets/qmdiarea.h \
+		/usr/include/qt/QtWidgets/qmdisubwindow.h \
+		/usr/include/qt/QtWidgets/qmenu.h \
+		/usr/include/qt/QtWidgets/qmenubar.h \
+		/usr/include/qt/QtWidgets/qmessagebox.h \
+		/usr/include/qt/QtWidgets/qmouseeventtransition.h \
+		/usr/include/qt/QtWidgets/qopenglwidget.h \
+		/usr/include/qt/QtWidgets/QWidget \
+		/usr/include/qt/QtWidgets/qplaintextedit.h \
+		/usr/include/qt/QtWidgets/qtextedit.h \
+		/usr/include/qt/QtWidgets/qprogressbar.h \
+		/usr/include/qt/QtWidgets/qprogressdialog.h \
+		/usr/include/qt/QtWidgets/qproxystyle.h \
+		/usr/include/qt/QtWidgets/QCommonStyle \
+		/usr/include/qt/QtWidgets/qradiobutton.h \
+		/usr/include/qt/QtWidgets/qscrollbar.h \
+		/usr/include/qt/QtWidgets/qscroller.h \
+		/usr/include/qt/QtCore/QPointF \
+		/usr/include/qt/QtWidgets/QScrollerProperties \
+		/usr/include/qt/QtWidgets/qscrollerproperties.h \
+		/usr/include/qt/QtCore/QMetaType \
+		/usr/include/qt/QtCore/QVariant \
+		/usr/include/qt/QtWidgets/qshortcut.h \
+		/usr/include/qt/QtWidgets/qsizegrip.h \
+		/usr/include/qt/QtWidgets/qspinbox.h \
+		/usr/include/qt/QtWidgets/qsplashscreen.h \
+		/usr/include/qt/QtWidgets/qsplitter.h \
+		/usr/include/qt/QtWidgets/qstackedlayout.h \
+		/usr/include/qt/QtWidgets/qstackedwidget.h \
+		/usr/include/qt/QtWidgets/qstatusbar.h \
+		/usr/include/qt/QtWidgets/qstyleditemdelegate.h \
+		/usr/include/qt/QtWidgets/qstylefactory.h \
+		/usr/include/qt/QtWidgets/qstylepainter.h \
+		/usr/include/qt/QtWidgets/qstyleplugin.h \
+		/usr/include/qt/QtWidgets/qsystemtrayicon.h \
+		/usr/include/qt/QtWidgets/qtableview.h \
+		/usr/include/qt/QtWidgets/qtablewidget.h \
+		/usr/include/qt/QtWidgets/qtextbrowser.h \
+		/usr/include/qt/QtWidgets/qtoolbar.h \
+		/usr/include/qt/QtWidgets/qtoolbox.h \
+		/usr/include/qt/QtWidgets/qtoolbutton.h \
+		/usr/include/qt/QtWidgets/qtooltip.h \
+		/usr/include/qt/QtWidgets/qtreeview.h \
+		/usr/include/qt/QtWidgets/qtreewidget.h \
+		/usr/include/qt/QtWidgets/qtreewidgetitemiterator.h \
+		/usr/include/qt/QtWidgets/qundogroup.h \
+		/usr/include/qt/QtWidgets/qundostack.h \
+		/usr/include/qt/QtWidgets/qundoview.h \
+		/usr/include/qt/QtWidgets/qwhatsthis.h \
+		/usr/include/qt/QtWidgets/qwidgetaction.h \
+		/usr/include/qt/QtWidgets/qwizard.h \
+		/usr/include/qt/QtWidgets/qtwidgetsversion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o QuestionDialog.o src/View/Dialog/QuestionDialog.cpp
 
 ProjectController.o: src/Controller/Dialog/ProjectController.cpp include/Controller/Dialog/ProjectController.h \
@@ -35130,6 +36161,7 @@ ClassController.o: src/Controller/Dialog/ClassController.cpp include/Controller/
 		include/View/Dialog/ConsoleDialog.h \
 		include/Controller/Dialog/ConsoleController.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
 		include/View/Dialog/ProjectDialog.h \
@@ -35652,6 +36684,7 @@ MenuEditController.o: src/Controller/Menu/MenuEditController.cpp include/Control
 		include/Model/MakefileFactory.h \
 		include/Controller/Controller.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
 		include/View/Dialog/ProjectDialog.h \
@@ -36639,6 +37672,7 @@ Snippet.o: src/View/Widget/Snippet.cpp include/View/Widget/Snippet.h \
 		include/View/Dialog/ConsoleDialog.h \
 		include/Controller/Dialog/ConsoleController.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
 		include/View/Dialog/ProjectDialog.h \
@@ -37622,6 +38656,7 @@ main.o: src/main.cpp /usr/include/qt/QtWidgets/QApplication \
 		include/View/Dialog/ConsoleDialog.h \
 		include/Controller/Dialog/ConsoleController.h \
 		include/View/Menu/MenuContextExplorer.h \
+		include/View/Dialog/QuestionDialog.h \
 		include/View/Menu/MenuFile.h \
 		include/View/Menu/MenuNew.h \
 		include/View/Dialog/ProjectDialog.h \
@@ -37651,6 +38686,9 @@ main.o: src/main.cpp /usr/include/qt/QtWidgets/QApplication \
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
+
+qrc_breeze.o: qrc_breeze.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_breeze.o qrc_breeze.cpp
 
 moc_Fenetre.o: moc_Fenetre.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Fenetre.o moc_Fenetre.cpp
