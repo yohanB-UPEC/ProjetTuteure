@@ -1,6 +1,6 @@
 #include "include/Model/Model.h"
 
-Model::Model(): QAbstractItemModel(), root("root"), settings(QCoreApplication::applicationDirPath()+"/config.ini",QSettings::IniFormat), console(&settings){
+Model::Model(): QAbstractItemModel(), root("root"), settings(QCoreApplication::applicationDirPath()+"/config.ini",QSettings::IniFormat), console(&settings), snippet(){
 	settings.beginGroup("Projects");
 	QStringList keys = settings.allKeys();
 	for(int i = 0; i < keys.size(); i++){

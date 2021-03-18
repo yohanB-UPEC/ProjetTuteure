@@ -5,7 +5,20 @@
 #include <QListView>
 #include "include/View/Widget/DSnippetItem.h"
 #include "include/Controller/Widget/SnippetController.h"
+#include "include/Model/SnippetModel.h"
 
+class Snippet : public QListView{
+    Q_OBJECT
+    public:
+        Snippet(SnippetModel *model);
+
+    private:
+        SnippetModel* m_model;
+};
+
+
+
+/*
 class Fenetre;
 
 class Snippet : public QWidget {
@@ -15,7 +28,8 @@ class Snippet : public QWidget {
 
     public:
         Snippet(Fenetre* fen, QWidget *parent=0);
-        DSnippetItem* getDSnippetItem() {return this->dlistItem;}
+        QStringList getSnippetsNames();
+
 
     private:
         QVBoxLayout *layout;
@@ -23,18 +37,15 @@ class Snippet : public QWidget {
         QPushButton *search;
         QPushButton *add;
         QListWidget *listWidget;
-        QListWidgetItem* listItems;
         QDialog *dial;
         QPushButton *valider;
         QLineEdit *nomSnippet;
-        QString filename;
         Fenetre *fen;
-        DSnippetItem *dlistItem;
         SnippetController sni;
         void addToList(QString snippetname);
         void getList();
         void createDialog();
         bool caracteresSpeciaux(QString nomSnippet);
 };
-
+*/
 #endif

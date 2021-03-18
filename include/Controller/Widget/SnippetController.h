@@ -7,7 +7,7 @@ class Snippet;
 
 class SnippetController : public QObject {
     Q_OBJECT
-
+/*
     public:
         SnippetController(Snippet *sni);
 
@@ -20,7 +20,7 @@ class SnippetController : public QObject {
         void validate(QString nomSnippet);
         void copyFile(QString name);
         void modifyFile(QString name);
-        void deleteFile(QString name);
+        void deleteFile(QString name);*/
 };
 
 #endif

@@ -15,6 +15,8 @@ class DCodeEditor : public QPlainTextEdit {
         DCodeEditor(QString &path,QWidget *parent = nullptr);
 		void leftAreaPaintEvent(QPaintEvent *event);
         CodeEditorController& getController(){return this->cec;}
+        void setCompleter(QCompleter *completer);
+        QCompleter* getCompleter(){return this->mCompleter;};
 	
 	private:
 		QWidget *leftArea;
@@ -22,8 +24,10 @@ class DCodeEditor : public QPlainTextEdit {
         JavaHighLighter *highlighter;
         void highlightCoupleNext(QString left, QString right);
         void highlightCouplePrev(QString left, QString right);
+        void completerFilter();
         QString textTab;
         void constructeur();
+        QCompleter *mCompleter;
 
 		
 	protected:
@@ -36,6 +40,7 @@ class DCodeEditor : public QPlainTextEdit {
         void keyPressEvent(QKeyEvent *event);
         void highlightCouples();
         void tab();
+        void insertCompletion(const QString &completion);
 };
 
 class LeftLineArea : public QWidget {

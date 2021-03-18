@@ -1,6 +1,6 @@
 #include "include/Controller/Widget/SnippetController.h"
 #include "include/View/Fenetre.h"
-
+/*
 SnippetController::SnippetController(Snippet *sni){
     this->m_sni = sni;
 }
@@ -75,3 +75,4 @@ void SnippetController::isDeleted(){
             item->setHidden(false);
     }
 }
+*/

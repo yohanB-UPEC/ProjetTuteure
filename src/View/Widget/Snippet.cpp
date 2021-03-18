@@ -1,5 +1,30 @@
 #include "include/View/Widget/Snippet.h"
-#include "include/View/Fenetre.h"
+
+
+Snippet::Snippet(SnippetModel *model): m_model(model){
+    this->setModel(m_model);
+    QLineEdit *search = new QLineEdit(this);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*#include "include/View/Fenetre.h"
 
 Snippet::Snippet(Fenetre* fen, QWidget *parent): QWidget(parent), sni(this){
     this->fen = fen;
@@ -18,7 +43,6 @@ Snippet::Snippet(Fenetre* fen, QWidget *parent): QWidget(parent), sni(this){
 
     listWidget = new QListWidget();
     listWidget->setMouseTracking(true);
-    listItems = new QListWidgetItem;
 
     h1->addWidget(input);
     h1->addWidget(add);
@@ -27,7 +51,6 @@ Snippet::Snippet(Fenetre* fen, QWidget *parent): QWidget(parent), sni(this){
     layout->addLayout(h2);
     this->setLayout(layout);
 
-    /* Création du dossier Snippet */
 
     QString path = QCoreApplication::applicationDirPath()+"/Snippets";
     QDir dir;
@@ -38,6 +61,14 @@ Snippet::Snippet(Fenetre* fen, QWidget *parent): QWidget(parent), sni(this){
     getList();
     connect(input,SIGNAL(textChanged(QString)),&sni,SLOT(isDeleted()));
     connect(add,SIGNAL(clicked()),&sni,SLOT(addSnippet()));
+}
+
+QStringList Snippet::getSnippetsNames(){
+    QStringList list;
+    for(int i = 0; i < listWidget->count();i++){
+        list << ((DSnippetItem*)listWidget->item(i))->getNomSnippet()->text();
+    }
+    return list;
 }
 
 void Snippet::createDialog(){
@@ -96,7 +127,7 @@ bool Snippet::caracteresSpeciaux(QString nomSnippet){
 
 void Snippet::addToList(QString snippetname){
     QListWidgetItem *listWItems = new QListWidgetItem;
-    dlistItem = new DSnippetItem(snippetname, listWItems);
+    DSnippetItem *dlistItem = new DSnippetItem(snippetname, listWItems);
     listWItems->setSizeHint(dlistItem->sizeHint());
     listWidget->addItem(listWItems);
     listWidget->setItemWidget(listWItems, dlistItem);
@@ -105,3 +136,4 @@ void Snippet::addToList(QString snippetname){
     connect(dlistItem,SIGNAL(sig_modify(QString)),&sni,SLOT(modifyFile(QString)));
     connect(dlistItem,SIGNAL(sig_delete(QString)),&sni,SLOT(deleteFile(QString)));
 }
+*/

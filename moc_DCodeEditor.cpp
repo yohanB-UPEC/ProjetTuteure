@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_DCodeEditor_t {
-    QByteArrayData data[12];
-    char stringdata0[135];
+    QByteArrayData data[14];
+    char stringdata0[163];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,13 +42,16 @@ QT_MOC_LITERAL(7, 83, 13), // "keyPressEvent"
 QT_MOC_LITERAL(8, 97, 10), // "QKeyEvent*"
 QT_MOC_LITERAL(9, 108, 5), // "event"
 QT_MOC_LITERAL(10, 114, 16), // "highlightCouples"
-QT_MOC_LITERAL(11, 131, 3) // "tab"
+QT_MOC_LITERAL(11, 131, 3), // "tab"
+QT_MOC_LITERAL(12, 135, 16), // "insertCompletion"
+QT_MOC_LITERAL(13, 152, 10) // "completion"
 
     },
     "DCodeEditor\0leftAreaWidthUpdate\0\0"
     "scrollLeftAreaUpdate\0rect\0dy\0"
     "highlightCurrentLine\0keyPressEvent\0"
-    "QKeyEvent*\0event\0highlightCouples\0tab"
+    "QKeyEvent*\0event\0highlightCouples\0tab\0"
+    "insertCompletion\0completion"
 };
 #undef QT_MOC_LITERAL
 
@@ -58,7 +61,7 @@ static const uint qt_meta_data_DCodeEditor[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -66,12 +69,13 @@ static const uint qt_meta_data_DCodeEditor[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   44,    2, 0x0a /* Public */,
-       3,    2,   45,    2, 0x0a /* Public */,
-       6,    0,   50,    2, 0x0a /* Public */,
-       7,    1,   51,    2, 0x0a /* Public */,
-      10,    0,   54,    2, 0x0a /* Public */,
-      11,    0,   55,    2, 0x0a /* Public */,
+       1,    0,   49,    2, 0x0a /* Public */,
+       3,    2,   50,    2, 0x0a /* Public */,
+       6,    0,   55,    2, 0x0a /* Public */,
+       7,    1,   56,    2, 0x0a /* Public */,
+      10,    0,   59,    2, 0x0a /* Public */,
+      11,    0,   60,    2, 0x0a /* Public */,
+      12,    1,   61,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
@@ -80,6 +84,7 @@ static const uint qt_meta_data_DCodeEditor[] = {
     QMetaType::Void, 0x80000000 | 8,    9,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,   13,
 
        0        // eod
 };
@@ -96,6 +101,7 @@ void DCodeEditor::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 3: _t->keyPressEvent((*reinterpret_cast< QKeyEvent*(*)>(_a[1]))); break;
         case 4: _t->highlightCouples(); break;
         case 5: _t->tab(); break;
+        case 6: _t->insertCompletion((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -130,13 +136,13 @@ int DCodeEditor::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
+        if (_id < 7)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }

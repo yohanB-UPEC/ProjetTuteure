@@ -41,6 +41,7 @@ HEADERS += include/View/Fenetre.h \
     include/Model/DSourceFolder.h \
     include/Model/DFolder.h \
     include/Model/DPackage.h \
+    include/Model/SnippetModel.h \
     include/Controller/Controller.h \
     include/View/Dialog/PackageDialog.h \
     include/View/Dialog/ClassDialog.h \
@@ -89,6 +90,7 @@ SOURCES += src/View/Fenetre.cpp \
     src/Model/DSourceFolder.cpp \
     src/Model/DFolder.cpp \
     src/Model/DPackage.cpp \
+    src/Model/SnippetModel.cpp \
     src/Compiler/NaiveAnalyzer.cpp \
     src/Compiler/JavaFileReader.cpp \
     src/Controller/Controller.cpp \

@@ -88,6 +88,7 @@ SOURCES       = src/View/Fenetre.cpp \
 		src/Model/DSourceFolder.cpp \
 		src/Model/DFolder.cpp \
 		src/Model/DPackage.cpp \
+		src/Model/SnippetModel.cpp \
 		src/Compiler/NaiveAnalyzer.cpp \
 		src/Compiler/JavaFileReader.cpp \
 		src/Controller/Controller.cpp \
@@ -125,6 +126,7 @@ SOURCES       = src/View/Fenetre.cpp \
 		moc_ProjectDialog.cpp \
 		moc_Model.cpp \
 		moc_TreeItem.cpp \
+		moc_SnippetModel.cpp \
 		moc_Controller.cpp \
 		moc_PackageDialog.cpp \
 		moc_ClassDialog.cpp \
@@ -172,6 +174,7 @@ OBJECTS       = Fenetre.o \
 		DSourceFolder.o \
 		DFolder.o \
 		DPackage.o \
+		SnippetModel.o \
 		NaiveAnalyzer.o \
 		JavaFileReader.o \
 		Controller.o \
@@ -210,6 +213,7 @@ OBJECTS       = Fenetre.o \
 		moc_ProjectDialog.o \
 		moc_Model.o \
 		moc_TreeItem.o \
+		moc_SnippetModel.o \
 		moc_Controller.o \
 		moc_PackageDialog.o \
 		moc_ClassDialog.o \
@@ -428,6 +432,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		include/Model/DSourceFolder.h \
 		include/Model/DFolder.h \
 		include/Model/DPackage.h \
+		include/Model/SnippetModel.h \
 		include/Controller/Controller.h \
 		include/View/Dialog/PackageDialog.h \
 		include/View/Dialog/ClassDialog.h \
@@ -474,6 +479,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		src/Model/DSourceFolder.cpp \
 		src/Model/DFolder.cpp \
 		src/Model/DPackage.cpp \
+		src/Model/SnippetModel.cpp \
 		src/Compiler/NaiveAnalyzer.cpp \
 		src/Compiler/JavaFileReader.cpp \
 		src/Controller/Controller.cpp \
@@ -869,8 +875,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents resources.qrc res/BreezeStyleSheets/breeze.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents include/View/Fenetre.h include/Controller/Dialog/ConsoleController.h include/Controller/Dialog/FolderController.h include/Controller/Dialog/PackageController.h include/Controller/Menu/MenuPrefController.h include/Controller/Widget/CodeEditorController.h include/Controller/Widget/ExplorerDelegate.h include/Model/ConsoleModel.h include/Model/FilteredModel.h include/Model/Javora.h include/Model/MakefileFactory.h include/View/Dialog/ConsoleDialog.h include/View/Dialog/FolderDialog.h include/View/Menu/MenuContextExplorer.h include/View/Widget/Console.h include/View/Widget/ConsoleTabWidget.h include/View/Widget/DCodeEditor.h include/View/Widget/JavaHighLighter.h include/View/Menu/MenuFile.h include/View/Menu/MenuNew.h include/View/Menu/MenuEdit.h include/View/Menu/MenuPref.h include/View/Menu/MenuHelp.h include/View/Dialog/ProjectDialog.h include/Model/ClassElement.h include/Model/ClassSubElement.h include/Model/DAttribut.h include/Model/DMethod.h include/Model/DClass.h include/Model/DJavaFile.h include/Model/Model.h include/Model/TreeItem.h include/Model/DIcons.h include/Model/DProject.h include/Model/DSourceFolder.h include/Model/DFolder.h include/Model/DPackage.h include/Controller/Controller.h include/View/Dialog/PackageDialog.h include/View/Dialog/ClassDialog.h include/View/Dialog/QuestionDialog.h include/Controller/Dialog/ProjectController.h include/Controller/Dialog/ClassController.h include/Controller/Widget/SnippetController.h include/Controller/Menu/MenuEditController.h include/View/Widget/DSnippetItem.h include/View/Widget/Snippet.h include/View/Widget/TitleBar.h $(DISTDIR)/
-	$(COPY_FILE) --parents src/View/Fenetre.cpp src/Controller/Dialog/FolderController.cpp src/Controller/Dialog/PackageController.cpp src/Controller/Menu/MenuPrefController.cpp src/Controller/Widget/CodeEditorController.cpp src/Controller/Widget/ExplorerDelegate.cpp src/Controller/Widget/snippetcontroller.cpp src/Model/ClassSubElement.cpp src/Model/ConsoleModel.cpp src/Model/DAttribut.cpp src/Model/DMethod.cpp src/Model/FilteredModel.cpp src/Model/MakefileFactory.cpp src/View/Dialog/ConsoleController.cpp src/View/Dialog/ConsoleDialog.cpp src/View/Dialog/FolderDialog.cpp src/View/Menu/MenuContextExplorer.cpp src/View/Widget/Console.cpp src/View/Widget/ConsoleTabWidget.cpp src/View/Widget/DCodeEditor.cpp src/View/Widget/JavaHighLighter.cpp src/View/Menu/MenuFile.cpp src/View/Menu/MenuNew.cpp src/View/Menu/MenuEdit.cpp src/View/Menu/MenuPref.cpp src/View/Menu/MenuHelp.cpp src/View/Dialog/ProjectDialog.cpp src/Model/DClass.cpp src/Model/DJavaFile.cpp src/Model/Model.cpp src/Model/TreeItem.cpp src/Model/DIcons.cpp src/Model/DProject.cpp src/Model/DSourceFolder.cpp src/Model/DFolder.cpp src/Model/DPackage.cpp src/Compiler/NaiveAnalyzer.cpp src/Compiler/JavaFileReader.cpp src/Controller/Controller.cpp src/View/Dialog/PackageDialog.cpp src/View/Dialog/ClassDialog.cpp src/View/Dialog/QuestionDialog.cpp src/Controller/Dialog/ProjectController.cpp src/Controller/Dialog/ClassController.cpp src/Controller/Menu/MenuEditController.cpp src/View/Widget/DSnippetItem.cpp src/View/Widget/Snippet.cpp src/View/Widget/TitleBar.cpp src/main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents include/View/Fenetre.h include/Controller/Dialog/ConsoleController.h include/Controller/Dialog/FolderController.h include/Controller/Dialog/PackageController.h include/Controller/Menu/MenuPrefController.h include/Controller/Widget/CodeEditorController.h include/Controller/Widget/ExplorerDelegate.h include/Model/ConsoleModel.h include/Model/FilteredModel.h include/Model/Javora.h include/Model/MakefileFactory.h include/View/Dialog/ConsoleDialog.h include/View/Dialog/FolderDialog.h include/View/Menu/MenuContextExplorer.h include/View/Widget/Console.h include/View/Widget/ConsoleTabWidget.h include/View/Widget/DCodeEditor.h include/View/Widget/JavaHighLighter.h include/View/Menu/MenuFile.h include/View/Menu/MenuNew.h include/View/Menu/MenuEdit.h include/View/Menu/MenuPref.h include/View/Menu/MenuHelp.h include/View/Dialog/ProjectDialog.h include/Model/ClassElement.h include/Model/ClassSubElement.h include/Model/DAttribut.h include/Model/DMethod.h include/Model/DClass.h include/Model/DJavaFile.h include/Model/Model.h include/Model/TreeItem.h include/Model/DIcons.h include/Model/DProject.h include/Model/DSourceFolder.h include/Model/DFolder.h include/Model/DPackage.h include/Model/SnippetModel.h include/Controller/Controller.h include/View/Dialog/PackageDialog.h include/View/Dialog/ClassDialog.h include/View/Dialog/QuestionDialog.h include/Controller/Dialog/ProjectController.h include/Controller/Dialog/ClassController.h include/Controller/Widget/SnippetController.h include/Controller/Menu/MenuEditController.h include/View/Widget/DSnippetItem.h include/View/Widget/Snippet.h include/View/Widget/TitleBar.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/View/Fenetre.cpp src/Controller/Dialog/FolderController.cpp src/Controller/Dialog/PackageController.cpp src/Controller/Menu/MenuPrefController.cpp src/Controller/Widget/CodeEditorController.cpp src/Controller/Widget/ExplorerDelegate.cpp src/Controller/Widget/snippetcontroller.cpp src/Model/ClassSubElement.cpp src/Model/ConsoleModel.cpp src/Model/DAttribut.cpp src/Model/DMethod.cpp src/Model/FilteredModel.cpp src/Model/MakefileFactory.cpp src/View/Dialog/ConsoleController.cpp src/View/Dialog/ConsoleDialog.cpp src/View/Dialog/FolderDialog.cpp src/View/Menu/MenuContextExplorer.cpp src/View/Widget/Console.cpp src/View/Widget/ConsoleTabWidget.cpp src/View/Widget/DCodeEditor.cpp src/View/Widget/JavaHighLighter.cpp src/View/Menu/MenuFile.cpp src/View/Menu/MenuNew.cpp src/View/Menu/MenuEdit.cpp src/View/Menu/MenuPref.cpp src/View/Menu/MenuHelp.cpp src/View/Dialog/ProjectDialog.cpp src/Model/DClass.cpp src/Model/DJavaFile.cpp src/Model/Model.cpp src/Model/TreeItem.cpp src/Model/DIcons.cpp src/Model/DProject.cpp src/Model/DSourceFolder.cpp src/Model/DFolder.cpp src/Model/DPackage.cpp src/Model/SnippetModel.cpp src/Compiler/NaiveAnalyzer.cpp src/Compiler/JavaFileReader.cpp src/Controller/Controller.cpp src/View/Dialog/PackageDialog.cpp src/View/Dialog/ClassDialog.cpp src/View/Dialog/QuestionDialog.cpp src/Controller/Dialog/ProjectController.cpp src/Controller/Dialog/ClassController.cpp src/Controller/Menu/MenuEditController.cpp src/View/Widget/DSnippetItem.cpp src/View/Widget/Snippet.cpp src/View/Widget/TitleBar.cpp src/main.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1016,9 +1022,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/qt/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector-strong -fno-plt -Wall -W -dM -E -o moc_predefs.h /usr/lib/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_Fenetre.cpp moc_ConsoleController.cpp moc_FolderController.cpp moc_PackageController.cpp moc_MenuPrefController.cpp moc_CodeEditorController.cpp moc_ConsoleModel.cpp moc_Javora.cpp moc_ConsoleDialog.cpp moc_FolderDialog.cpp moc_MenuContextExplorer.cpp moc_Console.cpp moc_ConsoleTabWidget.cpp moc_DCodeEditor.cpp moc_JavaHighLighter.cpp moc_MenuFile.cpp moc_MenuNew.cpp moc_MenuEdit.cpp moc_MenuPref.cpp moc_MenuHelp.cpp moc_ProjectDialog.cpp moc_Model.cpp moc_TreeItem.cpp moc_Controller.cpp moc_PackageDialog.cpp moc_ClassDialog.cpp moc_QuestionDialog.cpp moc_ProjectController.cpp moc_ClassController.cpp moc_SnippetController.cpp moc_MenuEditController.cpp moc_DSnippetItem.cpp moc_Snippet.cpp moc_TitleBar.cpp
+compiler_moc_header_make_all: moc_Fenetre.cpp moc_ConsoleController.cpp moc_FolderController.cpp moc_PackageController.cpp moc_MenuPrefController.cpp moc_CodeEditorController.cpp moc_ConsoleModel.cpp moc_Javora.cpp moc_ConsoleDialog.cpp moc_FolderDialog.cpp moc_MenuContextExplorer.cpp moc_Console.cpp moc_ConsoleTabWidget.cpp moc_DCodeEditor.cpp moc_JavaHighLighter.cpp moc_MenuFile.cpp moc_MenuNew.cpp moc_MenuEdit.cpp moc_MenuPref.cpp moc_MenuHelp.cpp moc_ProjectDialog.cpp moc_Model.cpp moc_TreeItem.cpp moc_SnippetModel.cpp moc_Controller.cpp moc_PackageDialog.cpp moc_ClassDialog.cpp moc_QuestionDialog.cpp moc_ProjectController.cpp moc_ClassController.cpp moc_SnippetController.cpp moc_MenuEditController.cpp moc_DSnippetItem.cpp moc_Snippet.cpp moc_TitleBar.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_Fenetre.cpp moc_ConsoleController.cpp moc_FolderController.cpp moc_PackageController.cpp moc_MenuPrefController.cpp moc_CodeEditorController.cpp moc_ConsoleModel.cpp moc_Javora.cpp moc_ConsoleDialog.cpp moc_FolderDialog.cpp moc_MenuContextExplorer.cpp moc_Console.cpp moc_ConsoleTabWidget.cpp moc_DCodeEditor.cpp moc_JavaHighLighter.cpp moc_MenuFile.cpp moc_MenuNew.cpp moc_MenuEdit.cpp moc_MenuPref.cpp moc_MenuHelp.cpp moc_ProjectDialog.cpp moc_Model.cpp moc_TreeItem.cpp moc_Controller.cpp moc_PackageDialog.cpp moc_ClassDialog.cpp moc_QuestionDialog.cpp moc_ProjectController.cpp moc_ClassController.cpp moc_SnippetController.cpp moc_MenuEditController.cpp moc_DSnippetItem.cpp moc_Snippet.cpp moc_TitleBar.cpp
+	-$(DEL_FILE) moc_Fenetre.cpp moc_ConsoleController.cpp moc_FolderController.cpp moc_PackageController.cpp moc_MenuPrefController.cpp moc_CodeEditorController.cpp moc_ConsoleModel.cpp moc_Javora.cpp moc_ConsoleDialog.cpp moc_FolderDialog.cpp moc_MenuContextExplorer.cpp moc_Console.cpp moc_ConsoleTabWidget.cpp moc_DCodeEditor.cpp moc_JavaHighLighter.cpp moc_MenuFile.cpp moc_MenuNew.cpp moc_MenuEdit.cpp moc_MenuPref.cpp moc_MenuHelp.cpp moc_ProjectDialog.cpp moc_Model.cpp moc_TreeItem.cpp moc_SnippetModel.cpp moc_Controller.cpp moc_PackageDialog.cpp moc_ClassDialog.cpp moc_QuestionDialog.cpp moc_ProjectController.cpp moc_ClassController.cpp moc_SnippetController.cpp moc_MenuEditController.cpp moc_DSnippetItem.cpp moc_Snippet.cpp moc_TitleBar.cpp
 moc_Fenetre.cpp: include/View/Fenetre.h \
 		/usr/include/qt/QtWidgets/QtWidgets \
 		/usr/include/qt/QtWidgets/QtWidgetsDepends \
@@ -1502,6 +1508,7 @@ moc_Fenetre.cpp: include/View/Fenetre.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/Controller/Controller.h \
 		include/View/Widget/DCodeEditor.h \
 		include/Controller/Widget/CodeEditorController.h \
@@ -2493,6 +2500,7 @@ moc_FolderController.cpp: include/Controller/Dialog/FolderController.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /export/home/senart19/bordes/Desktop/pt/ProjetTuteure/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/export/home/senart19/bordes/Desktop/pt/ProjetTuteure -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtXml -I/usr/include/qt/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include/Controller/Dialog/FolderController.h -o moc_FolderController.cpp
@@ -2980,6 +2988,7 @@ moc_PackageController.cpp: include/Controller/Dialog/PackageController.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /export/home/senart19/bordes/Desktop/pt/ProjetTuteure/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/export/home/senart19/bordes/Desktop/pt/ProjetTuteure -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtXml -I/usr/include/qt/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include/Controller/Dialog/PackageController.h -o moc_PackageController.cpp
@@ -5381,6 +5390,7 @@ moc_FolderDialog.cpp: include/View/Dialog/FolderDialog.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/Model/FilteredModel.h \
 		include/Model/Javora.h \
 		moc_predefs.h \
@@ -5870,6 +5880,7 @@ moc_MenuContextExplorer.cpp: include/View/Menu/MenuContextExplorer.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/View/Dialog/QuestionDialog.h \
 		moc_predefs.h \
 		/usr/bin/moc
@@ -6823,6 +6834,7 @@ moc_ConsoleTabWidget.cpp: include/View/Widget/ConsoleTabWidget.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/Controller/Controller.h \
 		include/View/Widget/DCodeEditor.h \
 		include/Controller/Widget/CodeEditorController.h \
@@ -8307,6 +8319,7 @@ moc_MenuFile.cpp: include/View/Menu/MenuFile.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/View/Dialog/PackageDialog.h \
 		include/Model/Javora.h \
 		include/Controller/Dialog/PackageController.h \
@@ -8833,6 +8846,7 @@ moc_MenuNew.cpp: include/View/Menu/MenuNew.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/View/Dialog/PackageDialog.h \
 		include/Model/Javora.h \
 		include/Controller/Dialog/PackageController.h \
@@ -10426,6 +10440,7 @@ moc_ProjectDialog.cpp: include/View/Dialog/ProjectDialog.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /export/home/senart19/bordes/Desktop/pt/ProjetTuteure/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/export/home/senart19/bordes/Desktop/pt/ProjetTuteure -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtXml -I/usr/include/qt/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include/View/Dialog/ProjectDialog.h -o moc_ProjectDialog.cpp
@@ -10912,6 +10927,7 @@ moc_Model.cpp: include/Model/Model.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /export/home/senart19/bordes/Desktop/pt/ProjetTuteure/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/export/home/senart19/bordes/Desktop/pt/ProjetTuteure -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtXml -I/usr/include/qt/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include/Model/Model.h -o moc_Model.cpp
@@ -11384,6 +11400,11 @@ moc_TreeItem.cpp: include/Model/TreeItem.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /export/home/senart19/bordes/Desktop/pt/ProjetTuteure/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/export/home/senart19/bordes/Desktop/pt/ProjetTuteure -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtXml -I/usr/include/qt/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include/Model/TreeItem.h -o moc_TreeItem.cpp
+
+moc_SnippetModel.cpp: include/Model/SnippetModel.h \
+		moc_predefs.h \
+		/usr/bin/moc
+	/usr/bin/moc $(DEFINES) --include /export/home/senart19/bordes/Desktop/pt/ProjetTuteure/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/export/home/senart19/bordes/Desktop/pt/ProjetTuteure -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtXml -I/usr/include/qt/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include/Model/SnippetModel.h -o moc_SnippetModel.cpp
 
 moc_Controller.cpp: include/Controller/Controller.h \
 		/usr/include/qt/QtWidgets/QtWidgets \
@@ -11880,6 +11901,7 @@ moc_Controller.cpp: include/Controller/Controller.h \
 		/usr/include/qt/QtCore/QRegularExpression \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
+		include/Model/SnippetModel.h \
 		include/View/Dialog/QuestionDialog.h \
 		moc_predefs.h \
 		/usr/bin/moc
@@ -12370,6 +12392,7 @@ moc_PackageDialog.cpp: include/View/Dialog/PackageDialog.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/Model/FilteredModel.h \
 		moc_predefs.h \
 		/usr/bin/moc
@@ -12859,6 +12882,7 @@ moc_ClassDialog.cpp: include/View/Dialog/ClassDialog.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/Model/Javora.h \
 		include/Model/FilteredModel.h \
 		include/View/Fenetre.h \
@@ -13849,6 +13873,7 @@ moc_ProjectController.cpp: include/Controller/Dialog/ProjectController.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /export/home/senart19/bordes/Desktop/pt/ProjetTuteure/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/export/home/senart19/bordes/Desktop/pt/ProjetTuteure -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtXml -I/usr/include/qt/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include/Controller/Dialog/ProjectController.h -o moc_ProjectController.cpp
@@ -14336,6 +14361,7 @@ moc_ClassController.cpp: include/Controller/Dialog/ClassController.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /export/home/senart19/bordes/Desktop/pt/ProjetTuteure/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/export/home/senart19/bordes/Desktop/pt/ProjetTuteure -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtXml -I/usr/include/qt/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include/Controller/Dialog/ClassController.h -o moc_ClassController.cpp
@@ -16215,6 +16241,7 @@ moc_Snippet.cpp: include/View/Widget/Snippet.h \
 		include/View/Widget/DSnippetItem.h \
 		include/Model/DIcons.h \
 		include/Controller/Widget/SnippetController.h \
+		include/Model/SnippetModel.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /export/home/senart19/bordes/Desktop/pt/ProjetTuteure/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/export/home/senart19/bordes/Desktop/pt/ProjetTuteure -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtXml -I/usr/include/qt/QtCore -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++ -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/i686-w64-mingw32 -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include/c++/backward -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/lib/gcc/i686-w64-mingw32/8.1.0/include-fixed -IC:/Mingw/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/i686-w64-mingw32/include include/View/Widget/Snippet.h -o moc_Snippet.cpp
@@ -17183,6 +17210,7 @@ Fenetre.o: src/View/Fenetre.cpp /usr/include/qt/QtWidgets/qsizepolicy.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/Controller/Controller.h \
 		include/View/Widget/DCodeEditor.h \
 		include/Controller/Widget/CodeEditorController.h \
@@ -17707,6 +17735,7 @@ FolderController.o: src/Controller/Dialog/FolderController.cpp include/Controlle
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/View/Dialog/FolderDialog.h \
 		include/Model/FilteredModel.h \
 		include/Model/Javora.h
@@ -18195,6 +18224,7 @@ PackageController.o: src/Controller/Dialog/PackageController.cpp include/Control
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/View/Dialog/PackageDialog.h \
 		include/Model/Javora.h \
 		include/Model/FilteredModel.h
@@ -18691,6 +18721,7 @@ MenuPrefController.o: src/Controller/Menu/MenuPrefController.cpp include/Control
 		/usr/include/qt/QtCore/QRegularExpression \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
+		include/Model/SnippetModel.h \
 		include/Controller/Controller.h \
 		include/View/Widget/DCodeEditor.h \
 		include/Controller/Widget/CodeEditorController.h \
@@ -19685,7 +19716,8 @@ ExplorerDelegate.o: src/Controller/Widget/ExplorerDelegate.cpp include/Controlle
 		/usr/include/qt/QtCore/QRegularExpression \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
-		include/Model/ConsoleModel.h
+		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ExplorerDelegate.o src/Controller/Widget/ExplorerDelegate.cpp
 
 snippetcontroller.o: src/Controller/Widget/snippetcontroller.cpp include/Controller/Widget/SnippetController.h \
@@ -20172,6 +20204,7 @@ snippetcontroller.o: src/Controller/Widget/snippetcontroller.cpp include/Control
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/Controller/Controller.h \
 		include/View/Widget/DCodeEditor.h \
 		include/Controller/Widget/CodeEditorController.h \
@@ -21279,7 +21312,8 @@ FilteredModel.o: src/Model/FilteredModel.cpp include/Model/FilteredModel.h \
 		/usr/include/qt/QtCore/QRegularExpression \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
-		include/Model/ConsoleModel.h
+		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o FilteredModel.o src/Model/FilteredModel.cpp
 
 MakefileFactory.o: src/Model/MakefileFactory.cpp include/Model/MakefileFactory.h \
@@ -23176,6 +23210,7 @@ FolderDialog.o: src/View/Dialog/FolderDialog.cpp include/View/Dialog/FolderDialo
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/Model/FilteredModel.h \
 		include/Model/Javora.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o FolderDialog.o src/View/Dialog/FolderDialog.cpp
@@ -23663,6 +23698,7 @@ MenuContextExplorer.o: src/View/Menu/MenuContextExplorer.cpp include/View/Menu/M
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/View/Dialog/QuestionDialog.h \
 		include/View/Fenetre.h \
 		include/Controller/Controller.h \
@@ -24189,6 +24225,7 @@ Console.o: src/View/Widget/Console.cpp /usr/include/qt/QtCore/QProcess \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/Controller/Controller.h \
 		include/View/Widget/DCodeEditor.h \
 		include/Controller/Widget/CodeEditorController.h \
@@ -24713,6 +24750,7 @@ ConsoleTabWidget.o: src/View/Widget/ConsoleTabWidget.cpp include/View/Widget/Con
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/Controller/Controller.h \
 		include/View/Widget/DCodeEditor.h \
 		include/Controller/Widget/CodeEditorController.h \
@@ -26190,6 +26228,7 @@ MenuFile.o: src/View/Menu/MenuFile.cpp include/View/Menu/MenuFile.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/View/Dialog/PackageDialog.h \
 		include/Model/Javora.h \
 		include/Controller/Dialog/PackageController.h \
@@ -26713,6 +26752,7 @@ MenuNew.o: src/View/Menu/MenuNew.cpp include/View/Menu/MenuNew.h \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/View/Dialog/PackageDialog.h \
 		include/Model/Javora.h \
 		include/Controller/Dialog/PackageController.h \
@@ -27248,6 +27288,7 @@ MenuEdit.o: src/View/Menu/MenuEdit.cpp include/View/Menu/MenuEdit.h \
 		/usr/include/qt/QtCore/QRegularExpression \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
+		include/Model/SnippetModel.h \
 		include/Controller/Controller.h \
 		include/View/Menu/MenuContextExplorer.h \
 		include/View/Dialog/QuestionDialog.h \
@@ -27766,6 +27807,7 @@ MenuPref.o: src/View/Menu/MenuPref.cpp include/View/Menu/MenuPref.h \
 		/usr/include/qt/QtCore/QRegularExpression \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
+		include/Model/SnippetModel.h \
 		include/Controller/Controller.h \
 		include/View/Widget/DCodeEditor.h \
 		include/Controller/Widget/CodeEditorController.h \
@@ -28290,6 +28332,7 @@ MenuHelp.o: src/View/Menu/MenuHelp.cpp include/View/Menu/MenuPref.h \
 		/usr/include/qt/QtCore/QRegularExpression \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
+		include/Model/SnippetModel.h \
 		include/Controller/Controller.h \
 		include/View/Widget/DCodeEditor.h \
 		include/Controller/Widget/CodeEditorController.h \
@@ -28806,7 +28849,8 @@ ProjectDialog.o: src/View/Dialog/ProjectDialog.cpp include/View/Dialog/ProjectDi
 		/usr/include/qt/QtCore/QRegularExpression \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
-		include/Model/ConsoleModel.h
+		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ProjectDialog.o src/View/Dialog/ProjectDialog.cpp
 
 DClass.o: src/Model/DClass.cpp include/Model/DClass.h \
@@ -29842,7 +29886,8 @@ Model.o: src/Model/Model.cpp include/Model/Model.h \
 		/usr/include/qt/QtCore/QRegularExpression \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
-		include/Model/ConsoleModel.h
+		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Model.o src/Model/Model.cpp
 
 TreeItem.o: src/Model/TreeItem.cpp include/Model/TreeItem.h \
@@ -32693,6 +32738,9 @@ DPackage.o: src/Model/DPackage.cpp include/Model/DPackage.h \
 		/usr/include/qt/QtCore/QRegularExpression
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DPackage.o src/Model/DPackage.cpp
 
+SnippetModel.o: src/Model/SnippetModel.cpp include/Model/SnippetModel.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SnippetModel.o src/Model/SnippetModel.cpp
+
 NaiveAnalyzer.o: src/Compiler/NaiveAnalyzer.cpp include/Compiler/NaiveAnalyzer.h \
 		/usr/include/qt/QtCore/QFile \
 		/usr/include/qt/QtCore/qfile.h \
@@ -33672,6 +33720,7 @@ Controller.o: src/Controller/Controller.cpp include/Controller/Controller.h \
 		/usr/include/qt/QtCore/QRegularExpression \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
+		include/Model/SnippetModel.h \
 		include/View/Dialog/QuestionDialog.h \
 		include/View/Fenetre.h \
 		include/View/Menu/MenuFile.h \
@@ -34186,6 +34235,7 @@ PackageDialog.o: src/View/Dialog/PackageDialog.cpp include/View/Dialog/PackageDi
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/Model/FilteredModel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o PackageDialog.o src/View/Dialog/PackageDialog.cpp
 
@@ -34673,6 +34723,7 @@ ClassDialog.o: src/View/Dialog/ClassDialog.cpp include/View/Dialog/ClassDialog.h
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/Model/Javora.h \
 		include/Model/FilteredModel.h \
 		include/View/Fenetre.h \
@@ -35658,6 +35709,7 @@ ProjectController.o: src/Controller/Dialog/ProjectController.cpp include/Control
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/View/Dialog/ProjectDialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ProjectController.o src/Controller/Dialog/ProjectController.cpp
 
@@ -36144,6 +36196,7 @@ ClassController.o: src/Controller/Dialog/ClassController.cpp include/Controller/
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/View/Dialog/ClassDialog.h \
 		include/Model/Javora.h \
 		include/Model/FilteredModel.h \
@@ -36682,6 +36735,7 @@ MenuEditController.o: src/Controller/Menu/MenuEditController.cpp include/Control
 		/usr/include/qt/QtCore/QRegularExpression \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
+		include/Model/SnippetModel.h \
 		include/Controller/Controller.h \
 		include/View/Menu/MenuContextExplorer.h \
 		include/View/Dialog/QuestionDialog.h \
@@ -37636,64 +37690,7 @@ Snippet.o: src/View/Widget/Snippet.cpp include/View/Widget/Snippet.h \
 		include/View/Widget/DSnippetItem.h \
 		include/Model/DIcons.h \
 		include/Controller/Widget/SnippetController.h \
-		include/View/Fenetre.h \
-		include/Model/Model.h \
-		include/Model/TreeItem.h \
-		/usr/include/qt/QtXml/QDomElement \
-		/usr/include/qt/QtXml/qdom.h \
-		/usr/include/qt/QtXml/qtxmlglobal.h \
-		/usr/include/qt/QtXml/qtxml-config.h \
-		include/Model/DProject.h \
-		include/Model/DFolder.h \
-		include/Model/DPackage.h \
-		include/Model/DJavaFile.h \
-		include/Model/DClass.h \
-		include/Model/DMethod.h \
-		include/Model/ClassSubElement.h \
-		include/Model/ClassElement.h \
-		/usr/include/qt/QtCore/QString \
-		/usr/include/qt/QtCore/QVector \
-		include/Model/DAttribut.h \
-		/usr/include/qt/QtCore/QRegularExpressionMatch \
-		/usr/include/qt/QtCore/QRegularExpression \
-		include/Model/DSourceFolder.h \
-		include/Model/MakefileFactory.h \
-		include/Model/ConsoleModel.h \
-		include/Controller/Controller.h \
-		include/View/Widget/DCodeEditor.h \
-		include/Controller/Widget/CodeEditorController.h \
-		include/View/Widget/JavaHighLighter.h \
-		include/View/Menu/MenuPref.h \
-		/usr/include/qt/QtWidgets/QMenu \
-		/usr/include/qt/QtWidgets/QLineEdit \
-		/usr/include/qt/QtWidgets/QPushButton \
-		/usr/include/qt/QtWidgets/QRadioButton \
-		include/Controller/Menu/MenuPrefController.h \
-		include/View/Dialog/ConsoleDialog.h \
-		include/Controller/Dialog/ConsoleController.h \
-		include/View/Menu/MenuContextExplorer.h \
-		include/View/Dialog/QuestionDialog.h \
-		include/View/Menu/MenuFile.h \
-		include/View/Menu/MenuNew.h \
-		include/View/Dialog/ProjectDialog.h \
-		include/Controller/Dialog/ProjectController.h \
-		include/View/Dialog/PackageDialog.h \
-		include/Model/Javora.h \
-		include/Controller/Dialog/PackageController.h \
-		include/Model/FilteredModel.h \
-		include/View/Dialog/ClassDialog.h \
-		include/Controller/Dialog/ClassController.h \
-		include/View/Dialog/FolderDialog.h \
-		include/Controller/Dialog/FolderController.h \
-		include/View/Menu/MenuEdit.h \
-		/usr/include/qt/QtWidgets/QTextEdit \
-		include/Controller/Menu/MenuEditController.h \
-		include/View/Menu/MenuHelp.h \
-		include/View/Widget/Console.h \
-		include/Controller/Widget/ExplorerDelegate.h \
-		include/View/Widget/TitleBar.h \
-		/usr/include/qt/QtWidgets/QDockWidget \
-		include/View/Widget/ConsoleTabWidget.h
+		include/Model/SnippetModel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Snippet.o src/View/Widget/Snippet.cpp
 
 TitleBar.o: src/View/Widget/TitleBar.cpp include/View/Widget/TitleBar.h \
@@ -38643,6 +38640,7 @@ main.o: src/main.cpp /usr/include/qt/QtWidgets/QApplication \
 		include/Model/DSourceFolder.h \
 		include/Model/MakefileFactory.h \
 		include/Model/ConsoleModel.h \
+		include/Model/SnippetModel.h \
 		include/Controller/Controller.h \
 		include/View/Widget/DCodeEditor.h \
 		include/Controller/Widget/CodeEditorController.h \
@@ -38758,6 +38756,9 @@ moc_Model.o: moc_Model.cpp
 
 moc_TreeItem.o: moc_TreeItem.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_TreeItem.o moc_TreeItem.cpp
+
+moc_SnippetModel.o: moc_SnippetModel.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_SnippetModel.o moc_SnippetModel.cpp
 
 moc_Controller.o: moc_Controller.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Controller.o moc_Controller.cpp

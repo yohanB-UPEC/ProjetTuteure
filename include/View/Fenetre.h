@@ -28,6 +28,7 @@ class Fenetre : public QMainWindow {
         MenuFile* getMenuFile(){return this->menuFile;}
         QTreeView* getExplorer(){return this->tree;}
         MenuPref* getMenuPref(){return this->menuPref;}
+        Snippet* getSnippet(){return this->mSnippet;}
 	private:
 		MenuFile *menuFile;
 		MenuEdit *menuEdit;
@@ -38,6 +39,7 @@ class Fenetre : public QMainWindow {
 		QTabWidget *central;
 		Model *model;
 		Controller *controller;
+		Snippet *mSnippet;
 		
 };
 
