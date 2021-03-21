@@ -1,5 +1,5 @@
-#ifndef FENETRE
-#define FENETRE
+#ifndef FENETRE_H
+#define FENETRE_H
 
 #include <QtWidgets>
 #include "../Model/Model.h"
@@ -15,6 +15,7 @@
 #include "Widget/TitleBar.h"
 #include "Widget/ConsoleTabWidget.h"
 
+
 class MenuFile;
 
 class Fenetre : public QMainWindow {
@@ -28,6 +29,7 @@ class Fenetre : public QMainWindow {
         MenuFile* getMenuFile(){return this->menuFile;}
         QTreeView* getExplorer(){return this->tree;}
         MenuPref* getMenuPref(){return this->menuPref;}
+        Snippet* getSnippet(){return this->mSnippet;}
 	private:
 		MenuFile *menuFile;
 		MenuEdit *menuEdit;
@@ -38,6 +40,7 @@ class Fenetre : public QMainWindow {
 		QTabWidget *central;
 		Model *model;
 		Controller *controller;
+		Snippet *mSnippet;
 		
 };
 

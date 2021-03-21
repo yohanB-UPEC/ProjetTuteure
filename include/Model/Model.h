@@ -8,6 +8,7 @@
 #include "DFolder.h"
 #include "DPackage.h"
 #include "ConsoleModel.h"
+#include "SnippetModel.h"
 
 
 class Model : public QAbstractItemModel{
@@ -29,13 +30,15 @@ class Model : public QAbstractItemModel{
         QString getRelativePath(TreeItem* item);
         bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex(),bool deleteFiles=false);
         ConsoleModel* getConsole(){return &console;};
+        SnippetModel* getSnippet(){return &snippet;};
+
 	public slots:
 	
 	private:
 		TreeItem root;
 		QSettings settings;
         ConsoleModel console;
-
+		SnippetModel snippet;
 };
 
 #endif

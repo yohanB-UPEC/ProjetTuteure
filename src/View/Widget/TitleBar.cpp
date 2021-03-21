@@ -5,7 +5,8 @@ TitleBar::TitleBar(QWidget *parent): QWidget(parent){
     m_layout.addWidget(&m_title,0,0);
     this->setLayout(&m_layout);
     this->setProperty("titlebar", true);
-
+    this->setMinimumHeight(19);
+    m_layout.setRowMinimumHeight(0,19);
     m_layout.setContentsMargins(0,0,0,0);
     this->setContentsMargins(0,0,0,0);
     m_title.setIndent(8);
@@ -13,10 +14,8 @@ TitleBar::TitleBar(QWidget *parent): QWidget(parent){
 
 void TitleBar::changeEvent(QEvent *event){
     if(event->type() == QEvent::ParentChange){
-        m_parent = qobject_cast<QDockWidget*>(parentWidget());
-        m_parent->setMinimumHeight(22);
-        this->setMinimumHeight(19);
-        this->setMaximumHeight(19);
+        m_parent = qobject_cast<QDockWidget*>(parentWidget());     
+        m_parent->setMinimumHeight(19);
         m_title.setText(m_parent->windowTitle());
     }
 }
