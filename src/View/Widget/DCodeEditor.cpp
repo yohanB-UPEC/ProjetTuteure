@@ -1,4 +1,5 @@
 #include "include/View/Widget/DCodeEditor.h"
+#include "include/View/Fenetre.h"
 
 DCodeEditor::DCodeEditor(TreeItem *item, QWidget *parent) : QPlainTextEdit(parent), cec(this,item){
     this->constructeur();
@@ -10,6 +11,11 @@ void DCodeEditor::constructeur(){
     leftArea = new LeftLineArea(this);
     QFont font("Consolas",14,QFont::Medium,false);
     this->setFont(font);
+/*
+    QStringList list;
+    list << "Main" << "Listener" << "salut";*/
+    mCompleter = new QCompleter(((Fenetre*)nativeParentWidget())->getModel()->getSnippet(), this);
+    this->setCompleter(mCompleter);
 
     highlighter = new JavaHighLighter(this->document());
     this->setTabStopDistance(this->fontMetrics().horizontalAdvance(' ') * 4);
@@ -25,6 +31,28 @@ void DCodeEditor::tab(){
     QString newText = this->textCursor().selection().toPlainText().replace("\n", "\n\t");
     if(newText != "" && newText != "\t")
         textTab = newText;
+}
+
+void DCodeEditor::setCompleter(QCompleter *completer){
+    if(completer)
+        completer->disconnect(this);
+    mCompleter = completer;
+
+    if(!mCompleter)
+        return;
+
+    mCompleter->setWidget(this);
+    mCompleter->setCompletionMode(QCompleter::PopupCompletion);
+    connect(mCompleter, SIGNAL(activated(const QModelIndex&)),this, SLOT(insertCompletion(const QModelIndex&)));
+}
+
+void DCodeEditor::insertCompletion(const QModelIndex &index){
+    QString res = ((Fenetre*)nativeParentWidget())->getModel()->getSnippet()->getText(((QAbstractProxyModel*)mCompleter->completionModel())->mapToSource(index));
+    QTextCursor tc = textCursor();
+    tc.movePosition(QTextCursor::PreviousWord,QTextCursor::KeepAnchor);
+    qDebug() << "select: " << tc.selectedText();
+    tc.removeSelectedText();
+    tc.insertText(res);
 }
 
 void DCodeEditor::highlightCouplePrev(QString left, QString right){
@@ -129,6 +157,19 @@ void DCodeEditor::highlightCouples(){
     highlightCouplePrev("(", ")");
     highlightCouplePrev("[", "]");
 }
+
+void DCodeEditor::completerFilter(){
+    QTextCursor tc = textCursor();
+    tc.select(QTextCursor::WordUnderCursor);
+    QString tmp = tc.selectedText();
+    if(mCompleter->completionPrefix() != tmp){
+        mCompleter->setCompletionPrefix(tmp);
+        mCompleter->popup()->setCurrentIndex(mCompleter->completionModel()->index(0, 0));
+    }
+    QRect cr = this->cursorRect();
+    cr.setWidth(250);
+    mCompleter->complete(cr);
+}
 void DCodeEditor::keyPressEvent(QKeyEvent *event) {
     int pos = this->textCursor().positionInBlock();
     QChar prevChar;
@@ -137,7 +178,20 @@ void DCodeEditor::keyPressEvent(QKeyEvent *event) {
     QChar suivChar;
     if(pos < this->textCursor().block().text().size())
         suivChar = this->textCursor().block().text().at(pos);
+    if(mCompleter && mCompleter->popup()->isVisible()){
+        if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return || event->key() == Qt::Key_Escape || event->key() == Qt::Key_Tab || event->key() == Qt::Key_Backtab){
+            event->ignore();
+            return;
+        }
+    }
+    if((event->modifiers().testFlag(Qt::ControlModifier) && event->key() == Qt::Key_E) && mCompleter){
+        this->completerFilter();
+        return;
+    }
     QPlainTextEdit::keyPressEvent(event);
+    if(mCompleter && mCompleter->popup()->isVisible()){
+        this->completerFilter();
+    }
     int nombreTabulations = 0;
 
     if(event->key() == Qt::Key_Tab){

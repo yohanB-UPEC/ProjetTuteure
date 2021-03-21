@@ -31,7 +31,7 @@ void Controller::openEditor(QString path){
             return;
         }
     }
-    DCodeEditor *edit = new DCodeEditor(path);
+    DCodeEditor *edit = new DCodeEditor(path,tab);
     QString name;
     if(path.isNull() || path.isEmpty()){
         name = "nouveau";

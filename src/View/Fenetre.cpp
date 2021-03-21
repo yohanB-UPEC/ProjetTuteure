@@ -50,12 +50,11 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 
     snippet->setTitleBarWidget(new TitleBar());
 
-    snippet->setWidget(new Snippet(this));
+    mSnippet = new Snippet(this, this->model->getSnippet());
+    snippet->setWidget(mSnippet);
+
+
     explorer->setWidget(tree);
-
-    explorer->setTitleBarWidget(new TitleBar());
-
-
 
     connect(tree,SIGNAL(doubleClicked(const QModelIndex)),controller,SLOT(openEditor(const QModelIndex)));
     connect(central,SIGNAL(tabCloseRequested(int)),controller,SLOT(closeEditor(int)));
