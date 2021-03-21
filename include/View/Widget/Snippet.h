@@ -6,46 +6,23 @@
 #include "include/View/Widget/DSnippetItem.h"
 #include "include/Controller/Widget/SnippetController.h"
 #include "include/Model/SnippetModel.h"
+#include "include/Controller/Widget/SnippetDelegate.h"
 
-class Snippet : public QListView{
-    Q_OBJECT
-    public:
-        Snippet(SnippetModel *model);
-
-    private:
-        SnippetModel* m_model;
-};
-
-
-
-/*
 class Fenetre;
 
-class Snippet : public QWidget {
+class Snippet : public QWidget{
     Q_OBJECT
 
     friend class SnippetController;
 
     public:
-        Snippet(Fenetre* fen, QWidget *parent=0);
-        QStringList getSnippetsNames();
-
-
+        Snippet(Fenetre *fen, SnippetModel *model);
     private:
-        QVBoxLayout *layout;
-        QLineEdit *input;
-        QPushButton *search;
-        QPushButton *add;
-        QListWidget *listWidget;
-        QDialog *dial;
-        QPushButton *valider;
-        QLineEdit *nomSnippet;
-        Fenetre *fen;
-        SnippetController sni;
-        void addToList(QString snippetname);
-        void getList();
-        void createDialog();
-        bool caracteresSpeciaux(QString nomSnippet);
+        Fenetre *m_fen;
+        SnippetModel* m_model;
+        QListView listView;
+        SnippetController *sc;
+
 };
-*/
+
 #endif

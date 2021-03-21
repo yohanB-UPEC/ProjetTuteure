@@ -50,7 +50,7 @@ Fenetre::Fenetre(Model *model) : QMainWindow(){
 
     snippet->setTitleBarWidget(new TitleBar());
 
-    mSnippet = new Snippet(this->model->getSnippet());
+    mSnippet = new Snippet(this, this->model->getSnippet());
     snippet->setWidget(mSnippet);
 
     explorer->setWidget(tree);

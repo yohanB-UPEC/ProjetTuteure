@@ -2,12 +2,13 @@
 #define SNIPPETCONTROLLER_H
 
 #include <QtWidgets>
+#include "include/View/Dialog/SnippetDialog.h"
 
 class Snippet;
 
 class SnippetController : public QObject {
     Q_OBJECT
-/*
+
     public:
         SnippetController(Snippet *sni);
 
@@ -15,12 +16,11 @@ class SnippetController : public QObject {
         Snippet *m_sni;
 
     public slots:
-        void isDeleted();
         void addSnippet();
-        void validate(QString nomSnippet);
-        void copyFile(QString name);
-        void modifyFile(QString name);
-        void deleteFile(QString name);*/
+        void modifyFile(const QModelIndex &index);
+        void removeSnippet(const QModelIndex &index);
+        void copySnippet(const QModelIndex &index);
+
 };
 
 #endif

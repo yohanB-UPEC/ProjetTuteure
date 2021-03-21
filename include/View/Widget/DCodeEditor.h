@@ -40,7 +40,7 @@ class DCodeEditor : public QPlainTextEdit {
         void keyPressEvent(QKeyEvent *event);
         void highlightCouples();
         void tab();
-        void insertCompletion(const QString &completion);
+        void insertCompletion(const QModelIndex &index);
 };
 
 class LeftLineArea : public QWidget {

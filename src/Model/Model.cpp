@@ -152,6 +152,7 @@ QString Model::getRelativePath(TreeItem* item){
 }
 
 bool Model::removeRows(int row, int count, const QModelIndex &parent,bool deleteFiles){
+    qDebug() << "Model::removeRows";
     TreeItem *p;
     if(!parent.isValid()){
         p = &root;

@@ -1,5 +1,5 @@
-#ifndef FENETRE
-#define FENETRE
+#ifndef FENETRE_H
+#define FENETRE_H
 
 #include <QtWidgets>
 #include "../Model/Model.h"
@@ -14,6 +14,7 @@
 #include "include/View/Widget/Snippet.h"
 #include "Widget/TitleBar.h"
 #include "Widget/ConsoleTabWidget.h"
+
 
 class MenuFile;
 

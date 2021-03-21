@@ -1,4 +1,5 @@
 #include "include/View/Widget/DCodeEditor.h"
+#include "include/View/Fenetre.h"
 
 DCodeEditor::DCodeEditor(TreeItem *item, QWidget *parent) : QPlainTextEdit(parent), cec(this,item){
     this->constructeur();
@@ -10,10 +11,10 @@ void DCodeEditor::constructeur(){
     leftArea = new LeftLineArea(this);
     QFont font("Consolas",14,QFont::Medium,false);
     this->setFont(font);
-
+/*
     QStringList list;
-    list << "main" << "class" << "interface" << "abstract";
-    mCompleter = new QCompleter(list,this);
+    list << "Main" << "Listener" << "salut";*/
+    mCompleter = new QCompleter(((Fenetre*)nativeParentWidget())->getModel()->getSnippet(), this);
     this->setCompleter(mCompleter);
 
     highlighter = new JavaHighLighter(this->document());
@@ -42,13 +43,16 @@ void DCodeEditor::setCompleter(QCompleter *completer){
 
     mCompleter->setWidget(this);
     mCompleter->setCompletionMode(QCompleter::PopupCompletion);
-    mCompleter->setCaseSensitivity(Qt::CaseInsensitive);
-    connect(mCompleter, SIGNAL(activated(const QString&)),this, SLOT(insertCompletion(const QString&)));
+    connect(mCompleter, SIGNAL(activated(const QModelIndex&)),this, SLOT(insertCompletion(const QModelIndex&)));
 }
 
-void DCodeEditor::insertCompletion(const QString &completion){
-    qDebug() << "DCodeEditor::insertCompletion(const QString &completion): à faire";
-
+void DCodeEditor::insertCompletion(const QModelIndex &index){
+    QString res = ((Fenetre*)nativeParentWidget())->getModel()->getSnippet()->getText(((QAbstractProxyModel*)mCompleter->completionModel())->mapToSource(index));
+    QTextCursor tc = textCursor();
+    tc.movePosition(QTextCursor::PreviousWord,QTextCursor::KeepAnchor);
+    qDebug() << "select: " << tc.selectedText();
+    tc.removeSelectedText();
+    tc.insertText(res);
 }
 
 void DCodeEditor::highlightCouplePrev(QString left, QString right){
