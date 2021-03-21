@@ -128,6 +128,7 @@ void JavaHighLighter::highlightBlock(const QString &text) {
 
     for(int i = startIndex; i < text.length();i++){
         if(text[i] == "/"){
+            if(i+1 >= text.length()) continue;
             if(text[i+1] == "/"){
                 setFormat(i,text.length(),commentFormat);
                 return;
@@ -170,6 +171,4 @@ void JavaHighLighter::highlightBlock(const QString &text) {
             }
         }
     }
-
-    
 }

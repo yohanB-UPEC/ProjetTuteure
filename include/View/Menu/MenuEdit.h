@@ -33,6 +33,7 @@ class MenuEdit : public QMenu {
         QAction *replace;
         QLabel *lab3;
         QCheckBox *casse;
+        QCheckBox *check;
         QRadioButton *radio2;
         QString motTmp;
         QLineEdit *mot;

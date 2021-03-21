@@ -25,7 +25,6 @@ void MakefileFactory::writeMakefile(){
     file.close();
 }
 
-
 void MakefileFactory::generate(){
     qDebug() << "MakefileFactory::generate() début";
     m_res.clear();
@@ -44,6 +43,7 @@ void MakefileFactory::generate(){
                 this->packageGeneration(item->label(),item->child(j));
             }
         }else if(typeid(*item) == typeid(DFolder)){
+            if(!QDir(item->getPath()).isEmpty())
                m_jarcmd.append(" -C "+item->label());
         }else if(typeid(*item) == typeid(TreeItem)){
             if(item->label() == "Makefile"){
@@ -58,7 +58,15 @@ void MakefileFactory::generate(){
 
     m_res.append("");
     m_res.append("jar:");
-    m_res.append("\tjar cvfe "+m_project->label()+".jar <classMain> " + m_jarcmd);
+    m_res.append("\tjar cvfe "+m_project->label()+".jar "  + m_mainClass + m_jarcmd);
+    m_res.append("run:");
+    m_res.append("\tjava -cp bin/ " + m_mainClass);
+    m_res.append("clean:");
+    #ifdef Q_OS_WIN
+        m_res.append("\tdel -Force bin");
+    #else
+        m_res.append("\trm -rf bin/*");
+    #endif
     m_res.append("");
     qDebug() << "MakefileFactory::generate() fin";
 }
@@ -69,6 +77,7 @@ void MakefileFactory::packageGeneration(QString src, TreeItem *item){
            qDebug() << item->label() + " n'est pas un package !!!";
            return;
     }
+    QRegularExpression verifySpace("public\\s+static\\s+void\\s+main\\(\\s*String\\[\\]\\s+[a-zA-Z0-9]+\\s*\\)");
     QString package = item->label();
     QString first = package.split(".")[0];
     if(!m_pvisited.contains(first)){
@@ -86,6 +95,14 @@ void MakefileFactory::packageGeneration(QString src, TreeItem *item){
 
         m_res.append(classPath+": "+srcPath);
         m_res.append("\t $(JCC) $(JFLAGS) -sourcepath "+src+" "+srcPath );
+
+        QFile file(javaFile->getPath());
+        file.open(QIODevice::ReadOnly);
+        if(verifySpace.match(file.readAll()).hasMatch()){
+            QFileInfo info(file);
+            m_mainClass = item->label() + "." + info.baseName();
+            qDebug() << " mainClass trouvé  " << m_mainClass;
+        }
     }
     qDebug() << "MakefileFactory::packageGeneration fin " + item->label();
 }

@@ -11,6 +11,8 @@ class Console : public QPlainTextEdit {
         Console(QString &cmdLancement,QString basePath, QWidget *parent=nullptr);
         ~Console();
         QTextCursor getCurrentCmd();
+        void build();
+        void execute();
 
     protected:
         void keyPressEvent(QKeyEvent *e);
@@ -21,6 +23,7 @@ class Console : public QPlainTextEdit {
         void sendCtrlC();
 
     private:
+        QString path;
         int lastLineSize;
         QProcess cmd;
         QVector<QString> historique;

@@ -29,7 +29,5 @@ void TitleBar::paintEvent(QPaintEvent* event){
 }
 
 void TitleBar::addLayout(QLayout *layout){
-
-    qDebug() << "setLayout";
     this->m_layout.addLayout(layout,0,1);
 }
