@@ -20,6 +20,7 @@ class SnippetController : public QObject {
         void modifyFile(const QModelIndex &index);
         void removeSnippet(const QModelIndex &index);
         void copySnippet(const QModelIndex &index);
+        void filtre(const QString& pattern);
 
 };
 

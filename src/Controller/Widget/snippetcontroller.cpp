@@ -6,10 +6,11 @@ SnippetController::SnippetController(Snippet *sni){
 }
 
 void SnippetController::addSnippet(){
-    SnippetDialog sd(m_sni->m_model);
+    SnippetModel *model=(SnippetModel*)m_sni->m_model->sourceModel();
+    SnippetDialog sd(model);
     if(sd.exec() == QDialog::Accepted){
         qDebug() << "création du snippet";
-        m_sni->m_model->addSnippet(sd.getSnippetName());
+        model->addSnippet(sd.getSnippetName());
     }
 }
 
@@ -27,6 +28,9 @@ void SnippetController::removeSnippet(const QModelIndex &index){
 
 void SnippetController::copySnippet(const QModelIndex &index){
     qDebug() << "copy du snippet";
-    QApplication::clipboard()->setText(m_sni->m_model->getText(index));
+    QApplication::clipboard()->setText(((SnippetModel*)m_sni->m_model->sourceModel())->getText(index));
 }
 
+void SnippetController::filtre(const QString& pattern){
+    m_sni->m_model->setFilterFixedString(pattern);
+}

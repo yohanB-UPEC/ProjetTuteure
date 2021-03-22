@@ -19,7 +19,7 @@ class Snippet : public QWidget{
         Snippet(Fenetre *fen, SnippetModel *model);
     private:
         Fenetre *m_fen;
-        SnippetModel* m_model;
+        QSortFilterProxyModel* m_model;
         QListView listView;
         SnippetController *sc;
 

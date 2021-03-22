@@ -62,6 +62,7 @@ void Console::keyPressEvent(QKeyEvent *e){
     }
 
     if(e->key() == Qt::Key_Up){
+        if(this->historique.isEmpty()) return;
     	QTextCursor cursor = this->getCurrentCmd();
     	if(histoIndex == this->historique.size()-1){
     		currentCmd = cursor.selectedText();
@@ -70,6 +71,7 @@ void Console::keyPressEvent(QKeyEvent *e){
         this->insertPlainText(this->historique[histoIndex]);
         if(histoIndex>0)
         	histoIndex--;
+        qDebug() << "hitoIndex: " << histoIndex;
         return;
     }else if(e->key() == Qt::Key_Down){
     	QTextCursor cursor = this->getCurrentCmd();
@@ -82,6 +84,7 @@ void Console::keyPressEvent(QKeyEvent *e){
         }else{
         	this->insertPlainText(this->historique[histoIndex]);
         }
+        qDebug() << "hitoIndexdown: " << histoIndex;
         return;
     }
 

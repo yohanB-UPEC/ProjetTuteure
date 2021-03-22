@@ -27,12 +27,5 @@ void ExplorerDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, 
         return;
     }
 
-    // futurs test de renommage
-    if(typeid(*item) == typeid(TreeItem)){
-
-    }else if(typeid(*item) == typeid(DProject)){
-
-    }
-
     QStyledItemDelegate::setModelData(editor,model,index);
 }
