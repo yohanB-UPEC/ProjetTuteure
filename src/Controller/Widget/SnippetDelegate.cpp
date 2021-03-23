@@ -42,6 +42,7 @@ bool SnippetDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, cons
 
 
 void SnippetDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const {
+    QStyledItemDelegate::paint(painter, option, index);
     int x,y,w,h;
     h = option.rect.height();
     x = option.rect.right()-h;
@@ -51,5 +52,4 @@ void SnippetDelegate::paint(QPainter *painter, const QStyleOptionViewItem &optio
     DIcons::remove.paint(painter, x, y,w,h);
     x -= 2*option.rect.height();
     DIcons::copy.paint(painter, x, y,w,h);
-    QStyledItemDelegate::paint(painter, option, index);
 }

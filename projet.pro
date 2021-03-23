@@ -105,7 +105,6 @@ SOURCES += src/View/Fenetre.cpp \
     src/Controller/Dialog/ClassController.cpp \
     src/Controller/Menu/MenuEditController.cpp \
     src/View/Widget/DSnippetItem.cpp \
-    src/View/Widget/Notifier.cpp \
     src/View/Widget/Snippet.cpp \
     src/View/Widget/TitleBar.cpp
 

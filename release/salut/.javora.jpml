@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Root>
-    <DProject label="salut" path="/export/home/senart19/bordes/Desktop/pt/ProjetTuteure/release/salut" id="e50a28b2-0a26-4326-a4d4-35282d10c26b">
+    <DProject label="salut" path="C:/Users/Yohan/Documents/DUT2/C++/ProjetTuteure/release/salut" id="e50a28b2-0a26-4326-a4d4-35282d10c26b">
         <DSourceFolder label="src">
             <DPackage label="fr.yohan.test">
                 <DJavaFile label="Main.java"/>
             </DPackage>
         </DSourceFolder>
-        <DFolder label="res"/>
+        <DFolder label="res">
+            <DFolder label="salut"/>
+        </DFolder>
         <TreeItem label="Makefile"/>
     </DProject>
 </Root>

@@ -11,6 +11,11 @@ int main(int argc,char **argv){
 		qDebug() << "\t- " << tmp.at(i);
 	}
 	QResource::registerResource("resources.rcc");
+    QFile f(":light.qss");
+    if(f.open(QFile::ReadOnly)) {
+        qApp->setStyleSheet(QString(f.readAll()));
+        f.close();
+    }
 	DIcons::init();
 	Model model;
 	Fenetre fen(&model);

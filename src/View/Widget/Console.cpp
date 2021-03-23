@@ -22,15 +22,6 @@ Console::Console(QString &cmdLancement,QString basePath, QWidget *parent) : QPla
 
     connect(&cmd, SIGNAL(readyReadStandardOutput()),this,SLOT(read()));
     new QShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_C),this,SLOT(sendCtrlC()),SLOT(sendCtrlC()),Qt::WidgetWithChildrenShortcut);
-    QMenu menu("salut", parent);
-    QAction *action = new QAction("build");
-    menu.addAction(action);
-    QLabel *lab = new QLabel("build", &menu);
-    qDebug() << "from parent = " << parent->mapFromParent(QPoint(0, 0));
-    qDebug() << "to parent = " << parent->mapToParent(QPoint(0, 0));
-    qDebug() << "to global = " << parent->mapToGlobal(QPoint(0, 0));
-    qDebug() << "from global = " << parent->mapFromGlobal(QPoint(0, 0));
-    menu.exec(parent->mapToGlobal(QPoint(0, 0)));
 }
 
 void Console::build(){
@@ -83,26 +74,26 @@ void Console::keyPressEvent(QKeyEvent *e){
     if(e->key() == Qt::Key_Up){
         if(this->historique.isEmpty()) return;
     	QTextCursor cursor = this->getCurrentCmd();
-    	if(histoIndex == this->historique.size()-1){
+        if(histoIndex == this->historique.size()-1){
     		currentCmd = cursor.selectedText();
     	}
         cursor.removeSelectedText();
         if(this->historique.size() > 0)
             this->insertPlainText(this->historique[histoIndex]);
         if(histoIndex>0)
-        	histoIndex--;
+            histoIndex--;
         qDebug() << "hitoIndex: " << histoIndex;
         return;
     }else if(e->key() == Qt::Key_Down){
     	QTextCursor cursor = this->getCurrentCmd();
         cursor.removeSelectedText();
         if(histoIndex<historique.size())
-        	histoIndex++;
+            histoIndex++;
         if(histoIndex==historique.size()){
         	this->insertPlainText(currentCmd);
         	histoIndex--;
         }else{
-        	this->insertPlainText(this->historique[histoIndex]);
+            this->insertPlainText(this->historique[histoIndex]);
         }
         qDebug() << "hitoIndexdown: " << histoIndex;
         return;

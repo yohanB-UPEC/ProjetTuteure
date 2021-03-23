@@ -4,7 +4,3 @@
     min-height: 20px;
 }
 
-QTreeView
-{
-    margin-top: 12px;
-}

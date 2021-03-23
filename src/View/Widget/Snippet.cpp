@@ -22,6 +22,7 @@ Snippet::Snippet(Fenetre *fen, SnippetModel *model): m_fen(fen){
     search->setPlaceholderText("rechercher");
     QPushButton *add = new QPushButton(DIcons::add, "");
     hb->addWidget(search);
+    hb->setContentsMargins(0,5,0,0);
     hb->addWidget(add);
 
     layout->addLayout(hb);

@@ -805,8 +805,8 @@ QAbstractSpinBox::down-arrow:hover
 }
 
 *[titlebar="true"]{
-    background: #232629;
-    border: 1px solid #454b52;
+    background: #2d3136;
+    border: 1px solid #262a2d;
     min-height: 20px;
 }
 
@@ -1196,7 +1196,6 @@ QDockWidget::close-button:pressed
 QTreeView,
 QListView
 {
-    margin-top: 10px;
     border: 0.1ex solid #76797c;
     background-color: #232629;
 }
