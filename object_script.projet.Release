@@ -47,6 +47,7 @@ release/ProjectController.o
 release/ClassController.o
 release/MenuEditController.o
 release/DSnippetItem.o
+release/Notifier.o
 release/Snippet.o
 release/TitleBar.o
 release/main.o

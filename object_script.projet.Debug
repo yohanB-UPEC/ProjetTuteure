@@ -47,6 +47,7 @@ debug/ProjectController.o
 debug/ClassController.o
 debug/MenuEditController.o
 debug/DSnippetItem.o
+debug/Notifier.o
 debug/Snippet.o
 debug/TitleBar.o
 debug/main.o
