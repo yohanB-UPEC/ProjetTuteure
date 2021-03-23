@@ -799,7 +799,7 @@ QAbstractSpinBox::down-arrow:hover
 }
 
 *[titlebar="true"] QPushButton{
-    background: transparent;
+    background: white;
     border-top: #454b52;
     border-bottom: #454b52;
 }
@@ -808,7 +808,6 @@ QAbstractSpinBox::down-arrow:hover
     background: #232629;
     border: 1px solid #454b52;
     min-height: 20px;
-
 }
 
 QLabel
@@ -914,8 +913,9 @@ QTabBar::tab:top:only-one
 
 QTabBar::tab:top:!selected
 {
-    color: #eff0f1;
-    background-color: #54575B;
+    height: 20px;
+    color: rgb(152, 152, 143);
+    background-color: rgb(77, 85, 92);
     border: 0.1ex transparent black;
     border-left: 0.1ex solid #76797c;
     border-top-left-radius: 0.2ex;
@@ -924,8 +924,30 @@ QTabBar::tab:top:!selected
 
 QTabBar::tab:top:first:!selected
 {
+    height: 20px;
+    color: rgb(152, 152, 143);
+    background-color: rgb(77, 85, 92);
+    border: 0.1ex transparent black;
+    border-top-left-radius: 0.2ex;
+    border-top-right-radius: 0.2ex;
+}
+
+QTabBar::tab:top:selected
+{
+    height: 25px;
     color: #eff0f1;
-    background-color: #54575B;
+    background-color: #232629;
+    border: 0.1ex transparent black;
+    border-left: 0.1ex solid #76797c;
+    border-top-left-radius: 0.2ex;
+    border-top-right-radius: 0.2ex;
+}
+
+QTabBar::tab:top:first:selected
+{
+    height: 25px;
+    color: #eff0f1;
+    background-color: #232629;
     border: 0.1ex transparent black;
     border-top-left-radius: 0.2ex;
     border-top-right-radius: 0.2ex;

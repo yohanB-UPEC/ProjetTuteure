@@ -23,6 +23,7 @@ class DIcons{
         static QIcon modifyDark;
         static QIcon removeDark;
         static QIcon stop;
+        static QIcon build;
 		
 		
 		

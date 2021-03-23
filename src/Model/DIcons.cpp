@@ -16,6 +16,7 @@ QIcon DIcons::copyDark;
 QIcon DIcons::modifyDark;
 QIcon DIcons::removeDark;
 QIcon DIcons::stop;
+QIcon DIcons::build;
 
 void DIcons::init(){
 	DIcons::logo.addFile(":/res/icons/logo.png");
@@ -35,4 +36,5 @@ void DIcons::init(){
     DIcons::modifyDark.addFile(":/res/icons/modifyDark.png");
     DIcons::removeDark.addFile(":/res/icons/deleteDark.png");
     DIcons::stop.addFile(":/res/icons/stop.png");
+    DIcons::build.addFile(":/res/icons/build.png");
 }

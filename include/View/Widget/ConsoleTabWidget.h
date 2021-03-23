@@ -15,6 +15,8 @@ class ConsoleTabWidget : public QStackedWidget {
         void addConsole(Console *c, const QString &label);
     public slots:
         void removeConsole(int index = -1);
+        void compiler();
+        void exec();
     private slots:
         void openMenuAdd();
         void addConsole();
@@ -24,6 +26,7 @@ class ConsoleTabWidget : public QStackedWidget {
         QPushButton m_add;
         ConsoleModel *m_model;
         Fenetre *m_parent;
+        Console *m_c;
 };
 
 #endif // CONSOLETABWIDGET_H

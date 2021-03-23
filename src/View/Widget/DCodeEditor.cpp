@@ -294,7 +294,7 @@ void DCodeEditor::leftAreaWidthUpdate(){
 void DCodeEditor::leftAreaPaintEvent(QPaintEvent *event){
     QPainter painter(leftArea);
     painter.setFont(this->font());
-    //painter.fillRect(0,event->rect().y(),event->rect().width(),event->rect().height(),QColor::fromRgb(54,50,50));
+    painter.fillRect(0,event->rect().y(),event->rect().width(),event->rect().height(),QColor::fromHsl(50, 50, 50, 50));
 
     QTextBlock qtb = this->firstVisibleBlock();
     QRect rect = blockBoundingGeometry(qtb).translated(contentOffset()).toRect();

@@ -277,6 +277,9 @@ void MenuEditController::s_Replace(){
     h->addWidget(lab);
     h->addWidget(m_me->mot);
     h->addWidget(m_me->newMot);
+    QHBoxLayout *h0 = new QHBoxLayout();
+    m_me->check = new QCheckBox("Respecter la casse");
+    h0->addWidget(m_me->check);
 
     QHBoxLayout *h1 = new QHBoxLayout();
     h1->setAlignment(Qt::AlignRight);
@@ -285,6 +288,7 @@ void MenuEditController::s_Replace(){
     h1->addWidget(valider);
 
     lay->addLayout(h);
+    lay->addLayout(h0);
     lay->addLayout(h1);
     dial->setLayout(lay);
 
@@ -301,17 +305,32 @@ void MenuEditController::replaceAll(){
     editor->moveCursor(QTextCursor::Start);
     QColor color(Qt::yellow);
     bool isExist = false;
-    while(editor->find(m_me->mot->text())){
-        QTextEdit::ExtraSelection extra;
-        extra.format.setBackground(color);
-        extra.cursor = editor->textCursor();
-        extraSelections.append(extra);
-        QTextCursor qc = editor->textCursor();
-        if(qc.hasSelection()){
-            isExist = true;
-            qc.insertText(m_me->newMot->text());
-        } else
-            break;
+    if(m_me->check->isChecked()){
+        while(editor->find(m_me->mot->text(), QTextDocument::FindCaseSensitively)){
+            QTextEdit::ExtraSelection extra;
+            extra.format.setBackground(color);
+            extra.cursor = editor->textCursor();
+            extraSelections.append(extra);
+            QTextCursor qc = editor->textCursor();
+            if(qc.hasSelection()){
+                isExist = true;
+                qc.insertText(m_me->newMot->text());
+            } else
+                break;
+        }
+    } else {
+        while(editor->find(m_me->mot->text())){
+            QTextEdit::ExtraSelection extra;
+            extra.format.setBackground(color);
+            extra.cursor = editor->textCursor();
+            extraSelections.append(extra);
+            QTextCursor qc = editor->textCursor();
+            if(qc.hasSelection()){
+                isExist = true;
+                qc.insertText(m_me->newMot->text());
+            } else
+                break;
+        }
     }
     if(!isExist){
         QMessageBox msgBox(QMessageBox::Warning, "Mot inexistant", "Le mot n'existe pas.");

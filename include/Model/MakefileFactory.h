@@ -23,6 +23,7 @@ class MakefileFactory {
         int m_def;
         void generate();
         void packageGeneration(QString src, TreeItem *item);
+        QString m_mainClass;
 };
 
 #endif // MAKEFILEFACTORY_H

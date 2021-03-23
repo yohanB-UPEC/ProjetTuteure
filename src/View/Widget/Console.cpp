@@ -10,6 +10,7 @@
 Console::Console(QString &cmdLancement,QString basePath, QWidget *parent) : QPlainTextEdit(parent), cmd(this),lastLineSize(0), histoIndex(0) {
     this->setStyleSheet("background-color: #242424; color: white; font-family: Arial, cursive; font-size: 15px;");
     this->cmd.setWorkingDirectory(basePath);
+    path = basePath;
     cmd.setProcessChannelMode(QProcess::MergedChannels);
     QStringList arg;
     QStringList tmp = cmdLancement.split(" ");
@@ -21,6 +22,24 @@ Console::Console(QString &cmdLancement,QString basePath, QWidget *parent) : QPla
 
     connect(&cmd, SIGNAL(readyReadStandardOutput()),this,SLOT(read()));
     new QShortcut(QKeySequence(Qt::CTRL+Qt::SHIFT+Qt::Key_C),this,SLOT(sendCtrlC()),SLOT(sendCtrlC()),Qt::WidgetWithChildrenShortcut);
+    QMenu menu("salut", parent);
+    QAction *action = new QAction("build");
+    menu.addAction(action);
+    QLabel *lab = new QLabel("build", &menu);
+    qDebug() << "from parent = " << parent->mapFromParent(QPoint(0, 0));
+    qDebug() << "to parent = " << parent->mapToParent(QPoint(0, 0));
+    qDebug() << "to global = " << parent->mapToGlobal(QPoint(0, 0));
+    qDebug() << "from global = " << parent->mapFromGlobal(QPoint(0, 0));
+    menu.exec(parent->mapToGlobal(QPoint(0, 0)));
+}
+
+void Console::build(){
+    cmd.write("make\n");
+    execute();
+}
+
+void Console::execute(){
+    cmd.write("make run\n");
 }
 
 Console::~Console(){
@@ -68,7 +87,8 @@ void Console::keyPressEvent(QKeyEvent *e){
     		currentCmd = cursor.selectedText();
     	}
         cursor.removeSelectedText();
-        this->insertPlainText(this->historique[histoIndex]);
+        if(this->historique.size() > 0)
+            this->insertPlainText(this->historique[histoIndex]);
         if(histoIndex>0)
         	histoIndex--;
         qDebug() << "hitoIndex: " << histoIndex;
